@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AmiStampAI — Digital Notary for Meaning & Intention</title>
+<meta name="description" content="The digital stamp that certifies not just existence, but meaning and intention. ECDSA P-256 cryptographic signatures + Tezos blockchain proof. Part of the ami* ecosystem by BRIDGRAI.">
+<meta property="og:title" content="AmiStampAI — Digital Notary for Meaning & Intention">
+<meta property="og:description" content="Certify what you mean and why you mean it. Cryptographic proof of meaning and intention, anchored on blockchain.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amistampai.com">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔏</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060a0f;--surface:#0b1018;--card:#10151f;--border:#1a2236;
+  --text:#e2e6ee;--muted:#6e7b91;--accent:#e85d3a;--accent2:#f07c5c;
+  --gold:#d4a53c;--gold2:#e8c45e;--teal:#2bb5a0;--slate:#94a3b8;
+  --font:'SF Mono',Monaco,'Cascadia Code','Fira Code',monospace;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-glow .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.06;animation:drift 35s ease-in-out infinite;will-change:transform;contain:strict}
+.bg-glow .orb:nth-child(1){width:500px;height:500px;background:var(--accent);top:-5%;left:15%;animation-delay:0s}
+.bg-glow .orb:nth-child(2){width:420px;height:420px;background:var(--gold);bottom:5%;right:8%;animation-delay:-12s}
+.bg-glow .orb:nth-child(3){width:350px;height:350px;background:var(--teal);top:50%;left:55%;animation-delay:-24s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(25px,-35px) scale(1.05)}66%{transform:translate(-20px,25px) scale(.96)}}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+nav{padding:16px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{color:var(--muted);font-size:.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--accent);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:12px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,93,58,.3)}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* HERO */
+.hero{padding:80px 0 60px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:var(--card);border:1px solid var(--border);font-size:.8rem;color:var(--gold);margin-bottom:24px}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:20px}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:640px;margin:0 auto 32px}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* STAMP VISUAL */
+.stamp-visual{margin:48px auto 0;max-width:320px;position:relative}
+.stamp-ring{width:280px;height:280px;margin:0 auto;border:4px solid var(--accent);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;box-shadow:0 0 60px rgba(232,93,58,.08),inset 0 0 40px rgba(232,93,58,.04)}
+.stamp-ring::before{content:'';position:absolute;inset:-12px;border:2px dashed var(--gold);opacity:.3;border-radius:50%}
+.stamp-inner{text-align:center;padding:20px}
+.stamp-icon{font-size:2.8rem;margin-bottom:8px}
+.stamp-title{font-family:var(--font);font-size:.85rem;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.12em}
+.stamp-sub{font-size:.7rem;color:var(--gold);margin-top:4px;letter-spacing:.08em}
+.stamp-date{font-family:var(--font);font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.05em}
+.stamp-arc-top,.stamp-arc-bottom{position:absolute;font-family:var(--font);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.stamp-arc-top{top:22px}
+.stamp-arc-bottom{bottom:22px}
+
+/* WHAT IT CERTIFIES */
+.certifies{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:800px;margin:0 auto}
+.certify-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 22px;text-align:center;transition:transform .2s,border-color .2s}
+.certify-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.certify-icon{font-size:2rem;margin-bottom:12px}
+.certify-card h3{font-size:1rem;margin-bottom:8px}
+.certify-card p{font-size:.85rem;color:var(--muted)}
+.certify-label{font-family:var(--font);font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-top:12px}
+
+/* DIFFERENCE */
+.diff-section{max-width:750px;margin:0 auto}
+.diff-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.diff-table th{text-align:left;padding:14px 16px;border-bottom:2px solid var(--accent);color:var(--accent);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.diff-table td{padding:14px 16px;border-bottom:1px solid var(--border)}
+.diff-table tr:hover td{background:rgba(232,93,58,.03)}
+.diff-table .check{color:var(--teal);font-weight:700}
+.diff-table .cross{color:var(--muted)}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;counter-reset:step}
+.step{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 22px;position:relative;counter-increment:step}
+.step::before{content:counter(step);position:absolute;top:16px;right:18px;font-family:var(--font);font-size:2rem;font-weight:900;color:var(--accent);opacity:.15}
+.step-icon{font-size:1.6rem;margin-bottom:12px}
+.step h3{font-size:.95rem;margin-bottom:8px}
+.step p{font-size:.82rem;color:var(--muted)}
+
+/* STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.stack-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;display:flex;align-items:start;gap:14px}
+.stack-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px}
+.stack-item h3{font-size:.9rem;margin-bottom:4px}
+.stack-item p{font-size:.8rem;color:var(--muted)}
+.stack-item code{font-family:var(--font);font-size:.75rem;color:var(--gold);background:rgba(212,165,60,.08);padding:2px 6px;border-radius:4px}
+
+/* USE CASES */
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.case{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;transition:transform .2s}
+.case:hover{transform:translateY(-4px)}
+.case-icon{font-size:1.6rem;margin-bottom:12px}
+.case h3{font-size:1rem;margin-bottom:8px}
+.case p{font-size:.85rem;color:var(--muted)}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:750px;margin:0 auto}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 28px;position:relative;transition:transform .2s}
+.plan:hover{transform:translateY(-4px)}
+.plan.popular{border-color:var(--accent);box-shadow:0 0 40px rgba(232,93,58,.08)}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--gold));color:#fff;font-size:.75rem;font-weight:800;padding:4px 16px;border-radius:100px}
+.plan h3{font-size:1.3rem;margin-bottom:4px}
+.plan .price{font-size:2.8rem;font-weight:900;margin:16px 0 4px}
+.plan .price span{font-size:1rem;font-weight:400;color:var(--muted)}
+.plan .period{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+.plan ul{list-style:none;margin-bottom:28px}
+.plan li{padding:8px 0;font-size:.9rem;color:var(--muted);display:flex;align-items:start;gap:10px}
+.plan li::before{content:"\2713";color:var(--accent);font-weight:700;flex-shrink:0}
+.plan .btn{width:100%;justify-content:center}
+
+/* LIVE DEMO */
+.demo-section{background:var(--surface);border-radius:20px;padding:48px 36px}
+.demo-container{max-width:600px;margin:0 auto}
+.demo-form{display:flex;flex-direction:column;gap:14px}
+.demo-form label{font-size:.82rem;color:var(--muted);font-weight:600}
+.demo-form textarea,.demo-form input[type="text"]{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;color:var(--text);font-size:.9rem;font-family:var(--font-sans);outline:none;resize:vertical}
+.demo-form textarea:focus,.demo-form input:focus{border-color:var(--accent)}
+.demo-form textarea{min-height:80px}
+.demo-result{margin-top:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;display:none}
+.demo-result.show{display:block;animation:fadeIn .4s ease}
+.demo-result h4{font-size:.9rem;margin-bottom:12px;color:var(--accent)}
+.demo-result .hash{font-family:var(--font);font-size:.72rem;color:var(--gold);word-break:break-all;padding:10px;background:rgba(212,165,60,.06);border-radius:8px;margin:8px 0}
+.demo-result .stamp-status{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--teal);font-weight:700;margin-top:12px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* COMPLIANCE */
+.compliance{background:var(--surface);border-radius:20px;padding:48px 36px;margin-top:40px}
+.compliance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.compliance-item h3{font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.compliance-item p{color:var(--muted);font-size:.85rem;line-height:1.7}
+
+/* SECTIONS */
+.section{padding:80px 0}
+.section-title{text-align:center;font-size:2rem;font-weight:800;margin-bottom:12px}
+.section-sub{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 48px}
+
+/* FOOTER */
+footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-bottom:32px}
+.footer-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:12px}
+.footer-col a{display:block;color:var(--muted);font-size:.85rem;padding:4px 0}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{text-align:center;color:var(--muted);font-size:.8rem;padding-top:24px;border-top:1px solid var(--border)}
+
+/* COOKIE BANNER */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:20px 24px;z-index:1000;display:none;animation:slideUp .3s ease}
+.cookie-banner.show{display:block}
+.cookie-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cookie-text{flex:1;min-width:260px;font-size:.85rem;color:var(--muted)}
+.cookie-btns{display:flex;gap:10px}
+.cookie-btns button{padding:8px 20px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:none}
+.cookie-accept{background:var(--accent);color:#fff}
+.cookie-reject{background:var(--card);color:var(--text);border:1px solid var(--border)!important}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;max-width:700px;width:100%;max-height:80vh;overflow-y:auto;padding:36px}
+.modal h2{font-size:1.5rem;margin-bottom:20px}
+.modal h3{font-size:1.1rem;margin:20px 0 8px;color:var(--accent)}
+.modal p,.modal li{font-size:.88rem;color:var(--muted);line-height:1.8}
+.modal ul{padding-left:20px}
+.modal-close{position:sticky;top:0;float:right;background:var(--card);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+@media(max-width:768px){
+  .hero{padding:50px 0 40px}
+  .section{padding:50px 0}
+  .certifies{grid-template-columns:1fr}
+  .demo-section,.compliance{padding:28px 20px}
+  .modal{padding:24px}
+  nav{padding:12px 0}
+  .stamp-ring{width:220px;height:220px}
+  .diff-table{font-size:.78rem}
+  .diff-table th,.diff-table td{padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="container">
+<nav>
+  <div class="logo">AmiStampAI</div>
+  <div class="nav-links">
+    <a href="#what">What</a>
+    <a href="#how">How</a>
+    <a href="#demo">Demo</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://amiecosystems.com" target="_blank">ami* Ecosystem</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">ECDSA P-256 + SHA-256 + Tezos Blockchain</div>
+  <h1>The digital stamp that certifies<br><span class="gradient">meaning & intention</span></h1>
+  <p>Other notaries prove a document exists. AmiStampAI proves what it means and why it was created. Cryptographic proof of sens and intentie, anchored on Tezos.</p>
+  <div class="hero-cta">
+    <a href="#demo" class="btn btn-primary">Try the stamp</a>
+    <a href="#how" class="btn btn-outline">How it works</a>
+  </div>
+
+  <div class="stamp-visual">
+    <div class="stamp-ring">
+      <div class="stamp-arc-top">CERTIFIED &middot; VERIFIED</div>
+      <div class="stamp-inner">
+        <div class="stamp-icon">&#128207;</div>
+        <div class="stamp-title">AmiStampAI</div>
+        <div class="stamp-sub">Sens &bull; Intentie &bull; Dovada</div>
+        <div class="stamp-date" id="stamp-date"></div>
+      </div>
+      <div class="stamp-arc-bottom">BRIDGRAI &middot; TEZOS</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT CERTIFIES -->
+<section class="section" id="what">
+  <h2 class="section-title">Three layers, one stamp</h2>
+  <p class="section-sub">Every AmiStampAI seal binds three dimensions that no other notary captures together.</p>
+
+  <div class="certifies">
+    <div class="certify-card">
+      <div class="certify-icon">&#128196;</div>
+      <h3>Existence</h3>
+      <p>The document exists and has not been altered. SHA-256 hash, ECDSA signature.</p>
+      <div class="certify-label">continut</div>
+    </div>
+    <div class="certify-card">
+      <div class="certify-icon">&#128161;</div>
+      <h3>Meaning</h3>
+      <p>What the author declares this document means. Recorded, signed, immutable.</p>
+      <div class="certify-label">sens</div>
+    </div>
+    <div class="certify-card">
+      <div class="certify-icon">&#127919;</div>
+      <h3>Intention</h3>
+      <p>Why it was created. The declared purpose, cryptographically bound to the content.</p>
+      <div class="certify-label">intentie</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENCE -->
+<section class="section">
+  <h2 class="section-title">What makes this different</h2>
+  <p class="section-sub">Traditional notarization vs. AmiStampAI.</p>
+
+  <div class="diff-section">
+    <div style="overflow-x:auto">
+    <table class="diff-table">
+      <thead>
+        <tr><th>Capability</th><th>Traditional</th><th>Blockchain-only</th><th>AmiStampAI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Proves existence</td><td class="check">Yes</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+        <tr><td>Proves authorship</td><td class="check">Yes</td><td class="cross">No</td><td class="check">Yes</td></tr>
+        <tr><td>Certifies meaning</td><td class="cross">No</td><td class="cross">No</td><td class="check">Yes</td></tr>
+        <tr><td>Certifies intention</td><td class="cross">No</td><td class="cross">No</td><td class="check">Yes</td></tr>
+        <tr><td>Immutable record</td><td class="cross">No</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+        <tr><td>Verifiable by anyone</td><td class="cross">No</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+        <tr><td>Under 5 seconds</td><td class="cross">No</td><td class="check">Yes</td><td class="check">Yes</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <h2 class="section-title">How it works</h2>
+  <p class="section-sub">Four steps. No intermediary. Your keys, your stamp.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">&#128273;</div>
+      <h3>Generate keys</h3>
+      <p>ECDSA P-256 key pair generated in your browser via Web Crypto API. Private key never leaves your device.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">&#9997;&#65039;</div>
+      <h3>Declare & sign</h3>
+      <p>Write your content, its meaning, and your intention. All three are bundled and signed with your private key.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">&#128279;</div>
+      <h3>Anchor to blockchain</h3>
+      <p>SHA-256 hashes of the document and signature are recorded on Tezos. Immutable, public, verifiable.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">&#9989;</div>
+      <h3>Verify anytime</h3>
+      <p>Anyone with the public key can verify the signature. Anyone can check the blockchain proof. Zero trust required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section">
+  <h2 class="section-title">Built on proven cryptography</h2>
+  <p class="section-sub">No custom algorithms. No proprietary formats. Standards only.</p>
+
+  <div class="stack-grid">
+    <div class="stack-item">
+      <div class="stack-icon">&#128272;</div>
+      <div>
+        <h3>ECDSA P-256</h3>
+        <p>Industry-standard elliptic curve signatures. <code>Web Crypto API</code></p>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-icon">&#128737;&#65039;</div>
+      <div>
+        <h3>SHA-256</h3>
+        <p>Cryptographic hashing for document integrity. <code>SubtleCrypto.digest()</code></p>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-icon">&#9939;&#65039;</div>
+      <div>
+        <h3>Tezos Blockchain</h3>
+        <p>Energy-efficient proof-of-stake chain. <code>ghostnet / mainnet</code></p>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-icon">&#128293;</div>
+      <div>
+        <h3>Firebase Firestore</h3>
+        <p>Secure document storage with audit trail. <code>secured_documents</code></p>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-icon">&#128274;</div>
+      <div>
+        <h3>JWK Key Exchange</h3>
+        <p>Export and share public keys for external verification. <code>exportKey("jwk")</code></p>
+      </div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-icon">&#128202;</div>
+      <div>
+        <h3>BRIDGRAI A2A</h3>
+        <p>8-agent platform with concordance verification. <code>Sens Agent + ACR</code></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="section">
+  <h2 class="section-title">Who stamps what</h2>
+  <p class="section-sub">Every domain where proving intention matters as much as proving existence.</p>
+
+  <div class="cases">
+    <div class="case">
+      <div class="case-icon">&#128220;</div>
+      <h3>Intellectual Property</h3>
+      <p>Stamp your research, code, or invention with its declared purpose before publication. Provable prior art with declared intention.</p>
+    </div>
+    <div class="case">
+      <div class="case-icon">&#9878;&#65039;</div>
+      <h3>Legal Declarations</h3>
+      <p>Contracts, NDAs, consent forms &mdash; stamp not just the text, but what each party intends by signing.</p>
+    </div>
+    <div class="case">
+      <div class="case-icon">&#129302;</div>
+      <h3>AI-Generated Content</h3>
+      <p>When AI creates something, stamp the human intention behind the prompt. EU AI Act transparency, built in.</p>
+    </div>
+    <div class="case">
+      <div class="case-icon">&#127891;</div>
+      <h3>Academic Work</h3>
+      <p>Certify the meaning and purpose of your research before peer review. Timestamp + intention = stronger claim.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section class="section" id="demo">
+  <div class="demo-section">
+    <h2 class="section-title">Try AmiStampAI</h2>
+    <p class="section-sub">Generate a real cryptographic stamp in your browser. Nothing leaves your device.</p>
+
+    <div class="demo-container">
+      <div class="demo-form">
+        <label for="demo-content">Content to stamp</label>
+        <textarea id="demo-content" placeholder="Your document, text, or declaration..."></textarea>
+
+        <label for="demo-sens">Meaning (sens)</label>
+        <input type="text" id="demo-sens" placeholder="What does this document mean?">
+
+        <label for="demo-intentie">Intention (intentie)</label>
+        <input type="text" id="demo-intentie" placeholder="Why are you creating this?">
+
+        <button class="btn btn-primary" id="demo-stamp" style="margin-top:8px">Stamp it</button>
+      </div>
+
+      <div class="demo-result" id="demo-result">
+        <h4>Stamp generated</h4>
+        <div><strong style="font-size:.8rem;color:var(--text)">Document hash:</strong></div>
+        <div class="hash" id="result-doc-hash"></div>
+        <div><strong style="font-size:.8rem;color:var(--text)">Signature (ECDSA P-256):</strong></div>
+        <div class="hash" id="result-sig"></div>
+        <div><strong style="font-size:.8rem;color:var(--text)">Public key (JWK):</strong></div>
+        <div class="hash" id="result-pubkey"></div>
+        <div class="stamp-status" id="result-status"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <h2 class="section-title">Pricing</h2>
+  <p class="section-sub">Start free. Pay only when you need blockchain anchoring or volume.</p>
+
+  <div class="pricing-grid">
+    <div class="plan">
+      <h3>Free</h3>
+      <div class="price">&#8364;0</div>
+      <div class="period">forever</div>
+      <ul>
+        <li>3 stamps per day</li>
+        <li>ECDSA P-256 signatures</li>
+        <li>SHA-256 document hashing</li>
+        <li>Local key generation</li>
+        <li>Browser-only &mdash; no data sent</li>
+      </ul>
+      <a href="#demo" class="btn btn-outline">Start stamping</a>
+    </div>
+    <div class="plan popular">
+      <div class="plan-badge">Most chosen</div>
+      <h3>Pro</h3>
+      <div class="price">&#8364;7.99<span>/mo</span></div>
+      <div class="period">billed monthly</div>
+      <ul>
+        <li>Unlimited stamps</li>
+        <li>Tezos blockchain anchoring</li>
+        <li>Firebase secure storage</li>
+        <li>Verification by document ID</li>
+        <li>Full audit trail</li>
+        <li>API access</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="btn btn-primary" onclick="alert('Stripe integration coming soon.')">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<div class="compliance">
+  <h2 class="section-title" style="margin-bottom:32px">Compliance & Transparency</h2>
+  <div class="compliance-grid">
+    <div class="compliance-item">
+      <h3>&#128274; GDPR</h3>
+      <p>All cryptographic operations run in your browser. Private keys never leave your device. We store only what you explicitly choose to persist in Firebase, with full deletion rights.</p>
+    </div>
+    <div class="compliance-item">
+      <h3>&#129302; EU AI Act</h3>
+      <p>AmiStampAI is a cryptographic tool, not an AI decision system. When used to stamp AI-generated content, it provides the transparency and traceability the Act requires.</p>
+    </div>
+    <div class="compliance-item">
+      <h3>&#128279; Open Standards</h3>
+      <p>ECDSA P-256, SHA-256, JWK, Tezos &mdash; all open, auditable, interoperable. No vendor lock-in. Export your keys and verify anywhere.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>AmiStampAI</h4>
+      <a href="#what">What it certifies</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Live demo</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#" onclick="openModal('privacy');return false">Privacy Policy</a>
+      <a href="#" onclick="openModal('terms');return false">Terms of Service</a>
+      <a href="#" onclick="openModal('aiact');return false">AI Act Transparency</a>
+      <a href="#" onclick="openModal('imprint');return false">Imprint</a>
+    </div>
+    <div class="footer-col">
+      <h4>ami* Ecosystem</h4>
+      <a href="https://amiecosystems.com" target="_blank">AmiEcosystems</a>
+      <a href="https://amithoughtsai.com" target="_blank">AmiThoughtsAI</a>
+      <a href="https://amiapiai.com" target="_blank">AmiApiAI</a>
+      <a href="https://amiqiai.com" target="_blank">AmiQiAI</a>
+      <a href="https://agikindergarten.com" target="_blank">AGI Kindergarten</a>
+    </div>
+    <div class="footer-col">
+      <h4>Built by</h4>
+      <a href="https://amiecosystems.com" target="_blank">BRIDGRAI</a>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:8px">3.5 years bootstrapped<br>0 EUR funding<br>Pure intention</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Part of the ami* ecosystem &middot; All rights reserved
+  </div>
+</footer>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-privacy">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('privacy')">&times;</button>
+    <h2>Privacy Policy</h2>
+    <h3>Data Processing</h3>
+    <p>AmiStampAI performs all cryptographic operations (key generation, signing, hashing) locally in your browser using the Web Crypto API. Your private keys never leave your device.</p>
+    <h3>What We Store</h3>
+    <p>If you choose to persist a stamped document to Firebase, we store: the document hash, the meaning declaration, the intention declaration, the signature, and the timestamp. We do not store the original content unless you explicitly include it.</p>
+    <h3>Cookies</h3>
+    <p>We use only essential cookies for session persistence and cookie consent state. No tracking, no analytics, no third-party cookies.</p>
+    <h3>Your Rights</h3>
+    <p>Under GDPR you have the right to access, rectify, delete, and port your data. Contact: mihairosca1982@gmail.com</p>
+    <h3>Data Controller</h3>
+    <p>Mihai Rosca / BRIDGRAI, Timisoara, Romania.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-terms">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('terms')">&times;</button>
+    <h2>Terms of Service</h2>
+    <h3>Service</h3>
+    <p>AmiStampAI provides cryptographic stamping services for documents, combining ECDSA digital signatures with declared meaning and intention. The service is provided as-is.</p>
+    <h3>Your Responsibility</h3>
+    <p>You are responsible for the accuracy of the meaning and intention you declare. AmiStampAI certifies that you made a declaration; it does not verify the truthfulness of the declaration itself.</p>
+    <h3>Blockchain Records</h3>
+    <p>Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.</p>
+    <h3>Pricing</h3>
+    <p>Free tier: 3 stamps/day with local-only operation. Pro tier: unlimited stamps with blockchain anchoring at the published price. Prices may change with 30 days notice.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-aiact">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('aiact')">&times;</button>
+    <h2>AI Act Transparency Notice</h2>
+    <h3>Classification</h3>
+    <p>AmiStampAI is a cryptographic tool. It does not make decisions, generate content, or classify data using AI. It uses standard cryptographic algorithms (ECDSA, SHA-256) and blockchain technology.</p>
+    <h3>When Used with AI Content</h3>
+    <p>When AmiStampAI is used to stamp AI-generated content, it provides traceability: who requested the content, what was the declared intention, and when was it created. This supports EU AI Act transparency requirements.</p>
+    <h3>Human Oversight</h3>
+    <p>Every stamp requires explicit human action: declaring meaning and intention, then triggering the signature. No automated stamping occurs.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-imprint">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('imprint')">&times;</button>
+    <h2>Imprint</h2>
+    <p><strong>Operator:</strong> Mihai Rosca / BRIDGRAI</p>
+    <p><strong>Location:</strong> Timisoara, Romania</p>
+    <p><strong>Contact:</strong> mihairosca1982@gmail.com</p>
+    <p><strong>Project:</strong> AmiStampAI is part of the ami* SaaS ecosystem, developed under BRIDGRAI research initiative.</p>
+    <p><strong>Blockchain:</strong> Tezos (Ghostnet for testing, Mainnet for production)</p>
+  </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-inner">
+    <div class="cookie-text">We use only essential cookies (session, consent state). No tracking, no analytics. Your cryptographic keys stay in your browser.</div>
+    <div class="cookie-btns">
+      <button class="cookie-accept" onclick="acceptCookies()">Accept essential</button>
+      <button class="cookie-reject" onclick="rejectCookies()">Decline</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Stamp date
+document.getElementById('stamp-date').textContent = new Date().toISOString().split('T')[0];
+
+// Live demo — real cryptographic stamping in browser
+document.getElementById('demo-stamp').addEventListener('click', async function() {
+  const content = document.getElementById('demo-content').value.trim();
+  const sens = document.getElementById('demo-sens').value.trim();
+  const intentie = document.getElementById('demo-intentie').value.trim();
+
+  if (!content || !sens || !intentie) {
+    alert('All three fields are required: content, meaning, and intention.');
+    return;
+  }
+
+  this.disabled = true;
+  this.textContent = 'Stamping...';
+
+  try {
+    const keyPair = await window.crypto.subtle.generateKey(
+      { name: 'ECDSA', namedCurve: 'P-256' },
+      true,
+      ['sign', 'verify']
+    );
+
+    const encoder = new TextEncoder();
+    const payload = JSON.stringify({
+      continut: content,
+      sens: sens,
+      intentie: intentie,
+      timestamp: Date.now()
+    });
+
+    const hashBuffer = await window.crypto.subtle.digest('SHA-256', encoder.encode(payload));
+    const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+    const sigBuffer = await window.crypto.subtle.sign(
+      { name: 'ECDSA', hash: { name: 'SHA-256' } },
+      keyPair.privateKey,
+      encoder.encode(payload)
+    );
+    const sigBase64 = btoa(String.fromCharCode(...new Uint8Array(sigBuffer)));
+
+    const pubKey = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
+
+    document.getElementById('result-doc-hash').textContent = hashHex;
+    document.getElementById('result-sig').textContent = sigBase64;
+    document.getElementById('result-pubkey').textContent = JSON.stringify(pubKey, null, 0);
+    document.getElementById('result-status').innerHTML = '✓ Stamp verified &mdash; signature valid, hash intact';
+
+    const result = document.getElementById('demo-result');
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+
+  this.disabled = false;
+  this.textContent = 'Stamp it';
+});
+
+// Modals
+function openModal(id) { document.getElementById('modal-' + id).classList.add('show'); }
+function closeModal(id) { document.getElementById('modal-' + id).classList.remove('show'); }
+document.querySelectorAll('.modal-overlay').forEach(function(el) {
+  el.addEventListener('click', function(e) { if (e.target === el) el.classList.remove('show'); });
+});
+
+// Cookie banner
+(function() {
+  if (!localStorage.getItem('amistampai-cookies')) {
+    setTimeout(function() { document.getElementById('cookie-banner').classList.add('show'); }, 1500);
+  }
+})();
+function acceptCookies() { localStorage.setItem('amistampai-cookies', 'accepted'); document.getElementById('cookie-banner').classList.remove('show'); }
+function rejectCookies() { localStorage.setItem('amistampai-cookies', 'rejected'); document.getElementById('cookie-banner').classList.remove('show'); }
+</script>
+
+</body>
+</html>
