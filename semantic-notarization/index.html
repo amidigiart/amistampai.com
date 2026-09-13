@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Notarization — What It Is and Why It Matters</title>
+<meta name="description" content="Semantic notarization certifies not just that a document exists, but what it means and why it was created. ECDSA P-256 + Tezos blockchain. Defined by AmiStampAI.">
+<link rel="canonical" href="https://amistampai.com/semantic-notarization/">
+<meta property="og:title" content="Semantic Notarization — What It Is and Why It Matters">
+<meta property="og:description" content="Semantic notarization certifies not just that a document exists, but what it means and why it was created.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://amistampai.com/semantic-notarization/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔏</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Semantic Notarization: Certifying Meaning and Intention",
+  "description": "Semantic notarization goes beyond timestamping. It cryptographically certifies what a document means and why it was created — existence, authorship, meaning, and intention in one verifiable stamp.",
+  "author": {
+    "@type": "Person",
+    "name": "Mihai Roșca",
+    "identifier": "https://orcid.org/0009-0001-1422-6209"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BRIDGRAI",
+    "url": "https://bridgrai.com"
+  },
+  "datePublished": "2026-09-13",
+  "url": "https://amistampai.com/semantic-notarization/",
+  "mainEntityOfPage": "https://amistampai.com/semantic-notarization/",
+  "keywords": ["semantic notarization", "digital notary", "meaning certification", "intention proof", "blockchain notarization", "ECDSA", "Tezos"]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060a0f;--surface:#0b1018;--card:#10151f;--border:#1a2236;
+  --text:#e2e6ee;--muted:#6e7b91;--accent:#e85d3a;--accent2:#f07c5c;
+  --gold:#d4a53c;--gold2:#e8c45e;--teal:#2bb5a0;--slate:#94a3b8;
+  --font:'SF Mono',Monaco,'Cascadia Code','Fira Code',monospace;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.container{max-width:780px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+nav{padding:16px 24px;display:flex;align-items:center;gap:16px;max-width:780px;margin:0 auto}
+.logo{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav a.back{color:var(--muted);font-size:.85rem}
+nav a.back:hover{color:var(--accent)}
+
+article{padding:40px 0 60px}
+article h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:12px}
+article h1 .gradient{background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{font-size:1.05rem;color:var(--muted);margin-bottom:40px;max-width:600px}
+.byline{font-size:.8rem;color:var(--muted);margin-bottom:32px}
+.byline a{color:var(--gold)}
+
+article h2{font-size:1.35rem;font-weight:800;margin:40px 0 16px;color:var(--text)}
+article h3{font-size:1.05rem;font-weight:700;margin:28px 0 12px;color:var(--accent)}
+article p{margin-bottom:16px;color:var(--text);font-size:.95rem}
+article ul,article ol{margin:0 0 16px 20px;color:var(--text);font-size:.95rem}
+article li{margin-bottom:8px}
+
+.layer-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:24px 0 32px}
+.layer{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;display:flex;align-items:start;gap:14px}
+.layer-num{font-family:var(--font);font-size:1.6rem;font-weight:900;color:var(--accent);opacity:.4;flex-shrink:0;width:32px;text-align:center}
+.layer h3{font-size:.95rem;margin:0 0 4px;color:var(--gold)}
+.layer p{font-size:.85rem;color:var(--muted);margin:0}
+
+.comparison{width:100%;border-collapse:collapse;font-size:.88rem;margin:24px 0 32px}
+.comparison th{text-align:left;padding:12px 16px;border-bottom:2px solid var(--accent);color:var(--accent);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.comparison td{padding:12px 16px;border-bottom:1px solid var(--border)}
+.comparison .check{color:var(--teal);font-weight:700}
+.comparison .cross{color:var(--muted)}
+
+.cta-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;margin:40px 0}
+.cta-box h2{margin-top:0;margin-bottom:12px}
+.cta-box p{color:var(--muted);margin-bottom:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:12px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,93,58,.3);text-decoration:none}
+
+blockquote{border-left:3px solid var(--gold);padding:12px 20px;margin:20px 0;background:rgba(212,165,60,.04);border-radius:0 8px 8px 0}
+blockquote p{color:var(--gold);font-style:italic;margin:0;font-size:.9rem}
+
+code{font-family:var(--font);font-size:.82rem;color:var(--gold);background:rgba(212,165,60,.08);padding:2px 6px;border-radius:4px}
+
+footer{padding:24px;text-align:center;font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);margin-top:40px}
+footer a{color:var(--accent)}
+
+@media(max-width:600px){
+  .container{padding:0 16px}
+  nav{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">AmiStampAI</a>
+  <a href="/" class="back">&larr; Back to app</a>
+</nav>
+
+<div class="container">
+<article>
+
+<h1><span class="gradient">Semantic Notarization</span></h1>
+<p class="subtitle">Certifying not just that something exists — but what it means and why it was created.</p>
+<p class="byline">By <a href="https://orcid.org/0009-0001-1422-6209" target="_blank">Mihai Roșca</a> · BRIDGRAI · September 2026</p>
+
+<h2>The Problem with Traditional Notarization</h2>
+
+<p>Traditional digital notarization answers one question: <strong>did this document exist at this point in time?</strong> A timestamp. A hash. A proof of existence.</p>
+
+<p>But existence is the least interesting thing about a document. What matters is:</p>
+
+<ul>
+  <li><strong>What does it mean?</strong> — the semantic content the author intended to communicate</li>
+  <li><strong>Why was it created?</strong> — the intention behind the act of creation</li>
+  <li><strong>Who stands behind it?</strong> — cryptographic authorship, not just possession</li>
+</ul>
+
+<p>A photograph exists. But is it evidence, art, or propaganda? A contract exists. But was it signed under duress or with full understanding? A research paper exists. But was it written to advance knowledge or to game metrics?</p>
+
+<p>Existence without meaning is noise.</p>
+
+<h2>What Semantic Notarization Certifies</h2>
+
+<p>Semantic notarization extends traditional timestamping into four verifiable layers:</p>
+
+<div class="layer-grid">
+  <div class="layer">
+    <div class="layer-num">1</div>
+    <div>
+      <h3>Existence</h3>
+      <p>SHA-256 content hash proves the document existed at a specific moment. Identical to traditional notarization.</p>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-num">2</div>
+    <div>
+      <h3>Authorship</h3>
+      <p>ECDSA P-256 digital signature binds the document to a specific cryptographic identity. The private key never leaves the author's device.</p>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-num">3</div>
+    <div>
+      <h3>Meaning</h3>
+      <p>The author declares what the document means — a human-readable semantic statement that becomes cryptographically bound to the content hash.</p>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-num">4</div>
+    <div>
+      <h3>Intention</h3>
+      <p>The author declares why the document was created — the purpose, the context, the motivation. This too is cryptographically bound and immutable.</p>
+    </div>
+  </div>
+</div>
+
+<p>All four layers are signed together in a single cryptographic operation and can be independently verified. Optionally, the combined proof is anchored on the Tezos blockchain for permanent, decentralized verification.</p>
+
+<h2>How It Differs from Existing Solutions</h2>
+
+<div style="overflow-x:auto">
+<table class="comparison">
+  <tr>
+    <th>Capability</th>
+    <th>Traditional timestamp</th>
+    <th>Blockchain-only</th>
+    <th>Semantic notarization</th>
+  </tr>
+  <tr>
+    <td>Proves existence</td>
+    <td class="check">Yes</td>
+    <td class="check">Yes</td>
+    <td class="check">Yes</td>
+  </tr>
+  <tr>
+    <td>Proves authorship</td>
+    <td class="cross">No</td>
+    <td class="check">Yes (if signed)</td>
+    <td class="check">Yes (cryptographically bound)</td>
+  </tr>
+  <tr>
+    <td>Certifies meaning</td>
+    <td class="cross">No</td>
+    <td class="cross">No</td>
+    <td class="check">Yes</td>
+  </tr>
+  <tr>
+    <td>Certifies intention</td>
+    <td class="cross">No</td>
+    <td class="cross">No</td>
+    <td class="check">Yes</td>
+  </tr>
+  <tr>
+    <td>Independently verifiable</td>
+    <td>Depends on provider</td>
+    <td class="check">Yes</td>
+    <td class="check">Yes</td>
+  </tr>
+  <tr>
+    <td>Keys stay on device</td>
+    <td class="cross">No</td>
+    <td>Varies</td>
+    <td class="check">Yes (Web Crypto API)</td>
+  </tr>
+</table>
+</div>
+
+<h2>The Technical Stack</h2>
+
+<p>Semantic notarization as implemented in AmiStampAI uses open, verifiable standards:</p>
+
+<ul>
+  <li><strong>SHA-256</strong> — content hashing (Web Crypto API, runs locally)</li>
+  <li><strong>ECDSA P-256</strong> — digital signatures (NIST standard, keys generated and stored on device)</li>
+  <li><strong>Tezos blockchain</strong> — optional anchoring for permanent, decentralized proof</li>
+  <li><strong>JSON</strong> — stamp format is open and machine-readable</li>
+</ul>
+
+<p>No vendor lock-in. No proprietary formats. No keys uploaded to servers. The stamp is self-contained and verifiable by anyone with access to the public key.</p>
+
+<h2>Use Cases</h2>
+
+<h3>Intellectual Property</h3>
+<p>Prove not just that you created something, but what you intended it to mean. Prior art disputes become clearer when the semantic record exists alongside the timestamp.</p>
+
+<h3>AI-Generated Content</h3>
+<p>Declare whether content was human-authored, AI-assisted, or AI-generated. Semantic notarization provides a verifiable disclosure mechanism — not a label that can be stripped, but a cryptographic attestation.</p>
+
+<h3>Legal Documents</h3>
+<p>Contracts, agreements, and declarations carry more weight when the meaning and intention are cryptographically bound. "I understood what I was signing" becomes verifiable.</p>
+
+<h3>Research and Academia</h3>
+<p>Establish priority for ideas, not just papers. A semantic stamp on a research concept proves when you had the idea and what you meant by it — before peer review, before publication.</p>
+
+<h3>Journalism and Investigations</h3>
+<p>Certify the editorial intention behind a piece. "This is evidence" vs. "this is commentary" vs. "this is satire" — the declaration is immutable.</p>
+
+<h2>Why This Matters Now</h2>
+
+<p>Three forces converge in 2026:</p>
+
+<ol>
+  <li><strong>AI content flood</strong> — when anyone can generate anything, provenance is the only differentiator</li>
+  <li><strong>EU AI Act</strong> — mandates transparency about AI-generated content and automated decision-making</li>
+  <li><strong>Post-truth erosion</strong> — trust in institutions declines, trust in verifiable cryptographic proof does not</li>
+</ol>
+
+<blockquote>
+  <p>Traditional notarization proves you were there. Semantic notarization proves you meant it.</p>
+</blockquote>
+
+<h2>Open Category, Not Proprietary Feature</h2>
+
+<p>Semantic notarization is a category, not a product feature. AmiStampAI is the first implementation, but the concept is designed to be adopted widely. The stamp format is open. The cryptographic standards are public. Anyone can build a semantic notary.</p>
+
+<p>We believe the concept is more valuable as infrastructure than as a monopoly. BRIDGRAI's mission is trust infrastructure for AI ecosystems — and trust infrastructure only works if it's open.</p>
+
+<div class="cta-box">
+  <h2>Try Semantic Notarization</h2>
+  <p>Create your first stamp — certify what your content means and why you created it. Free, no account required.</p>
+  <a href="/" class="btn btn-primary">Create a stamp &rarr;</a>
+</div>
+
+</article>
+</div>
+
+<footer>
+  <p>&copy; 2024&ndash;2026 BRIDGRAI &middot; <a href="/">AmiStampAI</a> &middot; Part of the <a href="https://amiecosystems.com" target="_blank">ami* ecosystem</a></p>
+  <p style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:center">
+    <a href="https://bridgrai.com" target="_blank">BRIDGRAI</a>
+    <a href="https://amiluxai.com" target="_blank">AmiLuxAI</a>
+    <a href="https://amigibberishai.com" target="_blank">AmiGibberishAI</a>
+    <a href="https://amipecetai.com" target="_blank">AmiPecetAI</a>
+    <a href="https://agikindergarten.com" target="_blank">KinderAGI</a>
+    <a href="https://agischool.academy" target="_blank">AGI School</a>
+    <a href="https://amiecosystems.com" target="_blank">ami* Portfolio</a>
+  </p>
+</footer>
+
+</body>
+</html>
