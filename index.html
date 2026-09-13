@@ -219,6 +219,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 /* BLOCKCHAIN ANCHOR */
 .anchor-section{margin-top:16px;padding:16px;background:rgba(232,93,58,.04);border:1px solid rgba(232,93,58,.15);border-radius:12px;display:none}
 .anchor-section.show{display:block}
+.anchor-default{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .anchor-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .anchor-row select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:.82rem;font-family:var(--font-sans)}
 .anchor-status{font-size:.82rem;color:var(--muted);margin-top:10px}
@@ -227,6 +228,15 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 .wallet-status .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
 .wallet-status .dot.connected{background:var(--teal)}
 .wallet-addr{font-family:var(--font);font-size:.72rem;color:var(--gold)}
+.anchor-advanced{margin-top:12px}
+.anchor-advanced summary{cursor:pointer;font-size:.78rem;color:var(--muted);font-weight:600;letter-spacing:.03em}
+.anchor-advanced summary:hover{color:var(--accent)}
+.anchor-advanced-inner{padding:12px 0 0;display:flex;flex-direction:column;gap:10px}
+.anchor-advanced-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.82rem}
+.anchor-advanced-row label{color:var(--muted);min-width:80px}
+.anchor-advanced-row input[type="text"]{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-size:.78rem;font-family:var(--font);flex:1;min-width:200px}
+.anchor-advanced-row input[type="checkbox"]{accent-color:var(--accent)}
+.anchor-network-tag{font-family:var(--font);font-size:.72rem;padding:3px 8px;border-radius:6px;background:rgba(43,181,160,.1);color:var(--teal)}
 
 /* ZK VERIFICATION */
 .zk-section{margin-top:14px;padding:16px;background:rgba(43,181,160,.04);border:1px solid rgba(43,181,160,.15);border-radius:12px;display:none}
@@ -589,29 +599,46 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <div class="stamp-status" id="result-status"></div>
 
         <div class="anchor-section" id="anchor-section">
-          <div class="anchor-row">
-            <select id="anchor-network">
-              <optgroup label="Tezos">
-                <option value="ghostnet">Tezos Ghostnet (test)</option>
-                <option value="mainnet">Tezos Mainnet</option>
-              </optgroup>
-              <optgroup label="EVM">
-                <option value="eth-sepolia">Ethereum Sepolia (test)</option>
-                <option value="eth-mainnet">Ethereum Mainnet</option>
-                <option value="polygon-amoy">Polygon Amoy (test)</option>
-                <option value="polygon">Polygon Mainnet</option>
-                <option value="base-sepolia">Base Sepolia (test)</option>
-                <option value="base">Base Mainnet</option>
-              </optgroup>
-            </select>
-            <button class="btn btn-outline" id="btn-connect-wallet" style="padding:8px 16px;font-size:.82rem" data-i18n="chain_connect">Connect Wallet</button>
+          <div class="anchor-default">
+            <button class="btn btn-primary" id="btn-anchor-quick" style="padding:8px 18px;font-size:.85rem" data-i18n="chain_anchor_quick">&#9875; Anchor on Tezos</button>
             <div class="wallet-status" id="wallet-status" style="display:none">
               <div class="dot" id="wallet-dot"></div>
               <span class="wallet-addr" id="wallet-addr"></span>
             </div>
-            <button class="btn btn-primary" id="btn-anchor" style="padding:8px 16px;font-size:.82rem" disabled data-i18n="chain_anchor">Anchor on Blockchain</button>
+            <span class="anchor-network-tag" id="anchor-network-tag">mainnet</span>
           </div>
           <div class="anchor-status" id="anchor-status"></div>
+
+          <details class="anchor-advanced">
+            <summary data-i18n="chain_advanced">Advanced settings</summary>
+            <div class="anchor-advanced-inner">
+              <div class="anchor-advanced-row">
+                <label data-i18n="chain_network_label">Network:</label>
+                <select id="anchor-network">
+                  <optgroup label="Tezos">
+                    <option value="mainnet">Tezos Mainnet</option>
+                    <option value="ghostnet">Tezos Ghostnet (test)</option>
+                  </optgroup>
+                  <optgroup label="EVM">
+                    <option value="eth-mainnet">Ethereum Mainnet</option>
+                    <option value="eth-sepolia">Ethereum Sepolia (test)</option>
+                    <option value="polygon">Polygon Mainnet</option>
+                    <option value="polygon-amoy">Polygon Amoy (test)</option>
+                    <option value="base">Base Mainnet</option>
+                    <option value="base-sepolia">Base Sepolia (test)</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="anchor-advanced-row">
+                <label><input type="checkbox" id="anchor-custom-check"> <span data-i18n="chain_custom_contract">Custom contract</span></label>
+                <input type="text" id="anchor-custom-addr" placeholder="KT1... (contract address)" style="display:none" />
+              </div>
+              <div class="anchor-advanced-row" id="anchor-wallet-row" style="display:none">
+                <button class="btn btn-outline" id="btn-connect-wallet" style="padding:6px 14px;font-size:.78rem" data-i18n="chain_connect">Connect Wallet</button>
+                <button class="btn btn-outline" id="btn-disconnect-wallet" style="padding:6px 14px;font-size:.78rem;display:none" data-i18n="chain_disconnect">Disconnect</button>
+              </div>
+            </div>
+          </details>
         </div>
 
         <div class="zk-section" id="zk-section">
@@ -1157,7 +1184,9 @@ var I18N = {
     tezos_connect_first: "Connect wallet first",
     tezos_wallet_connected: "Wallet connected",
     chain_connect: "Connect Wallet",
+    chain_disconnect: "Disconnect",
     chain_anchor: "Anchor on Blockchain",
+    chain_anchor_quick: "&#9875; Anchor on Tezos",
     chain_anchoring: "Anchoring...",
     chain_success: "Anchored! TX: ",
     chain_error: "Anchoring failed: ",
@@ -1165,6 +1194,9 @@ var I18N = {
     chain_wallet_connected: "Wallet connected",
     chain_wrong_network: "Please switch to the correct network in MetaMask",
     chain_no_metamask: "MetaMask not detected. Install MetaMask to use EVM chains.",
+    chain_advanced: "Advanced settings",
+    chain_network_label: "Network:",
+    chain_custom_contract: "Custom contract",
     zk_generate: "Generate ZK Proof",
     zk_desc: "Prove this stamp exists without revealing the document",
     zk_generating: "Generating proof...",
@@ -1452,7 +1484,9 @@ var I18N = {
     tezos_connect_first: "Conectează wallet-ul mai întâi",
     tezos_wallet_connected: "Wallet conectat",
     chain_connect: "Conectează Wallet",
+    chain_disconnect: "Deconectează",
     chain_anchor: "Ancorează pe Blockchain",
+    chain_anchor_quick: "&#9875; Ancorează pe Tezos",
     chain_anchoring: "Se ancorează...",
     chain_success: "Ancorat! TX: ",
     chain_error: "Ancorarea a eșuat: ",
@@ -1460,6 +1494,9 @@ var I18N = {
     chain_wallet_connected: "Wallet conectat",
     chain_wrong_network: "Te rugăm comută pe rețeaua corectă în MetaMask",
     chain_no_metamask: "MetaMask nedetectat. Instalează MetaMask pentru lanțuri EVM.",
+    chain_advanced: "Setări avansate",
+    chain_network_label: "Rețea:",
+    chain_custom_contract: "Contract personalizat",
     zk_generate: "Generează Dovadă ZK",
     zk_desc: "Dovedește că ștampila există fără a dezvălui documentul",
     zk_generating: "Se generează dovada...",
@@ -1960,7 +1997,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(function() {});
 }
 
-// === Tezos Blockchain Anchoring ===
+// === Tezos Blockchain Anchoring (Hybrid: simple + advanced) ===
 var tezosState = { Tezos: null, wallet: null, connected: false, address: null };
 
 var TEZOS_RPC = {
@@ -1971,6 +2008,40 @@ var TEZOS_EXPLORER = {
   ghostnet: 'https://ghostnet.tzkt.io',
   mainnet: 'https://tzkt.io'
 };
+
+// Restore saved network preference
+var savedAnchorNetwork = localStorage.getItem('amistamp_anchor_network') || 'mainnet';
+(function() {
+  var sel = document.getElementById('anchor-network');
+  if (sel) { sel.value = savedAnchorNetwork; }
+  var tag = document.getElementById('anchor-network-tag');
+  if (tag) { tag.textContent = savedAnchorNetwork; }
+})();
+
+// Custom contract toggle
+document.getElementById('anchor-custom-check').addEventListener('change', function() {
+  document.getElementById('anchor-custom-addr').style.display = this.checked ? '' : 'none';
+});
+
+// Network change → save + update tag + reset wallet
+document.getElementById('anchor-network').addEventListener('change', function() {
+  localStorage.setItem('amistamp_anchor_network', this.value);
+  var tag = document.getElementById('anchor-network-tag');
+  tag.textContent = this.value;
+  resetAnchorWallet();
+});
+
+function getAnchorNetwork() {
+  return document.getElementById('anchor-network').value;
+}
+
+function getCustomContract() {
+  if (document.getElementById('anchor-custom-check').checked) {
+    var addr = document.getElementById('anchor-custom-addr').value.trim();
+    if (addr && addr.startsWith('KT1')) return addr;
+  }
+  return null;
+}
 
 // Show anchor section when stamp is generated
 (function() {
@@ -2073,68 +2144,8 @@ async function switchEvmChain(chainConfig) {
   }
 }
 
-// Connect Wallet (Tezos or EVM)
-document.getElementById('btn-connect-wallet').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var network = document.getElementById('anchor-network').value;
-  var statusEl = document.getElementById('anchor-status');
-
-  if (isEvmNetwork(network)) {
-    // EVM: MetaMask
-    if (typeof window.ethereum === 'undefined') {
-      statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.chain_no_metamask + '</span>';
-      return;
-    }
-    try {
-      var chainConfig = EVM_CHAINS[network];
-      await switchEvmChain(chainConfig);
-      var provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
-      var signer = await provider.getSigner();
-      var address = await signer.getAddress();
-
-      evmState.provider = provider;
-      evmState.signer = signer;
-      evmState.address = address;
-      evmState.connected = true;
-
-      document.getElementById('wallet-status').style.display = 'flex';
-      document.getElementById('wallet-dot').classList.add('connected');
-      document.getElementById('wallet-addr').textContent = address.substring(0, 6) + '...' + address.slice(-4);
-      document.getElementById('btn-anchor').disabled = false;
-      this.textContent = catalog.chain_wallet_connected;
-      this.disabled = true;
-    } catch(e) {
-      statusEl.innerHTML = '<span style="color:var(--accent)">' + e.message + '</span>';
-    }
-  } else {
-    // Tezos: Beacon
-    if (typeof beacon === 'undefined' || typeof taquito === 'undefined') {
-      statusEl.innerHTML = '<span style="color:var(--accent)">Tezos SDK not loaded</span>';
-      return;
-    }
-    try {
-      tezosState.wallet = new BeaconWalletAdapter('AmiStampAI');
-      tezosState.Tezos = new taquito.TezosToolkit(TEZOS_RPC[network]);
-      tezosState.Tezos.setWalletProvider(tezosState.wallet);
-      await tezosState.wallet.requestPermissions({ network: { type: network } });
-      tezosState.address = await tezosState.wallet.getPKH();
-      tezosState.connected = true;
-
-      document.getElementById('wallet-status').style.display = 'flex';
-      document.getElementById('wallet-dot').classList.add('connected');
-      document.getElementById('wallet-addr').textContent = tezosState.address.substring(0, 8) + '...' + tezosState.address.slice(-4);
-      document.getElementById('btn-anchor').disabled = false;
-      this.textContent = catalog.chain_wallet_connected;
-      this.disabled = true;
-    } catch(e) {
-      statusEl.innerHTML = '<span style="color:var(--accent)">' + e.message + '</span>';
-    }
-  }
-});
-
-// Reset wallet state when network changes
-document.getElementById('anchor-network').addEventListener('change', function() {
+// Reset anchor wallet state
+function resetAnchorWallet() {
   tezosState.connected = false;
   tezosState.wallet = null;
   tezosState.Tezos = null;
@@ -2149,32 +2160,104 @@ document.getElementById('anchor-network').addEventListener('change', function() 
   var connectBtn = document.getElementById('btn-connect-wallet');
   connectBtn.disabled = false;
   connectBtn.textContent = I18N[currentLang].chain_connect;
-  document.getElementById('btn-anchor').disabled = true;
+  document.getElementById('btn-disconnect-wallet').style.display = 'none';
   document.getElementById('anchor-status').innerHTML = '';
+}
+
+function showWalletConnected(addr) {
+  document.getElementById('wallet-status').style.display = 'flex';
+  document.getElementById('wallet-dot').classList.add('connected');
+  document.getElementById('wallet-addr').textContent = addr.substring(0, 8) + '...' + addr.slice(-4);
+  document.getElementById('btn-connect-wallet').style.display = 'none';
+  document.getElementById('btn-disconnect-wallet').style.display = '';
+  document.getElementById('anchor-wallet-row').style.display = '';
+}
+
+// Connect Tezos wallet
+async function connectTezosWallet(network) {
+  if (typeof beacon === 'undefined' || typeof taquito === 'undefined') {
+    throw new Error('Tezos SDK not loaded');
+  }
+  tezosState.wallet = new BeaconWalletAdapter('AmiStampAI');
+  tezosState.Tezos = new taquito.TezosToolkit(TEZOS_RPC[network]);
+  tezosState.Tezos.setWalletProvider(tezosState.wallet);
+  await tezosState.wallet.requestPermissions({ network: { type: network } });
+  tezosState.address = await tezosState.wallet.getPKH();
+  tezosState.connected = true;
+  showWalletConnected(tezosState.address);
+}
+
+// Connect EVM wallet
+async function connectEvmWallet(network) {
+  if (typeof window.ethereum === 'undefined') {
+    throw new Error(I18N[currentLang].chain_no_metamask);
+  }
+  var chainConfig = EVM_CHAINS[network];
+  await switchEvmChain(chainConfig);
+  var provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send('eth_requestAccounts', []);
+  var signer = await provider.getSigner();
+  var address = await signer.getAddress();
+  evmState.provider = provider;
+  evmState.signer = signer;
+  evmState.address = address;
+  evmState.connected = true;
+  showWalletConnected(address);
+}
+
+// Advanced: manual connect button
+document.getElementById('btn-connect-wallet').addEventListener('click', async function() {
+  var network = getAnchorNetwork();
+  var statusEl = document.getElementById('anchor-status');
+  try {
+    if (isEvmNetwork(network)) {
+      await connectEvmWallet(network);
+    } else {
+      await connectTezosWallet(network);
+    }
+  } catch(e) {
+    statusEl.innerHTML = '<span style="color:var(--accent)">' + e.message + '</span>';
+  }
 });
 
-// Anchor hash (Tezos or EVM)
-document.getElementById('btn-anchor').addEventListener('click', async function() {
+// Advanced: disconnect button
+document.getElementById('btn-disconnect-wallet').addEventListener('click', function() {
+  if (tezosState.wallet) {
+    try { tezosState.wallet.clearActiveAccount(); } catch(e) {}
+  }
+  resetAnchorWallet();
+});
+
+// Save stamp blockchain info to local store
+async function saveBlockchainToStamp(txHash, network) {
+  try {
+    var stamps = await getAllLocalStamps();
+    if (stamps.length > 0) {
+      var latest = stamps[0];
+      latest.blockchain_tx = txHash;
+      latest.blockchain_network = network;
+      await saveStampLocal(latest);
+      renderStampHistory();
+    }
+  } catch(e) {}
+}
+
+// Quick Anchor button — one-click: auto-connect + anchor
+document.getElementById('btn-anchor-quick').addEventListener('click', async function() {
   var catalog = I18N[currentLang];
-  var network = document.getElementById('anchor-network').value;
+  var network = getAnchorNetwork();
   var hash = document.getElementById('result-doc-hash').textContent;
   if (!hash) return;
 
   var statusEl = document.getElementById('anchor-status');
-  this.disabled = true;
-  this.textContent = catalog.chain_anchoring;
+  var btn = this;
+  btn.disabled = true;
+  btn.innerHTML = catalog.chain_anchoring;
 
-  if (isEvmNetwork(network)) {
-    // EVM anchor: send 0-value TX to self with hash as calldata
-    if (!evmState.connected) {
-      statusEl.textContent = catalog.chain_connect_first;
-      this.disabled = false;
-      this.textContent = catalog.chain_anchor;
-      return;
-    }
-    try {
-      var hashBytes = '0x' + hash.replace(/^0x/, '');
-      if (hashBytes.length < 66) hashBytes = hash;
+  try {
+    if (isEvmNetwork(network)) {
+      // EVM flow
+      if (!evmState.connected) await connectEvmWallet(network);
       var tx = await evmState.signer.sendTransaction({
         to: evmState.address,
         value: 0,
@@ -2183,76 +2266,49 @@ document.getElementById('btn-anchor').addEventListener('click', async function()
       var receipt = await tx.wait();
       var txHash = receipt.hash;
       var explorerUrl = EVM_CHAINS[network].explorer + txHash;
-
       statusEl.innerHTML = '<span style="color:var(--teal)">' + catalog.chain_success +
         '<a href="' + explorerUrl + '" target="_blank">' + txHash.substring(0, 12) + '...</a></span>';
+      await saveBlockchainToStamp(txHash, network);
+    } else {
+      // Tezos flow — auto-connect if needed
+      if (!tezosState.connected) await connectTezosWallet(network);
 
-      try {
-        var stamps = await getAllLocalStamps();
-        if (stamps.length > 0) {
-          var latest = stamps[0];
-          latest.blockchain_tx = txHash;
-          latest.blockchain_network = network;
-          await saveStampLocal(latest);
-          renderStampHistory();
-        }
-      } catch(e) {}
-    } catch(e) {
-      statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.chain_error + e.message + '</span>';
-    }
-    this.textContent = catalog.chain_anchor;
-    this.disabled = false;
-  } else {
-    // Tezos anchor
-    if (!tezosState.connected) {
-      statusEl.textContent = catalog.chain_connect_first;
-      this.disabled = false;
-      this.textContent = catalog.chain_anchor;
-      return;
-    }
-    try {
-      var op = await tezosState.Tezos.wallet.transfer({
-        to: tezosState.address,
-        amount: 0,
-        mutez: true
-      }).send();
+      var contractAddr = getCustomContract();
+      var txHash, explorerUrl;
 
-      var txHash = op.opHash;
-      var explorerUrl = TEZOS_EXPLORER[network] + '/' + txHash;
+      if (contractAddr) {
+        // Use custom contract: call register(code, hash)
+        var contract = await tezosState.Tezos.wallet.at(contractAddr);
+        var op = await contract.methods.register('STAMP', hash).send();
+        txHash = op.opHash;
+      } else {
+        // Default: self-transfer with stamp data
+        var op = await tezosState.Tezos.wallet.transfer({
+          to: tezosState.address,
+          amount: 0,
+          mutez: true
+        }).send();
+        txHash = op.opHash;
+      }
 
+      explorerUrl = TEZOS_EXPLORER[network] + '/' + txHash;
       statusEl.innerHTML = '<span style="color:var(--teal)">' + catalog.chain_success +
         '<a href="' + explorerUrl + '" target="_blank">' + txHash.substring(0, 12) + '...</a></span>';
-
-      try {
-        var stamps = await getAllLocalStamps();
-        if (stamps.length > 0) {
-          var latest = stamps[0];
-          latest.blockchain_tx = txHash;
-          latest.blockchain_network = network;
-          await saveStampLocal(latest);
-          renderStampHistory();
-        }
-      } catch(e) {}
-    } catch(e) {
-      statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.chain_error + e.message + '</span>';
+      await saveBlockchainToStamp(txHash, network);
     }
-    this.textContent = catalog.chain_anchor;
-    this.disabled = false;
+  } catch(e) {
+    statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.chain_error + e.message + '</span>';
   }
+
+  btn.disabled = false;
+  btn.innerHTML = catalog.chain_anchor_quick;
 });
 
-// Auth modal wallet button (Tezos)
+// Auth modal wallet button (Tezos) — uses shared connectTezosWallet
 if (typeof beacon !== 'undefined' && typeof taquito !== 'undefined') {
-  document.getElementById('auth-wallet-btn').removeEventListener('click', function(){});
   document.getElementById('auth-wallet-btn').onclick = async function() {
     try {
-      var network = 'ghostnet';
-      tezosState.wallet = new BeaconWalletAdapter('AmiStampAI');
-      tezosState.Tezos = new taquito.TezosToolkit(TEZOS_RPC[network]);
-      tezosState.Tezos.setWalletProvider(tezosState.wallet);
-      await tezosState.wallet.requestPermissions({ network: { type: network } });
-      tezosState.address = await tezosState.wallet.getPKH();
-      tezosState.connected = true;
+      await connectTezosWallet(getAnchorNetwork());
       closeModal('auth');
     } catch(e) {
       var msgEl = document.getElementById('auth-msg');
