@@ -880,7 +880,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <h3 data-i18n="modal_privacy_h4">Your Rights</h3>
     <p data-i18n="modal_privacy_p4">Under GDPR you have the right to access, rectify, delete, and port your data. Contact: mihairosca1982@gmail.com</p>
     <h3 data-i18n="modal_privacy_h5">Data Controller</h3>
-    <p data-i18n="modal_privacy_p5">Mihai Rosca / BRIDGRAI, Braila, Romania, EU.</p>
+    <p data-i18n="modal_privacy_p5">Mihai Rosca / BRIDGRAI, Brăila, Romania, EU.</p>
   </div>
 </div>
 
@@ -895,7 +895,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <h3 data-i18n="modal_terms_h3">Blockchain Records</h3>
     <p data-i18n="modal_terms_p3">Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.</p>
     <h3 data-i18n="modal_terms_h4">Pricing</h3>
-    <p data-i18n="modal_terms_p4">Free tier: 50 stamps/month. Pay-as-you-go: &euro;0.10/stamp. Stamp Pack: 100 stamps for &euro;8. Pro: &euro;9.99/month unlimited. Prices may change with 30 days notice.</p>
+    <p data-i18n="modal_terms_p4">Free tier: 50 stamps/month. Pro: &euro;9.99/month unlimited. Enterprise: custom pricing. Prices may change with 30 days notice.</p>
   </div>
 </div>
 
@@ -917,7 +917,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <button class="modal-close" onclick="closeModal('imprint')">&times;</button>
     <h2 data-i18n="modal_imprint_title">Imprint</h2>
     <p data-i18n-html="modal_imprint_operator"><strong>Operator:</strong> Mihai Rosca / BRIDGRAI</p>
-    <p data-i18n-html="modal_imprint_location"><strong>Location:</strong> Braila, Romania, EU</p>
+    <p data-i18n-html="modal_imprint_location"><strong>Location:</strong> Brăila, Romania, EU</p>
     <p data-i18n-html="modal_imprint_contact"><strong>Contact:</strong> mihairosca1982@gmail.com</p>
     <p data-i18n-html="modal_imprint_project"><strong>Project:</strong> AmiStampAI is part of the ami* SaaS ecosystem, developed under BRIDGRAI research initiative.</p>
     <p data-i18n-html="modal_imprint_blockchain"><strong>Blockchain:</strong> Tezos (Ghostnet for testing, Mainnet for production)</p>
@@ -960,9 +960,11 @@ var I18N = {
     nav_how: "How",
     nav_demo: "Demo",
     nav_pricing: "Pricing",
+    nav_faq: "FAQ",
     nav_ecosystem: "ami* Ecosystem",
     hero_title: 'The digital stamp that certifies<br><span class="gradient">meaning &amp; intention</span>',
     hero_desc: "Traditional notaries prove a document exists. But in 2026, most content is AI-generated. The question isn't \"does this exist?\" — it's \"what does this mean and why was it created?\" AmiStampAI answers that with cryptographic proof.",
+    hero_badge: "Cryptographic signatures + Tezos Blockchain",
     hero_cta_try: "Create Your First Stamp",
     hero_cta_how: "How it works",
     stamp_arc_top: "CERTIFIED · VERIFIED",
@@ -1111,7 +1113,7 @@ var I18N = {
     modal_privacy_h4: "Your Rights",
     modal_privacy_p4: "Under GDPR you have the right to access, rectify, delete, and port your data. Contact: mihairosca1982@gmail.com",
     modal_privacy_h5: "Data Controller",
-    modal_privacy_p5: "Mihai Rosca / BRIDGRAI, Braila, Romania, EU.",
+    modal_privacy_p5: "Mihai Rosca / BRIDGRAI, Brăila, Romania, EU.",
     modal_terms_title: "Terms of Service",
     modal_terms_h1: "Service",
     modal_terms_p1: "AmiStampAI provides cryptographic stamping services for documents, combining ECDSA digital signatures with declared meaning and intention. The service is provided as-is.",
@@ -1120,7 +1122,7 @@ var I18N = {
     modal_terms_h3: "Blockchain Records",
     modal_terms_p3: "Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.",
     modal_terms_h4: "Pricing",
-    modal_terms_p4: "Free tier: 50 stamps/month. Pay-as-you-go: €0.10/stamp. Stamp Pack: 100 stamps for €8. Pro: €9.99/month unlimited. Prices may change with 30 days notice.",
+    modal_terms_p4: "Free tier: 50 stamps/month. Pro: €9.99/month unlimited. Enterprise: custom pricing. Prices may change with 30 days notice.",
     modal_aiact_title: "AI Act Transparency Notice",
     modal_aiact_h1: "Classification",
     modal_aiact_p1: "AmiStampAI is a cryptographic tool. It does not make decisions, generate content, or classify data using AI. It uses standard cryptographic algorithms (ECDSA, SHA-256) and blockchain technology.",
@@ -1130,7 +1132,7 @@ var I18N = {
     modal_aiact_p3: "Every stamp requires explicit human action: declaring meaning and intention, then triggering the signature. No automated stamping occurs.",
     modal_imprint_title: "Imprint",
     modal_imprint_operator: "<strong>Operator:</strong> Mihai Rosca / BRIDGRAI",
-    modal_imprint_location: "<strong>Location:</strong> Braila, Romania, EU",
+    modal_imprint_location: "<strong>Location:</strong> Brăila, Romania, EU",
     modal_imprint_contact: "<strong>Contact:</strong> mihairosca1982@gmail.com",
     modal_imprint_project: "<strong>Project:</strong> AmiStampAI is part of the ami* SaaS ecosystem, developed under BRIDGRAI research initiative.",
     modal_imprint_blockchain: "<strong>Blockchain:</strong> Tezos (Ghostnet for testing, Mainnet for production)",
@@ -1208,14 +1210,8 @@ var I18N = {
     offline_msg: "You are offline — stamps are saved locally and will sync when reconnected.",
     nav_install: "Install",
     demo_saved_local: "💾 Stamp saved locally (offline)",
-    nav_faq: "FAQ",
-    hero_badge: "Cryptographic signatures + Tezos Blockchain",
-    hero_cta_try: "Create Your First Stamp",
     hero_cta_sub: "No account required. Works in browser. Takes 30 seconds.",
     stamps_sign_in: "Sign in to track your stamps across devices.",
-    stat_stamps: "stamps created",
-    stat_users: "active users",
-    stat_chains: "blockchains supported",
     case1_example: "\"I stamped my ML algorithm with intention 'novel approach to federated learning' 6 months before publication. When a competitor claimed similar work, my timestamp proved prior art.\"",
     case2_example: "\"Both parties stamped the contract with their intentions. When dispute arose, the stamped intentions clarified ambiguous clauses.\"",
     case3_example: "\"I stamp every AI-generated report with my editorial intention. If audited under the EU AI Act, I have cryptographic proof of human oversight.\"",
@@ -1252,7 +1248,6 @@ var I18N = {
     faq_q5: "What if AmiStampAI shuts down?",
     faq_a5: "Your stamps are on the Tezos blockchain and verifiable with standard cryptographic tools. You don't depend on us to verify.",
     footer_contact: "Contact",
-    footer_tagline: "3.5 years bootstrapped<br>0 EUR funding<br>100% self-funded",
     verify_example: "Try it: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click to test verification</a>"
   },
   ro: {
@@ -1260,9 +1255,11 @@ var I18N = {
     nav_how: "Cum",
     nav_demo: "Demo",
     nav_pricing: "Prețuri",
+    nav_faq: "Întrebări",
     nav_ecosystem: "Ecosistemul ami*",
     hero_title: 'Ștampila digitală care certifică<br><span class="gradient">sensul și intenția</span>',
     hero_desc: "Notarii tradiționali dovedesc că un document există. Dar în 2026, majoritatea conținutului este generat de AI. Întrebarea nu e „există?" — ci „ce înseamnă și de ce a fost creat?" AmiStampAI răspunde cu dovadă criptografică.",
+    hero_badge: "Semnături criptografice + Blockchain Tezos",
     hero_cta_try: "Creează Prima Ta Ștampilă",
     hero_cta_how: "Cum funcționează",
     stamp_arc_top: "CERTIFICAT · VERIFICAT",
@@ -1420,7 +1417,7 @@ var I18N = {
     modal_terms_h3: "Înregistrări Blockchain",
     modal_terms_p3: "Odată ce un hash este ancorat pe Tezos, nu poate fi șters. Acesta este by design. Gândește-te bine înainte de ancorare.",
     modal_terms_h4: "Prețuri",
-    modal_terms_p4: "Planul gratuit: 50 ștampile/lună. Pay-as-you-go: €0.10/ștampilă. Pachet: 100 ștampile la €8. Pro: €9.99/lună nelimitat. Prețurile se pot modifica cu 30 de zile preaviz.",
+    modal_terms_p4: "Planul gratuit: 50 ștampile/lună. Pro: €9.99/lună nelimitat. Enterprise: prețuri personalizate. Prețurile se pot modifica cu 30 de zile preaviz.",
     modal_aiact_title: "Notificare Transparență AI Act",
     modal_aiact_h1: "Clasificare",
     modal_aiact_p1: "AmiStampAI este un instrument criptografic. Nu ia decizii, nu generează conținut și nu clasifică date folosind AI. Folosește algoritmi criptografici standard (ECDSA, SHA-256) și tehnologie blockchain.",
@@ -1508,14 +1505,8 @@ var I18N = {
     offline_msg: "Ești offline — ștampilele sunt salvate local și se vor sincroniza la reconectare.",
     nav_install: "Instalează",
     demo_saved_local: "💾 Ștampilă salvată local (offline)",
-    nav_faq: "Întrebări",
-    hero_badge: "Semnături criptografice + Blockchain Tezos",
-    hero_cta_try: "Creează Prima Ta Ștampilă",
     hero_cta_sub: "Fără cont necesar. Funcționează în browser. Durează 30 de secunde.",
     stamps_sign_in: "Autentifică-te pentru a urmări ștampilele pe toate dispozitivele.",
-    stat_stamps: "ștampile create",
-    stat_users: "utilizatori activi",
-    stat_chains: "blockchain-uri suportate",
     case1_example: "\"Am ștampilat algoritmul meu ML cu intenția 'abordare nouă pentru federated learning' cu 6 luni înainte de publicare. Când un competitor a revendicat lucrări similare, timestamp-ul meu a dovedit anterioritatea.\"",
     case2_example: "\"Ambele părți au ștampilat contractul cu intențiile lor. Când a apărut disputa, intențiile ștampilate au clarificat clauzele ambigue.\"",
     case3_example: "\"Ștampilez fiecare raport generat de AI cu intenția mea editorială. Dacă sunt auditat conform EU AI Act, am dovadă criptografică a supravegherii umane.\"",
@@ -1552,7 +1543,6 @@ var I18N = {
     faq_q5: "Ce se întâmplă dacă AmiStampAI se închide?",
     faq_a5: "Ștampilele tale sunt pe blockchain-ul Tezos și verificabile cu instrumente criptografice standard. Nu depinzi de noi pentru verificare.",
     footer_contact: "Contact",
-    footer_tagline: "3,5 ani bootstrapped<br>0 EUR finanțare<br>100% autofinanțat",
     verify_example: "Testează: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click pentru verificare demo</a>"
   }
 };
