@@ -987,6 +987,7 @@ var I18N = {
     demo_result_pubkey: "Public key (JWK):",
     demo_result_status: "✓ Stamp verified — signature valid, hash intact",
     demo_alert_fill: "All three fields are required: content, meaning, and intention.",
+    demo_limit_reached: "Monthly limit reached (50 free stamps). Upgrade to Pro or buy a Stamp Pack for more.",
     pricing_title: "Pricing",
     pricing_sub: "Start free. Pay only when you need blockchain anchoring or volume.",
     plan_free: "Free",
@@ -1239,6 +1240,7 @@ var I18N = {
     demo_result_pubkey: "Cheie publică (JWK):",
     demo_result_status: "✓ Ștampilă verificată — semnătură validă, hash intact",
     demo_alert_fill: "Toate cele trei câmpuri sunt obligatorii: conținut, sens și intenție.",
+    demo_limit_reached: "Limita lunară atinsă (50 ștampile gratuite). Upgradează la Pro sau cumpără un Pachet pentru mai multe.",
     pricing_title: "Prețuri",
     pricing_sub: "Începe gratuit. Plătești doar când ai nevoie de ancorare blockchain sau volum.",
     plan_free: "Gratuit",
@@ -1464,6 +1466,18 @@ document.getElementById('demo-stamp').addEventListener('click', async function()
     alert(catalog.demo_alert_fill);
     return;
   }
+
+  // Enforce free tier limit (50/month)
+  try {
+    var allStamps = await getAllLocalStamps();
+    var now = new Date();
+    var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    var thisMonthCount = allStamps.filter(function(s) { return s.created_at >= monthStart; }).length;
+    if (thisMonthCount >= 50) {
+      alert(catalog.demo_limit_reached);
+      return;
+    }
+  } catch(e) {}
 
   this.disabled = true;
   this.textContent = catalog.demo_btn_stamping;
