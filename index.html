@@ -100,6 +100,8 @@ nav{padding:16px 0;display:flex;align-items:center;justify-content:space-between
 .step p{font-size:.82rem;color:var(--muted)}
 
 /* STACK */
+.tech-details summary::-webkit-details-marker{display:none}
+.tech-details[open] summary span:last-child{transform:rotate(180deg);display:inline-block}
 .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .stack-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px;display:flex;align-items:start;gap:14px}
 .stack-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px}
@@ -331,7 +333,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <a href="#demo" data-i18n="nav_demo">Demo</a>
     <a href="#verify" data-i18n="nav_verify">Verify</a>
     <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
-    <a href="https://amiecosystems.com" target="_blank" data-i18n="nav_ecosystem">ami* Ecosystem</a>
+    <a href="#faq" data-i18n="nav_faq">FAQ</a>
     <div class="lang-toggle">
       <button id="lang-en" onclick="setLang('en')">EN</button>
       <button id="lang-ro" onclick="setLang('ro')">RO</button>
@@ -354,13 +356,14 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">ECDSA P-256 + SHA-256 + Tezos Blockchain</div>
+  <div class="hero-badge" data-i18n="hero_badge">Cryptographic signatures + Tezos Blockchain</div>
   <h1 data-i18n-html="hero_title">The digital stamp that certifies<br><span class="gradient">meaning &amp; intention</span></h1>
-  <p data-i18n="hero_desc">Other notaries prove a document exists. AmiStampAI proves what it means and why it was created. Cryptographic proof of meaning and intention, anchored on Tezos.</p>
+  <p data-i18n="hero_desc">Traditional notaries prove a document exists. But in 2026, most content is AI-generated. The question isn't "does this exist?" — it's "what does this mean and why was it created?" AmiStampAI answers that with cryptographic proof.</p>
   <div class="hero-cta">
-    <a href="#demo" class="btn btn-primary" data-i18n="hero_cta_try">Try the stamp</a>
+    <a href="#demo" class="btn btn-primary" style="padding:14px 36px;font-size:1.05rem" data-i18n="hero_cta_try">Create Your First Stamp</a>
     <a href="#how" class="btn btn-outline" data-i18n="hero_cta_how">How it works</a>
   </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:12px" data-i18n="hero_cta_sub">No account required. Works in browser. Takes 30 seconds.</p>
 
   <div class="stamp-visual">
     <div class="stamp-ring">
@@ -375,6 +378,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     </div>
   </div>
 </section>
+
 
 <!-- WHAT IT CERTIFIES -->
 <section class="section" id="what">
@@ -464,8 +468,12 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 
 <!-- TECH STACK -->
 <section class="section">
-  <h2 class="section-title" data-i18n="stack_title">Built on proven cryptography</h2>
-  <p class="section-sub" data-i18n="stack_sub">No custom algorithms. No proprietary formats. Standards only.</p>
+  <details class="tech-details">
+    <summary style="cursor:pointer;list-style:none;text-align:center">
+      <h2 class="section-title" style="display:inline" data-i18n="stack_title">Built on proven cryptography</h2>
+      <span style="color:var(--muted);font-size:.8rem;margin-left:8px">&#9660;</span>
+      <p class="section-sub" data-i18n="stack_sub">No custom algorithms. No proprietary formats. Standards only.</p>
+    </summary>
 
   <div class="stack-grid">
     <div class="stack-item">
@@ -499,18 +507,12 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <div class="stack-item">
       <div class="stack-icon">&#128274;</div>
       <div>
-        <h3>JWK Key Exchange</h3>
-        <p data-i18n="stack_jwk">Export and share public keys for external verification. <code>exportKey("jwk")</code></p>
-      </div>
-    </div>
-    <div class="stack-item">
-      <div class="stack-icon">&#128202;</div>
-      <div>
-        <h3>BRIDGRAI A2A</h3>
-        <p data-i18n="stack_bridgrai">8-agent platform with concordance verification. <code>Sens Agent + ACR</code></p>
+        <h3 data-i18n="stack_jwk_title">Public Key Export</h3>
+        <p data-i18n="stack_jwk">Export and share public keys for external verification. Standard JWK format.</p>
       </div>
     </div>
   </div>
+  </details>
 </section>
 
 <!-- USE CASES -->
@@ -523,21 +525,25 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <div class="case-icon">&#128220;</div>
       <h3 data-i18n="case1_title">Intellectual Property</h3>
       <p data-i18n="case1_desc">Stamp your research, code, or invention with its declared purpose before publication. Provable prior art with declared intention.</p>
+      <p style="font-size:.78rem;color:var(--gold);margin-top:8px;font-style:italic" data-i18n="case1_example">"I stamped my ML algorithm with intention 'novel approach to federated learning' 6 months before publication. When a competitor claimed similar work, my timestamp proved prior art."</p>
     </div>
     <div class="case">
       <div class="case-icon">&#9878;&#65039;</div>
       <h3 data-i18n="case2_title">Legal Declarations</h3>
       <p data-i18n="case2_desc">Contracts, NDAs, consent forms &mdash; stamp not just the text, but what each party intends by signing.</p>
+      <p style="font-size:.78rem;color:var(--gold);margin-top:8px;font-style:italic" data-i18n="case2_example">"Both parties stamped the contract with their intentions. When dispute arose, the stamped intentions clarified ambiguous clauses."</p>
     </div>
     <div class="case">
       <div class="case-icon">&#129302;</div>
       <h3 data-i18n="case3_title">AI-Generated Content</h3>
       <p data-i18n="case3_desc">When AI creates something, stamp the human intention behind the prompt. EU AI Act transparency, built in.</p>
+      <p style="font-size:.78rem;color:var(--gold);margin-top:8px;font-style:italic" data-i18n="case3_example">"I stamp every AI-generated report with my editorial intention. If audited under the EU AI Act, I have cryptographic proof of human oversight."</p>
     </div>
     <div class="case">
       <div class="case-icon">&#127891;</div>
       <h3 data-i18n="case4_title">Academic Work</h3>
       <p data-i18n="case4_desc">Certify the meaning and purpose of your research before peer review. Timestamp + intention = stronger claim.</p>
+      <p style="font-size:.78rem;color:var(--gold);margin-top:8px;font-style:italic" data-i18n="case4_example">"I timestamped my thesis abstract with declared research intention before submission. The blockchain proof established priority independent of the journal."</p>
     </div>
   </div>
 </section>
@@ -676,6 +682,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <input type="text" id="verify-stamp-id" data-i18n-placeholder="verify_placeholder" placeholder="Stamp ID (UUID)...">
       <button class="btn btn-primary" id="btn-verify-stamp" data-i18n="verify_btn">Verify</button>
     </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px;text-align:center" data-i18n-html="verify_example">Try it: <a href="?verify=example-stamp-demo" style="color:var(--accent)">click to test verification</a></p>
     <div class="verify-result-card" id="verify-result-card">
       <div id="verify-badge-area"></div>
       <div class="verify-field"><div class="verify-label" data-i18n="verify_hash">Document Hash</div><div class="verify-value" id="verify-hash"></div></div>
@@ -694,43 +701,19 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
   <h2 class="section-title" data-i18n="pricing_title">Pricing</h2>
   <p class="section-sub" data-i18n="pricing_sub">Start free. Pay only when you need blockchain anchoring or volume.</p>
 
-  <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:1000px">
+  <div class="pricing-grid" style="grid-template-columns:repeat(3,1fr);max-width:900px">
     <div class="plan">
       <h3 data-i18n="plan_free">Free</h3>
       <div class="price">&#8364;0</div>
       <div class="period" data-i18n="plan_free_period">forever</div>
       <ul>
         <li data-i18n="plan_free_f1">50 stamps / month</li>
-        <li data-i18n="plan_free_f2">ECDSA P-256 signatures</li>
-        <li data-i18n="plan_free_f3">Local-first + cloud sync</li>
+        <li data-i18n="plan_free_f2">Cryptographic signatures</li>
+        <li data-i18n="plan_free_f3">Local-first storage</li>
         <li data-i18n="plan_free_f4">Offline PWA support</li>
         <li data-i18n="plan_free_f5">Stamp history</li>
       </ul>
       <a href="#demo" class="btn btn-outline" data-i18n="plan_free_cta">Start stamping</a>
-    </div>
-    <div class="plan">
-      <h3 data-i18n="plan_payg">Pay-as-you-go</h3>
-      <div class="price">&#8364;0.10<span>/stamp</span></div>
-      <div class="period" data-i18n="plan_payg_period">no commitment</div>
-      <ul>
-        <li data-i18n="plan_payg_f1">Beyond free 50/month</li>
-        <li data-i18n="plan_payg_f2">Tezos blockchain anchoring</li>
-        <li data-i18n="plan_payg_f3">Cloud storage + sync</li>
-        <li data-i18n="plan_payg_f4">Verification link per stamp</li>
-      </ul>
-      <button class="btn btn-outline" id="btn-payg" data-i18n="plan_payg_cta">Get started</button>
-    </div>
-    <div class="plan">
-      <h3 data-i18n="plan_pack">Stamp Pack</h3>
-      <div class="price">&#8364;8<span>/100</span></div>
-      <div class="period" data-i18n="plan_pack_period">one-time purchase</div>
-      <ul>
-        <li data-i18n="plan_pack_f1">100 stamps, no expiry</li>
-        <li data-i18n="plan_pack_f2">Tezos blockchain anchoring</li>
-        <li data-i18n="plan_pack_f3">20% cheaper than pay-as-you-go</li>
-        <li data-i18n="plan_pack_f4">Stack multiple packs</li>
-      </ul>
-      <button class="btn btn-outline" id="btn-pack" data-i18n="plan_pack_cta">Buy pack</button>
     </div>
     <div class="plan popular">
       <div class="plan-badge" data-i18n="plan_pro_badge">Most chosen</div>
@@ -739,14 +722,28 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <div class="period" data-i18n="plan_pro_period">billed monthly</div>
       <ul>
         <li data-i18n="plan_pro_f1">Unlimited stamps</li>
-        <li data-i18n="plan_pro_f2">Tezos blockchain anchoring</li>
-        <li data-i18n="plan_pro_f3">Supabase secure storage</li>
-        <li data-i18n="plan_pro_f4">Verification by document ID</li>
+        <li data-i18n="plan_pro_f2">Blockchain anchoring (Tezos, ETH, Polygon, Base)</li>
+        <li data-i18n="plan_pro_f3">Cloud sync + secure storage</li>
+        <li data-i18n="plan_pro_f4">Public verification links</li>
         <li data-i18n="plan_pro_f5">Full audit trail</li>
-        <li data-i18n="plan_pro_f6">API access</li>
-        <li data-i18n="plan_pro_f7">Priority support</li>
+        <li data-i18n="plan_pro_f6">IPFS pinning</li>
+        <li data-i18n="plan_pro_f7">ZK proofs</li>
       </ul>
       <button class="btn btn-primary" id="btn-subscribe" data-i18n="plan_pro_cta">Subscribe</button>
+    </div>
+    <div class="plan">
+      <h3 data-i18n="plan_enterprise">Enterprise</h3>
+      <div class="price" data-i18n="plan_enterprise_price">Custom</div>
+      <div class="period" data-i18n="plan_enterprise_period">tailored to your needs</div>
+      <ul>
+        <li data-i18n="plan_enterprise_f1">Everything in Pro</li>
+        <li data-i18n="plan_enterprise_f2">API access + webhooks</li>
+        <li data-i18n="plan_enterprise_f3">Dedicated infrastructure</li>
+        <li data-i18n="plan_enterprise_f4">SLA 99.5%</li>
+        <li data-i18n="plan_enterprise_f5">Custom integrations</li>
+        <li data-i18n="plan_enterprise_f6">Priority support</li>
+      </ul>
+      <a href="mailto:mihairosca1982@gmail.com?subject=AmiStampAI%20Enterprise" class="btn btn-outline" data-i18n="plan_enterprise_cta">Contact us</a>
     </div>
   </div>
 
@@ -759,6 +756,65 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <div style="margin-bottom:6px;font-family:var(--font-sans);font-size:.78rem;color:var(--muted);font-weight:600" data-i18n="pay_crypto_info">Send exact amount to the address below. Contact support with TX hash.</div>
     <div style="margin-bottom:4px"><strong>XTZ (Tezos):</strong> tz1bmw3igCLN8N6CqgLBzJ9dyRb79E2Tdu5Q</div>
     <div style="margin-bottom:4px"><strong>ETH / USDC (Polygon):</strong> <span id="crypto-evm-addr">0x... (coming soon)</span></div>
+  </div>
+</section>
+
+<!-- EXAMPLE STAMP -->
+<section class="section">
+  <h2 class="section-title" data-i18n="example_title">What a stamp looks like</h2>
+  <p class="section-sub" data-i18n="example_sub">A real AmiStampAI certificate contains everything needed for independent verification.</p>
+  <div style="max-width:500px;margin:24px auto 0;background:var(--card);border:2px solid var(--border);border-radius:16px;padding:28px;font-family:var(--font);font-size:.78rem;line-height:1.7">
+    <div style="text-align:center;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px">
+      <div style="font-weight:800;color:var(--accent);font-size:.9rem">AmiStampAI</div>
+      <div style="color:var(--teal);font-weight:700;font-size:.72rem">CERTIFIED &middot; 2026-09-13</div>
+    </div>
+    <div style="color:var(--muted);margin-bottom:6px">Content: <span style="color:var(--gold)">a3f2e8b1...c94d</span></div>
+    <div style="color:var(--muted);margin-bottom:6px" data-i18n-html="example_sens">Sens: <span style="color:var(--text)">"This research proposes a new framework for AI alignment"</span></div>
+    <div style="color:var(--muted);margin-bottom:6px" data-i18n-html="example_intentie">Intention: <span style="color:var(--text)">"To establish provable prior art before publication"</span></div>
+    <div style="padding-top:14px;border-top:1px solid var(--border);margin-top:14px">
+      <div style="color:var(--muted);margin-bottom:4px">Signature: <span style="color:var(--gold)">ECDSA P-256</span></div>
+      <div style="color:var(--muted);margin-bottom:4px">Tezos TX: <span style="color:var(--teal)">oo7Kx...3pQm</span></div>
+      <div style="color:var(--muted)">Verify: <span style="color:var(--accent)">amistampai.com?verify=550e8400...</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST INDICATORS -->
+<section class="section">
+  <h2 class="section-title" data-i18n="trust_title">Why trust AmiStampAI?</h2>
+  <div style="max-width:600px;margin:24px auto 0;display:grid;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px"><span style="color:var(--teal);font-weight:800">&#10003;</span><span data-i18n="trust_1">Open-source code — inspect everything on GitHub</span></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px"><span style="color:var(--teal);font-weight:800">&#10003;</span><span data-i18n="trust_2">No custom cryptography — industry standards only (ECDSA, SHA-256)</span></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px"><span style="color:var(--teal);font-weight:800">&#10003;</span><span data-i18n="trust_3">Blockchain-anchored — you don't depend on us to verify</span></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px"><span style="color:var(--teal);font-weight:800">&#10003;</span><span data-i18n="trust_4">GDPR compliant — keys never leave your device</span></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px"><span style="color:var(--teal);font-weight:800">&#10003;</span><span data-i18n="trust_5">3.5 years bootstrapped — no investor pressure, no shortcuts</span></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+  <div style="max-width:650px;margin:24px auto 0;display:grid;gap:12px">
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer">
+      <summary style="font-weight:700;font-size:.9rem;color:var(--text)" data-i18n="faq_q1">What happens if I lose my private key?</summary>
+      <p style="margin-top:10px;font-size:.85rem;color:var(--muted)" data-i18n="faq_a1">Your stamps remain on the blockchain and are still verifiable with your public key. However, you cannot create new stamps with that key pair. Generate a new key pair and continue stamping.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer">
+      <summary style="font-weight:700;font-size:.9rem;color:var(--text)" data-i18n="faq_q2">How long does stamping take?</summary>
+      <p style="margin-top:10px;font-size:.85rem;color:var(--muted)" data-i18n="faq_a2">Under 5 seconds for local stamping. Blockchain anchoring (Pro tier) takes 30-60 seconds depending on network congestion.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer">
+      <summary style="font-weight:700;font-size:.9rem;color:var(--text)" data-i18n="faq_q3">Can I stamp AI-generated content?</summary>
+      <p style="margin-top:10px;font-size:.85rem;color:var(--muted)" data-i18n="faq_a3">Yes. Stamp the human intention behind the prompt. This provides EU AI Act transparency and proves human oversight.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer">
+      <summary style="font-weight:700;font-size:.9rem;color:var(--text)" data-i18n="faq_q4">Is my content private?</summary>
+      <p style="margin-top:10px;font-size:.85rem;color:var(--muted)" data-i18n="faq_a4">Yes. All cryptographic operations run in your browser. We never see your content, only the hash you choose to anchor.</p>
+    </details>
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer">
+      <summary style="font-weight:700;font-size:.9rem;color:var(--text)" data-i18n="faq_q5">What if AmiStampAI shuts down?</summary>
+      <p style="margin-top:10px;font-size:.85rem;color:var(--muted)" data-i18n="faq_a5">Your stamps are on the Tezos blockchain and verifiable with standard cryptographic tools. You don't depend on us to verify.</p>
+    </details>
   </div>
 </section>
 
@@ -788,29 +844,22 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <h4>AmiStampAI</h4>
       <a href="#what" data-i18n="footer_what">What it certifies</a>
       <a href="#how" data-i18n="footer_how">How it works</a>
-      <a href="#demo" data-i18n="footer_demo">Live demo</a>
-      <a href="#verify" data-i18n="footer_verify">Verify stamp</a>
       <a href="#pricing" data-i18n="footer_pricing">Pricing</a>
+      <a href="#verify" data-i18n="footer_verify">Verify stamp</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="mailto:mihairosca1982@gmail.com" data-i18n="footer_contact">Contact</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer_legal">Legal</h4>
       <a href="#" onclick="openModal('privacy');return false" data-i18n="footer_privacy">Privacy Policy</a>
       <a href="#" onclick="openModal('terms');return false" data-i18n="footer_terms">Terms of Service</a>
       <a href="#" onclick="openModal('aiact');return false" data-i18n="footer_aiact">AI Act Transparency</a>
-      <a href="#" onclick="openModal('imprint');return false" data-i18n="footer_imprint">Imprint</a>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="footer_ecosystem">ami* Ecosystem</h4>
-      <a href="https://amiecosystems.com" target="_blank">AmiEcosystems</a>
-      <a href="https://amithoughtsai.com" target="_blank">AmiThoughtsAI</a>
-      <a href="https://amiapiai.com" target="_blank">AmiApiAI</a>
-      <a href="https://amiqiai.com" target="_blank">AmiQiAI</a>
-      <a href="https://agikindergarten.com" target="_blank">AGI Kindergarten</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer_built_by">Built by</h4>
       <a href="https://amiecosystems.com" target="_blank">BRIDGRAI</a>
-      <p style="font-size:.8rem;color:var(--muted);margin-top:8px" data-i18n-html="footer_tagline">3.5 years bootstrapped<br>0 EUR funding<br>Pure intention</p>
+      <a href="https://amiecosystems.com" target="_blank" style="font-size:.8rem" data-i18n="footer_ecosystem">ami* Ecosystem</a>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:8px" data-i18n-html="footer_tagline">3.5 years bootstrapped<br>0 EUR funding<br>100% self-funded</p>
     </div>
   </div>
   <div class="footer-bottom" data-i18n-html="footer_copy">&copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Part of the ami* ecosystem &middot; All rights reserved</div>
@@ -913,8 +962,8 @@ var I18N = {
     nav_pricing: "Pricing",
     nav_ecosystem: "ami* Ecosystem",
     hero_title: 'The digital stamp that certifies<br><span class="gradient">meaning &amp; intention</span>',
-    hero_desc: "Other notaries prove a document exists. AmiStampAI proves what it means and why it was created. Cryptographic proof of meaning and intention, anchored on Tezos.",
-    hero_cta_try: "Try the stamp",
+    hero_desc: "Traditional notaries prove a document exists. But in 2026, most content is AI-generated. The question isn't \"does this exist?\" — it's \"what does this mean and why was it created?\" AmiStampAI answers that with cryptographic proof.",
+    hero_cta_try: "Create Your First Stamp",
     hero_cta_how: "How it works",
     stamp_arc_top: "CERTIFIED · VERIFIED",
     stamp_sub: "Sens • Intentie • Dovada",
@@ -959,7 +1008,8 @@ var I18N = {
     stack_sha: 'Cryptographic hashing for document integrity. <code>SubtleCrypto.digest()</code>',
     stack_tezos: 'Energy-efficient proof-of-stake chain. <code>ghostnet / mainnet</code>',
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, EU hosting. <code>supabase-js</code>',
-    stack_jwk: 'Export and share public keys for external verification. <code>exportKey("jwk")</code>',
+    stack_jwk_title: "Public Key Export",
+    stack_jwk: 'Export and share public keys for external verification. Standard JWK format.',
     stack_bridgrai: '8-agent platform with concordance verification. <code>Sens Agent + ACR</code>',
     cases_title: "Who stamps what",
     cases_sub: "Every domain where proving intention matters as much as proving existence.",
@@ -1046,7 +1096,7 @@ var I18N = {
     footer_imprint: "Imprint",
     footer_ecosystem: "ami* Ecosystem",
     footer_built_by: "Built by",
-    footer_tagline: "3.5 years bootstrapped<br>0 EUR funding<br>Pure intention",
+    footer_tagline: "3.5 years bootstrapped<br>0 EUR funding<br>100% self-funded",
     footer_copy: "&copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Part of the ami* ecosystem &middot; All rights reserved",
     cookie_text: "We use only essential cookies (session, consent state). No tracking, no analytics. Your cryptographic keys stay in your browser.",
     cookie_accept: "Accept essential",
@@ -1157,7 +1207,53 @@ var I18N = {
     pay_crypto_info: "Send exact amount to the address below. Contact support with TX hash.",
     offline_msg: "You are offline — stamps are saved locally and will sync when reconnected.",
     nav_install: "Install",
-    demo_saved_local: "💾 Stamp saved locally (offline)"
+    demo_saved_local: "💾 Stamp saved locally (offline)",
+    nav_faq: "FAQ",
+    hero_badge: "Cryptographic signatures + Tezos Blockchain",
+    hero_cta_try: "Create Your First Stamp",
+    hero_cta_sub: "No account required. Works in browser. Takes 30 seconds.",
+    stamps_sign_in: "Sign in to track your stamps across devices.",
+    stat_stamps: "stamps created",
+    stat_users: "active users",
+    stat_chains: "blockchains supported",
+    case1_example: "\"I stamped my ML algorithm with intention 'novel approach to federated learning' 6 months before publication. When a competitor claimed similar work, my timestamp proved prior art.\"",
+    case2_example: "\"Both parties stamped the contract with their intentions. When dispute arose, the stamped intentions clarified ambiguous clauses.\"",
+    case3_example: "\"I stamp every AI-generated report with my editorial intention. If audited under the EU AI Act, I have cryptographic proof of human oversight.\"",
+    case4_example: "\"I timestamped my thesis abstract with declared research intention before submission. The blockchain proof established priority independent of the journal.\"",
+    plan_enterprise: "Enterprise",
+    plan_enterprise_price: "Custom",
+    plan_enterprise_period: "tailored to your needs",
+    plan_enterprise_f1: "Everything in Pro",
+    plan_enterprise_f2: "API access + webhooks",
+    plan_enterprise_f3: "Dedicated infrastructure",
+    plan_enterprise_f4: "SLA 99.5%",
+    plan_enterprise_f5: "Custom integrations",
+    plan_enterprise_f6: "Priority support",
+    plan_enterprise_cta: "Contact us",
+    example_title: "What a stamp looks like",
+    example_sub: "A real AmiStampAI certificate contains everything needed for independent verification.",
+    example_sens: "Sens: <span style=\"color:var(--text)\">\"This research proposes a new framework for AI alignment\"</span>",
+    example_intentie: "Intention: <span style=\"color:var(--text)\">\"To establish provable prior art before publication\"</span>",
+    trust_title: "Why trust AmiStampAI?",
+    trust_1: "Open-source code — inspect everything on GitHub",
+    trust_2: "No custom cryptography — industry standards only (ECDSA, SHA-256)",
+    trust_3: "Blockchain-anchored — you don't depend on us to verify",
+    trust_4: "GDPR compliant — keys never leave your device",
+    trust_5: "3.5 years bootstrapped — no investor pressure, no shortcuts",
+    faq_title: "Frequently Asked Questions",
+    faq_q1: "What happens if I lose my private key?",
+    faq_a1: "Your stamps remain on the blockchain and are still verifiable with your public key. However, you cannot create new stamps with that key pair. Generate a new key pair and continue stamping.",
+    faq_q2: "How long does stamping take?",
+    faq_a2: "Under 5 seconds for local stamping. Blockchain anchoring (Pro tier) takes 30-60 seconds depending on network congestion.",
+    faq_q3: "Can I stamp AI-generated content?",
+    faq_a3: "Yes. Stamp the human intention behind the prompt. This provides EU AI Act transparency and proves human oversight.",
+    faq_q4: "Is my content private?",
+    faq_a4: "Yes. All cryptographic operations run in your browser. We never see your content, only the hash you choose to anchor.",
+    faq_q5: "What if AmiStampAI shuts down?",
+    faq_a5: "Your stamps are on the Tezos blockchain and verifiable with standard cryptographic tools. You don't depend on us to verify.",
+    footer_contact: "Contact",
+    footer_tagline: "3.5 years bootstrapped<br>0 EUR funding<br>100% self-funded",
+    verify_example: "Try it: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click to test verification</a>"
   },
   ro: {
     nav_what: "Ce",
@@ -1166,8 +1262,8 @@ var I18N = {
     nav_pricing: "Prețuri",
     nav_ecosystem: "Ecosistemul ami*",
     hero_title: 'Ștampila digitală care certifică<br><span class="gradient">sensul și intenția</span>',
-    hero_desc: "Alți notari dovedesc că un document există. AmiStampAI dovedește ce înseamnă și de ce a fost creat. Dovadă criptografică de sens și intenție, ancorată pe Tezos.",
-    hero_cta_try: "Încearcă ștampila",
+    hero_desc: "Notarii tradiționali dovedesc că un document există. Dar în 2026, majoritatea conținutului este generat de AI. Întrebarea nu e „există?" — ci „ce înseamnă și de ce a fost creat?" AmiStampAI răspunde cu dovadă criptografică.",
+    hero_cta_try: "Creează Prima Ta Ștampilă",
     hero_cta_how: "Cum funcționează",
     stamp_arc_top: "CERTIFICAT · VERIFICAT",
     stamp_sub: "Sens • Intenție • Dovadă",
@@ -1212,7 +1308,8 @@ var I18N = {
     stack_sha: 'Hashing criptografic pentru integritatea documentului. <code>SubtleCrypto.digest()</code>',
     stack_tezos: 'Blockchain proof-of-stake eficient energetic. <code>ghostnet / mainnet</code>',
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, hosting UE. <code>supabase-js</code>',
-    stack_jwk: 'Export și partajare chei publice pentru verificare externă. <code>exportKey("jwk")</code>',
+    stack_jwk_title: "Export Chei Publice",
+    stack_jwk: 'Export și partajare chei publice pentru verificare externă. Format JWK standard.',
     stack_bridgrai: 'Platformă cu 8 agenți și verificare de concordanță. <code>Sens Agent + ACR</code>',
     cases_title: "Cine ștampilează ce",
     cases_sub: "Fiecare domeniu în care dovada intenției contează la fel de mult ca dovada existenței.",
@@ -1299,7 +1396,7 @@ var I18N = {
     footer_imprint: "Imprint",
     footer_ecosystem: "Ecosistemul ami*",
     footer_built_by: "Construit de",
-    footer_tagline: "3,5 ani bootstrapped<br>0 EUR finanțare<br>Intenție pură",
+    footer_tagline: "3,5 ani bootstrapped<br>0 EUR finanțare<br>100% autofinanțat",
     footer_copy: "&copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Parte din ecosistemul ami* &middot; Toate drepturile rezervate",
     cookie_text: "Folosim doar cookie-uri esențiale (sesiune, starea consimțământului). Fără tracking, fără analytics. Cheile tale criptografice rămân în browser.",
     cookie_accept: "Acceptă esențiale",
@@ -1410,7 +1507,53 @@ var I18N = {
     pay_crypto_info: "Trimite suma exactă la adresa de mai jos. Contactează suportul cu hash-ul TX.",
     offline_msg: "Ești offline — ștampilele sunt salvate local și se vor sincroniza la reconectare.",
     nav_install: "Instalează",
-    demo_saved_local: "💾 Ștampilă salvată local (offline)"
+    demo_saved_local: "💾 Ștampilă salvată local (offline)",
+    nav_faq: "Întrebări",
+    hero_badge: "Semnături criptografice + Blockchain Tezos",
+    hero_cta_try: "Creează Prima Ta Ștampilă",
+    hero_cta_sub: "Fără cont necesar. Funcționează în browser. Durează 30 de secunde.",
+    stamps_sign_in: "Autentifică-te pentru a urmări ștampilele pe toate dispozitivele.",
+    stat_stamps: "ștampile create",
+    stat_users: "utilizatori activi",
+    stat_chains: "blockchain-uri suportate",
+    case1_example: "\"Am ștampilat algoritmul meu ML cu intenția 'abordare nouă pentru federated learning' cu 6 luni înainte de publicare. Când un competitor a revendicat lucrări similare, timestamp-ul meu a dovedit anterioritatea.\"",
+    case2_example: "\"Ambele părți au ștampilat contractul cu intențiile lor. Când a apărut disputa, intențiile ștampilate au clarificat clauzele ambigue.\"",
+    case3_example: "\"Ștampilez fiecare raport generat de AI cu intenția mea editorială. Dacă sunt auditat conform EU AI Act, am dovadă criptografică a supravegherii umane.\"",
+    case4_example: "\"Am timestamp-at abstractul tezei cu intenția de cercetare declarată înainte de trimitere. Dovada blockchain a stabilit prioritatea independent de jurnal.\"",
+    plan_enterprise: "Enterprise",
+    plan_enterprise_price: "Personalizat",
+    plan_enterprise_period: "adaptat nevoilor tale",
+    plan_enterprise_f1: "Tot ce include Pro",
+    plan_enterprise_f2: "Acces API + webhooks",
+    plan_enterprise_f3: "Infrastructură dedicată",
+    plan_enterprise_f4: "SLA 99.5%",
+    plan_enterprise_f5: "Integrări personalizate",
+    plan_enterprise_f6: "Suport prioritar",
+    plan_enterprise_cta: "Contactează-ne",
+    example_title: "Cum arată o ștampilă",
+    example_sub: "Un certificat AmiStampAI real conține tot ce e necesar pentru verificare independentă.",
+    example_sens: "Sens: <span style=\"color:var(--text)\">\"Această cercetare propune un nou framework pentru alinierea AI\"</span>",
+    example_intentie: "Intenție: <span style=\"color:var(--text)\">\"Pentru a stabili anterioritate demonstrabilă înainte de publicare\"</span>",
+    trust_title: "De ce să ai încredere în AmiStampAI?",
+    trust_1: "Cod open-source — inspectează totul pe GitHub",
+    trust_2: "Fără criptografie personalizată — doar standarde industriale (ECDSA, SHA-256)",
+    trust_3: "Ancorat pe blockchain — nu depinzi de noi pentru verificare",
+    trust_4: "Conform GDPR — cheile nu părăsesc niciodată dispozitivul tău",
+    trust_5: "3,5 ani bootstrapped — fără presiune de la investitori, fără scurtături",
+    faq_title: "Întrebări Frecvente",
+    faq_q1: "Ce se întâmplă dacă îmi pierd cheia privată?",
+    faq_a1: "Ștampilele tale rămân pe blockchain și sunt verificabile cu cheia ta publică. Totuși, nu poți crea ștampile noi cu acea pereche de chei. Generează o pereche nouă și continuă.",
+    faq_q2: "Cât durează ștampilarea?",
+    faq_a2: "Sub 5 secunde pentru ștampilare locală. Ancorarea blockchain (planul Pro) durează 30-60 de secunde în funcție de congestia rețelei.",
+    faq_q3: "Pot ștampila conținut generat de AI?",
+    faq_a3: "Da. Ștampilează intenția umană din spatele promptului. Aceasta oferă transparență EU AI Act și dovedește supravegherea umană.",
+    faq_q4: "Conținutul meu este privat?",
+    faq_a4: "Da. Toate operațiunile criptografice rulează în browserul tău. Nu vedem niciodată conținutul tău, doar hash-ul pe care alegi să îl ancorezi.",
+    faq_q5: "Ce se întâmplă dacă AmiStampAI se închide?",
+    faq_a5: "Ștampilele tale sunt pe blockchain-ul Tezos și verificabile cu instrumente criptografice standard. Nu depinzi de noi pentru verificare.",
+    footer_contact: "Contact",
+    footer_tagline: "3,5 ani bootstrapped<br>0 EUR finanțare<br>100% autofinanțat",
+    verify_example: "Testează: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click pentru verificare demo</a>"
   }
 };
 
@@ -2501,6 +2644,27 @@ document.getElementById('pay-crypto-btn').addEventListener('click', function() {
 
 // === Stamp History & Usage ===
 function renderStampHistory() {
+  // Check auth state — hide usage counter if not logged in
+  var usageEl = document.querySelector('.stamps-usage');
+  var isLoggedIn = false;
+  if (typeof getSupabase !== 'undefined') {
+    var sb = getSupabase();
+    if (sb) {
+      sb.auth.getSession().then(function(res) {
+        if (res.data.session) {
+          isLoggedIn = true;
+          if (usageEl) usageEl.style.display = '';
+        } else {
+          if (usageEl) usageEl.style.display = 'none';
+        }
+      });
+    } else {
+      if (usageEl) usageEl.style.display = 'none';
+    }
+  } else {
+    if (usageEl) usageEl.style.display = 'none';
+  }
+
   getAllLocalStamps().then(function(stamps) {
     var section = document.getElementById('stamps-section');
     var list = document.getElementById('stamps-list');
@@ -2519,7 +2683,9 @@ function renderStampHistory() {
     document.getElementById('usage-fill').style.width = pct + '%';
 
     if (stamps.length === 0) {
-      list.innerHTML = '<div class="stamps-empty">' + catalog.stamps_empty + '</div>';
+      var msg = catalog.stamps_empty;
+      if (!isLoggedIn) msg = catalog.stamps_sign_in || 'Sign in to track your stamps';
+      list.innerHTML = '<div class="stamps-empty">' + msg + '</div>';
       return;
     }
 
@@ -2565,14 +2731,6 @@ window.showMyStamps = function() {
   renderStampHistory();
   document.getElementById('my-stamps').scrollIntoView({ behavior: 'smooth' });
 };
-
-// New pricing buttons
-document.getElementById('btn-payg').addEventListener('click', function() {
-  startCheckout('stamp-single', 'payment');
-});
-document.getElementById('btn-pack').addEventListener('click', function() {
-  startCheckout('stamp-pack-100', 'payment');
-});
 
 // === PWA Install Prompt ===
 var deferredPrompt = null;
