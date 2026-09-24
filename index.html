@@ -37,6 +37,7 @@
       "name": "Pro",
       "price": "9.99",
       "priceCurrency": "EUR",
+      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "9.99", "priceCurrency": "EUR", "valueAddedTaxIncluded": false },
       "description": "Unlimited stamps, Tezos blockchain anchoring, API access"
     },
     {
@@ -896,7 +897,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <div class="plan-badge" data-i18n="plan_pro_badge">Most chosen</div>
       <h3>Pro</h3>
       <div class="price">&#8364;9.99<span>/mo</span></div>
-      <div class="period" data-i18n="plan_pro_period">billed monthly</div>
+      <div class="period" data-i18n="plan_pro_period">+ VAT · billed monthly</div>
       <div style="font-size:.72rem;color:var(--gold);font-weight:600;margin-top:4px" data-i18n="plan_pro_early">Early adopter pricing — lock it in now</div>
       <ul>
         <li data-i18n="plan_pro_f1">Unlimited stamps</li>
@@ -1063,7 +1064,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <h3 data-i18n="modal_terms_h3">Blockchain Records</h3>
     <p data-i18n="modal_terms_p3">Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.</p>
     <h3 data-i18n="modal_terms_h4">Pricing</h3>
-    <p data-i18n="modal_terms_p4">Free tier: 5 stamps/month. Pro: &euro;9.99/month unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.</p>
+    <p data-i18n="modal_terms_p4">Free tier: 5 stamps/month. Pro: &euro;9.99/month + VAT, unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.</p>
   </div>
 </div>
 
@@ -1223,7 +1224,7 @@ var I18N = {
     plan_free_f5: "Stamp history",
     plan_free_cta: "Start stamping",
     plan_pro_badge: "Most chosen",
-    plan_pro_period: "billed monthly",
+    plan_pro_period: "+ VAT · billed monthly",
     plan_pro_early: "Early adopter pricing — lock it in now",
     plan_pro_f1: "Unlimited stamps",
     plan_pro_f2: "Tezos blockchain anchoring",
@@ -1276,7 +1277,7 @@ var I18N = {
     modal_terms_h3: "Blockchain Records",
     modal_terms_p3: "Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.",
     modal_terms_h4: "Pricing",
-    modal_terms_p4: "Free tier: 5 stamps/month. Pro: €9.99/month unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.",
+    modal_terms_p4: "Free tier: 5 stamps/month. Pro: €9.99/month + VAT, unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.",
     modal_aiact_title: "AI Act Transparency Notice",
     modal_aiact_h1: "Classification",
     modal_aiact_p1: "AmiStampAI is a cryptographic tool. It does not make decisions, generate content, or classify data using AI. It uses standard cryptographic algorithms (ECDSA, SHA-256) and blockchain technology.",
@@ -1473,7 +1474,7 @@ var I18N = {
     plan_free_f5: "Istoric ștampile",
     plan_free_cta: "Începe să ștampilezi",
     plan_pro_badge: "Cel mai ales",
-    plan_pro_period: "facturat lunar",
+    plan_pro_period: "+ TVA · facturat lunar",
     plan_pro_early: "Preț early adopter — blochează-l acum",
     plan_pro_f1: "Ștampile nelimitate",
     plan_pro_f2: "Ancorare blockchain Tezos",
@@ -1526,7 +1527,7 @@ var I18N = {
     modal_terms_h3: "Înregistrări Blockchain",
     modal_terms_p3: "Odată ce un hash este ancorat pe Tezos, nu poate fi șters. Acesta este by design. Gândește-te bine înainte de ancorare.",
     modal_terms_h4: "Prețuri",
-    modal_terms_p4: "Planul gratuit: 5 ștampile/lună. Pro: €9.99/lună nelimitat (preț early adopter). Enterprise: prețuri personalizate. Prețurile se pot modifica cu 30 de zile preaviz.",
+    modal_terms_p4: "Planul gratuit: 5 ștampile/lună. Pro: €9,99/lună + TVA, nelimitat (preț early adopter). Enterprise: prețuri personalizate. Prețurile se pot modifica cu 30 de zile preaviz.",
     modal_aiact_title: "Notificare Transparență AI Act",
     modal_aiact_h1: "Clasificare",
     modal_aiact_p1: "AmiStampAI este un instrument criptografic. Nu ia decizii, nu generează conținut și nu clasifică date folosind AI. Folosește algoritmi criptografici standard (ECDSA, SHA-256) și tehnologie blockchain.",
