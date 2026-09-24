@@ -329,7 +329,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 .anchor-advanced-row input[type="checkbox"]{accent-color:var(--accent)}
 .anchor-network-tag{font-family:var(--font);font-size:.72rem;padding:3px 8px;border-radius:6px;background:rgba(43,181,160,.1);color:var(--teal)}
 
-/* ZK VERIFICATION */
+/* PRIVATE COMMITMENT */
 .zk-section{margin-top:14px;padding:16px;background:rgba(43,181,160,.04);border:1px solid rgba(43,181,160,.15);border-radius:12px;display:none}
 .zk-section.show{display:block}
 .zk-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
@@ -359,10 +359,6 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 .verify-badge.verified{background:rgba(43,181,160,.12);color:var(--teal)}
 .verify-badge.not-found{background:rgba(232,93,58,.12);color:var(--accent)}
 
-/* IPFS */
-.ipfs-row{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
-.ipfs-status{font-size:.82rem;color:var(--muted)}
-.ipfs-status a{color:var(--teal)}
 
 /* CRYPTO PAY TOGGLE */
 .pay-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 8px;font-size:.82rem;color:var(--muted)}
@@ -614,7 +610,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <div class="stack-icon">&#9939;&#65039;</div>
       <div>
         <h3>Tezos Blockchain</h3>
-        <p data-i18n="stack_tezos">Energy-efficient proof-of-stake chain. <code>ghostnet / mainnet</code></p>
+        <p data-i18n="stack_tezos">Energy-efficient proof-of-stake chain. <code>shadownet / mainnet</code></p>
       </div>
     </div>
     <div class="stack-item">
@@ -680,6 +676,12 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 
     <div class="demo-container">
       <div class="demo-form">
+        <label for="demo-file" data-i18n="demo_label_file">Document</label>
+        <label class="drop-zone" id="demo-drop" for="demo-file">
+          <input type="file" id="demo-file" hidden>
+          <span id="demo-file-name" data-i18n="demo_drop">Drop a file here or click to choose. It never leaves your device.</span>
+        </label>
+
         <label for="demo-content" data-i18n="demo_label_content">Content to stamp</label>
         <textarea id="demo-content" data-i18n-placeholder="demo_ph_content" placeholder="Your document, text, or declaration..."></textarea>
 
@@ -689,39 +691,50 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <label for="demo-intentie" data-i18n="demo_label_intentie">Intention (intentie)</label>
         <input type="text" id="demo-intentie" data-i18n-placeholder="demo_ph_intentie" placeholder="Why are you creating this?">
 
-        <button class="btn btn-primary" id="demo-stamp" style="margin-top:8px" data-i18n="demo_btn_stamp">Stamp it</button>
+        <button type="button" class="btn btn-primary" id="demo-stamp" style="margin-top:8px" data-i18n="demo_btn_stamp">Stamp it</button>
+        <p class="key-note"><span data-i18n="demo_key_label">Your signing key on this device:</span> <code id="demo-key-fp">…</code></p>
       </div>
 
       <div class="demo-result" id="demo-result">
         <h4 data-i18n="demo_result_title">Stamp generated</h4>
-        <div><strong style="font-size:.8rem;color:var(--text)" data-i18n="demo_result_hash">Document hash:</strong></div>
+        <div class="result-label" data-i18n="demo_result_id">Stamp ID:</div>
+        <div class="hash" id="result-id"></div>
+        <div class="result-label" data-i18n="demo_result_hash">Document hash:</div>
         <div class="hash" id="result-doc-hash"></div>
-        <div><strong style="font-size:.8rem;color:var(--text)" data-i18n="demo_result_sig">Signature (ECDSA P-256):</strong></div>
+        <div class="result-label" data-i18n="demo_result_stamp_hash">Stamp hash (anchored on blockchain):</div>
+        <div class="hash" id="result-stamp-hash"></div>
+        <div class="result-label" data-i18n="demo_result_sig">Signature (ECDSA P-256):</div>
         <div class="hash" id="result-sig"></div>
-        <div><strong style="font-size:.8rem;color:var(--text)" data-i18n="demo_result_pubkey">Public key (JWK):</strong></div>
+        <div class="result-label" data-i18n="demo_result_pubkey">Public key (JWK):</div>
         <div class="hash" id="result-pubkey"></div>
         <div class="stamp-status" id="result-status"></div>
 
+        <div class="proof-row">
+          <button type="button" class="btn btn-primary" id="btn-download-proof" data-i18n="proof_download">Download proof (.json)</button>
+          <button type="button" class="btn btn-outline" id="btn-copy-link" data-i18n="proof_copy_link">Copy verification link</button>
+        </div>
+        <p class="proof-note" data-i18n="proof_note">Keep the proof file with your document. Anyone can verify it on this page, without an account.</p>
+
         <div class="anchor-section" id="anchor-section">
           <div class="anchor-default">
-            <button class="btn btn-primary" id="btn-anchor-quick" style="padding:8px 18px;font-size:.85rem" data-i18n="chain_anchor_quick">&#9875; Anchor on Tezos</button>
+            <button type="button" class="btn btn-primary" id="btn-anchor-quick" style="padding:8px 18px;font-size:.85rem" data-i18n="chain_anchor_quick">&#9875; Anchor on Tezos</button>
             <div class="wallet-status" id="wallet-status" style="display:none">
               <div class="dot" id="wallet-dot"></div>
               <span class="wallet-addr" id="wallet-addr"></span>
             </div>
             <span class="anchor-network-tag" id="anchor-network-tag">mainnet</span>
           </div>
-          <div class="anchor-status" id="anchor-status"></div>
+          <div class="anchor-status" id="anchor-status" role="status"></div>
 
           <details class="anchor-advanced">
             <summary data-i18n="chain_advanced">Advanced settings</summary>
             <div class="anchor-advanced-inner">
               <div class="anchor-advanced-row">
-                <label data-i18n="chain_network_label">Network:</label>
+                <label for="anchor-network" data-i18n="chain_network_label">Network:</label>
                 <select id="anchor-network">
                   <optgroup label="Tezos">
                     <option value="mainnet">Tezos Mainnet</option>
-                    <option value="ghostnet">Tezos Ghostnet (test)</option>
+                    <option value="shadownet">Tezos Shadownet (test)</option>
                   </optgroup>
                   <optgroup label="EVM">
                     <option value="eth-mainnet">Ethereum Mainnet</option>
@@ -735,46 +748,45 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
               </div>
               <div class="anchor-advanced-row">
                 <label><input type="checkbox" id="anchor-custom-check"> <span data-i18n="chain_custom_contract">Custom contract</span></label>
-                <input type="text" id="anchor-custom-addr" placeholder="KT1... (contract address)" style="display:none" />
+                <input type="text" id="anchor-custom-addr" placeholder="KT1... (contract address)" style="display:none">
               </div>
-              <div class="anchor-advanced-row" id="anchor-wallet-row" style="display:none">
-                <button class="btn btn-outline" id="btn-connect-wallet" style="padding:6px 14px;font-size:.78rem" data-i18n="chain_connect">Connect Wallet</button>
-                <button class="btn btn-outline" id="btn-disconnect-wallet" style="padding:6px 14px;font-size:.78rem;display:none" data-i18n="chain_disconnect">Disconnect</button>
+              <div class="anchor-advanced-row" id="anchor-wallet-row">
+                <button type="button" class="btn btn-outline" id="btn-connect-wallet" style="padding:6px 14px;font-size:.78rem" data-i18n="chain_connect">Connect Wallet</button>
+                <button type="button" class="btn btn-outline" id="btn-disconnect-wallet" style="padding:6px 14px;font-size:.78rem;display:none" data-i18n="chain_disconnect">Disconnect</button>
               </div>
             </div>
           </details>
         </div>
 
-        <div class="zk-section" id="zk-section">
+        <div class="zk-section" id="commit-section">
           <div class="zk-row">
-            <button class="btn btn-outline" id="btn-zk-generate" style="padding:8px 16px;font-size:.82rem" data-i18n="zk_generate">Generate ZK Proof</button>
-            <span style="font-size:.78rem;color:var(--muted)" data-i18n="zk_desc">Prove this stamp exists without revealing the document</span>
+            <button type="button" class="btn btn-outline" id="btn-commit-generate" style="padding:8px 16px;font-size:.82rem" data-i18n="commit_generate">Create private commitment</button>
+            <span style="font-size:.78rem;color:var(--muted)" data-i18n="commit_desc">Publish the commitment, keep the key. Later you can prove the document existed without having revealed it.</span>
           </div>
-          <div id="zk-proof-output" style="display:none">
+          <div id="commit-output" style="display:none">
             <div class="zk-proof-box">
-              <span class="zk-label" data-i18n="zk_commitment_label">Commitment:</span>
-              <span id="zk-commitment"></span>
-              <button class="zk-copy" onclick="navigator.clipboard.writeText(document.getElementById('zk-commitment').textContent)">copy</button>
+              <span class="zk-label" data-i18n="commit_public_label">Commitment (public):</span>
+              <span id="commit-value"></span>
+              <button type="button" class="zk-copy" data-copy="commit-value">copy</button>
             </div>
             <div class="zk-proof-box">
-              <span class="zk-label" data-i18n="zk_proof_label">Proof (share privately):</span>
-              <span id="zk-proof-data"></span>
-              <button class="zk-copy" onclick="navigator.clipboard.writeText(document.getElementById('zk-proof-data').textContent)">copy</button>
+              <span class="zk-label" data-i18n="commit_private_label">Opening key (keep private):</span>
+              <span id="commit-opening"></span>
+              <button type="button" class="zk-copy" data-copy="commit-opening">copy</button>
             </div>
           </div>
-          <div class="zk-status" id="zk-status"></div>
+          <div class="zk-status" id="commit-status" role="status"></div>
 
           <details style="margin-top:14px">
-            <summary style="cursor:pointer;font-size:.82rem;color:var(--muted);font-weight:600" data-i18n="zk_verify_title">Verify a ZK Proof</summary>
-            <textarea class="zk-verify-input" id="zk-verify-input" rows="3" data-i18n-placeholder="zk_verify_placeholder" placeholder="Paste proof JSON here..."></textarea>
-            <button class="btn btn-outline" id="btn-zk-verify" style="padding:6px 14px;font-size:.78rem" data-i18n="zk_verify_btn">Verify Proof</button>
-            <div class="zk-verify-result" id="zk-verify-result"></div>
+            <summary style="cursor:pointer;font-size:.82rem;color:var(--muted);font-weight:600" data-i18n="commit_verify_title">Check a commitment</summary>
+            <textarea class="zk-verify-input" id="commit-verify-input" rows="3" data-i18n-placeholder="commit_verify_placeholder" placeholder="Paste the opening key JSON here..."></textarea>
+            <label class="drop-zone small" for="commit-verify-file">
+              <input type="file" id="commit-verify-file" hidden>
+              <span id="commit-verify-file-name" data-i18n="commit_verify_doc">Choose the original document</span>
+            </label>
+            <button type="button" class="btn btn-outline" id="btn-commit-verify" style="padding:6px 14px;font-size:.78rem" data-i18n="commit_verify_btn">Check</button>
+            <div class="zk-verify-result" id="commit-verify-result" role="status"></div>
           </details>
-        </div>
-
-        <div class="ipfs-row" id="ipfs-row" style="display:none">
-          <button class="btn btn-outline" id="btn-ipfs-upload" style="padding:8px 16px;font-size:.82rem" data-i18n="ipfs_upload">Upload to IPFS</button>
-          <div class="ipfs-status" id="ipfs-status"></div>
         </div>
       </div>
     </div>
@@ -808,21 +820,30 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 <section class="section" id="verify">
   <div class="verify-section">
     <h2 class="section-title" data-i18n="verify_title">Verify a Stamp</h2>
-    <p class="section-sub" data-i18n="verify_sub">Enter a stamp ID to verify its authenticity, blockchain proof, and ZK commitment.</p>
+    <p class="section-sub" data-i18n="verify_sub">Check the signature, the document and the blockchain anchor of any stamp.</p>
     <div class="verify-input-row">
       <input type="text" id="verify-stamp-id" data-i18n-placeholder="verify_placeholder" placeholder="Stamp ID (UUID)...">
-      <button class="btn btn-primary" id="btn-verify-stamp" data-i18n="verify_btn">Verify</button>
+      <button type="button" class="btn btn-primary" id="btn-verify-stamp" data-i18n="verify_btn">Verify</button>
     </div>
-    <p style="font-size:.78rem;color:var(--muted);margin-top:8px;text-align:center" data-i18n-html="verify_example">Try it: <a href="?verify=example-stamp-demo" style="color:var(--accent)">click to test verification</a></p>
+    <div class="verify-alt">
+      <label class="drop-zone small" for="verify-proof-file">
+        <input type="file" id="verify-proof-file" accept=".json,application/json" hidden>
+        <span id="verify-proof-name" data-i18n="verify_proof_drop">…or choose a proof file (.json)</span>
+      </label>
+      <label class="drop-zone small" for="verify-doc-file">
+        <input type="file" id="verify-doc-file" hidden>
+        <span id="verify-doc-name" data-i18n="verify_doc_drop">Optional: the original document, to check it matches</span>
+      </label>
+    </div>
     <div class="verify-result-card" id="verify-result-card">
       <div id="verify-badge-area"></div>
       <div class="verify-field"><div class="verify-label" data-i18n="verify_hash">Document Hash</div><div class="verify-value" id="verify-hash"></div></div>
+      <div class="verify-field"><div class="verify-label" data-i18n="verify_stamp_hash">Stamp hash</div><div class="verify-value" id="verify-stamp-hash"></div></div>
       <div class="verify-field"><div class="verify-label" data-i18n="verify_sens">Meaning</div><div class="verify-value" id="verify-sens" style="color:var(--text)"></div></div>
       <div class="verify-field"><div class="verify-label" data-i18n="verify_intentie">Intention</div><div class="verify-value" id="verify-intentie" style="color:var(--text)"></div></div>
       <div class="verify-field"><div class="verify-label" data-i18n="verify_timestamp">Timestamp</div><div class="verify-value" id="verify-timestamp" style="color:var(--text)"></div></div>
-      <div class="verify-field"><div class="verify-label" data-i18n="verify_blockchain">Blockchain</div><div class="verify-value" id="verify-blockchain"></div></div>
-      <div class="verify-field"><div class="verify-label">IPFS</div><div class="verify-value" id="verify-ipfs"></div></div>
-      <div class="verify-field"><div class="verify-label">ZK</div><div class="verify-value" id="verify-zk" style="color:var(--teal)"></div></div>
+      <div class="verify-field"><div class="verify-label" data-i18n="verify_key">Signing key</div><div class="verify-value" id="verify-key"></div></div>
+      <ul class="check-list" id="verify-checks"></ul>
     </div>
   </div>
 </section>
@@ -858,8 +879,8 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <li data-i18n="plan_pro_f3">Cloud sync + secure storage</li>
         <li data-i18n="plan_pro_f4">Public verification links</li>
         <li data-i18n="plan_pro_f5">Full audit trail</li>
-        <li data-i18n="plan_pro_f6">IPFS pinning</li>
-        <li data-i18n="plan_pro_f7">ZK proofs</li>
+        <li data-i18n="plan_pro_f6">API access</li>
+        <li data-i18n="plan_pro_f7">Priority support</li>
       </ul>
       <button class="btn btn-primary" id="btn-subscribe" data-i18n="plan_pro_cta">Subscribe</button>
     </div>
@@ -1042,7 +1063,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <p data-i18n-html="modal_imprint_location"><strong>Location:</strong> Brăila, Romania, EU</p>
     <p data-i18n-html="modal_imprint_contact"><strong>Contact:</strong> mihairosca1982@gmail.com</p>
     <p data-i18n-html="modal_imprint_project"><strong>Project:</strong> AmiStampAI is part of the ami* SaaS ecosystem, developed under BRIDGRAI research initiative.</p>
-    <p data-i18n-html="modal_imprint_blockchain"><strong>Blockchain:</strong> Tezos (Ghostnet for testing, Mainnet for production)</p>
+    <p data-i18n-html="modal_imprint_blockchain"><strong>Blockchain:</strong> Tezos (Shadownet for testing, Mainnet for production)</p>
   </div>
 </div>
 
@@ -1135,7 +1156,7 @@ var I18N = {
     stack_sub: "No custom algorithms. No proprietary formats. Standards only.",
     stack_ecdsa: 'Industry-standard elliptic curve signatures. <code>Web Crypto API</code>',
     stack_sha: 'Cryptographic hashing for document integrity. <code>SubtleCrypto.digest()</code>',
-    stack_tezos: 'Energy-efficient proof-of-stake chain. <code>ghostnet / mainnet</code>',
+    stack_tezos: 'Energy-efficient proof-of-stake chain. <code>shadownet / mainnet</code>',
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, EU hosting. <code>supabase-js</code>',
     stack_jwk_title: "Public Key Export",
     stack_jwk: 'Export and share public keys for external verification. Standard JWK format.',
@@ -1264,7 +1285,7 @@ var I18N = {
     modal_imprint_location: "<strong>Location:</strong> Brăila, Romania, EU",
     modal_imprint_contact: "<strong>Contact:</strong> mihairosca1982@gmail.com",
     modal_imprint_project: "<strong>Project:</strong> AmiStampAI is part of the ami* SaaS ecosystem, developed under BRIDGRAI research initiative.",
-    modal_imprint_blockchain: "<strong>Blockchain:</strong> Tezos (Ghostnet for testing, Mainnet for production)",
+    modal_imprint_blockchain: "<strong>Blockchain:</strong> Tezos (Shadownet for testing, Mainnet for production)",
     nav_login: "Sign in (optional)",
     nav_my_stamps: "My Stamps",
     nav_signout: "Sign out",
@@ -1299,18 +1320,6 @@ var I18N = {
     chain_advanced: "Advanced settings",
     chain_network_label: "Network:",
     chain_custom_contract: "Custom contract",
-    zk_generate: "Generate ZK Proof",
-    zk_desc: "Prove this stamp exists without revealing the document",
-    zk_generating: "Generating proof...",
-    zk_commitment_label: "Commitment:",
-    zk_proof_label: "Proof (share privately):",
-    zk_generated: "ZK proof generated. Share the commitment publicly; the proof privately to verifiers.",
-    zk_verify_title: "Verify a ZK Proof",
-    zk_verify_placeholder: "Paste proof JSON here...",
-    zk_verify_btn: "Verify Proof",
-    zk_valid: "Valid — this stamp exists and the proof matches.",
-    zk_invalid: "Invalid — proof does not match the commitment.",
-    zk_parse_error: "Could not parse proof JSON.",
     nav_verify: "Verify",
     verify_title: "Verify a Stamp",
     verify_sub: "Enter a stamp ID to verify its authenticity, blockchain proof, and ZK commitment.",
@@ -1325,11 +1334,6 @@ var I18N = {
     verify_not_found: "Stamp not found",
     verify_checking: "Verifying...",
     verify_local_only: "Local stamp (not synced to cloud)",
-    ipfs_upload: "Upload to IPFS",
-    ipfs_uploading: "Uploading...",
-    ipfs_success: "Pinned on IPFS: ",
-    ipfs_error: "IPFS upload failed: ",
-    ipfs_no_key: "IPFS requires web3.storage API key (Pro plan)",
     pay_method: "Pay with:",
     pay_card: "Card",
     pay_crypto: "Crypto",
@@ -1438,7 +1442,7 @@ var I18N = {
     stack_sub: "Niciun algoritm personalizat. Niciun format proprietar. Doar standarde.",
     stack_ecdsa: 'Semnături cu curbe eliptice, standard industrial. <code>Web Crypto API</code>',
     stack_sha: 'Hashing criptografic pentru integritatea documentului. <code>SubtleCrypto.digest()</code>',
-    stack_tezos: 'Blockchain proof-of-stake eficient energetic. <code>ghostnet / mainnet</code>',
+    stack_tezos: 'Blockchain proof-of-stake eficient energetic. <code>shadownet / mainnet</code>',
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, hosting UE. <code>supabase-js</code>',
     stack_jwk_title: "Export Chei Publice",
     stack_jwk: 'Export și partajare chei publice pentru verificare externă. Format JWK standard.',
@@ -1567,7 +1571,7 @@ var I18N = {
     modal_imprint_location: "<strong>Locație:</strong> Brăila, România, UE",
     modal_imprint_contact: "<strong>Contact:</strong> mihairosca1982@gmail.com",
     modal_imprint_project: "<strong>Proiect:</strong> AmiStampAI face parte din ecosistemul ami* SaaS, dezvoltat în cadrul inițiativei de cercetare BRIDGRAI.",
-    modal_imprint_blockchain: "<strong>Blockchain:</strong> Tezos (Ghostnet pentru testare, Mainnet pentru producție)",
+    modal_imprint_blockchain: "<strong>Blockchain:</strong> Tezos (Shadownet pentru testare, Mainnet pentru producție)",
     nav_login: "Autentificare (opțional)",
     nav_my_stamps: "Ștampilele mele",
     nav_signout: "Deconectare",
@@ -1602,18 +1606,6 @@ var I18N = {
     chain_advanced: "Setări avansate",
     chain_network_label: "Rețea:",
     chain_custom_contract: "Contract personalizat",
-    zk_generate: "Generează Dovadă ZK",
-    zk_desc: "Dovedește că ștampila există fără a dezvălui documentul",
-    zk_generating: "Se generează dovada...",
-    zk_commitment_label: "Angajament:",
-    zk_proof_label: "Dovadă (partajează privat):",
-    zk_generated: "Dovadă ZK generată. Partajează angajamentul public; dovada privat verificatorilor.",
-    zk_verify_title: "Verifică o Dovadă ZK",
-    zk_verify_placeholder: "Lipește JSON-ul dovezii aici...",
-    zk_verify_btn: "Verifică Dovada",
-    zk_valid: "Validă — ștampila există și dovada corespunde.",
-    zk_invalid: "Invalidă — dovada nu corespunde angajamentului.",
-    zk_parse_error: "Nu s-a putut parsa JSON-ul dovezii.",
     nav_verify: "Verifică",
     verify_title: "Verifică o Ștampilă",
     verify_sub: "Introdu un ID de ștampilă pentru a verifica autenticitatea, dovada blockchain și angajamentul ZK.",
@@ -1628,11 +1620,6 @@ var I18N = {
     verify_not_found: "Ștampila nu a fost găsită",
     verify_checking: "Se verifică...",
     verify_local_only: "Ștampilă locală (nesincronizată cu cloud-ul)",
-    ipfs_upload: "Încarcă pe IPFS",
-    ipfs_uploading: "Se încarcă...",
-    ipfs_success: "Fixat pe IPFS: ",
-    ipfs_error: "Încărcarea IPFS a eșuat: ",
-    ipfs_no_key: "IPFS necesită cheie API web3.storage (plan Pro)",
     pay_method: "Plătește cu:",
     pay_card: "Card",
     pay_crypto: "Crypto",
@@ -1727,76 +1714,6 @@ document.getElementById('example-cert-date').textContent = new Date().toISOStrin
 // Apply language on load
 applyLang(currentLang);
 
-// Live demo — real cryptographic stamping in browser
-document.getElementById('demo-stamp').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var content = document.getElementById('demo-content').value.trim();
-  var sens = document.getElementById('demo-sens').value.trim();
-  var intentie = document.getElementById('demo-intentie').value.trim();
-
-  if (!content || !sens || !intentie) {
-    alert(catalog.demo_alert_fill);
-    return;
-  }
-
-  // Enforce free tier limit (5/month)
-  try {
-    var allStamps = await getAllLocalStamps();
-    var now = new Date();
-    var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-    var thisMonthCount = allStamps.filter(function(s) { return s.created_at >= monthStart; }).length;
-    if (thisMonthCount >= 5) {
-      alert(catalog.demo_limit_reached);
-      return;
-    }
-  } catch(e) {}
-
-  this.disabled = true;
-  this.textContent = catalog.demo_btn_stamping;
-
-  try {
-    var keyPair = await window.crypto.subtle.generateKey(
-      { name: 'ECDSA', namedCurve: 'P-256' },
-      true,
-      ['sign', 'verify']
-    );
-
-    var encoder = new TextEncoder();
-    var payload = JSON.stringify({
-      continut: content,
-      sens: sens,
-      intentie: intentie,
-      timestamp: Date.now()
-    });
-
-    var hashBuffer = await window.crypto.subtle.digest('SHA-256', encoder.encode(payload));
-    var hashHex = Array.from(new Uint8Array(hashBuffer)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
-
-    var sigBuffer = await window.crypto.subtle.sign(
-      { name: 'ECDSA', hash: { name: 'SHA-256' } },
-      keyPair.privateKey,
-      encoder.encode(payload)
-    );
-    var sigBase64 = btoa(String.fromCharCode.apply(null, new Uint8Array(sigBuffer)));
-
-    var pubKey = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
-
-    document.getElementById('result-doc-hash').textContent = hashHex;
-    document.getElementById('result-sig').textContent = sigBase64;
-    document.getElementById('result-pubkey').textContent = JSON.stringify(pubKey, null, 0);
-    document.getElementById('result-status').innerHTML = catalog.demo_result_status;
-
-    var result = document.getElementById('demo-result');
-    result.classList.add('show');
-    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  } catch (e) {
-    alert('Error: ' + e.message);
-  }
-
-  this.disabled = false;
-  this.textContent = catalog.demo_btn_stamp;
-});
-
 // Stripe Checkout
 var CHECKOUT_API = 'https://ami-checkout-production.up.railway.app';
 
@@ -1858,10 +1775,6 @@ document.addEventListener('click', function(e) {
 });
 function toggleAuthMenu() {
   document.getElementById('auth-menu').classList.toggle('show');
-}
-function showMyStamps() {
-  document.getElementById('auth-menu').classList.remove('show');
-  alert('My Stamps — coming in Phase 3');
 }
 </script>
 
@@ -1939,872 +1852,796 @@ function showMyStamps() {
     await sb.auth.signOut();
   };
 
-  document.getElementById('auth-wallet-btn').addEventListener('click', function() {
-    alert('Wallet login — coming in Phase 5 (Tezos Beacon SDK)');
-  });
 })();
 </script>
 
+<style>
+.drop-zone{display:flex;align-items:center;justify-content:center;min-height:64px;padding:14px;border:1px dashed var(--border);border-radius:8px;background:var(--surface);color:var(--muted);font-size:.82rem;text-align:center;cursor:pointer;margin-bottom:10px;overflow-wrap:anywhere}
+.drop-zone:hover,.drop-zone.over{border-color:var(--accent);color:var(--text)}
+.drop-zone.small{min-height:44px;padding:10px}
+.drop-zone:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.key-note{font-size:.75rem;color:var(--muted);margin-top:10px;overflow-wrap:anywhere}
+.key-note code{color:var(--gold)}
+.result-label{font-size:.8rem;color:var(--text);font-weight:700;margin-top:10px}
+.proof-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.proof-row .btn{padding:8px 16px;font-size:.82rem}
+.proof-note{font-size:.75rem;color:var(--muted);margin-top:8px}
+.verify-alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media (max-width:640px){.verify-alt{grid-template-columns:1fr}}
+.check-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.check-list li{display:flex;gap:10px;align-items:baseline;font-size:.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px}
+.check-list .mark{font-weight:700;min-width:1.2em;text-align:center}
+.check-list .ok .mark{color:var(--teal)} .check-list .fail .mark{color:var(--accent)} .check-list .na .mark{color:var(--muted)}
+.check-list .detail{color:var(--muted);font-size:.78rem;overflow-wrap:anywhere}
+</style>
 <script>
-// === IndexedDB: Local-First Stamp Storage ===
-var STAMP_DB_NAME = 'amistampai';
-var STAMP_DB_VERSION = 1;
-var STAMP_STORE = 'stamps';
+(function () {
+'use strict';
 
-function openStampDB() {
-  return new Promise(function(resolve, reject) {
-    var req = indexedDB.open(STAMP_DB_NAME, STAMP_DB_VERSION);
-    req.onupgradeneeded = function(e) {
-      var db = e.target.result;
-      if (!db.objectStoreNames.contains(STAMP_STORE)) {
-        var store = db.createObjectStore(STAMP_STORE, { keyPath: 'id' });
-        store.createIndex('synced', 'synced', { unique: false });
-        store.createIndex('created_at', 'created_at', { unique: false });
-      }
-    };
-    req.onsuccess = function(e) { resolve(e.target.result); };
-    req.onerror = function(e) { reject(e.target.error); };
-  });
-}
-
-function saveStampLocal(stamp) {
-  return openStampDB().then(function(db) {
-    return new Promise(function(resolve, reject) {
-      var tx = db.transaction(STAMP_STORE, 'readwrite');
-      tx.objectStore(STAMP_STORE).put(stamp);
-      tx.oncomplete = function() { resolve(stamp); };
-      tx.onerror = function(e) { reject(e.target.error); };
-    });
-  });
-}
-
-function getUnsyncedStamps() {
-  return openStampDB().then(function(db) {
-    return new Promise(function(resolve, reject) {
-      var tx = db.transaction(STAMP_STORE, 'readonly');
-      var idx = tx.objectStore(STAMP_STORE).index('synced');
-      var req = idx.getAll(0);
-      req.onsuccess = function(e) { resolve(e.target.result); };
-      req.onerror = function(e) { reject(e.target.error); };
-    });
-  });
-}
-
-function markStampSynced(id) {
-  return openStampDB().then(function(db) {
-    return new Promise(function(resolve, reject) {
-      var tx = db.transaction(STAMP_STORE, 'readwrite');
-      var store = tx.objectStore(STAMP_STORE);
-      var req = store.get(id);
-      req.onsuccess = function(e) {
-        var stamp = e.target.result;
-        if (stamp) { stamp.synced = 1; store.put(stamp); }
-      };
-      tx.oncomplete = function() { resolve(); };
-      tx.onerror = function(e) { reject(e.target.error); };
-    });
-  });
-}
-
-function getAllLocalStamps() {
-  return openStampDB().then(function(db) {
-    return new Promise(function(resolve, reject) {
-      var tx = db.transaction(STAMP_STORE, 'readonly');
-      var req = tx.objectStore(STAMP_STORE).index('created_at').getAll();
-      req.onsuccess = function(e) { resolve(e.target.result.reverse()); };
-      req.onerror = function(e) { reject(e.target.error); };
-    });
-  });
-}
-
-// Sync unsynced stamps to Supabase
-async function syncStampsToSupabase() {
-  if (typeof getSupabase === 'undefined') return;
-  var sb = getSupabase();
-  if (!sb || !navigator.onLine) return;
-  var session = (await sb.auth.getSession()).data.session;
-  if (!session) return;
-
-  var unsynced = await getUnsyncedStamps();
-  for (var i = 0; i < unsynced.length; i++) {
-    var s = unsynced[i];
-    var row = {
-      user_id: session.user.id,
-      content_hash: s.content_hash,
-      sens: s.sens,
-      intentie: s.intentie,
-      signature: s.signature,
-      public_key: s.public_key,
-      created_at: s.created_at
-    };
-    var res = await sb.from('stamps').insert(row);
-    if (!res.error) await markStampSynced(s.id);
-  }
-}
-
-// Hook into demo stamp button to also save locally
-(function() {
-  var origHandler = document.getElementById('demo-stamp').onclick;
-  var stampBtn = document.getElementById('demo-stamp');
-  var origListeners = stampBtn.cloneNode(true);
-
-  var originalClick = null;
-  stampBtn.addEventListener('click', async function saveToLocal() {
-    // Wait a tick for the original handler to finish
-    await new Promise(function(r) { setTimeout(r, 600); });
-
-    var hashEl = document.getElementById('result-doc-hash');
-    var sigEl = document.getElementById('result-sig');
-    var pubkeyEl = document.getElementById('result-pubkey');
-    if (!hashEl.textContent) return;
-
-    var stamp = {
-      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).substr(2),
-      content_hash: hashEl.textContent,
-      sens: document.getElementById('demo-sens').value.trim(),
-      intentie: document.getElementById('demo-intentie').value.trim(),
-      signature: sigEl.textContent,
-      public_key: JSON.parse(pubkeyEl.textContent),
-      synced: 0,
-      created_at: new Date().toISOString()
-    };
-
-    try {
-      await saveStampLocal(stamp);
-      var catalog = I18N[currentLang];
-      var statusEl = document.getElementById('result-status');
-      statusEl.innerHTML += '<br><span style="color:var(--gold);font-size:.8rem">' + catalog.demo_saved_local + '</span>';
-
-      if (navigator.onLine) syncStampsToSupabase();
-    } catch(e) {}
-  });
-})();
-
-// === Offline / Online Detection ===
-function updateOnlineStatus() {
-  var bar = document.getElementById('offline-bar');
-  if (navigator.onLine) {
-    bar.classList.remove('show');
-    syncStampsToSupabase();
-  } else {
-    bar.classList.add('show');
-  }
-}
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
-if (!navigator.onLine) document.getElementById('offline-bar').classList.add('show');
-
-// === Service Worker Registration ===
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(function() {});
-}
-
-// === Tezos Blockchain Anchoring (Hybrid: simple + advanced) ===
-var tezosState = { Tezos: null, wallet: null, connected: false, address: null };
-
-var TEZOS_RPC = {
-  ghostnet: 'https://rpc.ghostnet.teztnets.com',
-  mainnet: 'https://prod.tcinfra.net/rpc/mainnet'
-};
-var TEZOS_EXPLORER = {
-  ghostnet: 'https://ghostnet.tzkt.io',
-  mainnet: 'https://tzkt.io'
-};
-
-// Restore saved network preference
-var savedAnchorNetwork = localStorage.getItem('amistamp_anchor_network') || 'mainnet';
-(function() {
-  var sel = document.getElementById('anchor-network');
-  if (sel) { sel.value = savedAnchorNetwork; }
-  var tag = document.getElementById('anchor-network-tag');
-  if (tag) { tag.textContent = savedAnchorNetwork; }
-})();
-
-// Custom contract toggle
-document.getElementById('anchor-custom-check').addEventListener('change', function() {
-  document.getElementById('anchor-custom-addr').style.display = this.checked ? '' : 'none';
+// ============ i18n (EN/RO; other languages load from i18n/*.json) ============
+Object.assign(I18N.en, {
+  demo_label_file: 'Document',
+  demo_drop: 'Drop a file here or click to choose. It never leaves your device.',
+  demo_label_content: '…or text to stamp',
+  demo_key_label: 'Your signing key on this device:',
+  demo_result_id: 'Stamp ID:',
+  demo_result_hash: 'Document hash (SHA-256):',
+  demo_result_stamp_hash: 'Stamp hash (anchored on blockchain):',
+  demo_result_status: '✓ Signed with your device key. Saved on this device.',
+  demo_alert_fill: 'Add a document or text, plus meaning and intention.',
+  demo_limit_reached: 'Free plan: 5 stamps per month on this device. Upgrade to Pro for more.',
+  demo_hashing: 'Hashing {name}…',
+  proof_download: 'Download proof (.json)',
+  proof_copy_link: 'Copy verification link',
+  proof_copied: 'Link copied. It opens this stamp on any device once it is synced (sign in), or on this device now.',
+  proof_note: 'Keep the proof file with your document. Anyone can verify it on this page, without an account.',
+  chain_anchor_quick: '⚓ Anchor on blockchain',
+  chain_anchoring: 'Anchoring…',
+  chain_success: '✓ Anchored. Transaction: ',
+  chain_error: 'Anchoring failed: ',
+  chain_tezos_soon: 'The public Tezos stamp registry is being deployed. For now, choose an EVM network or your own contract in Advanced settings.',
+  chain_no_stamp: 'Create a stamp first.',
+  commit_generate: 'Create private commitment',
+  commit_desc: 'Publish the commitment, keep the key. Later you can prove the document existed without having revealed it.',
+  commit_public_label: 'Commitment (public):',
+  commit_private_label: 'Opening key (keep private):',
+  commit_generated: '✓ Commitment created. Only someone with the opening key and the document can check it.',
+  commit_verify_title: 'Check a commitment',
+  commit_verify_placeholder: 'Paste the opening key JSON here...',
+  commit_verify_doc: 'Choose the original document',
+  commit_verify_btn: 'Check',
+  commit_valid: '✓ Match: this document opens the commitment.',
+  commit_invalid: '✗ No match: different document or different key.',
+  commit_parse_error: 'Paste a valid opening key and choose the document (or type the text above).',
+  verify_sub: 'Check the signature, the document and the blockchain anchor of any stamp.',
+  verify_stamp_hash: 'Stamp hash',
+  verify_key: 'Signing key',
+  verify_proof_drop: '…or choose a proof file (.json)',
+  verify_doc_drop: 'Optional: the original document, to check it matches',
+  verify_verified: '✓ VERIFIED',
+  verify_partial: '⚠ PARTIALLY VERIFIED',
+  verify_failed: '✗ VERIFICATION FAILED',
+  verify_not_found: 'Stamp not found',
+  verify_legacy: 'Legacy stamp (v1): created before signatures could be re-verified.',
+  verify_bad_proof: 'This file is not an AmiStampAI proof.',
+  check_sig: 'Signature matches the stamp content',
+  check_key: 'Signing key matches its fingerprint',
+  check_hash: 'Stamp hash matches the content',
+  check_doc: 'Original document matches',
+  check_doc_na: 'Original document not provided',
+  check_anchor: 'Anchored on {network}',
+  check_anchor_na: 'Not anchored on a blockchain',
+  check_anchor_unverifiable: 'Anchor on {network} could not be checked right now',
+  stamps_legacy: 'v1'
 });
-
-// Network change → save + update tag + reset wallet
-document.getElementById('anchor-network').addEventListener('change', function() {
-  localStorage.setItem('amistamp_anchor_network', this.value);
-  var tag = document.getElementById('anchor-network-tag');
-  tag.textContent = this.value;
-  resetAnchorWallet();
+Object.assign(I18N.ro, {
+  demo_label_file: 'Document',
+  demo_drop: 'Trage un fișier aici sau apasă pentru a alege. Fișierul nu părăsește dispozitivul tău.',
+  demo_label_content: '…sau text de ștampilat',
+  demo_key_label: 'Cheia ta de semnare pe acest dispozitiv:',
+  demo_result_id: 'ID ștampilă:',
+  demo_result_hash: 'Hash document (SHA-256):',
+  demo_result_stamp_hash: 'Hash ștampilă (ancorat pe blockchain):',
+  demo_result_status: '✓ Semnat cu cheia dispozitivului tău. Salvat pe acest dispozitiv.',
+  demo_alert_fill: 'Adaugă un document sau un text, plus sensul și intenția.',
+  demo_limit_reached: 'Planul gratuit: 5 ștampile pe lună pe acest dispozitiv. Treci la Pro pentru mai multe.',
+  demo_hashing: 'Calculez hash-ul pentru {name}…',
+  proof_download: 'Descarcă dovada (.json)',
+  proof_copy_link: 'Copiază linkul de verificare',
+  proof_copied: 'Link copiat. Deschide ștampila pe orice dispozitiv după sincronizare (autentificare) sau pe acest dispozitiv acum.',
+  proof_note: 'Păstrează fișierul de dovadă lângă document. Oricine îl poate verifica pe această pagină, fără cont.',
+  chain_anchor_quick: '⚓ Ancorează pe blockchain',
+  chain_anchoring: 'Se ancorează…',
+  chain_success: '✓ Ancorat. Tranzacție: ',
+  chain_error: 'Ancorarea a eșuat: ',
+  chain_tezos_soon: 'Registrul public Tezos pentru ștampile e în curs de lansare. Până atunci, alege o rețea EVM sau propriul contract din Setări avansate.',
+  chain_no_stamp: 'Creează mai întâi o ștampilă.',
+  commit_generate: 'Creează un angajament privat',
+  commit_desc: 'Publici angajamentul, păstrezi cheia. Ulterior poți dovedi că documentul exista, fără să-l fi dezvăluit.',
+  commit_public_label: 'Angajament (public):',
+  commit_private_label: 'Cheie de deschidere (păstreaz-o privată):',
+  commit_generated: '✓ Angajament creat. Doar cine are cheia de deschidere și documentul îl poate verifica.',
+  commit_verify_title: 'Verifică un angajament',
+  commit_verify_placeholder: 'Lipește aici JSON-ul cheii de deschidere...',
+  commit_verify_doc: 'Alege documentul original',
+  commit_verify_btn: 'Verifică',
+  commit_valid: '✓ Corespunde: acest document deschide angajamentul.',
+  commit_invalid: '✗ Nu corespunde: alt document sau altă cheie.',
+  commit_parse_error: 'Lipește o cheie de deschidere validă și alege documentul (sau scrie textul mai sus).',
+  verify_sub: 'Verifică semnătura, documentul și ancora pe blockchain ale oricărei ștampile.',
+  verify_stamp_hash: 'Hash ștampilă',
+  verify_key: 'Cheie de semnare',
+  verify_proof_drop: '…sau alege un fișier de dovadă (.json)',
+  verify_doc_drop: 'Opțional: documentul original, pentru a verifica dacă se potrivește',
+  verify_verified: '✓ VERIFICAT',
+  verify_partial: '⚠ VERIFICAT PARȚIAL',
+  verify_failed: '✗ VERIFICARE EȘUATĂ',
+  verify_not_found: 'Ștampila nu a fost găsită',
+  verify_legacy: 'Ștampilă veche (v1): creată înainte ca semnăturile să poată fi reverificate.',
+  verify_bad_proof: 'Acest fișier nu este o dovadă AmiStampAI.',
+  check_sig: 'Semnătura corespunde conținutului ștampilei',
+  check_key: 'Cheia de semnare corespunde amprentei',
+  check_hash: 'Hash-ul ștampilei corespunde conținutului',
+  check_doc: 'Documentul original corespunde',
+  check_doc_na: 'Documentul original nu a fost furnizat',
+  check_anchor: 'Ancorat pe {network}',
+  check_anchor_na: 'Neancorat pe blockchain',
+  check_anchor_unverifiable: 'Ancora de pe {network} nu poate fi verificată acum',
+  stamps_legacy: 'v1'
 });
-
-function getAnchorNetwork() {
-  return document.getElementById('anchor-network').value;
+applyLang(currentLang);
+function t(k, vars) {
+  var c = I18N[currentLang] || I18N.en;
+  var s = c[k] !== undefined ? c[k] : (I18N.en[k] !== undefined ? I18N.en[k] : k);
+  if (vars) Object.keys(vars).forEach(function (v) { s = s.split('{' + v + '}').join(vars[v]); });
+  return s;
 }
 
-function getCustomContract() {
-  if (document.getElementById('anchor-custom-check').checked) {
-    var addr = document.getElementById('anchor-custom-addr').value.trim();
-    if (addr && addr.startsWith('KT1')) return addr;
+// ============ helpers ============
+var enc = new TextEncoder();
+var $ = function (id) { return document.getElementById(id); };
+function hex(buf) { return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join(''); }
+async function sha256Hex(data) { return hex(await crypto.subtle.digest('SHA-256', typeof data === 'string' ? enc.encode(data) : data)); }
+function b64(buf) { var s = '', a = new Uint8Array(buf); for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]); return btoa(s); }
+function unb64(s) { var r = atob(s), a = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; }
+function canonical(obj) { return JSON.stringify(Object.keys(obj).sort().reduce(function (o, k) { o[k] = obj[k]; return o; }, {})); }
+function normText(s) { return s.normalize('NFC').replace(/\r\n?/g, '\n').trim(); }
+function uuid() { return crypto.randomUUID(); }
+function setText(id, v) { $(id).textContent = (v === null || v === undefined || v === '') ? '—' : String(v); }
+function short(h, a, b) { return h ? h.slice(0, a || 12) + '…' + h.slice(-(b || 6)) : ''; }
+function statusLine(target, cls, text, link) {
+  target.textContent = '';
+  var span = document.createElement('span');
+  span.style.color = cls === 'ok' ? 'var(--teal)' : cls === 'err' ? 'var(--accent)' : 'var(--gold)';
+  span.textContent = text;
+  target.appendChild(span);
+  if (link) {
+    var a = document.createElement('a');
+    a.href = link.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = link.text;
+    span.appendChild(a);
   }
+}
+async function hashFile(file) { return sha256Hex(await file.arrayBuffer()); }
+
+// ============ networks ============
+var TEZOS_RPC = { mainnet: 'https://prod.tcinfra.net/rpc/mainnet', shadownet: 'https://rpc.shadownet.teztnets.com' };
+var TEZOS_API = { mainnet: 'https://api.tzkt.io', shadownet: 'https://api.shadownet.tzkt.io' };
+var TEZOS_EXPLORER = { mainnet: 'https://tzkt.io', shadownet: 'https://shadownet.tzkt.io' };
+// Public stamp registry (anyone can call; parameter = bytes). Empty until deployed.
+var AMISTAMP_TEZOS_REGISTRY = { mainnet: '', shadownet: '' };
+var EVM_CHAINS = {
+  'eth-sepolia':  { chainId: '0xaa36a7', name: 'Sepolia',      rpc: 'https://ethereum-sepolia-rpc.publicnode.com', explorer: 'https://sepolia.etherscan.io/tx/', symbol: 'ETH' },
+  'eth-mainnet':  { chainId: '0x1',      name: 'Ethereum',     rpc: 'https://ethereum-rpc.publicnode.com',         explorer: 'https://etherscan.io/tx/',         symbol: 'ETH' },
+  'polygon-amoy': { chainId: '0x13882',  name: 'Polygon Amoy', rpc: 'https://rpc-amoy.polygon.technology',         explorer: 'https://amoy.polygonscan.com/tx/', symbol: 'POL' },
+  'polygon':      { chainId: '0x89',     name: 'Polygon',      rpc: 'https://polygon-rpc.com',                     explorer: 'https://polygonscan.com/tx/',      symbol: 'POL' },
+  'base-sepolia': { chainId: '0x14a34',  name: 'Base Sepolia', rpc: 'https://sepolia.base.org',                    explorer: 'https://sepolia.basescan.org/tx/', symbol: 'ETH' },
+  'base':         { chainId: '0x2105',   name: 'Base',         rpc: 'https://mainnet.base.org',                    explorer: 'https://basescan.org/tx/',         symbol: 'ETH' }
+};
+var TEZOS_OP_RX = /^o[1-9A-HJ-NP-Za-km-z]{50}$/;
+var EVM_TX_RX = /^0x[0-9a-fA-F]{64}$/;
+function isTezos(n) { return Object.prototype.hasOwnProperty.call(TEZOS_RPC, n); }
+function isEvm(n) { return Object.prototype.hasOwnProperty.call(EVM_CHAINS, n); }
+function networkLabel(n) { return isEvm(n) ? EVM_CHAINS[n].name : isTezos(n) ? 'Tezos ' + n : 'unknown'; }
+function explorerUrl(network, tx) {
+  if (isTezos(network) && TEZOS_OP_RX.test(tx)) return TEZOS_EXPLORER[network] + '/' + tx;
+  if (isEvm(network) && EVM_TX_RX.test(tx)) return EVM_CHAINS[network].explorer + tx;
   return null;
 }
 
-// Show anchor section when stamp is generated
-(function() {
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.target.classList && m.target.classList.contains('show')) {
-        document.getElementById('anchor-section').classList.add('show');
-        document.getElementById('zk-section').classList.add('show');
+// ============ IndexedDB (v2: stamps + device key) ============
+var DB_NAME = 'amistampai', DB_VERSION = 2;
+function openDB() {
+  return new Promise(function (resolve, reject) {
+    var r = indexedDB.open(DB_NAME, DB_VERSION);
+    r.onupgradeneeded = function (e) {
+      var db = e.target.result;
+      if (!db.objectStoreNames.contains('stamps')) {
+        var s = db.createObjectStore('stamps', { keyPath: 'id' });
+        s.createIndex('synced', 'synced', { unique: false });
+        s.createIndex('created_at', 'created_at', { unique: false });
       }
+      if (!db.objectStoreNames.contains('keys')) db.createObjectStore('keys');
+    };
+    r.onsuccess = function (e) { resolve(e.target.result); };
+    r.onerror = function (e) { reject(e.target.error); };
+  });
+}
+function idbReq(store, mode, op) {
+  return openDB().then(function (db) {
+    return new Promise(function (resolve, reject) {
+      var tx = db.transaction(store, mode), req = op(tx.objectStore(store));
+      tx.oncomplete = function () { resolve(req ? req.result : undefined); };
+      tx.onerror = function () { reject(tx.error); };
     });
   });
-  var resultEl = document.getElementById('demo-result');
-  if (resultEl) observer.observe(resultEl, { attributes: true, attributeFilter: ['class'] });
-})();
-
-// EVM chain config
-var EVM_CHAINS = {
-  'eth-sepolia':   { chainId: '0xaa36a7', name: 'Sepolia',       rpc: 'https://rpc.sepolia.org',            explorer: 'https://sepolia.etherscan.io/tx/', symbol: 'ETH' },
-  'eth-mainnet':   { chainId: '0x1',      name: 'Ethereum',      rpc: 'https://eth.llamarpc.com',           explorer: 'https://etherscan.io/tx/',         symbol: 'ETH' },
-  'polygon-amoy':  { chainId: '0x13882',  name: 'Polygon Amoy',  rpc: 'https://rpc-amoy.polygon.technology', explorer: 'https://amoy.polygonscan.com/tx/', symbol: 'POL' },
-  'polygon':       { chainId: '0x89',     name: 'Polygon',       rpc: 'https://polygon-rpc.com',            explorer: 'https://polygonscan.com/tx/',      symbol: 'POL' },
-  'base-sepolia':  { chainId: '0x14a34',  name: 'Base Sepolia',  rpc: 'https://sepolia.base.org',           explorer: 'https://sepolia.basescan.org/tx/', symbol: 'ETH' },
-  'base':          { chainId: '0x2105',   name: 'Base',          rpc: 'https://mainnet.base.org',           explorer: 'https://basescan.org/tx/',         symbol: 'ETH' }
+}
+var putStamp = function (s) { return idbReq('stamps', 'readwrite', function (st) { return st.put(s); }); };
+var getStamp = function (id) { return idbReq('stamps', 'readonly', function (st) { return st.get(id); }); };
+var allStamps = function () {
+  return idbReq('stamps', 'readonly', function (st) { return st.getAll(); })
+    .then(function (a) { return (a || []).sort(function (x, y) { return x.created_at < y.created_at ? 1 : -1; }); });
 };
 
-function isEvmNetwork(network) {
-  return !!EVM_CHAINS[network];
+// ============ device signing key (persistent, non-extractable) ============
+var keyPromise = null;
+function deviceKey() {
+  if (keyPromise) return keyPromise;
+  keyPromise = (async function () {
+    var k = await idbReq('keys', 'readonly', function (st) { return st.get('device'); });
+    if (k && k.privateKey && k.publicJwk && k.fp) return k;
+    var pair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign', 'verify']);
+    var jwk = await crypto.subtle.exportKey('jwk', pair.publicKey);
+    var pub = { crv: jwk.crv, kty: jwk.kty, x: jwk.x, y: jwk.y };
+    var rec = { privateKey: pair.privateKey, publicJwk: pub, fp: await sha256Hex(canonical(pub)), created_at: new Date().toISOString() };
+    await idbReq('keys', 'readwrite', function (st) { return st.put(rec, 'device'); });
+    return rec;
+  })();
+  return keyPromise;
 }
+async function keyFingerprint(pub) { return sha256Hex(canonical({ crv: pub.crv, kty: pub.kty, x: pub.x, y: pub.y })); }
 
-var evmState = { provider: null, signer: null, connected: false, address: null };
-
-// Beacon Wallet Adapter (for Tezos)
-if (typeof beacon !== 'undefined' && typeof taquito !== 'undefined') {
-  function BeaconWalletAdapter(name) {
-    this.client = new beacon.DAppClient({ name: name });
-  }
-  BeaconWalletAdapter.prototype.requestPermissions = async function(opts) {
-    var net = opts && opts.network ? opts.network : {};
-    var networkConfig = {};
-    if (net.type === 'mainnet') {
-      networkConfig.type = 'mainnet';
-    } else {
-      networkConfig.type = 'custom';
-      networkConfig.name = net.type || 'ghostnet';
-      networkConfig.rpcUrl = TEZOS_RPC[net.type] || TEZOS_RPC.ghostnet;
-    }
-    await this.client.requestPermissions({ network: networkConfig });
-  };
-  BeaconWalletAdapter.prototype.getPKH = async function() {
-    var account = await this.client.getActiveAccount();
-    if (!account) throw new Error('No active account');
-    return account.address;
-  };
-  BeaconWalletAdapter.prototype.clearActiveAccount = async function() {
-    await this.client.clearActiveAccount();
-  };
-  BeaconWalletAdapter.prototype.mapTransferParamsToWalletParams = async function(params) {
-    var p = await params();
-    return Object.assign({}, p, { kind: 'transaction' });
-  };
-  BeaconWalletAdapter.prototype.sendOperations = async function(params) {
-    var ops = params.map(function(op) {
-      var o = Object.assign({}, op);
-      if (o.fee != null) o.fee = String(o.fee);
-      if (o.amount != null) o.amount = String(o.amount);
-      if (o.kind === 'transaction') {
-        if (o.to && !o.destination) { o.destination = o.to; delete o.to; }
-        if (o.parameter && !o.parameters) { o.parameters = o.parameter; delete o.parameter; }
-        if (o.amount == null) o.amount = '0';
-        delete o.mutez;
-      }
-      return o;
-    });
-    var response = await this.client.requestOperation({ operationDetails: ops });
-    return response.transactionHash;
+// ============ stamp model ============
+function payloadOf(s) {
+  return { v: s.v, doc_hash: s.doc_hash, doc_kind: s.doc_kind, sens: s.sens, intentie: s.intentie, created_at: s.created_at, key_fp: s.key_fp };
+}
+function proofOf(s) {
+  return {
+    format: 'amistamp-proof-2',
+    id: s.id,
+    stamp: payloadOf(s),
+    stamp_hash: s.stamp_hash,
+    signature: { alg: 'ECDSA-P256-SHA256', encoding: 'base64-ieee-p1363', value: s.signature },
+    public_key: s.public_key,
+    anchors: s.anchors || [],
+    verify_url: 'https://amistampai.com/?verify=' + encodeURIComponent(s.id),
+    how_to_verify: 'Open amistampai.com, section Verify, choose this file (and optionally the original document). ' +
+      'Manually: stamp_hash = SHA-256 of JSON(stamp) with keys sorted and no spaces; the signature is ECDSA P-256/SHA-256 over the same bytes; ' +
+      'doc_hash = SHA-256 of the file bytes (or of the NFC-normalized, trimmed text with LF line endings).'
   };
 }
+function stampFromProof(p) {
+  if (!p || p.format !== 'amistamp-proof-2' || !p.stamp || !p.signature || !p.public_key) return null;
+  var st = p.stamp;
+  return { id: p.id, v: st.v, doc_hash: st.doc_hash, doc_kind: st.doc_kind, sens: st.sens, intentie: st.intentie,
+    created_at: st.created_at, key_fp: st.key_fp, stamp_hash: p.stamp_hash, signature: p.signature.value,
+    public_key: p.public_key, anchors: Array.isArray(p.anchors) ? p.anchors : [] };
+}
+function stampFromRow(r) {
+  var m = r.context_graph || {};
+  var anchors = Array.isArray(m.anchors) ? m.anchors : [];
+  if (!anchors.length && r.blockchain_tx) anchors = [{ network: r.blockchain_network, tx: r.blockchain_tx }];
+  return { id: r.id, v: m.v, doc_hash: r.content_hash, doc_kind: m.doc_kind, sens: r.sens, intentie: r.intentie,
+    created_at: new Date(r.created_at).toISOString(), key_fp: m.key_fp, stamp_hash: m.stamp_hash,
+    signature: r.signature, public_key: r.public_key, anchors: anchors };
+}
 
-// Switch MetaMask to the correct EVM chain
-async function switchEvmChain(chainConfig) {
+// ============ create stamp ============
+var pendingFile = null;   // { name, hash }
+var currentStamp = null;
+var FREE_LIMIT = 5;
+
+function bindDrop(zoneId, inputId, onFile) {
+  var zone = $(zoneId) || $(inputId).closest('.drop-zone'), input = $(inputId);
+  input.addEventListener('change', function () { if (input.files[0]) onFile(input.files[0]); });
+  if (!zone) return;
+  zone.addEventListener('dragover', function (e) { e.preventDefault(); zone.classList.add('over'); });
+  zone.addEventListener('dragleave', function () { zone.classList.remove('over'); });
+  zone.addEventListener('drop', function (e) { e.preventDefault(); zone.classList.remove('over'); if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]); });
+}
+bindDrop('demo-drop', 'demo-file', async function (file) {
+  $('demo-file-name').textContent = t('demo_hashing', { name: file.name });
+  pendingFile = { name: file.name, hash: await hashFile(file) };
+  $('demo-file-name').textContent = '📄 ' + file.name + ' — ' + short(pendingFile.hash, 16, 8);
+});
+
+$('demo-stamp').addEventListener('click', async function () {
+  var btn = this;
+  var text = normText($('demo-content').value);
+  var sens = $('demo-sens').value.trim(), intentie = $('demo-intentie').value.trim();
+  if ((!pendingFile && !text) || !sens || !intentie) { alert(t('demo_alert_fill')); return; }
+
+  var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+  var used = (await allStamps()).filter(function (s) { return s.created_at >= monthStart; }).length;
+  if (used >= FREE_LIMIT) { alert(t('demo_limit_reached')); return; }
+
+  btn.disabled = true; btn.textContent = t('demo_btn_stamping');
   try {
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: chainConfig.chainId }]
+    var key = await deviceKey();
+    var s = {
+      id: uuid(), v: 'amistamp-2',
+      doc_hash: pendingFile ? pendingFile.hash : await sha256Hex(text),
+      doc_kind: pendingFile ? 'file' : 'text',
+      sens: sens, intentie: intentie,
+      created_at: new Date().toISOString(),
+      key_fp: key.fp
+    };
+    var bytes = enc.encode(canonical(payloadOf(s)));
+    s.signature = b64(await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, key.privateKey, bytes));
+    s.stamp_hash = await sha256Hex(bytes);
+    s.public_key = key.publicJwk;
+    s.anchors = [];
+    s.synced = 0;
+    await putStamp(s);
+    currentStamp = s;
+    showResult(s);
+    renderStampHistory();
+    syncStamps();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+  btn.disabled = false; btn.textContent = t('demo_btn_stamp');
+});
+
+function showResult(s) {
+  setText('result-id', s.id);
+  setText('result-doc-hash', s.doc_hash);
+  setText('result-stamp-hash', s.stamp_hash);
+  setText('result-sig', s.signature);
+  setText('result-pubkey', JSON.stringify(s.public_key));
+  setText('result-status', t('demo_result_status'));
+  $('anchor-status').textContent = '';
+  $('commit-output').style.display = 'none';
+  $('commit-status').textContent = '';
+  var r = $('demo-result');
+  r.classList.add('show');
+  $('anchor-section').classList.add('show');
+  $('commit-section').classList.add('show');
+  r.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+deviceKey().then(function (k) { $('demo-key-fp').textContent = k.fp.slice(0, 16); }).catch(function () {});
+
+// ============ proof file + link ============
+$('btn-download-proof').addEventListener('click', function () {
+  if (!currentStamp) return;
+  var blob = new Blob([JSON.stringify(proofOf(currentStamp), null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'amistamp-proof-' + currentStamp.id.slice(0, 8) + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+});
+$('btn-copy-link').addEventListener('click', function () {
+  if (!currentStamp) return;
+  navigator.clipboard.writeText(proofOf(currentStamp).verify_url).then(function () { statusLine($('result-status'), 'ok', t('proof_copied')); });
+});
+
+// ============ Supabase sync ============
+async function syncStamps() {
+  if (typeof getSupabase === 'undefined' || !navigator.onLine) return;
+  var sb = getSupabase(); if (!sb) return;
+  var session = (await sb.auth.getSession()).data.session;
+  if (!session) return;
+  var list = (await allStamps()).filter(function (s) { return !s.synced && s.v === 'amistamp-2'; });
+  for (var i = 0; i < list.length; i++) {
+    var s = list[i], last = s.anchors[s.anchors.length - 1];
+    var res = await sb.from('stamps').insert({
+      id: s.id, user_id: session.user.id, content_hash: s.doc_hash, sens: s.sens, intentie: s.intentie,
+      signature: s.signature, public_key: s.public_key, created_at: s.created_at,
+      blockchain_tx: last ? last.tx : null, blockchain_network: last ? last.network : null,
+      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors }
     });
-  } catch(switchError) {
-    if (switchError.code === 4902) {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: chainConfig.chainId,
-          chainName: chainConfig.name,
-          rpcUrls: [chainConfig.rpc],
-          nativeCurrency: { name: chainConfig.symbol, symbol: chainConfig.symbol, decimals: 18 }
-        }]
-      });
-    } else {
-      throw switchError;
+    if (!res.error) { s.synced = 1; await putStamp(s); }
+  }
+}
+async function pushAnchorToCloud(s) {
+  if (!s.synced || typeof getSupabase === 'undefined') return;
+  var sb = getSupabase(); if (!sb) return;
+  var last = s.anchors[s.anchors.length - 1];
+  try {
+    await sb.from('stamps').update({
+      blockchain_tx: last.tx, blockchain_network: last.network,
+      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors }
+    }).eq('id', s.id);
+  } catch (e) {}
+}
+
+// ============ online / offline + service worker ============
+function updateOnlineStatus() {
+  var bar = $('offline-bar');
+  if (navigator.onLine) { bar.classList.remove('show'); syncStamps(); } else { bar.classList.add('show'); }
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+if (!navigator.onLine) $('offline-bar').classList.add('show');
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
+if (typeof getSupabase !== 'undefined' && getSupabase()) {
+  getSupabase().auth.onAuthStateChange(function (ev) { if (ev === 'SIGNED_IN') syncStamps(); });
+}
+
+// ============ anchoring ============
+var tezosState = { Tezos: null, wallet: null, connected: false, address: null, network: null };
+var evmState = { signer: null, connected: false, address: null, network: null };
+
+var savedNet = 'mainnet';
+try { savedNet = localStorage.getItem('amistamp_anchor_network') || 'mainnet'; } catch (e) {}
+if (!isTezos(savedNet) && !isEvm(savedNet)) savedNet = 'mainnet';
+$('anchor-network').value = savedNet;
+$('anchor-network-tag').textContent = savedNet;
+$('anchor-custom-check').addEventListener('change', function () { $('anchor-custom-addr').style.display = this.checked ? '' : 'none'; });
+$('anchor-network').addEventListener('change', function () {
+  try { localStorage.setItem('amistamp_anchor_network', this.value); } catch (e) {}
+  $('anchor-network-tag').textContent = this.value;
+  resetWallet();
+});
+function getNetwork() { return $('anchor-network').value; }
+function customContract() {
+  if (!$('anchor-custom-check').checked) return null;
+  var a = $('anchor-custom-addr').value.trim();
+  return /^KT1[1-9A-HJ-NP-Za-km-z]{33}$/.test(a) ? a : null;
+}
+
+function BeaconWalletAdapter(name) { this.client = new beacon.DAppClient({ name: name }); }
+BeaconWalletAdapter.prototype.requestPermissions = async function (network) {
+  var cfg = network === 'mainnet' ? { type: 'mainnet' } : { type: 'custom', name: network, rpcUrl: TEZOS_RPC[network] };
+  await this.client.requestPermissions({ network: cfg });
+};
+BeaconWalletAdapter.prototype.getPKH = async function () {
+  var acc = await this.client.getActiveAccount();
+  if (!acc) throw new Error('No active account');
+  return acc.address;
+};
+BeaconWalletAdapter.prototype.clearActiveAccount = function () { return this.client.clearActiveAccount(); };
+BeaconWalletAdapter.prototype.mapTransferParamsToWalletParams = async function (p) { return Object.assign({}, await p(), { kind: 'transaction' }); };
+BeaconWalletAdapter.prototype.sendOperations = async function (params) {
+  var ops = params.map(function (op) {
+    var o = Object.assign({}, op);
+    ['fee', 'gas_limit', 'storage_limit', 'amount'].forEach(function (k) { if (o[k] != null) o[k] = String(o[k]); });
+    if (o.kind === 'transaction') {
+      if (o.to && !o.destination) { o.destination = o.to; delete o.to; }
+      if (o.parameter && !o.parameters) { o.parameters = o.parameter; delete o.parameter; }
+      if (o.amount == null) o.amount = '0';
+      delete o.mutez;
     }
-  }
-}
+    return o;
+  });
+  var r = await this.client.requestOperation({ operationDetails: ops });
+  return r.transactionHash;
+};
 
-// Reset anchor wallet state
-function resetAnchorWallet() {
-  tezosState.connected = false;
-  tezosState.wallet = null;
-  tezosState.Tezos = null;
-  tezosState.address = null;
-  evmState.connected = false;
-  evmState.provider = null;
-  evmState.signer = null;
-  evmState.address = null;
-  document.getElementById('wallet-status').style.display = 'none';
-  document.getElementById('wallet-dot').classList.remove('connected');
-  document.getElementById('wallet-addr').textContent = '';
-  var connectBtn = document.getElementById('btn-connect-wallet');
-  connectBtn.disabled = false;
-  connectBtn.textContent = I18N[currentLang].chain_connect;
-  document.getElementById('btn-disconnect-wallet').style.display = 'none';
-  document.getElementById('anchor-status').innerHTML = '';
+function showWallet(addr) {
+  $('wallet-status').style.display = 'flex';
+  $('wallet-dot').classList.add('connected');
+  $('wallet-addr').textContent = addr.slice(0, 8) + '…' + addr.slice(-4);
+  $('btn-connect-wallet').style.display = 'none';
+  $('btn-disconnect-wallet').style.display = '';
 }
-
-function showWalletConnected(addr) {
-  document.getElementById('wallet-status').style.display = 'flex';
-  document.getElementById('wallet-dot').classList.add('connected');
-  document.getElementById('wallet-addr').textContent = addr.substring(0, 8) + '...' + addr.slice(-4);
-  document.getElementById('btn-connect-wallet').style.display = 'none';
-  document.getElementById('btn-disconnect-wallet').style.display = '';
-  document.getElementById('anchor-wallet-row').style.display = '';
+function resetWallet() {
+  tezosState = { Tezos: null, wallet: tezosState.wallet, connected: false, address: null, network: null };
+  evmState = { signer: null, connected: false, address: null, network: null };
+  $('wallet-status').style.display = 'none';
+  $('wallet-dot').classList.remove('connected');
+  $('wallet-addr').textContent = '';
+  $('btn-connect-wallet').style.display = '';
+  $('btn-connect-wallet').disabled = false;
+  $('btn-disconnect-wallet').style.display = 'none';
+  $('anchor-status').textContent = '';
 }
-
-// Connect Tezos wallet
-async function connectTezosWallet(network) {
-  if (typeof beacon === 'undefined' || typeof taquito === 'undefined') {
-    throw new Error('Tezos SDK not loaded');
-  }
-  tezosState.wallet = new BeaconWalletAdapter('AmiStampAI');
+async function connectTezos(network) {
+  if (typeof beacon === 'undefined' || typeof taquito === 'undefined') throw new Error('Tezos SDK not loaded');
+  if (!tezosState.wallet) tezosState.wallet = new BeaconWalletAdapter('AmiStampAI');
   tezosState.Tezos = new taquito.TezosToolkit(TEZOS_RPC[network]);
   tezosState.Tezos.setWalletProvider(tezosState.wallet);
-  await tezosState.wallet.requestPermissions({ network: { type: network } });
+  await tezosState.wallet.requestPermissions(network);
   tezosState.address = await tezosState.wallet.getPKH();
-  tezosState.connected = true;
-  showWalletConnected(tezosState.address);
+  tezosState.connected = true; tezosState.network = network;
+  showWallet(tezosState.address);
 }
-
-// Connect EVM wallet
-async function connectEvmWallet(network) {
-  if (typeof window.ethereum === 'undefined') {
-    throw new Error(I18N[currentLang].chain_no_metamask);
+async function connectEvm(network) {
+  if (typeof window.ethereum === 'undefined') throw new Error(t('chain_no_metamask'));
+  var c = EVM_CHAINS[network];
+  try {
+    await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: c.chainId }] });
+  } catch (err) {
+    if (err.code !== 4902) throw err;
+    await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: c.chainId, chainName: c.name, rpcUrls: [c.rpc], nativeCurrency: { name: c.symbol, symbol: c.symbol, decimals: 18 } }] });
   }
-  var chainConfig = EVM_CHAINS[network];
-  await switchEvmChain(chainConfig);
   var provider = new ethers.BrowserProvider(window.ethereum);
   await provider.send('eth_requestAccounts', []);
-  var signer = await provider.getSigner();
-  var address = await signer.getAddress();
-  evmState.provider = provider;
-  evmState.signer = signer;
-  evmState.address = address;
-  evmState.connected = true;
-  showWalletConnected(address);
+  evmState.signer = await provider.getSigner();
+  evmState.address = await evmState.signer.getAddress();
+  evmState.connected = true; evmState.network = network;
+  showWallet(evmState.address);
 }
-
-// Advanced: manual connect button
-document.getElementById('btn-connect-wallet').addEventListener('click', async function() {
-  var network = getAnchorNetwork();
-  var statusEl = document.getElementById('anchor-status');
-  try {
-    if (isEvmNetwork(network)) {
-      await connectEvmWallet(network);
-    } else {
-      await connectTezosWallet(network);
-    }
-  } catch(e) {
-    statusEl.innerHTML = '<span style="color:var(--accent)">' + e.message + '</span>';
-  }
+$('btn-connect-wallet').addEventListener('click', async function () {
+  var n = getNetwork();
+  try { if (isEvm(n)) await connectEvm(n); else await connectTezos(n); }
+  catch (e) { statusLine($('anchor-status'), 'err', e.message); }
+});
+$('btn-disconnect-wallet').addEventListener('click', function () {
+  if (tezosState.wallet) { try { tezosState.wallet.clearActiveAccount(); } catch (e) {} }
+  resetWallet();
 });
 
-// Advanced: disconnect button
-document.getElementById('btn-disconnect-wallet').addEventListener('click', function() {
-  if (tezosState.wallet) {
-    try { tezosState.wallet.clearActiveAccount(); } catch(e) {}
-  }
-  resetAnchorWallet();
-});
+$('btn-anchor-quick').addEventListener('click', async function () {
+  var btn = this, status = $('anchor-status'), s = currentStamp, network = getNetwork();
+  if (!s) { statusLine(status, 'err', t('chain_no_stamp')); return; }
+  var registry = isTezos(network) ? (customContract() || AMISTAMP_TEZOS_REGISTRY[network]) : null;
+  if (isTezos(network) && !registry) { statusLine(status, 'warn', t('chain_tezos_soon')); return; }
 
-// Save stamp blockchain info to local store
-async function saveBlockchainToStamp(txHash, network) {
+  btn.disabled = true; btn.textContent = t('chain_anchoring');
   try {
-    var stamps = await getAllLocalStamps();
-    if (stamps.length > 0) {
-      var latest = stamps[0];
-      latest.blockchain_tx = txHash;
-      latest.blockchain_network = network;
-      await saveStampLocal(latest);
-      renderStampHistory();
-    }
-  } catch(e) {}
-}
-
-// Quick Anchor button — one-click: auto-connect + anchor
-document.getElementById('btn-anchor-quick').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var network = getAnchorNetwork();
-  var hash = document.getElementById('result-doc-hash').textContent;
-  if (!hash) return;
-
-  var statusEl = document.getElementById('anchor-status');
-  var btn = this;
-  btn.disabled = true;
-  btn.innerHTML = catalog.chain_anchoring;
-
-  try {
-    if (isEvmNetwork(network)) {
-      // EVM flow
-      if (!evmState.connected) await connectEvmWallet(network);
-      var tx = await evmState.signer.sendTransaction({
-        to: evmState.address,
-        value: 0,
-        data: ethers.hexlify(ethers.toUtf8Bytes('amistamp:' + hash))
-      });
-      var receipt = await tx.wait();
-      var txHash = receipt.hash;
-      var explorerUrl = EVM_CHAINS[network].explorer + txHash;
-      statusEl.innerHTML = '<span style="color:var(--teal)">' + catalog.chain_success +
-        '<a href="' + explorerUrl + '" target="_blank">' + txHash.substring(0, 12) + '...</a></span>';
-      await saveBlockchainToStamp(txHash, network);
+    var tx, anchor;
+    if (isEvm(network)) {
+      if (!evmState.connected || evmState.network !== network) await connectEvm(network);
+      var sent = await evmState.signer.sendTransaction({ to: evmState.address, value: 0, data: ethers.hexlify(ethers.toUtf8Bytes('amistamp:' + s.stamp_hash)) });
+      tx = (await sent.wait()).hash;
+      anchor = { network: network, tx: tx, method: 'evm-calldata', at: new Date().toISOString() };
     } else {
-      // Tezos flow — auto-connect if needed
-      if (!tezosState.connected) await connectTezosWallet(network);
-
-      var contractAddr = getCustomContract();
-      var txHash, explorerUrl;
-
-      if (contractAddr) {
-        // Use custom contract: call register(code, hash)
-        var contract = await tezosState.Tezos.wallet.at(contractAddr);
-        var op = await contract.methods.register('STAMP', hash).send();
-        txHash = op.opHash;
+      if (!tezosState.connected || tezosState.network !== network) await connectTezos(network);
+      var op;
+      if (customContract()) {
+        var c = await tezosState.Tezos.wallet.at(registry);
+        op = await c.methods.register('AMISTAMP-' + s.id, s.stamp_hash).send();
       } else {
-        // Default: self-transfer with stamp data
-        var op = await tezosState.Tezos.wallet.transfer({
-          to: tezosState.address,
-          amount: 0,
-          mutez: true
-        }).send();
-        txHash = op.opHash;
+        op = await tezosState.Tezos.wallet.transfer({ to: registry, amount: 0, parameter: { entrypoint: 'default', value: { bytes: s.stamp_hash } } }).send();
       }
-
-      explorerUrl = TEZOS_EXPLORER[network] + '/' + txHash;
-      statusEl.innerHTML = '<span style="color:var(--teal)">' + catalog.chain_success +
-        '<a href="' + explorerUrl + '" target="_blank">' + txHash.substring(0, 12) + '...</a></span>';
-      await saveBlockchainToStamp(txHash, network);
+      await op.confirmation(1);
+      tx = op.opHash;
+      anchor = { network: network, tx: tx, contract: registry, method: customContract() ? 'register' : 'registry', at: new Date().toISOString() };
     }
-  } catch(e) {
-    statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.chain_error + e.message + '</span>';
+    s.anchors.push(anchor);
+    await putStamp(s);
+    pushAnchorToCloud(s);
+    renderStampHistory();
+    statusLine(status, 'ok', t('chain_success'), { href: explorerUrl(network, tx), text: short(tx, 12, 4) });
+  } catch (e) {
+    statusLine(status, 'err', t('chain_error') + e.message);
   }
-
-  btn.disabled = false;
-  btn.innerHTML = catalog.chain_anchor_quick;
+  btn.disabled = false; btn.textContent = t('chain_anchor_quick');
 });
 
-// Auth modal wallet button (Tezos) — uses shared connectTezosWallet
 if (typeof beacon !== 'undefined' && typeof taquito !== 'undefined') {
-  document.getElementById('auth-wallet-btn').onclick = async function() {
-    try {
-      await connectTezosWallet(getAnchorNetwork());
-      closeModal('auth');
-    } catch(e) {
-      var msgEl = document.getElementById('auth-msg');
-      msgEl.className = 'auth-msg error';
-      msgEl.textContent = e.message;
-    }
+  $('auth-wallet-btn').onclick = async function () {
+    try { await connectTezos(isTezos(getNetwork()) ? getNetwork() : 'mainnet'); closeModal('auth'); }
+    catch (e) { var m = $('auth-msg'); m.className = 'auth-msg error'; m.textContent = e.message; }
   };
 }
 
+// ============ private commitment (salted, VCI §6.3) ============
+async function commitmentOf(salt, docHash) { return sha256Hex('amistamp-commit-v1|' + salt + '|' + docHash); }
+$('btn-commit-generate').addEventListener('click', async function () {
+  if (!currentStamp) return;
+  var salt = hex(crypto.getRandomValues(new Uint8Array(32)));
+  var commitment = await commitmentOf(salt, currentStamp.doc_hash);
+  $('commit-value').textContent = commitment;
+  $('commit-opening').textContent = JSON.stringify({ v: 'amistamp-commit-v1', commitment: commitment, salt: salt });
+  $('commit-output').style.display = 'block';
+  statusLine($('commit-status'), 'ok', t('commit_generated'));
+  currentStamp.commitment = { commitment: commitment, salt: salt };
+  await putStamp(currentStamp);
+});
+var commitDocHash = null;
+bindDrop(null, 'commit-verify-file', async function (file) {
+  $('commit-verify-file-name').textContent = t('demo_hashing', { name: file.name });
+  commitDocHash = await hashFile(file);
+  $('commit-verify-file-name').textContent = '📄 ' + file.name;
+});
+$('btn-commit-verify').addEventListener('click', async function () {
+  var out = $('commit-verify-result');
+  try {
+    var o = JSON.parse($('commit-verify-input').value.trim());
+    var docHash = commitDocHash || (normText($('demo-content').value) ? await sha256Hex(normText($('demo-content').value)) : null);
+    if (!o.commitment || !o.salt || !docHash) throw new Error('incomplete');
+    var ok = (await commitmentOf(o.salt, docHash)) === o.commitment;
+    out.className = 'zk-verify-result ' + (ok ? 'valid' : 'invalid');
+    out.textContent = t(ok ? 'commit_valid' : 'commit_invalid');
+  } catch (e) {
+    out.className = 'zk-verify-result invalid';
+    out.textContent = t('commit_parse_error');
+  }
+});
+document.querySelectorAll('[data-copy]').forEach(function (b) {
+  b.addEventListener('click', function () { navigator.clipboard.writeText($(b.getAttribute('data-copy')).textContent); });
+});
 
-// === ZK Verification (Hash-Based Commitment) ===
-// Generates: commitment = SHA-256(document_hash || salt)
-// Proof = { commitment, salt, timestamp, public_key_hash }
-// Verifier recomputes commitment from (document_hash + salt) to check
-
-async function zkHash(data) {
-  var encoder = new TextEncoder();
-  var buf = await crypto.subtle.digest('SHA-256', encoder.encode(data));
-  return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+// ============ verification ============
+async function checkAnchor(a, stampHash) {
+  try {
+    if (isTezos(a.network) && TEZOS_OP_RX.test(a.tx)) {
+      var ops = await (await fetch(TEZOS_API[a.network] + '/v1/operations/' + a.tx)).json();
+      if (!Array.isArray(ops) || !ops.length) return false;
+      return ops.some(function (o) { return o.status === 'applied' && JSON.stringify(o.parameter || {}).toLowerCase().indexOf(stampHash) !== -1; });
+    }
+    if (isEvm(a.network) && EVM_TX_RX.test(a.tx)) {
+      var r = await (await fetch(EVM_CHAINS[a.network].rpc, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_getTransactionByHash', params: [a.tx] }) })).json();
+      if (!r.result || !r.result.blockNumber) return false;
+      var want = hex(enc.encode('amistamp:' + stampHash));
+      return (r.result.input || '').toLowerCase().indexOf(want) !== -1;
+    }
+    return false;
+  } catch (e) {
+    return null;
+  }
 }
-
-function zkGenerateSalt() {
-  var arr = new Uint8Array(32);
-  crypto.getRandomValues(arr);
-  return Array.from(arr).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+async function verifyStamp(s, providedDocHash) {
+  var checks = [];
+  if (s.v !== 'amistamp-2' || !s.public_key || !s.signature) {
+    checks.push({ state: 'na', text: t('verify_legacy') });
+    return { checks: checks, verdict: 'partial' };
+  }
+  var fp = await keyFingerprint(s.public_key);
+  checks.push({ state: fp === s.key_fp ? 'ok' : 'fail', text: t('check_key'), detail: fp.slice(0, 16) });
+  var bytes = enc.encode(canonical(payloadOf(s)));
+  var sigOk = false;
+  try {
+    var pub = await crypto.subtle.importKey('jwk', { kty: s.public_key.kty, crv: s.public_key.crv, x: s.public_key.x, y: s.public_key.y },
+      { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
+    sigOk = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, pub, unb64(s.signature), bytes);
+  } catch (e) { sigOk = false; }
+  checks.push({ state: sigOk ? 'ok' : 'fail', text: t('check_sig') });
+  var sh = await sha256Hex(bytes);
+  checks.push({ state: !s.stamp_hash || sh === s.stamp_hash ? 'ok' : 'fail', text: t('check_hash'), detail: short(sh, 16, 8) });
+  if (providedDocHash) checks.push({ state: providedDocHash === s.doc_hash ? 'ok' : 'fail', text: t('check_doc') });
+  else checks.push({ state: 'na', text: t('check_doc_na') });
+  var anchors = (s.anchors || []).filter(function (a) { return a && typeof a.tx === 'string'; });
+  if (!anchors.length) checks.push({ state: 'na', text: t('check_anchor_na') });
+  for (var i = 0; i < anchors.length; i++) {
+    var a = anchors[i], res = await checkAnchor(a, sh), label = networkLabel(a.network);
+    checks.push({
+      state: res === null ? 'na' : res ? 'ok' : 'fail',
+      text: res === null ? t('check_anchor_unverifiable', { network: label }) : t('check_anchor', { network: label }),
+      link: explorerUrl(a.network, a.tx) ? { href: explorerUrl(a.network, a.tx), text: short(a.tx, 12, 4) } : null
+    });
+  }
+  var core = checks.slice(0, 3).every(function (c) { return c.state === 'ok'; });
+  var anyFail = checks.some(function (c) { return c.state === 'fail'; });
+  return { checks: checks, verdict: !core || anyFail ? 'failed' : 'verified' };
 }
-
-document.getElementById('btn-zk-generate').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var hash = document.getElementById('result-doc-hash').textContent;
-  if (!hash || !crypto.subtle) return;
-
-  this.disabled = true;
-  this.textContent = catalog.zk_generating;
-
-  try {
-    var salt = zkGenerateSalt();
-    var commitment = await zkHash(hash + '||' + salt);
-    var timestamp = new Date().toISOString();
-
-    var pubkeyText = document.getElementById('result-pubkey').textContent;
-    var pubkeyHash = await zkHash(pubkeyText);
-
-    var proof = {
-      version: 'amistamp-zk-v1',
-      commitment: commitment,
-      salt: salt,
-      document_hash: hash,
-      timestamp: timestamp,
-      public_key_hash: pubkeyHash
-    };
-
-    document.getElementById('zk-commitment').textContent = commitment;
-    document.getElementById('zk-proof-data').textContent = JSON.stringify(proof);
-    document.getElementById('zk-proof-output').style.display = 'block';
-    document.getElementById('zk-status').innerHTML =
-      '<span style="color:var(--teal)">' + catalog.zk_generated + '</span>';
-
-    // Save ZK proof to latest local stamp
-    try {
-      var stamps = await getAllLocalStamps();
-      if (stamps.length > 0) {
-        var latest = stamps[0];
-        latest.zk_proof = proof;
-        await saveStampLocal(latest);
-      }
-    } catch(e) {}
-  } catch(e) {
-    document.getElementById('zk-status').innerHTML =
-      '<span style="color:var(--accent)">' + e.message + '</span>';
-  }
-
-  this.disabled = false;
-  this.textContent = catalog.zk_generate;
-});
-
-document.getElementById('btn-zk-verify').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var input = document.getElementById('zk-verify-input').value.trim();
-  var resultEl = document.getElementById('zk-verify-result');
-
-  if (!input || !crypto.subtle) return;
-
-  try {
-    var proof = JSON.parse(input);
-    if (!proof.commitment || !proof.salt || !proof.document_hash) {
-      resultEl.className = 'zk-verify-result invalid';
-      resultEl.textContent = catalog.zk_parse_error;
-      return;
-    }
-
-    var recomputed = await zkHash(proof.document_hash + '||' + proof.salt);
-
-    if (recomputed === proof.commitment) {
-      resultEl.className = 'zk-verify-result valid';
-      resultEl.textContent = catalog.zk_valid;
-    } else {
-      resultEl.className = 'zk-verify-result invalid';
-      resultEl.textContent = catalog.zk_invalid;
-    }
-  } catch(e) {
-    resultEl.className = 'zk-verify-result invalid';
-    resultEl.textContent = catalog.zk_parse_error;
-  }
-});
-
-// === Public Verification ===
-// Handle ?verify=STAMP_ID URL parameter
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var verifyId = params.get('verify');
-  if (verifyId) {
-    document.getElementById('verify-stamp-id').value = verifyId;
-    setTimeout(function() {
-      document.getElementById('btn-verify-stamp').click();
-      document.getElementById('verify').scrollIntoView({ behavior: 'smooth' });
-    }, 500);
-  }
-})();
-
-document.getElementById('btn-verify-stamp').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var stampId = document.getElementById('verify-stamp-id').value.trim();
-  if (!stampId) return;
-
-  this.disabled = true;
-  this.textContent = catalog.verify_checking;
-  var card = document.getElementById('verify-result-card');
-  card.classList.remove('show');
-
-  var found = false;
-
-  // Try Supabase first
-  if (typeof getSupabase !== 'undefined') {
-    var sb = getSupabase();
-    if (sb) {
-      try {
-        var resp = await sb.from('stamps').select('*').eq('id', stampId).single();
-        if (resp.data) {
-          found = true;
-          var s = resp.data;
-          document.getElementById('verify-badge-area').innerHTML =
-            '<span class="verify-badge verified">' + catalog.verify_verified + '</span>';
-          document.getElementById('verify-hash').textContent = s.content_hash;
-          document.getElementById('verify-sens').textContent = s.sens;
-          document.getElementById('verify-intentie').textContent = s.intentie;
-          document.getElementById('verify-timestamp').textContent = new Date(s.created_at).toLocaleString();
-          document.getElementById('verify-blockchain').innerHTML = s.blockchain_tx
-            ? s.blockchain_network + ': <a href="' +
-              (s.blockchain_network === 'ghostnet' ? 'https://ghostnet.tzkt.io/' :
-               s.blockchain_network === 'mainnet' ? 'https://tzkt.io/' :
-               (typeof EVM_CHAINS !== 'undefined' && EVM_CHAINS[s.blockchain_network] ? EVM_CHAINS[s.blockchain_network].explorer : '')) +
-              s.blockchain_tx + '" target="_blank">' + s.blockchain_tx.substring(0, 16) + '...</a>'
-            : '—';
-          document.getElementById('verify-ipfs').innerHTML = s.ipfs_cid
-            ? '<a href="https://w3s.link/ipfs/' + s.ipfs_cid + '" target="_blank">' + s.ipfs_cid.substring(0, 20) + '...</a>'
-            : '—';
-          document.getElementById('verify-zk').textContent = s.zk_proof ? s.zk_proof.commitment.substring(0, 24) + '...' : '—';
-        }
-      } catch(e) {}
-    }
-  }
-
-  // Fallback: check IndexedDB
-  if (!found && typeof getAllLocalStamps !== 'undefined') {
-    try {
-      var locals = await getAllLocalStamps();
-      var match = locals.find(function(st) { return st.id === stampId; });
-      if (match) {
-        found = true;
-        document.getElementById('verify-badge-area').innerHTML =
-          '<span class="verify-badge verified">' + catalog.verify_verified + '</span>' +
-          ' <span style="font-size:.75rem;color:var(--muted)">' + catalog.verify_local_only + '</span>';
-        document.getElementById('verify-hash').textContent = match.content_hash || '—';
-        document.getElementById('verify-sens').textContent = match.sens || '—';
-        document.getElementById('verify-intentie').textContent = match.intentie || '—';
-        document.getElementById('verify-timestamp').textContent = match.created_at ? new Date(match.created_at).toLocaleString() : '—';
-        document.getElementById('verify-blockchain').textContent = match.blockchain_tx || '—';
-        document.getElementById('verify-ipfs').textContent = match.ipfs_cid || '—';
-        document.getElementById('verify-zk').textContent = match.zk_proof ? match.zk_proof.commitment.substring(0, 24) + '...' : '—';
-      }
-    } catch(e) {}
-  }
-
-  if (!found) {
-    document.getElementById('verify-badge-area').innerHTML =
-      '<span class="verify-badge not-found">' + catalog.verify_not_found + '</span>';
-    ['verify-hash','verify-sens','verify-intentie','verify-timestamp','verify-blockchain','verify-ipfs','verify-zk']
-      .forEach(function(id) { document.getElementById(id).textContent = '—'; });
-  }
-
-  card.classList.add('show');
-  this.disabled = false;
-  this.textContent = catalog.verify_btn;
-});
-
-// === IPFS Upload (web3.storage) ===
-// Show IPFS row when stamp is generated
-(function() {
-  var obs = new MutationObserver(function(muts) {
-    muts.forEach(function(m) {
-      if (m.target.classList && m.target.classList.contains('show')) {
-        document.getElementById('ipfs-row').style.display = 'flex';
-      }
-    });
-  });
-  var el = document.getElementById('demo-result');
-  if (el) obs.observe(el, { attributes: true, attributeFilter: ['class'] });
-})();
-
-document.getElementById('btn-ipfs-upload').addEventListener('click', async function() {
-  var catalog = I18N[currentLang];
-  var hash = document.getElementById('result-doc-hash').textContent;
-  var sens = document.getElementById('demo-sens').value.trim();
-  var intentie = document.getElementById('demo-intentie').value.trim();
-  if (!hash) return;
-
-  this.disabled = true;
-  this.textContent = catalog.ipfs_uploading;
-  var statusEl = document.getElementById('ipfs-status');
-
-  // Build stamp metadata JSON for IPFS
-  var metadata = JSON.stringify({
-    version: 'amistamp-v1',
-    content_hash: hash,
-    sens: sens,
-    intentie: intentie,
-    timestamp: new Date().toISOString(),
-    signature: document.getElementById('result-sig').textContent,
-    public_key: document.getElementById('result-pubkey').textContent
-  });
-
-  try {
-    // Use web3.storage HTTP API
-    var w3sToken = localStorage.getItem('amistamp_w3s_token');
-    if (!w3sToken) {
-      statusEl.innerHTML = '<span style="color:var(--gold)">' + catalog.ipfs_no_key + '</span>';
-      this.disabled = false;
-      this.textContent = catalog.ipfs_upload;
-      return;
-    }
-
-    var blob = new Blob([metadata], { type: 'application/json' });
-    var formData = new FormData();
-    formData.append('file', blob, 'stamp-' + hash.substring(0, 12) + '.json');
-
-    var resp = await fetch('https://api.web3.storage/upload', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + w3sToken },
-      body: formData
-    });
-
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    var data = await resp.json();
-    var cid = data.cid;
-
-    statusEl.innerHTML = '<span style="color:var(--teal)">' + catalog.ipfs_success +
-      '<a href="https://w3s.link/ipfs/' + cid + '" target="_blank">' + cid.substring(0, 16) + '...</a></span>';
-
-    // Update local stamp
-    try {
-      var stamps = await getAllLocalStamps();
-      if (stamps.length > 0) {
-        var latest = stamps[0];
-        latest.ipfs_cid = cid;
-        await saveStampLocal(latest);
-        renderStampHistory();
-      }
-    } catch(e) {}
-  } catch(e) {
-    statusEl.innerHTML = '<span style="color:var(--accent)">' + catalog.ipfs_error + e.message + '</span>';
-  }
-
-  this.disabled = false;
-  this.textContent = catalog.ipfs_upload;
-});
-
-// === Crypto Payment Toggle ===
-document.getElementById('pay-card-btn').addEventListener('click', function() {
-  this.classList.add('active');
-  document.getElementById('pay-crypto-btn').classList.remove('active');
-  document.getElementById('crypto-addr-info').classList.remove('show');
-});
-document.getElementById('pay-crypto-btn').addEventListener('click', function() {
-  this.classList.add('active');
-  document.getElementById('pay-card-btn').classList.remove('active');
-  document.getElementById('crypto-addr-info').classList.add('show');
-});
-
-// === Stamp History & Usage ===
-function renderStampHistory() {
-  // Check auth state — hide usage counter if not logged in
-  var usageEl = document.querySelector('.stamps-usage');
-  var isLoggedIn = false;
-  if (typeof getSupabase !== 'undefined') {
-    var sb = getSupabase();
-    if (sb) {
-      sb.auth.getSession().then(function(res) {
-        if (res.data.session) {
-          isLoggedIn = true;
-          if (usageEl) usageEl.style.display = '';
-        } else {
-          if (usageEl) usageEl.style.display = 'none';
-        }
-      });
-    } else {
-      if (usageEl) usageEl.style.display = 'none';
-    }
+function renderVerification(s, result) {
+  var card = $('verify-result-card'), badge = $('verify-badge-area'), list = $('verify-checks');
+  badge.textContent = ''; list.textContent = '';
+  var b = document.createElement('span');
+  if (!s) {
+    b.className = 'verify-badge not-found'; b.textContent = t('verify_not_found');
+    ['verify-hash', 'verify-stamp-hash', 'verify-sens', 'verify-intentie', 'verify-timestamp', 'verify-key'].forEach(function (id) { setText(id, null); });
   } else {
-    if (usageEl) usageEl.style.display = 'none';
-  }
-
-  getAllLocalStamps().then(function(stamps) {
-    var section = document.getElementById('stamps-section');
-    var list = document.getElementById('stamps-list');
-    var catalog = I18N[currentLang];
-
-    section.classList.add('show');
-
-    var now = new Date();
-    var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-    var thisMonthCount = stamps.filter(function(s) { return s.created_at >= monthStart; }).length;
-
-    document.getElementById('stamps-used').textContent = thisMonthCount;
-    var limit = 5;
-    document.getElementById('stamps-limit').textContent = limit;
-    var pct = Math.min(100, Math.round((thisMonthCount / limit) * 100));
-    document.getElementById('usage-fill').style.width = pct + '%';
-
-    if (stamps.length === 0) {
-      var msg = catalog.stamps_empty;
-      if (!isLoggedIn) msg = catalog.stamps_sign_in || 'Sign in to track your stamps';
-      list.innerHTML = '<div class="stamps-empty">' + msg + '</div>';
-      return;
-    }
-
-    var html = '';
-    stamps.forEach(function(s) {
-      var date = new Date(s.created_at);
-      var dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-      var hashShort = s.content_hash ? s.content_hash.substring(0, 16) + '...' + s.content_hash.substring(s.content_hash.length - 8) : '';
-
-      var badges = '';
-      if (s.blockchain_tx) {
-        badges += '<span class="stamp-badge chain">' + catalog.stamps_chain + '</span>';
-      } else if (s.synced) {
-        badges += '<span class="stamp-badge synced">' + catalog.stamps_synced + '</span>';
-      } else {
-        badges += '<span class="stamp-badge local">' + catalog.stamps_local + '</span>';
-      }
-
-      html += '<div class="stamp-entry">' +
-        '<div>' +
-          '<div class="stamp-meta"><strong>' + (s.sens || '').substring(0, 60) + '</strong></div>' +
-          '<div class="stamp-meta">' + (s.intentie || '').substring(0, 80) + '</div>' +
-          '<div class="stamp-hash-short">' + hashShort + '</div>' +
-          '<div class="stamp-meta" style="margin-top:4px">' + dateStr + '</div>' +
-        '</div>' +
-        '<div class="stamp-badges">' + badges + '</div>' +
-      '</div>';
+    b.className = 'verify-badge ' + (result.verdict === 'verified' ? 'verified' : 'not-found');
+    b.textContent = t(result.verdict === 'verified' ? 'verify_verified' : result.verdict === 'partial' ? 'verify_partial' : 'verify_failed');
+    setText('verify-hash', s.doc_hash);
+    setText('verify-stamp-hash', s.stamp_hash);
+    setText('verify-sens', s.sens);
+    setText('verify-intentie', s.intentie);
+    setText('verify-timestamp', s.created_at ? new Date(s.created_at).toLocaleString() : null);
+    setText('verify-key', s.key_fp ? s.key_fp.slice(0, 16) : null);
+    result.checks.forEach(function (c) {
+      var li = document.createElement('li'); li.className = c.state;
+      var m = document.createElement('span'); m.className = 'mark'; m.textContent = c.state === 'ok' ? '✓' : c.state === 'fail' ? '✗' : '–';
+      var body = document.createElement('span'); body.textContent = c.text;
+      if (c.detail) { var d = document.createElement('div'); d.className = 'detail'; d.textContent = c.detail; body.appendChild(d); }
+      if (c.link) { var a = document.createElement('a'); a.href = c.link.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = ' ' + c.link.text; body.appendChild(a); }
+      li.appendChild(m); li.appendChild(body); list.appendChild(li);
     });
-    list.innerHTML = html;
-  }).catch(function() {});
+  }
+  badge.appendChild(b);
+  card.classList.add('show');
 }
-
-// Render on load + after each stamp
-var origStampClick = document.getElementById('demo-stamp');
-origStampClick.addEventListener('click', function() {
-  setTimeout(renderStampHistory, 1200);
+var verifyDocHash = null;
+bindDrop(null, 'verify-doc-file', async function (file) {
+  $('verify-doc-name').textContent = t('demo_hashing', { name: file.name });
+  verifyDocHash = await hashFile(file);
+  $('verify-doc-name').textContent = '📄 ' + file.name;
 });
-renderStampHistory();
+bindDrop(null, 'verify-proof-file', async function (file) {
+  $('verify-proof-name').textContent = '📄 ' + file.name;
+  var s = null;
+  try { s = stampFromProof(JSON.parse(await file.text())); } catch (e) {}
+  if (!s) { renderVerification(null); $('verify-badge-area').firstChild.textContent = t('verify_bad_proof'); return; }
+  renderVerification(s, await verifyStamp(s, verifyDocHash));
+});
+async function findStamp(id) {
+  if (typeof getSupabase !== 'undefined' && getSupabase() && /^[0-9a-f-]{36}$/i.test(id)) {
+    try {
+      var r = await getSupabase().from('stamps').select('*').eq('id', id).maybeSingle();
+      if (r.data) return stampFromRow(r.data);
+    } catch (e) {}
+  }
+  return (await getStamp(id)) || null;
+}
+$('btn-verify-stamp').addEventListener('click', async function () {
+  var id = $('verify-stamp-id').value.trim(); if (!id) return;
+  var btn = this; btn.disabled = true; btn.textContent = t('verify_checking');
+  var s = await findStamp(id);
+  renderVerification(s, s ? await verifyStamp(s, verifyDocHash) : null);
+  btn.disabled = false; btn.textContent = t('verify_btn');
+});
+(function () {
+  var id = new URLSearchParams(location.search).get('verify');
+  if (!id) return;
+  $('verify-stamp-id').value = id;
+  setTimeout(function () { $('btn-verify-stamp').click(); $('verify').scrollIntoView({ behavior: 'smooth' }); }, 400);
+})();
 
-// Show My Stamps from nav
-window.showMyStamps = function() {
-  document.getElementById('auth-menu').classList.remove('show');
+// ============ history ============
+function renderStampHistory() {
+  var usageEl = document.querySelector('.stamps-usage');
+  var sb = typeof getSupabase !== 'undefined' ? getSupabase() : null;
+  var sessionP = sb ? sb.auth.getSession().then(function (r) { return !!r.data.session; }) : Promise.resolve(false);
+  Promise.all([allStamps(), sessionP]).then(function (res) {
+    var stamps = res[0], loggedIn = res[1];
+    if (usageEl) usageEl.style.display = loggedIn ? '' : 'none';
+    var list = $('stamps-list');
+    $('stamps-section').classList.add('show');
+    var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+    var used = stamps.filter(function (s) { return s.created_at >= monthStart; }).length;
+    $('stamps-used').textContent = used;
+    $('stamps-limit').textContent = FREE_LIMIT;
+    $('usage-fill').style.width = Math.min(100, Math.round(used / FREE_LIMIT * 100)) + '%';
+    list.textContent = '';
+    if (!stamps.length) {
+      var empty = document.createElement('div'); empty.className = 'stamps-empty';
+      empty.textContent = loggedIn ? t('stamps_empty') : (t('stamps_sign_in') || t('stamps_empty'));
+      list.appendChild(empty); return;
+    }
+    stamps.forEach(function (s) {
+      var row = document.createElement('div'); row.className = 'stamp-entry';
+      var left = document.createElement('div');
+      var d = new Date(s.created_at);
+      [[s.sens, 60, true], [s.intentie, 80, false]].forEach(function (x) {
+        var m = document.createElement('div'); m.className = 'stamp-meta';
+        var txt = (x[0] || '').slice(0, x[1]);
+        if (x[2]) { var st = document.createElement('strong'); st.textContent = txt; m.appendChild(st); } else { m.textContent = txt; }
+        left.appendChild(m);
+      });
+      var h = document.createElement('div'); h.className = 'stamp-hash-short'; h.textContent = short(s.stamp_hash || s.content_hash, 16, 8);
+      var dt = document.createElement('div'); dt.className = 'stamp-meta'; dt.style.marginTop = '4px';
+      dt.textContent = d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      left.appendChild(h); left.appendChild(dt);
+      var badges = document.createElement('div'); badges.className = 'stamp-badges';
+      var b = document.createElement('span');
+      var anchored = (s.anchors && s.anchors.length) || s.blockchain_tx;
+      b.className = 'stamp-badge ' + (anchored ? 'chain' : s.synced ? 'synced' : 'local');
+      b.textContent = anchored ? t('stamps_chain') : s.synced ? t('stamps_synced') : t('stamps_local');
+      badges.appendChild(b);
+      if (s.v !== 'amistamp-2') { var l = document.createElement('span'); l.className = 'stamp-badge local'; l.textContent = t('stamps_legacy'); badges.appendChild(l); }
+      else {
+        var open = document.createElement('a'); open.href = '?verify=' + encodeURIComponent(s.id); open.className = 'stamp-badge synced'; open.textContent = t('verify_btn');
+        badges.appendChild(open);
+      }
+      row.appendChild(left); row.appendChild(badges); list.appendChild(row);
+    });
+  }).catch(function () {});
+}
+renderStampHistory();
+window.showMyStamps = function () {
+  $('auth-menu').classList.remove('show');
   renderStampHistory();
-  document.getElementById('my-stamps').scrollIntoView({ behavior: 'smooth' });
+  $('my-stamps').scrollIntoView({ behavior: 'smooth' });
 };
 
-// === PWA Install Prompt ===
+// ============ crypto payment toggle + PWA ============
+$('pay-card-btn').addEventListener('click', function () { this.classList.add('active'); $('pay-crypto-btn').classList.remove('active'); $('crypto-addr-info').classList.remove('show'); });
+$('pay-crypto-btn').addEventListener('click', function () { this.classList.add('active'); $('pay-card-btn').classList.remove('active'); $('crypto-addr-info').classList.add('show'); });
 var deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', function(e) {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('pwa-install').classList.add('show');
+window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; $('pwa-install').classList.add('show'); });
+$('pwa-install').addEventListener('click', function () {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+  this.classList.remove('show');
 });
-document.getElementById('pwa-install').addEventListener('click', function() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
-    this.classList.remove('show');
-  }
-});
+})();
 </script>
-
 </body>
 </html>
