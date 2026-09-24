@@ -2681,7 +2681,8 @@ window.showMyStamps = function () {
 };
 
 // ============ crypto payment toggle + PWA ============
-$('pay-card-btn').addEventListener('click', function () { this.classList.add('active'); $('pay-crypto-btn').classList.remove('active'); $('crypto-addr-info').classList.remove('show'); });
+// "Card" starts the same Pro checkout as the Subscribe button (login first if needed)
+$('pay-card-btn').addEventListener('click', function () { this.classList.add('active'); $('pay-crypto-btn').classList.remove('active'); $('crypto-addr-info').classList.remove('show'); $('btn-subscribe').click(); });
 $('pay-crypto-btn').addEventListener('click', function () { this.classList.add('active'); $('pay-card-btn').classList.remove('active'); $('crypto-addr-info').classList.add('show'); });
 var deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; $('pwa-install').classList.add('show'); });
