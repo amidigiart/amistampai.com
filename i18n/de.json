@@ -287,5 +287,9 @@
  "check_anchor": "Verankert auf {network}",
  "check_anchor_na": "Nicht in einer Blockchain verankert",
  "check_anchor_unverifiable": "Verankerung auf {network} konnte gerade nicht geprüft werden",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Abo verwalten",
+ "pay_success": "✓ Zahlung erhalten. Pro ist aktiv: unbegrenzte Stempel.",
+ "pay_pending": "Zahlung erhalten. Pro wird für dein Konto aktiviert…",
+ "sync_quota": "Gratis-Plan: 5 Stempel pro Monat werden mit deinem Konto synchronisiert. Die übrigen bleiben auf diesem Gerät, bis du auf Pro wechselst."
 }

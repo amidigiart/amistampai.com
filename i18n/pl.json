@@ -287,5 +287,9 @@
  "check_anchor": "Zakotwiczono w {network}",
  "check_anchor_na": "Nie zakotwiczono w blockchainie",
  "check_anchor_unverifiable": "Nie udało się teraz sprawdzić zakotwiczenia w {network}",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Zarządzaj subskrypcją",
+ "pay_success": "✓ Płatność otrzymana. Pro jest aktywny: nielimitowane pieczęcie.",
+ "pay_pending": "Płatność otrzymana. Aktywujemy Pro na Twoim koncie…",
+ "sync_quota": "Plan darmowy: 5 pieczęci miesięcznie synchronizuje się z kontem. Pozostałe zostają na tym urządzeniu, dopóki nie przejdziesz na Pro."
 }

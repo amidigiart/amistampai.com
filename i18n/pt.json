@@ -287,5 +287,9 @@
  "check_anchor": "Ancorado em {network}",
  "check_anchor_na": "Não ancorado numa blockchain",
  "check_anchor_unverifiable": "Não foi possível verificar agora a ancoragem em {network}",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Gerir subscrição",
+ "pay_success": "✓ Pagamento recebido. O Pro está ativo: carimbos ilimitados.",
+ "pay_pending": "Pagamento recebido. A ativar o Pro na sua conta…",
+ "sync_quota": "Plano gratuito: 5 carimbos por mês sincronizam com a sua conta. Os restantes ficam neste dispositivo até passar para Pro."
 }

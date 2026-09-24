@@ -287,5 +287,9 @@
  "check_anchor": "{network} üzerinde sabitlendi",
  "check_anchor_na": "Bir blokzincire sabitlenmedi",
  "check_anchor_unverifiable": "{network} üzerindeki sabitleme şu anda kontrol edilemedi",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Aboneliği yönet",
+ "pay_success": "✓ Ödeme alındı. Pro aktif: sınırsız damga.",
+ "pay_pending": "Ödeme alındı. Hesabınızda Pro etkinleştiriliyor…",
+ "sync_quota": "Ücretsiz plan: ayda 5 damga hesabınızla eşitlenir. Geri kalanlar Pro’ya geçene kadar bu cihazda kalır."
 }

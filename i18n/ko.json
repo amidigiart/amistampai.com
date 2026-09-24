@@ -287,5 +287,9 @@
  "check_anchor": "{network}에 앵커링됨",
  "check_anchor_na": "블록체인에 앵커링되지 않음",
  "check_anchor_unverifiable": "지금은 {network}의 앵커를 확인할 수 없습니다",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "구독 관리",
+ "pay_success": "✓ 결제가 완료되었습니다. Pro 활성화: 무제한 스탬프.",
+ "pay_pending": "결제가 완료되었습니다. 계정에서 Pro를 활성화하는 중…",
+ "sync_quota": "무료 플랜: 매월 5개의 스탬프가 계정에 동기화됩니다. 나머지는 Pro로 업그레이드할 때까지 이 기기에 남아 있습니다."
 }

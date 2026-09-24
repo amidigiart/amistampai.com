@@ -287,5 +287,9 @@
  "check_anchor": "Usidreno na {network}",
  "check_anchor_na": "Nije usidreno na blokčejnu",
  "check_anchor_unverifiable": "Sidrenje na {network} trenutno nije moglo da se proveri",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Upravljaj pretplatom",
+ "pay_success": "✓ Uplata primljena. Pro je aktivan: neograničeni pečati.",
+ "pay_pending": "Uplata primljena. Aktiviramo Pro na tvom nalogu…",
+ "sync_quota": "Besplatan plan: 5 pečata mesečno se sinhronizuje sa nalogom. Ostali ostaju na ovom uređaju dok ne pređeš na Pro."
 }

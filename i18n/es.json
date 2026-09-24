@@ -287,5 +287,9 @@
  "check_anchor": "Anclado en {network}",
  "check_anchor_na": "No anclado en una blockchain",
  "check_anchor_unverifiable": "No se pudo comprobar ahora el anclaje en {network}",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Gestionar suscripción",
+ "pay_success": "✓ Pago recibido. Pro está activo: sellos ilimitados.",
+ "pay_pending": "Pago recibido. Activando Pro en tu cuenta…",
+ "sync_quota": "Plan gratuito: 5 sellos al mes se sincronizan con tu cuenta. El resto se queda en este dispositivo hasta que pases a Pro."
 }
