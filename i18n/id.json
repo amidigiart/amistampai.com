@@ -287,5 +287,9 @@
  "check_anchor": "Tertambat di {network}",
  "check_anchor_na": "Tidak tertambat di blockchain",
  "check_anchor_unverifiable": "Penambatan di {network} tidak dapat diperiksa saat ini",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Kelola langganan",
+ "pay_success": "✓ Pembayaran diterima. Pro aktif: stempel tanpa batas.",
+ "pay_pending": "Pembayaran diterima. Mengaktifkan Pro di akun Anda…",
+ "sync_quota": "Paket gratis: 5 stempel per bulan disinkronkan ke akun Anda. Sisanya tetap di perangkat ini sampai Anda beralih ke Pro."
 }

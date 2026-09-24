@@ -287,5 +287,9 @@
  "check_anchor": "{network} にアンカー済み",
  "check_anchor_na": "ブロックチェーンにアンカーされていません",
  "check_anchor_unverifiable": "現在 {network} のアンカーを確認できませんでした",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "サブスクリプションを管理",
+ "pay_success": "✓ お支払いを受け付けました。Pro が有効です：スタンプ無制限。",
+ "pay_pending": "お支払いを受け付けました。アカウントで Pro を有効化しています…",
+ "sync_quota": "無料プラン：毎月 5 件のスタンプがアカウントに同期されます。残りは Pro にアップグレードするまでこのデバイスに保存されます。"
 }

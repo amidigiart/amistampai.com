@@ -287,5 +287,9 @@
  "check_anchor": "Ancré sur {network}",
  "check_anchor_na": "Non ancré sur une blockchain",
  "check_anchor_unverifiable": "L’ancrage sur {network} n’a pas pu être vérifié pour le moment",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Gérer l'abonnement",
+ "pay_success": "✓ Paiement reçu. Pro est actif : tampons illimités.",
+ "pay_pending": "Paiement reçu. Activation de Pro sur votre compte…",
+ "sync_quota": "Offre gratuite : 5 tampons par mois sont synchronisés avec votre compte. Les autres restent sur cet appareil jusqu'au passage à Pro."
 }

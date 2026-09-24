@@ -287,5 +287,9 @@
  "check_anchor": "Rögzítve: {network}",
  "check_anchor_na": "Nincs blokkláncon rögzítve",
  "check_anchor_unverifiable": "A rögzítést itt: {network} most nem sikerült ellenőrizni",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Előfizetés kezelése",
+ "pay_success": "✓ Fizetés megérkezett. A Pro aktív: korlátlan bélyegzés.",
+ "pay_pending": "Fizetés megérkezett. A Pro aktiválása a fiókodon…",
+ "sync_quota": "Ingyenes csomag: havonta 5 bélyegző szinkronizálódik a fiókoddal. A többi ezen az eszközön marad, amíg Pro-ra nem váltasz."
 }

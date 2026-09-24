@@ -287,5 +287,9 @@
  "check_anchor": "Verankerd op {network}",
  "check_anchor_na": "Niet verankerd op een blockchain",
  "check_anchor_unverifiable": "Verankering op {network} kon nu niet worden gecontroleerd",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Abonnement beheren",
+ "pay_success": "✓ Betaling ontvangen. Pro is actief: onbeperkt stempels.",
+ "pay_pending": "Betaling ontvangen. Pro wordt geactiveerd op je account…",
+ "sync_quota": "Gratis plan: 5 stempels per maand worden met je account gesynchroniseerd. De rest blijft op dit apparaat tot je overstapt op Pro."
 }

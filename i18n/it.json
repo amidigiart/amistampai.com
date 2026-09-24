@@ -287,5 +287,9 @@
  "check_anchor": "Ancorato su {network}",
  "check_anchor_na": "Non ancorato su una blockchain",
  "check_anchor_unverifiable": "Non è stato possibile verificare ora l’ancoraggio su {network}",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "Gestisci l'abbonamento",
+ "pay_success": "✓ Pagamento ricevuto. Pro è attivo: timbri illimitati.",
+ "pay_pending": "Pagamento ricevuto. Attivazione di Pro sul tuo account…",
+ "sync_quota": "Piano gratuito: 5 timbri al mese vengono sincronizzati con il tuo account. Gli altri restano su questo dispositivo finché non passi a Pro."
 }

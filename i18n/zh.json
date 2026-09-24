@@ -287,5 +287,9 @@
  "check_anchor": "已锚定在 {network}",
  "check_anchor_na": "未锚定到区块链",
  "check_anchor_unverifiable": "暂时无法核验 {network} 上的锚定",
- "stamps_legacy": "v1"
+ "stamps_legacy": "v1",
+ "nav_manage_sub": "管理订阅",
+ "pay_success": "✓ 已收到付款。Pro 已激活：无限次盖章。",
+ "pay_pending": "已收到付款。正在为您的账户激活 Pro…",
+ "sync_quota": "免费版：每月 5 个印章同步到您的账户。其余印章保留在此设备上，直到您升级到 Pro。"
 }

@@ -468,6 +468,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       </div>
       <div class="auth-menu" id="auth-menu">
         <a href="#" onclick="showMyStamps();return false" data-i18n="nav_my_stamps">My Stamps</a>
+        <a href="#" id="auth-manage-sub" style="display:none" onclick="openBillingPortal();return false" data-i18n="nav_manage_sub">Manage subscription</a>
         <button onclick="handleSignOut()" data-i18n="nav_signout">Sign out</button>
       </div>
     </div>
@@ -1694,14 +1695,16 @@ async function startCheckout(lookupKey, mode) {
   try {
     var res = await fetch(CHECKOUT_API + '/api/checkout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
       body: JSON.stringify({
         lookup_key: lookupKey,
         mode: mode,
-        success_url: 'https://amistampai.com?payment=success',
-        cancel_url: 'https://amistampai.com#pricing'
+        app: 'amistampai',
+        success_url: 'https://amistampai.com/?payment=success',
+        cancel_url: 'https://amistampai.com/#pricing'
       })
     });
+    if (res.status === 401) { openModal('auth'); return; }
     var data = await res.json();
     if (data.url) window.location.href = data.url;
     else alert(data.error || 'Checkout error');
@@ -1711,8 +1714,27 @@ async function startCheckout(lookupKey, mode) {
 }
 
 document.getElementById('btn-subscribe').addEventListener('click', function() {
+  if (window.amistampPlan && window.amistampPlan.pro) { openBillingPortal(); return; }
   startCheckout('stamp-pro-monthly', 'subscription');
 });
+
+async function openBillingPortal() {
+  var sb = typeof getSupabase !== 'undefined' ? getSupabase() : null;
+  var session = sb ? (await sb.auth.getSession()).data.session : null;
+  if (!session) { openModal('auth'); return; }
+  try {
+    var res = await fetch(CHECKOUT_API + '/api/portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+      body: JSON.stringify({ return_url: 'https://amistampai.com/#my-stamps' })
+    });
+    var data = await res.json();
+    if (data.url) window.location.href = data.url;
+    else alert(data.error || 'Portal error');
+  } catch(e) {
+    alert(I18N[currentLang].plan_pro_alert);
+  }
+}
 
 // Modals
 function openModal(id) { document.getElementById('modal-' + id).classList.add('show'); }
@@ -1897,7 +1919,11 @@ Object.assign(I18N.en, {
   check_anchor: 'Anchored on {network}',
   check_anchor_na: 'Not anchored on a blockchain',
   check_anchor_unverifiable: 'Anchor on {network} could not be checked right now',
-  stamps_legacy: 'v1'
+  stamps_legacy: 'v1',
+  nav_manage_sub: 'Manage subscription',
+  pay_success: '✓ Payment received. Pro is active: unlimited stamps.',
+  pay_pending: 'Payment received. Activating Pro on your account…',
+  sync_quota: 'Free plan: 5 stamps per month sync to your account. The rest stay on this device until you upgrade to Pro.'
 });
 Object.assign(I18N.ro, {
   demo_label_file: 'Document',
@@ -1952,7 +1978,11 @@ Object.assign(I18N.ro, {
   check_anchor: 'Ancorat pe {network}',
   check_anchor_na: 'Neancorat pe blockchain',
   check_anchor_unverifiable: 'Ancora de pe {network} nu poate fi verificată acum',
-  stamps_legacy: 'v1'
+  stamps_legacy: 'v1',
+  nav_manage_sub: 'Gestionează abonamentul',
+  pay_success: '✓ Plată primită. Pro este activ: ștampile nelimitate.',
+  pay_pending: 'Plată primită. Activăm Pro pe contul tău…',
+  sync_quota: 'Planul gratuit: 5 ștampile pe lună se sincronizează în cont. Restul rămân pe acest dispozitiv până treci la Pro.'
 });
 applyLang(currentLang);
 function t(k, vars) {
@@ -2104,6 +2134,26 @@ function stampFromRow(r) {
 var pendingFile = null;   // { name, hash }
 var currentStamp = null;
 var FREE_LIMIT = 5;
+var plan = window.amistampPlan = { pro: false };
+
+// Plan comes from subscriptions, which only the Stripe webhook can write.
+async function loadPlan() {
+  var sb = typeof getSupabase !== 'undefined' ? getSupabase() : null;
+  var session = sb ? (await sb.auth.getSession()).data.session : null;
+  var pro = false;
+  if (session) {
+    try {
+      var r = await sb.from('subscriptions').select('plan,status,current_period_end').eq('user_id', session.user.id).maybeSingle();
+      var d = r.data;
+      pro = !!(d && d.plan === 'pro' && (d.status === 'active' || d.status === 'trialing') &&
+               (!d.current_period_end || new Date(d.current_period_end) > new Date()));
+    } catch (e) {}
+  }
+  plan.pro = pro;
+  var manage = $('auth-manage-sub'); if (manage) manage.style.display = pro ? '' : 'none';
+  return pro;
+}
+function refreshPlan() { return loadPlan().then(renderStampHistory); }
 
 function bindDrop(zoneId, inputId, onFile) {
   var zone = $(zoneId) || $(inputId).closest('.drop-zone'), input = $(inputId);
@@ -2127,7 +2177,7 @@ $('demo-stamp').addEventListener('click', async function () {
 
   var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
   var used = (await allStamps()).filter(function (s) { return s.created_at >= monthStart; }).length;
-  if (used >= FREE_LIMIT) { alert(t('demo_limit_reached')); return; }
+  if (!plan.pro && used >= FREE_LIMIT) { alert(t('demo_limit_reached')); return; }
 
   btn.disabled = true; btn.textContent = t('demo_btn_stamping');
   try {
@@ -2206,8 +2256,11 @@ async function syncStamps() {
       blockchain_tx: last ? last.tx : null, blockchain_network: last ? last.network : null,
       context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors }
     });
-    if (!res.error) { s.synced = 1; await putStamp(s); }
+    // 23505: already in the cloud; 42501: row-level security refused it, i.e. monthly quota used up
+    if (!res.error || res.error.code === '23505') { s.synced = 1; await putStamp(s); }
+    else if (res.error.code === '42501') { statusLine($('result-status'), 'warn', t('sync_quota')); break; }
   }
+  renderStampHistory();
 }
 async function pushAnchorToCloud(s) {
   if (!s.synced || typeof getSupabase === 'undefined') return;
@@ -2231,8 +2284,33 @@ window.addEventListener('offline', updateOnlineStatus);
 if (!navigator.onLine) $('offline-bar').classList.add('show');
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
 if (typeof getSupabase !== 'undefined' && getSupabase()) {
-  getSupabase().auth.onAuthStateChange(function (ev) { if (ev === 'SIGNED_IN') syncStamps(); });
+  getSupabase().auth.onAuthStateChange(function (ev) {
+    if (ev === 'SIGNED_IN') refreshPlan().then(syncStamps);
+    if (ev === 'SIGNED_OUT') refreshPlan();
+  });
 }
+
+// Back from Stripe: the webhook may land a few seconds after the redirect.
+(function () {
+  var params = new URLSearchParams(location.search);
+  if (params.get('payment') !== 'success') return;
+  params.delete('payment');
+  var rest = params.toString();
+  history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
+  var bar = $('offline-bar');
+  bar.textContent = t('pay_pending'); bar.classList.add('show');
+  var tries = 0;
+  (function poll() {
+    loadPlan().then(function (pro) {
+      if (pro) {
+        bar.textContent = t('pay_success');
+        renderStampHistory(); syncStamps();
+        setTimeout(function () { bar.classList.remove('show'); bar.textContent = t('offline_msg'); }, 6000);
+      } else if (++tries < 12) setTimeout(poll, 2500);
+      else { bar.classList.remove('show'); bar.textContent = t('offline_msg'); }
+    });
+  })();
+})();
 
 // ============ anchoring ============
 var tezosState = { Tezos: null, wallet: null, connected: false, address: null, network: null };
@@ -2518,8 +2596,13 @@ bindDrop(null, 'verify-proof-file', async function (file) {
 async function findStamp(id) {
   if (typeof getSupabase !== 'undefined' && getSupabase() && /^[0-9a-f-]{36}$/i.test(id)) {
     try {
-      var r = await getSupabase().from('stamps').select('*').eq('id', id).maybeSingle();
-      if (r.data) return stampFromRow(r.data);
+      // get_stamp returns one stamp by id to anyone, without listing or exposing the owner
+      var r = await getSupabase().rpc('get_stamp', { p_id: id });
+      if (r.data && r.data.length) return stampFromRow(r.data[0]);
+      if (r.error) {
+        r = await getSupabase().from('stamps').select('*').eq('id', id).maybeSingle();
+        if (r.data) return stampFromRow(r.data);
+      }
     } catch (e) {}
   }
   return (await getStamp(id)) || null;
@@ -2551,8 +2634,9 @@ function renderStampHistory() {
     var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
     var used = stamps.filter(function (s) { return s.created_at >= monthStart; }).length;
     $('stamps-used').textContent = used;
-    $('stamps-limit').textContent = FREE_LIMIT;
-    $('usage-fill').style.width = Math.min(100, Math.round(used / FREE_LIMIT * 100)) + '%';
+    $('stamps-limit').textContent = plan.pro ? '∞' : FREE_LIMIT;
+    $('stamps-plan-badge').textContent = plan.pro ? 'Pro' : t('plan_free');
+    $('usage-fill').style.width = plan.pro ? '0%' : Math.min(100, Math.round(used / FREE_LIMIT * 100)) + '%';
     list.textContent = '';
     if (!stamps.length) {
       var empty = document.createElement('div'); empty.className = 'stamps-empty';
@@ -2588,7 +2672,7 @@ function renderStampHistory() {
     });
   }).catch(function () {});
 }
-renderStampHistory();
+refreshPlan();
 document.addEventListener('langchange', renderStampHistory);
 window.showMyStamps = function () {
   $('auth-menu').classList.remove('show');
