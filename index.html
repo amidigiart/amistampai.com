@@ -2027,8 +2027,8 @@ async function hashFile(file) { return sha256Hex(await file.arrayBuffer()); }
 var TEZOS_RPC = { mainnet: 'https://prod.tcinfra.net/rpc/mainnet', shadownet: 'https://rpc.shadownet.teztnets.com' };
 var TEZOS_API = { mainnet: 'https://api.tzkt.io', shadownet: 'https://api.shadownet.tzkt.io' };
 var TEZOS_EXPLORER = { mainnet: 'https://tzkt.io', shadownet: 'https://shadownet.tzkt.io' };
-// Public stamp registry (anyone can call; parameter = bytes). Empty until deployed.
-var AMISTAMP_TEZOS_REGISTRY = { mainnet: '', shadownet: '' };
+// Public stamp registry: anyone can call; parameter = 32-byte stamp hash; first anchor wins. Source: tezos-ip/amistamp_registry.tz
+var AMISTAMP_TEZOS_REGISTRY = { mainnet: 'KT1DhusJXS7BAwM81XS59eAQ6jxijB82bRbJ', shadownet: '' };
 var EVM_CHAINS = {
   'eth-sepolia':  { chainId: '0xaa36a7', name: 'Sepolia',      rpc: 'https://ethereum-sepolia-rpc.publicnode.com', explorer: 'https://sepolia.etherscan.io/tx/', symbol: 'ETH' },
   'eth-mainnet':  { chainId: '0x1',      name: 'Ethereum',     rpc: 'https://ethereum-rpc.publicnode.com',         explorer: 'https://etherscan.io/tx/',         symbol: 'ETH' },
