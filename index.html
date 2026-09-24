@@ -137,10 +137,13 @@ a:hover{text-decoration:underline}
 
 nav{padding:16px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links{display:flex;gap:8px 20px;align-items:center;flex-wrap:wrap;justify-content:flex-end;min-width:0}
 .nav-links a{color:var(--muted);font-size:.9rem;transition:color .2s}
 .nav-links a:hover{color:var(--accent);text-decoration:none}
 .lang-toggle{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:.8rem;margin-left:4px}
+.lang-toggle select{background:transparent;border:none;color:var(--text);padding:5px 8px;font-size:.8rem;font-weight:600;cursor:pointer;max-width:9.5rem}
+.lang-toggle select option{background:var(--card);color:var(--text)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .lang-toggle button{background:transparent;border:none;color:var(--muted);padding:5px 10px;cursor:pointer;font-weight:600;font-size:.8rem;transition:all .2s}
 .lang-toggle button.active{background:var(--accent);color:#fff}
 .lang-toggle button:hover:not(.active){color:var(--text)}
@@ -347,8 +350,8 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 /* PUBLIC VERIFICATION */
 .verify-section{max-width:600px;margin:0 auto;padding:40px 0}
 .verify-section h2{font-size:1.4rem;margin-bottom:8px}
-.verify-input-row{display:flex;gap:10px;margin:16px 0}
-.verify-input-row input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-size:.88rem;font-family:var(--font)}
+.verify-input-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.verify-input-row input{flex:1 1 200px;min-width:0;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-size:.88rem;font-family:var(--font)}
 .verify-input-row input:focus{border-color:var(--accent);outline:none}
 .verify-result-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:16px;display:none}
 .verify-result-card.show{display:block;animation:fadeIn .4s ease}
@@ -405,7 +408,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
   .modal{padding:24px}
   nav{padding:12px 0}
   .stamp-ring{width:220px;height:220px}
-  .diff-table{font-size:.78rem}
+  .diff-table{font-size:.78rem;display:block;overflow-x:auto;max-width:100%}
   .diff-table th,.diff-table td{padding:10px 8px}
   .auth-menu{left:0;right:auto}
 }
@@ -432,8 +435,29 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
     <a href="#faq" data-i18n="nav_faq">FAQ</a>
     <div class="lang-toggle">
-      <button id="lang-en" onclick="setLang('en')">EN</button>
-      <button id="lang-ro" onclick="setLang('ro')">RO</button>
+      <label for="lang-select" class="sr-only">Language</label>
+      <select id="lang-select" onchange="setLang(this.value)">
+        <option value="en">English</option>
+        <option value="ro">Română</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="nl">Nederlands</option>
+        <option value="pl">Polski</option>
+        <option value="uk">Українська</option>
+        <option value="bg">Български</option>
+        <option value="hu">Magyar</option>
+        <option value="sr">Srpski</option>
+        <option value="el">Ελληνικά</option>
+        <option value="tr">Türkçe</option>
+        <option value="ko">한국어</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+        <option value="hi">हिन्दी</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
     </div>
     <div class="auth-dropdown" id="auth-area">
       <button class="auth-btn" id="auth-login-btn" onclick="openModal('auth')" data-i18n="nav_login">Sign in</button>
@@ -853,7 +877,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
   <h2 class="section-title" data-i18n="pricing_title">Pricing</h2>
   <p class="section-sub" data-i18n="pricing_sub">Start free. Pay only when you need blockchain anchoring or volume.</p>
 
-  <div class="pricing-grid" style="grid-template-columns:repeat(3,1fr);max-width:900px">
+  <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:900px">
     <div class="plan">
       <h3 data-i18n="plan_free">Free</h3>
       <div class="price">&#8364;0</div>
@@ -1104,7 +1128,6 @@ var I18N = {
     nav_demo: "Demo",
     nav_pricing: "Pricing",
     nav_faq: "FAQ",
-    nav_ecosystem: "ami* Ecosystem",
     hero_title: 'The digital stamp that proves<br><span class="gradient">what your content means &mdash; and why you created it</span>',
     hero_desc: "Traditional notaries prove a document exists. But in 2026, most content is AI-generated. The question isn't \"does this exist?\" — it's \"what does this mean and why was it created?\" AmiStampAI answers that with cryptographic proof.",
     hero_badge: "Cryptographic proof of meaning and intention",
@@ -1149,7 +1172,7 @@ var I18N = {
     step2_title: "Declare & sign",
     step2_desc: "Write your content, its meaning, and your intention. All three are bundled and signed with your private key.",
     step3_title: "Anchor to blockchain",
-    step3_desc: "SHA-256 hashes of the document and signature are recorded on Tezos. Immutable, public, verifiable.",
+    step3_desc: "The stamp hash (document + meaning + intention + your key) is recorded on Tezos. Immutable, public, verifiable.",
     step4_title: "Verify anytime",
     step4_desc: "Anyone with the public key can verify the signature. Anyone can check the blockchain proof. Zero trust required.",
     stack_title: "Built on proven cryptography",
@@ -1160,7 +1183,6 @@ var I18N = {
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, EU hosting. <code>supabase-js</code>',
     stack_jwk_title: "Public Key Export",
     stack_jwk: 'Export and share public keys for external verification. Standard JWK format.',
-    stack_bridgrai: '8-agent platform with concordance verification. <code>Sens Agent + ACR</code>',
     cases_title: "Who stamps what",
     cases_sub: "Every domain where proving intention matters as much as proving existence.",
     case_scenario_label: "Example scenario",
@@ -1210,20 +1232,6 @@ var I18N = {
     plan_pro_f6: "API access",
     plan_pro_f7: "Priority support",
     plan_pro_cta: "Subscribe",
-    plan_payg: "Pay-as-you-go",
-    plan_payg_period: "no commitment",
-    plan_payg_f1: "Beyond free 5/month",
-    plan_payg_f2: "Tezos blockchain anchoring",
-    plan_payg_f3: "Cloud storage + sync",
-    plan_payg_f4: "Verification link per stamp",
-    plan_payg_cta: "Get started",
-    plan_pack: "Stamp Pack",
-    plan_pack_period: "one-time purchase",
-    plan_pack_f1: "100 stamps, no expiry",
-    plan_pack_f2: "Tezos blockchain anchoring",
-    plan_pack_f3: "20% cheaper than pay-as-you-go",
-    plan_pack_f4: "Stack multiple packs",
-    plan_pack_cta: "Buy pack",
     plan_pro_alert: "Checkout temporarily unavailable. Please try again.",
     stamps_title: "My Stamps",
     stamps_sub: "Your stamping history. Local stamps sync to cloud when signed in.",
@@ -1238,17 +1246,12 @@ var I18N = {
     compliance_open: "ECDSA P-256, SHA-256, JWK, Tezos — all open, auditable, interoperable. No vendor lock-in. Export your keys and verify anywhere.",
     footer_what: "What it certifies",
     footer_how: "How it works",
-    footer_demo: "Live demo",
     footer_verify: "Verify stamp",
     footer_pricing: "Pricing",
     footer_legal: "Legal",
     footer_privacy: "Privacy Policy",
     footer_terms: "Terms of Service",
     footer_aiact: "AI Act Transparency",
-    footer_imprint: "Imprint",
-    footer_ecosystem: "ami* Ecosystem",
-    footer_built_by: "Built by",
-    footer_tagline: "3.5 years bootstrapped<br>0 EUR funding<br>100% self-funded",
     footer_copy: "&copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Part of the ami* ecosystem &middot; All rights reserved",
     cookie_text: "We use only essential cookies (session, consent state). No tracking, no analytics. Your cryptographic keys stay in your browser.",
     cookie_accept: "Accept essential",
@@ -1299,23 +1302,12 @@ var I18N = {
     auth_msg_sent: "Magic link sent! Check your email.",
     auth_msg_error: "Something went wrong. Try again.",
     auth_msg_invalid: "Please enter a valid email.",
-    tezos_connect: "Connect Wallet",
-    tezos_anchor: "Anchor on Tezos",
-    tezos_anchoring: "Anchoring...",
-    tezos_success: "Anchored on Tezos! TX: ",
-    tezos_error: "Anchoring failed: ",
-    tezos_connect_first: "Connect wallet first",
-    tezos_wallet_connected: "Wallet connected",
     chain_connect: "Connect Wallet",
     chain_disconnect: "Disconnect",
-    chain_anchor: "Anchor on Blockchain",
     chain_anchor_quick: "&#9875; Anchor on Tezos",
     chain_anchoring: "Anchoring...",
     chain_success: "Anchored! TX: ",
     chain_error: "Anchoring failed: ",
-    chain_connect_first: "Connect wallet first",
-    chain_wallet_connected: "Wallet connected",
-    chain_wrong_network: "Please switch to the correct network in MetaMask",
     chain_no_metamask: "MetaMask not detected. Install MetaMask to use EVM chains.",
     chain_advanced: "Advanced settings",
     chain_network_label: "Network:",
@@ -1329,18 +1321,15 @@ var I18N = {
     verify_sens: "Meaning",
     verify_intentie: "Intention",
     verify_timestamp: "Timestamp",
-    verify_blockchain: "Blockchain",
     verify_verified: "Verified",
     verify_not_found: "Stamp not found",
     verify_checking: "Verifying...",
-    verify_local_only: "Local stamp (not synced to cloud)",
     pay_method: "Pay with:",
     pay_card: "Card",
     pay_crypto: "Crypto",
     pay_crypto_info: "Send exact amount to the address below. Contact support with TX hash.",
     offline_msg: "You are offline — stamps are saved locally and will sync when reconnected.",
     nav_install: "Install",
-    demo_saved_local: "💾 Stamp saved locally (offline)",
     hero_cta_sub: "No account required. Works in browser. Takes 30 seconds.",
     stamps_sign_in: "Sign in to track your stamps across devices.",
     case1_example: "\"I stamped my ML algorithm with intention 'novel approach to federated learning' 6 months before publication. When a competitor claimed similar work, my timestamp proved prior art.\"",
@@ -1362,7 +1351,7 @@ var I18N = {
     example_sens: "Sens: <span style=\"color:var(--text)\">\"This research proposes a new framework for AI alignment\"</span>",
     example_intentie: "Intention: <span style=\"color:var(--text)\">\"To establish provable prior art before publication\"</span>",
     trust_title: "Why trust AmiStampAI?",
-    trust_1: "Open-source code — inspect everything on GitHub",
+    trust_1: "Source code publicly viewable — inspect everything on GitHub",
     trust_2: "No custom cryptography — industry standards only (ECDSA, SHA-256)",
     trust_3: "Blockchain-anchored — you don't depend on us to verify",
     trust_4: "GDPR compliant — keys never leave your device",
@@ -1372,7 +1361,7 @@ var I18N = {
     cta_sub: "No account required · Works in browser · Takes 30 seconds",
     faq_title: "Frequently Asked Questions",
     faq_q1: "What happens if I lose my private key?",
-    faq_a1: "Your stamps remain on the blockchain and are still verifiable with your public key. However, you cannot create new stamps with that key pair. Generate a new key pair and continue stamping.",
+    faq_a1: "Your signing key lives in this browser. If you clear site data or switch devices, a new key is created. Your existing stamps remain verifiable: each proof file carries its public key.",
     faq_q2: "How long does stamping take?",
     faq_a2: "Under 5 seconds for local stamping. Blockchain anchoring (Pro tier) takes 30-60 seconds depending on network congestion.",
     faq_q3: "Can I stamp AI-generated content?",
@@ -1382,7 +1371,6 @@ var I18N = {
     faq_q5: "What if AmiStampAI shuts down?",
     faq_a5: "Your stamps are on the Tezos blockchain and verifiable with standard cryptographic tools. You don't depend on us to verify.",
     footer_contact: "Contact",
-    verify_example: "Try it: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click to test verification</a>"
   },
   ro: {
     nav_what: "Ce",
@@ -1390,7 +1378,6 @@ var I18N = {
     nav_demo: "Demo",
     nav_pricing: "Prețuri",
     nav_faq: "Întrebări",
-    nav_ecosystem: "Ecosistemul ami*",
     hero_title: 'Ștampila digitală care dovedește<br><span class="gradient">ce înseamnă conținutul tău &mdash; și de ce l-ai creat</span>',
     hero_desc: 'Notarii tradiționali dovedesc că un document există. Dar în 2026, majoritatea conținutului este generat de AI. Întrebarea nu e „există?" — ci „ce înseamnă și de ce a fost creat?" AmiStampAI răspunde cu dovadă criptografică.',
     hero_badge: "Dovadă criptografică a sensului și intenției",
@@ -1435,7 +1422,7 @@ var I18N = {
     step2_title: "Declară și semnează",
     step2_desc: "Scrie conținutul, sensul și intenția. Toate trei sunt împachetate și semnate cu cheia ta privată.",
     step3_title: "Ancorare pe blockchain",
-    step3_desc: "Hash-urile SHA-256 ale documentului și semnăturii sunt înregistrate pe Tezos. Imuabile, publice, verificabile.",
+    step3_desc: "Hash-ul ștampilei (document + sens + intenție + cheia ta) este înregistrat pe Tezos. Imuabil, public, verificabil.",
     step4_title: "Verifică oricând",
     step4_desc: "Oricine are cheia publică poate verifica semnătura. Oricine poate verifica dovada blockchain. Zero încredere necesară.",
     stack_title: "Construit pe criptografie dovedită",
@@ -1446,7 +1433,6 @@ var I18N = {
     stack_supabase: 'Auth + PostgreSQL + RLS. Open-source, hosting UE. <code>supabase-js</code>',
     stack_jwk_title: "Export Chei Publice",
     stack_jwk: 'Export și partajare chei publice pentru verificare externă. Format JWK standard.',
-    stack_bridgrai: 'Platformă cu 8 agenți și verificare de concordanță. <code>Sens Agent + ACR</code>',
     cases_title: "Cine ștampilează ce",
     cases_sub: "Fiecare domeniu în care dovada intenției contează la fel de mult ca dovada existenței.",
     case_scenario_label: "Exemplu de scenariu",
@@ -1496,20 +1482,6 @@ var I18N = {
     plan_pro_f6: "Acces API",
     plan_pro_f7: "Suport prioritar",
     plan_pro_cta: "Abonează-te",
-    plan_payg: "Pay-as-you-go",
-    plan_payg_period: "fără angajament",
-    plan_payg_f1: "Peste cele 5 gratuite/lună",
-    plan_payg_f2: "Ancorare blockchain Tezos",
-    plan_payg_f3: "Stocare cloud + sincronizare",
-    plan_payg_f4: "Link de verificare per ștampilă",
-    plan_payg_cta: "Începe",
-    plan_pack: "Pachet Ștampile",
-    plan_pack_period: "achiziție unică",
-    plan_pack_f1: "100 ștampile, fără expirare",
-    plan_pack_f2: "Ancorare blockchain Tezos",
-    plan_pack_f3: "20% mai ieftin decât pay-as-you-go",
-    plan_pack_f4: "Cumulează mai multe pachete",
-    plan_pack_cta: "Cumpără pachet",
     plan_pro_alert: "Checkout temporar indisponibil. Te rugăm să încerci din nou.",
     stamps_title: "Ștampilele Mele",
     stamps_sub: "Istoricul ștampilării. Ștampilele locale se sincronizează în cloud la autentificare.",
@@ -1524,17 +1496,12 @@ var I18N = {
     compliance_open: "ECDSA P-256, SHA-256, JWK, Tezos — toate deschise, auditabile, interoperabile. Fără vendor lock-in. Exportă cheile și verifică oriunde.",
     footer_what: "Ce certifică",
     footer_how: "Cum funcționează",
-    footer_demo: "Demo live",
     footer_verify: "Verifică ștampilă",
     footer_pricing: "Prețuri",
     footer_legal: "Juridic",
     footer_privacy: "Politica de Confidențialitate",
     footer_terms: "Termeni și Condiții",
     footer_aiact: "Transparență AI Act",
-    footer_imprint: "Imprint",
-    footer_ecosystem: "Ecosistemul ami*",
-    footer_built_by: "Construit de",
-    footer_tagline: "3,5 ani bootstrapped<br>0 EUR finanțare<br>100% autofinanțat",
     footer_copy: "&copy; 2024&ndash;2026 BRIDGRAI &middot; AmiStampAI &middot; Parte din ecosistemul ami* &middot; Toate drepturile rezervate",
     cookie_text: "Folosim doar cookie-uri esențiale (sesiune, starea consimțământului). Fără tracking, fără analytics. Cheile tale criptografice rămân în browser.",
     cookie_accept: "Acceptă esențiale",
@@ -1585,23 +1552,12 @@ var I18N = {
     auth_msg_sent: "Link magic trimis! Verifică emailul.",
     auth_msg_error: "Ceva nu a mers bine. Încearcă din nou.",
     auth_msg_invalid: "Te rugăm introdu un email valid.",
-    tezos_connect: "Conectează Wallet",
-    tezos_anchor: "Ancorează pe Tezos",
-    tezos_anchoring: "Se ancorează...",
-    tezos_success: "Ancorat pe Tezos! TX: ",
-    tezos_error: "Ancorarea a eșuat: ",
-    tezos_connect_first: "Conectează wallet-ul mai întâi",
-    tezos_wallet_connected: "Wallet conectat",
     chain_connect: "Conectează Wallet",
     chain_disconnect: "Deconectează",
-    chain_anchor: "Ancorează pe Blockchain",
     chain_anchor_quick: "&#9875; Ancorează pe Tezos",
     chain_anchoring: "Se ancorează...",
     chain_success: "Ancorat! TX: ",
     chain_error: "Ancorarea a eșuat: ",
-    chain_connect_first: "Conectează wallet-ul mai întâi",
-    chain_wallet_connected: "Wallet conectat",
-    chain_wrong_network: "Te rugăm comută pe rețeaua corectă în MetaMask",
     chain_no_metamask: "MetaMask nedetectat. Instalează MetaMask pentru lanțuri EVM.",
     chain_advanced: "Setări avansate",
     chain_network_label: "Rețea:",
@@ -1615,18 +1571,15 @@ var I18N = {
     verify_sens: "Sens",
     verify_intentie: "Intenție",
     verify_timestamp: "Timestamp",
-    verify_blockchain: "Blockchain",
     verify_verified: "Verificat",
     verify_not_found: "Ștampila nu a fost găsită",
     verify_checking: "Se verifică...",
-    verify_local_only: "Ștampilă locală (nesincronizată cu cloud-ul)",
     pay_method: "Plătește cu:",
     pay_card: "Card",
     pay_crypto: "Crypto",
     pay_crypto_info: "Trimite suma exactă la adresa de mai jos. Contactează suportul cu hash-ul TX.",
     offline_msg: "Ești offline — ștampilele sunt salvate local și se vor sincroniza la reconectare.",
     nav_install: "Instalează",
-    demo_saved_local: "💾 Ștampilă salvată local (offline)",
     hero_cta_sub: "Fără cont necesar. Funcționează în browser. Durează 30 de secunde.",
     stamps_sign_in: "Autentifică-te pentru a urmări ștampilele pe toate dispozitivele.",
     case1_example: "\"Am ștampilat algoritmul meu ML cu intenția 'abordare nouă pentru federated learning' cu 6 luni înainte de publicare. Când un competitor a revendicat lucrări similare, timestamp-ul meu a dovedit anterioritatea.\"",
@@ -1648,7 +1601,7 @@ var I18N = {
     example_sens: "Sens: <span style=\"color:var(--text)\">\"Această cercetare propune un nou framework pentru alinierea AI\"</span>",
     example_intentie: "Intenție: <span style=\"color:var(--text)\">\"Pentru a stabili anterioritate demonstrabilă înainte de publicare\"</span>",
     trust_title: "De ce să ai încredere în AmiStampAI?",
-    trust_1: "Cod open-source — inspectează totul pe GitHub",
+    trust_1: "Cod sursă public, la vedere — verifică totul pe GitHub",
     trust_2: "Fără criptografie personalizată — doar standarde industriale (ECDSA, SHA-256)",
     trust_3: "Ancorat pe blockchain — nu depinzi de noi pentru verificare",
     trust_4: "Conform GDPR — cheile nu părăsesc niciodată dispozitivul tău",
@@ -1658,7 +1611,7 @@ var I18N = {
     cta_sub: "Fără cont necesar · Funcționează în browser · Durează 30 de secunde",
     faq_title: "Întrebări Frecvente",
     faq_q1: "Ce se întâmplă dacă îmi pierd cheia privată?",
-    faq_a1: "Ștampilele tale rămân pe blockchain și sunt verificabile cu cheia ta publică. Totuși, nu poți crea ștampile noi cu acea pereche de chei. Generează o pereche nouă și continuă.",
+    faq_a1: "Cheia ta de semnare stă în acest browser. Dacă ștergi datele site-ului sau schimbi dispozitivul, se creează o cheie nouă. Ștampilele existente rămân verificabile: fiecare fișier de dovadă conține cheia publică.",
     faq_q2: "Cât durează ștampilarea?",
     faq_a2: "Sub 5 secunde pentru ștampilare locală. Ancorarea blockchain (planul Pro) durează 30-60 de secunde în funcție de congestia rețelei.",
     faq_q3: "Pot ștampila conținut generat de AI?",
@@ -1668,13 +1621,22 @@ var I18N = {
     faq_q5: "Ce se întâmplă dacă AmiStampAI se închide?",
     faq_a5: "Ștampilele tale sunt pe blockchain-ul Tezos și verificabile cu instrumente criptografice standard. Nu depinzi de noi pentru verificare.",
     footer_contact: "Contact",
-    verify_example: "Testează: <a href=\"?verify=example-stamp-demo\" style=\"color:var(--accent)\">click pentru verificare demo</a>"
   }
 };
 
-var currentLang;
-try { currentLang = localStorage.getItem('amistampai-lang'); } catch(e) {}
-if (!currentLang) currentLang = (navigator.language && navigator.language.startsWith('ro')) ? 'ro' : 'en';
+var SUPPORTED_LANGS = { en: 'English', ro: 'Română', fr: 'Français', de: 'Deutsch', es: 'Español', it: 'Italiano', pt: 'Português', nl: 'Nederlands', pl: 'Polski', uk: 'Українська', bg: 'Български', hu: 'Magyar', sr: 'Srpski', el: 'Ελληνικά', tr: 'Türkçe', ko: '한국어', ja: '日本語', zh: '中文', hi: 'हिन्दी', id: 'Bahasa Indonesia' };
+function detectLang() {
+  try { var saved = localStorage.getItem('amistampai-lang'); if (saved && SUPPORTED_LANGS[saved]) return saved; } catch(e) {}
+  var prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+  for (var i = 0; i < prefs.length; i++) { var p = String(prefs[i] || '').toLowerCase().split('-')[0]; if (SUPPORTED_LANGS[p]) return p; }
+  return 'en';
+}
+var currentLang = detectLang();
+function loadLang(lang) {
+  if (I18N[lang]) return Promise.resolve(I18N[lang]);
+  return fetch('i18n/' + lang + '.json').then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(j) { I18N[lang] = j; return j; });
+}
 
 function applyLang(lang) {
   var catalog = I18N[lang];
@@ -1697,22 +1659,25 @@ function applyLang(lang) {
     var key = el.getAttribute('data-i18n');
     if (catalog[key] !== undefined) el.innerHTML = catalog[key];
   });
-  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-  document.getElementById('lang-ro').classList.toggle('active', lang === 'ro');
+  var sel = document.getElementById('lang-select');
+  if (sel) sel.value = lang;
+  document.dispatchEvent(new Event('langchange'));
 }
 
 function setLang(lang) {
+  if (!SUPPORTED_LANGS[lang]) lang = 'en';
   currentLang = lang;
   try { localStorage.setItem('amistampai-lang', lang); } catch(e) {}
-  applyLang(lang);
+  loadLang(lang).then(function() { if (currentLang === lang) applyLang(lang); })
+    .catch(function() { currentLang = 'en'; applyLang('en'); });
 }
 
 // Stamp date
 document.getElementById('stamp-date').textContent = new Date().toISOString().split('T')[0];
 document.getElementById('example-cert-date').textContent = new Date().toISOString().split('T')[0];
 
-// Apply language on load
-applyLang(currentLang);
+// Apply language on load (non-inline languages are fetched from i18n/*.json)
+if (I18N[currentLang]) applyLang(currentLang); else { applyLang('en'); setLang(currentLang); }
 
 // Stripe Checkout
 var CHECKOUT_API = 'https://ami-checkout-production.up.railway.app';
@@ -1899,7 +1864,7 @@ Object.assign(I18N.en, {
   chain_anchoring: 'Anchoring…',
   chain_success: '✓ Anchored. Transaction: ',
   chain_error: 'Anchoring failed: ',
-  chain_tezos_soon: 'The public Tezos stamp registry is being deployed. For now, choose an EVM network or your own contract in Advanced settings.',
+  chain_tezos_soon: "No public AmiStamp registry on this network yet. Choose Tezos Mainnet, an EVM network, or your own contract in Advanced settings.",
   chain_no_stamp: 'Create a stamp first.',
   commit_generate: 'Create private commitment',
   commit_desc: 'Publish the commitment, keep the key. Later you can prove the document existed without having revealed it.',
@@ -1954,7 +1919,7 @@ Object.assign(I18N.ro, {
   chain_anchoring: 'Se ancorează…',
   chain_success: '✓ Ancorat. Tranzacție: ',
   chain_error: 'Ancorarea a eșuat: ',
-  chain_tezos_soon: 'Registrul public Tezos pentru ștampile e în curs de lansare. Până atunci, alege o rețea EVM sau propriul contract din Setări avansate.',
+  chain_tezos_soon: "Pe această rețea nu există încă un registru public AmiStamp. Alege Tezos Mainnet, o rețea EVM sau propriul contract din Setări avansate.",
   chain_no_stamp: 'Creează mai întâi o ștampilă.',
   commit_generate: 'Creează un angajament privat',
   commit_desc: 'Publici angajamentul, păstrezi cheia. Ulterior poți dovedi că documentul exista, fără să-l fi dezvăluit.',
@@ -2624,6 +2589,7 @@ function renderStampHistory() {
   }).catch(function () {});
 }
 renderStampHistory();
+document.addEventListener('langchange', renderStampHistory);
 window.showMyStamps = function () {
   $('auth-menu').classList.remove('show');
   renderStampHistory();
