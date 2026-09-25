@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Chiave pubblica (JWK):",
  "demo_result_status": "✓ Firmato con la chiave del tuo dispositivo. Salvato su questo dispositivo.",
  "demo_alert_fill": "Aggiungi un documento o un testo, più significato e intenzione.",
- "demo_limit_reached": "Piano gratuito: 5 timbri al mese su questo dispositivo. Passa a Pro per averne di più.",
+ "demo_limit_reached": "Piano gratuito: 5 timbri al mese. Acquista un pacchetto o passa a Pro per averne di più.",
  "pricing_title": "Prezzi",
  "pricing_sub": "Inizia gratis. Paga solo quando ti servono l’ancoraggio su blockchain o volumi maggiori.",
  "plan_free": "Gratis",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Gestisci l'abbonamento",
  "pay_success": "✓ Pagamento ricevuto. Pro è attivo: timbri illimitati.",
  "pay_pending": "Pagamento ricevuto. Attivazione di Pro sul tuo account…",
- "sync_quota": "Piano gratuito: 5 timbri al mese vengono sincronizzati con il tuo account. Gli altri restano su questo dispositivo finché non passi a Pro."
+ "sync_quota": "Piano gratuito: 5 timbri al mese vengono sincronizzati con il tuo account. Gli altri restano su questo dispositivo finché non acquisti un pacchetto o passi a Pro.",
+ "plan_pack": "Pacchetto timbri",
+ "plan_pack_period": "+ IVA · pagamento unico",
+ "plan_pack_f1": "100 timbri, senza scadenza",
+ "plan_pack_f2": "Usati dopo i tuoi 5 timbri gratuiti del mese",
+ "plan_pack_f3": "Nessun abbonamento",
+ "plan_pack_f4": "Tutto il piano gratuito",
+ "plan_pack_cta": "Acquista 100 timbri",
+ "pay_pending_pack": "Pagamento ricevuto. Stiamo aggiungendo i timbri al tuo account…",
+ "pay_success_pack": "✓ Pagamento ricevuto. Hai {n} timbri del pacchetto.",
+ "modal_terms_pack": "Pacchetto timbri: 8 € + IVA, pagamento unico per 100 timbri. I timbri del pacchetto non scadono e si usano solo dopo i 5 timbri gratuiti del mese."
 }

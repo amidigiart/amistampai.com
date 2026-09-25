@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Javni ključ (JWK):",
  "demo_result_status": "✓ Potpisano ključem vašeg uređaja. Sačuvano na ovom uređaju.",
  "demo_alert_fill": "Dodajte dokument ili tekst, kao i značenje i nameru.",
- "demo_limit_reached": "Besplatan plan: 5 pečata mesečno na ovom uređaju. Pređite na Pro za više.",
+ "demo_limit_reached": "Besplatan plan: 5 pečata mesečno. Kupi paket ili pređi na Pro za više.",
  "pricing_title": "Cene",
  "pricing_sub": "Počnite besplatno. Plaćajte samo kada vam treba sidrenje na blokčejnu ili veći obim.",
  "plan_free": "Besplatno",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Upravljaj pretplatom",
  "pay_success": "✓ Uplata primljena. Pro je aktivan: neograničeni pečati.",
  "pay_pending": "Uplata primljena. Aktiviramo Pro na tvom nalogu…",
- "sync_quota": "Besplatan plan: 5 pečata mesečno se sinhronizuje sa nalogom. Ostali ostaju na ovom uređaju dok ne pređeš na Pro."
+ "sync_quota": "Besplatan plan: 5 pečata mesečno se sinhronizuje sa nalogom. Ostali ostaju na ovom uređaju dok ne kupiš paket ili ne pređeš na Pro.",
+ "plan_pack": "Paket pečata",
+ "plan_pack_period": "+ PDV · jednokratno plaćanje",
+ "plan_pack_f1": "100 pečata bez roka trajanja",
+ "plan_pack_f2": "Koriste se posle 5 besplatnih pečata u mesecu",
+ "plan_pack_f3": "Bez pretplate",
+ "plan_pack_f4": "Sve iz besplatnog plana",
+ "plan_pack_cta": "Kupi 100 pečata",
+ "pay_pending_pack": "Uplata primljena. Dodajemo pečate na tvoj nalog…",
+ "pay_success_pack": "✓ Uplata primljena. Imaš {n} pečata iz paketa.",
+ "modal_terms_pack": "Paket pečata: 8 € + PDV, jednokratno plaćanje za 100 pečata. Pečati iz paketa ne ističu i koriste se tek posle 5 besplatnih pečata u mesecu."
 }

@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Chave pública (JWK):",
  "demo_result_status": "✓ Assinado com a chave do seu dispositivo. Guardado neste dispositivo.",
  "demo_alert_fill": "Adicione um documento ou texto, além do significado e da intenção.",
- "demo_limit_reached": "Plano gratuito: 5 carimbos por mês neste dispositivo. Passe para o Pro para ter mais.",
+ "demo_limit_reached": "Plano gratuito: 5 carimbos por mês. Compre um pacote ou passe para Pro para ter mais.",
  "pricing_title": "Preços",
  "pricing_sub": "Comece grátis. Pague apenas quando precisar de ancoragem na blockchain ou de volume.",
  "plan_free": "Grátis",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Gerir subscrição",
  "pay_success": "✓ Pagamento recebido. O Pro está ativo: carimbos ilimitados.",
  "pay_pending": "Pagamento recebido. A ativar o Pro na sua conta…",
- "sync_quota": "Plano gratuito: 5 carimbos por mês sincronizam com a sua conta. Os restantes ficam neste dispositivo até passar para Pro."
+ "sync_quota": "Plano gratuito: 5 carimbos por mês sincronizam com a sua conta. Os restantes ficam neste dispositivo até comprar um pacote ou passar para Pro.",
+ "plan_pack": "Pacote de carimbos",
+ "plan_pack_period": "+ IVA · pagamento único",
+ "plan_pack_f1": "100 carimbos, sem validade",
+ "plan_pack_f2": "Usados depois dos seus 5 carimbos gratuitos do mês",
+ "plan_pack_f3": "Sem subscrição",
+ "plan_pack_f4": "Tudo do plano gratuito",
+ "plan_pack_cta": "Comprar 100 carimbos",
+ "pay_pending_pack": "Pagamento recebido. A adicionar os carimbos à sua conta…",
+ "pay_success_pack": "✓ Pagamento recebido. Tem {n} carimbos de pacote.",
+ "modal_terms_pack": "Pacote de carimbos: 8 € + IVA, pagamento único por 100 carimbos. Os carimbos do pacote não expiram e só são usados depois dos 5 carimbos gratuitos do mês."
 }

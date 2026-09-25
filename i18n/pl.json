@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Klucz publiczny (JWK):",
  "demo_result_status": "✓ Podpisano kluczem Twojego urządzenia. Zapisano na tym urządzeniu.",
  "demo_alert_fill": "Dodaj dokument lub tekst oraz znaczenie i intencję.",
- "demo_limit_reached": "Plan darmowy: 5 pieczęci miesięcznie na tym urządzeniu. Przejdź na Pro, aby mieć więcej.",
+ "demo_limit_reached": "Plan darmowy: 5 pieczęci miesięcznie. Kup pakiet lub przejdź na Pro, aby mieć więcej.",
  "pricing_title": "Cennik",
  "pricing_sub": "Zacznij za darmo. Płać tylko wtedy, gdy potrzebujesz kotwiczenia w blockchainie lub większej skali.",
  "plan_free": "Darmowy",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Zarządzaj subskrypcją",
  "pay_success": "✓ Płatność otrzymana. Pro jest aktywny: nielimitowane pieczęcie.",
  "pay_pending": "Płatność otrzymana. Aktywujemy Pro na Twoim koncie…",
- "sync_quota": "Plan darmowy: 5 pieczęci miesięcznie synchronizuje się z kontem. Pozostałe zostają na tym urządzeniu, dopóki nie przejdziesz na Pro."
+ "sync_quota": "Plan darmowy: 5 pieczęci miesięcznie synchronizuje się z kontem. Pozostałe zostają na tym urządzeniu, dopóki nie kupisz pakietu lub nie przejdziesz na Pro.",
+ "plan_pack": "Pakiet pieczęci",
+ "plan_pack_period": "+ VAT · płatność jednorazowa",
+ "plan_pack_f1": "100 pieczęci bez terminu ważności",
+ "plan_pack_f2": "Używane po 5 darmowych pieczęciach w miesiącu",
+ "plan_pack_f3": "Bez subskrypcji",
+ "plan_pack_f4": "Wszystko z planu darmowego",
+ "plan_pack_cta": "Kup 100 pieczęci",
+ "pay_pending_pack": "Płatność otrzymana. Dodajemy pieczęcie do Twojego konta…",
+ "pay_success_pack": "✓ Płatność otrzymana. Masz {n} pieczęci z pakietu.",
+ "modal_terms_pack": "Pakiet pieczęci: 8 € + VAT, płatność jednorazowa za 100 pieczęci. Pieczęcie z pakietu nie wygasają i są używane dopiero po 5 darmowych pieczęciach w miesiącu."
 }

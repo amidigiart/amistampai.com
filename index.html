@@ -42,6 +42,14 @@
     },
     {
       "@type": "Offer",
+      "name": "Stamp Pack 100",
+      "price": "8.00",
+      "priceCurrency": "EUR",
+      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "8.00", "priceCurrency": "EUR", "valueAddedTaxIncluded": false },
+      "description": "100 stamps, one-time payment, no expiry"
+    },
+    {
+      "@type": "Offer",
       "name": "Enterprise",
       "priceCurrency": "EUR",
       "description": "Custom pricing, dedicated infrastructure, SLA 99.5%"
@@ -879,7 +887,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
   <h2 class="section-title" data-i18n="pricing_title">Pricing</h2>
   <p class="section-sub" data-i18n="pricing_sub">Start free. Pay only when you need blockchain anchoring or volume.</p>
 
-  <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:900px">
+  <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));max-width:1180px">
     <div class="plan">
       <h3 data-i18n="plan_free">Free</h3>
       <div class="price">&#8364;0</div>
@@ -892,6 +900,18 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <li data-i18n="plan_free_f5">Stamp history</li>
       </ul>
       <a href="#demo" class="btn btn-outline" data-i18n="plan_free_cta">Start stamping</a>
+    </div>
+    <div class="plan">
+      <h3 data-i18n="plan_pack">Stamp Pack</h3>
+      <div class="price">&#8364;8</div>
+      <div class="period" data-i18n="plan_pack_period">+ VAT · one-time payment</div>
+      <ul>
+        <li data-i18n="plan_pack_f1">100 stamps, no expiry</li>
+        <li data-i18n="plan_pack_f2">Used after your 5 free stamps of the month</li>
+        <li data-i18n="plan_pack_f3">No subscription</li>
+        <li data-i18n="plan_pack_f4">Everything in Free</li>
+      </ul>
+      <button class="btn btn-outline" id="btn-pack" data-i18n="plan_pack_cta">Buy 100 stamps</button>
     </div>
     <div class="plan popular">
       <div class="plan-badge" data-i18n="plan_pro_badge">Most chosen</div>
@@ -1064,6 +1084,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <h3 data-i18n="modal_terms_h3">Blockchain Records</h3>
     <p data-i18n="modal_terms_p3">Once a hash is anchored on Tezos, it cannot be removed. This is by design. Consider carefully before anchoring.</p>
     <h3 data-i18n="modal_terms_h4">Pricing</h3>
+    <p data-i18n="modal_terms_pack">Stamp Pack: &euro;8 + VAT, one-time payment for 100 stamps. Pack stamps do not expire and are used only after the 5 free stamps of the month.</p>
     <p data-i18n="modal_terms_p4">Free tier: 5 stamps/month. Pro: &euro;9.99/month + VAT, unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.</p>
   </div>
 </div>
@@ -1684,7 +1705,7 @@ if (I18N[currentLang]) applyLang(currentLang); else { applyLang('en'); setLang(c
 // Stripe Checkout
 var CHECKOUT_API = 'https://ami-checkout-production.up.railway.app';
 
-async function startCheckout(lookupKey, mode) {
+async function startCheckout(lookupKey, mode, kind) {
   var sb = typeof getSupabase !== 'undefined' ? getSupabase() : null;
   var session = sb ? (await sb.auth.getSession()).data.session : null;
 
@@ -1701,7 +1722,7 @@ async function startCheckout(lookupKey, mode) {
         lookup_key: lookupKey,
         mode: mode,
         app: 'amistampai',
-        success_url: 'https://amistampai.com/?payment=success',
+        success_url: 'https://amistampai.com/?payment=success' + (kind ? '&kind=' + kind : ''),
         cancel_url: 'https://amistampai.com/#pricing'
       })
     });
@@ -1713,6 +1734,10 @@ async function startCheckout(lookupKey, mode) {
     alert((I18N[currentLang] || I18N.en).plan_pro_alert || I18N.en.plan_pro_alert);
   }
 }
+
+document.getElementById('btn-pack').addEventListener('click', function() {
+  startCheckout('stamp-pack-100', 'payment', 'pack');
+});
 
 document.getElementById('btn-subscribe').addEventListener('click', function() {
   if (window.amistampPlan && window.amistampPlan.pro) { openBillingPortal(); return; }
@@ -1877,7 +1902,7 @@ Object.assign(I18N.en, {
   demo_result_stamp_hash: 'Stamp hash (anchored on blockchain):',
   demo_result_status: '✓ Signed with your device key. Saved on this device.',
   demo_alert_fill: 'Add a document or text, plus meaning and intention.',
-  demo_limit_reached: 'Free plan: 5 stamps per month on this device. Upgrade to Pro for more.',
+  demo_limit_reached: 'Free plan: 5 stamps per month. Buy a Stamp Pack or upgrade to Pro for more.',
   demo_hashing: 'Hashing {name}…',
   proof_download: 'Download proof (.json)',
   proof_copy_link: 'Copy verification link',
@@ -1924,7 +1949,17 @@ Object.assign(I18N.en, {
   nav_manage_sub: 'Manage subscription',
   pay_success: '✓ Payment received. Pro is active: unlimited stamps.',
   pay_pending: 'Payment received. Activating Pro on your account…',
-  sync_quota: 'Free plan: 5 stamps per month sync to your account. The rest stay on this device until you upgrade to Pro.'
+  sync_quota: 'Free plan: 5 stamps per month sync to your account. The rest stay on this device until you buy a Stamp Pack or upgrade to Pro.',
+  plan_pack: 'Stamp Pack',
+  plan_pack_period: '+ VAT · one-time payment',
+  plan_pack_f1: '100 stamps, no expiry',
+  plan_pack_f2: 'Used after your 5 free stamps of the month',
+  plan_pack_f3: 'No subscription',
+  plan_pack_f4: 'Everything in Free',
+  plan_pack_cta: 'Buy 100 stamps',
+  pay_pending_pack: 'Payment received. Adding the stamps to your account…',
+  pay_success_pack: '✓ Payment received. You have {n} pack stamps.',
+  modal_terms_pack: 'Stamp Pack: €8 + VAT, one-time payment for 100 stamps. Pack stamps do not expire and are used only after the 5 free stamps of the month.'
 });
 Object.assign(I18N.ro, {
   demo_label_file: 'Document',
@@ -1936,7 +1971,7 @@ Object.assign(I18N.ro, {
   demo_result_stamp_hash: 'Hash ștampilă (ancorat pe blockchain):',
   demo_result_status: '✓ Semnat cu cheia dispozitivului tău. Salvat pe acest dispozitiv.',
   demo_alert_fill: 'Adaugă un document sau un text, plus sensul și intenția.',
-  demo_limit_reached: 'Planul gratuit: 5 ștampile pe lună pe acest dispozitiv. Treci la Pro pentru mai multe.',
+  demo_limit_reached: 'Planul gratuit: 5 ștampile pe lună. Cumpără un pachet sau treci la Pro pentru mai multe.',
   demo_hashing: 'Calculez hash-ul pentru {name}…',
   proof_download: 'Descarcă dovada (.json)',
   proof_copy_link: 'Copiază linkul de verificare',
@@ -1983,7 +2018,17 @@ Object.assign(I18N.ro, {
   nav_manage_sub: 'Gestionează abonamentul',
   pay_success: '✓ Plată primită. Pro este activ: ștampile nelimitate.',
   pay_pending: 'Plată primită. Activăm Pro pe contul tău…',
-  sync_quota: 'Planul gratuit: 5 ștampile pe lună se sincronizează în cont. Restul rămân pe acest dispozitiv până treci la Pro.'
+  sync_quota: 'Planul gratuit: 5 ștampile pe lună se sincronizează în cont. Restul rămân pe acest dispozitiv până cumperi un pachet sau treci la Pro.',
+  plan_pack: 'Pachet de ștampile',
+  plan_pack_period: '+ TVA · plată unică',
+  plan_pack_f1: '100 de ștampile, fără expirare',
+  plan_pack_f2: 'Folosite după cele 5 ștampile gratuite ale lunii',
+  plan_pack_f3: 'Fără abonament',
+  plan_pack_f4: 'Tot ce include planul gratuit',
+  plan_pack_cta: 'Cumpără 100 de ștampile',
+  pay_pending_pack: 'Plată primită. Adăugăm ștampilele în contul tău…',
+  pay_success_pack: '✓ Plată primită. Ai {n} ștampile din pachete.',
+  modal_terms_pack: 'Pachet de ștampile: 8 € + TVA, plată unică pentru 100 de ștampile. Ștampilele din pachet nu expiră și se folosesc doar după cele 5 ștampile gratuite ale lunii.'
 });
 applyLang(currentLang);
 function t(k, vars) {
@@ -2151,6 +2196,19 @@ async function loadPlan() {
     } catch (e) {}
   }
   plan.pro = pro;
+  // stamp packs: written only by the Stripe webhook; the database takes one stamp per sync after the free 5
+  var left = 0, last = null;
+  if (session) {
+    try {
+      var p = await sb.from('stamp_packs').select('stamps_count,stamps_used,purchased_at').eq('user_id', session.user.id);
+      (p.data || []).forEach(function (k) {
+        left += Math.max(0, (k.stamps_count || 0) - (k.stamps_used || 0));
+        if (!last || k.purchased_at > last) last = k.purchased_at;
+      });
+    } catch (e) {}
+  }
+  plan.packLeft = left;
+  plan.lastPackAt = last;
   var manage = $('auth-manage-sub'); if (manage) manage.style.display = pro ? '' : 'none';
   return pro;
 }
@@ -2178,7 +2236,7 @@ $('demo-stamp').addEventListener('click', async function () {
 
   var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
   var used = (await allStamps()).filter(function (s) { return s.created_at >= monthStart; }).length;
-  if (!plan.pro && used >= FREE_LIMIT) { alert(t('demo_limit_reached')); return; }
+  if (!plan.pro && used >= FREE_LIMIT && !(plan.packLeft > 0)) { alert(t('demo_limit_reached')); return; }
 
   btn.disabled = true; btn.textContent = t('demo_btn_stamping');
   try {
@@ -2261,7 +2319,7 @@ async function syncStamps() {
     if (!res.error || res.error.code === '23505') { s.synced = 1; await putStamp(s); }
     else if (res.error.code === '42501') { statusLine($('result-status'), 'warn', t('sync_quota')); break; }
   }
-  renderStampHistory();
+  refreshPlan();          // pack balance may have changed
 }
 async function pushAnchorToCloud(s) {
   if (!s.synced || typeof getSupabase === 'undefined') return;
@@ -2295,16 +2353,19 @@ if (typeof getSupabase !== 'undefined' && getSupabase()) {
 (function () {
   var params = new URLSearchParams(location.search);
   if (params.get('payment') !== 'success') return;
-  params.delete('payment');
+  var isPack = params.get('kind') === 'pack';
+  params.delete('payment'); params.delete('kind');
   var rest = params.toString();
   history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
   var bar = $('offline-bar');
-  bar.textContent = t('pay_pending'); bar.classList.add('show');
+  bar.textContent = t(isPack ? 'pay_pending_pack' : 'pay_pending'); bar.classList.add('show');
   var tries = 0;
   (function poll() {
     loadPlan().then(function (pro) {
-      if (pro) {
-        bar.textContent = t('pay_success');
+      // a pack counts as arrived when one was bought in the last 15 minutes
+      var done = isPack ? !!(plan.lastPackAt && Date.now() - new Date(plan.lastPackAt).getTime() < 15 * 60 * 1000) : pro;
+      if (done) {
+        bar.textContent = isPack ? t('pay_success_pack', { n: plan.packLeft }) : t('pay_success');
         renderStampHistory(); syncStamps();
         setTimeout(function () { bar.classList.remove('show'); bar.textContent = t('offline_msg'); }, 6000);
       } else if (++tries < 12) setTimeout(poll, 2500);
@@ -2635,8 +2696,8 @@ function renderStampHistory() {
     var monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
     var used = stamps.filter(function (s) { return s.created_at >= monthStart; }).length;
     $('stamps-used').textContent = used;
-    $('stamps-limit').textContent = plan.pro ? '∞' : FREE_LIMIT;
-    $('stamps-plan-badge').textContent = plan.pro ? 'Pro' : t('plan_free');
+    $('stamps-limit').textContent = plan.pro ? '∞' : FREE_LIMIT + (plan.packLeft > 0 ? ' + ' + plan.packLeft : '');
+    $('stamps-plan-badge').textContent = plan.pro ? 'Pro' : (plan.packLeft > 0 ? t('plan_pack') : t('plan_free'));
     $('usage-fill').style.width = plan.pro ? '0%' : Math.min(100, Math.round(used / FREE_LIMIT * 100)) + '%';
     list.textContent = '';
     if (!stamps.length) {

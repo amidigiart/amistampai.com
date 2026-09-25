@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Nyilvános kulcs (JWK):",
  "demo_result_status": "✓ Az eszközöd kulcsával aláírva. Ezen az eszközön elmentve.",
  "demo_alert_fill": "Adj meg egy dokumentumot vagy szöveget, valamint a jelentést és a szándékot.",
- "demo_limit_reached": "Ingyenes csomag: havi 5 pecsét ezen az eszközön. Többért válts Pro-ra.",
+ "demo_limit_reached": "Ingyenes csomag: havi 5 bélyegző. Vegyél csomagot vagy válts Pro-ra a többhöz.",
  "pricing_title": "Árak",
  "pricing_sub": "Kezdd ingyen. Csak akkor fizess, ha blokkláncos rögzítésre vagy nagyobb mennyiségre van szükséged.",
  "plan_free": "Ingyenes",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Előfizetés kezelése",
  "pay_success": "✓ Fizetés megérkezett. A Pro aktív: korlátlan bélyegzés.",
  "pay_pending": "Fizetés megérkezett. A Pro aktiválása a fiókodon…",
- "sync_quota": "Ingyenes csomag: havonta 5 bélyegző szinkronizálódik a fiókoddal. A többi ezen az eszközön marad, amíg Pro-ra nem váltasz."
+ "sync_quota": "Ingyenes csomag: havonta 5 bélyegző szinkronizálódik a fiókoddal. A többi ezen az eszközön marad, amíg nem veszel csomagot vagy nem váltasz Pro-ra.",
+ "plan_pack": "Bélyegzőcsomag",
+ "plan_pack_period": "+ ÁFA · egyszeri fizetés",
+ "plan_pack_f1": "100 bélyegző, lejárat nélkül",
+ "plan_pack_f2": "A hónap 5 ingyenes bélyegzője után használódik",
+ "plan_pack_f3": "Nincs előfizetés",
+ "plan_pack_f4": "Minden, ami az ingyenes csomagban",
+ "plan_pack_cta": "100 bélyegző vásárlása",
+ "pay_pending_pack": "Fizetés megérkezett. A bélyegzőket hozzáadjuk a fiókodhoz…",
+ "pay_success_pack": "✓ Fizetés megérkezett. {n} csomagbélyegződ van.",
+ "modal_terms_pack": "Bélyegzőcsomag: 8 € + ÁFA, egyszeri fizetés 100 bélyegzőért. A csomagbélyegzők nem járnak le, és csak a hónap 5 ingyenes bélyegzője után használódnak."
 }

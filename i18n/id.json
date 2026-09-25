@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Kunci publik (JWK):",
  "demo_result_status": "✓ Ditandatangani dengan kunci perangkat Anda. Disimpan di perangkat ini.",
  "demo_alert_fill": "Tambahkan dokumen atau teks, serta makna dan niat.",
- "demo_limit_reached": "Paket gratis: 5 stempel per bulan di perangkat ini. Tingkatkan ke Pro untuk lebih banyak.",
+ "demo_limit_reached": "Paket gratis: 5 stempel per bulan. Beli paket atau beralih ke Pro untuk lebih banyak.",
  "pricing_title": "Harga",
  "pricing_sub": "Mulai gratis. Bayar hanya saat Anda membutuhkan penambatan blockchain atau volume lebih besar.",
  "plan_free": "Gratis",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Kelola langganan",
  "pay_success": "✓ Pembayaran diterima. Pro aktif: stempel tanpa batas.",
  "pay_pending": "Pembayaran diterima. Mengaktifkan Pro di akun Anda…",
- "sync_quota": "Paket gratis: 5 stempel per bulan disinkronkan ke akun Anda. Sisanya tetap di perangkat ini sampai Anda beralih ke Pro."
+ "sync_quota": "Paket gratis: 5 stempel per bulan disinkronkan ke akun Anda. Sisanya tetap di perangkat ini sampai Anda membeli paket atau beralih ke Pro.",
+ "plan_pack": "Paket stempel",
+ "plan_pack_period": "+ PPN · pembayaran sekali",
+ "plan_pack_f1": "100 stempel, tanpa kedaluwarsa",
+ "plan_pack_f2": "Dipakai setelah 5 stempel gratis bulan ini",
+ "plan_pack_f3": "Tanpa langganan",
+ "plan_pack_f4": "Semua fitur paket gratis",
+ "plan_pack_cta": "Beli 100 stempel",
+ "pay_pending_pack": "Pembayaran diterima. Menambahkan stempel ke akun Anda…",
+ "pay_success_pack": "✓ Pembayaran diterima. Anda punya {n} stempel paket.",
+ "modal_terms_pack": "Paket stempel: €8 + PPN, pembayaran sekali untuk 100 stempel. Stempel paket tidak kedaluwarsa dan hanya dipakai setelah 5 stempel gratis bulan ini."
 }

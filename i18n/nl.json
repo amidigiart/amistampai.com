@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Publieke sleutel (JWK):",
  "demo_result_status": "✓ Ondertekend met de sleutel van je apparaat. Opgeslagen op dit apparaat.",
  "demo_alert_fill": "Voeg een document of tekst toe, plus betekenis en intentie.",
- "demo_limit_reached": "Gratis abonnement: 5 stempels per maand op dit apparaat. Upgrade naar Pro voor meer.",
+ "demo_limit_reached": "Gratis plan: 5 stempels per maand. Koop een pakket of stap over op Pro voor meer.",
  "pricing_title": "Prijzen",
  "pricing_sub": "Begin gratis. Betaal alleen als je blockchainverankering of volume nodig hebt.",
  "plan_free": "Gratis",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Abonnement beheren",
  "pay_success": "✓ Betaling ontvangen. Pro is actief: onbeperkt stempels.",
  "pay_pending": "Betaling ontvangen. Pro wordt geactiveerd op je account…",
- "sync_quota": "Gratis plan: 5 stempels per maand worden met je account gesynchroniseerd. De rest blijft op dit apparaat tot je overstapt op Pro."
+ "sync_quota": "Gratis plan: 5 stempels per maand worden met je account gesynchroniseerd. De rest blijft op dit apparaat tot je een pakket koopt of overstapt op Pro.",
+ "plan_pack": "Stempelpakket",
+ "plan_pack_period": "excl. btw · eenmalige betaling",
+ "plan_pack_f1": "100 stempels, verlopen niet",
+ "plan_pack_f2": "Gebruikt na je 5 gratis stempels van de maand",
+ "plan_pack_f3": "Geen abonnement",
+ "plan_pack_f4": "Alles van het gratis plan",
+ "plan_pack_cta": "100 stempels kopen",
+ "pay_pending_pack": "Betaling ontvangen. De stempels worden aan je account toegevoegd…",
+ "pay_success_pack": "✓ Betaling ontvangen. Je hebt {n} pakketstempels.",
+ "modal_terms_pack": "Stempelpakket: € 8 excl. btw, eenmalige betaling voor 100 stempels. Pakketstempels verlopen niet en worden pas gebruikt na de 5 gratis stempels van de maand."
 }
