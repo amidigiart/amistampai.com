@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Clave pública (JWK):",
  "demo_result_status": "✓ Firmado con la clave de tu dispositivo. Guardado en este dispositivo.",
  "demo_alert_fill": "Añade un documento o un texto, además del significado y la intención.",
- "demo_limit_reached": "Plan gratuito: 5 sellos al mes en este dispositivo. Pásate a Pro para más.",
+ "demo_limit_reached": "Plan gratuito: 5 sellos al mes. Compra un paquete o pasa a Pro para tener más.",
  "pricing_title": "Precios",
  "pricing_sub": "Empieza gratis. Paga solo cuando necesites anclaje en blockchain o volumen.",
  "plan_free": "Gratis",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Gestionar suscripción",
  "pay_success": "✓ Pago recibido. Pro está activo: sellos ilimitados.",
  "pay_pending": "Pago recibido. Activando Pro en tu cuenta…",
- "sync_quota": "Plan gratuito: 5 sellos al mes se sincronizan con tu cuenta. El resto se queda en este dispositivo hasta que pases a Pro."
+ "sync_quota": "Plan gratuito: 5 sellos al mes se sincronizan con tu cuenta. El resto se queda en este dispositivo hasta que compres un paquete o pases a Pro.",
+ "plan_pack": "Paquete de sellos",
+ "plan_pack_period": "+ IVA · pago único",
+ "plan_pack_f1": "100 sellos, sin caducidad",
+ "plan_pack_f2": "Se usan después de tus 5 sellos gratuitos del mes",
+ "plan_pack_f3": "Sin suscripción",
+ "plan_pack_f4": "Todo lo del plan gratuito",
+ "plan_pack_cta": "Comprar 100 sellos",
+ "pay_pending_pack": "Pago recibido. Añadiendo los sellos a tu cuenta…",
+ "pay_success_pack": "✓ Pago recibido. Tienes {n} sellos de paquete.",
+ "modal_terms_pack": "Paquete de sellos: 8 € + IVA, pago único por 100 sellos. Los sellos del paquete no caducan y solo se usan después de los 5 sellos gratuitos del mes."
 }

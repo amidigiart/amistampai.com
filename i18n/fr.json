@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Clé publique (JWK) :",
  "demo_result_status": "✓ Signé avec la clé de votre appareil. Enregistré sur cet appareil.",
  "demo_alert_fill": "Ajoutez un document ou un texte, ainsi que le sens et l’intention.",
- "demo_limit_reached": "Offre gratuite : 5 tampons par mois sur cet appareil. Passez à Pro pour plus.",
+ "demo_limit_reached": "Offre gratuite : 5 tampons par mois. Achetez un pack ou passez à Pro pour en avoir plus.",
  "pricing_title": "Tarifs",
  "pricing_sub": "Commencez gratuitement. Payez uniquement quand vous avez besoin de l’ancrage blockchain ou de volume.",
  "plan_free": "Gratuit",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Gérer l'abonnement",
  "pay_success": "✓ Paiement reçu. Pro est actif : tampons illimités.",
  "pay_pending": "Paiement reçu. Activation de Pro sur votre compte…",
- "sync_quota": "Offre gratuite : 5 tampons par mois sont synchronisés avec votre compte. Les autres restent sur cet appareil jusqu'au passage à Pro."
+ "sync_quota": "Offre gratuite : 5 tampons par mois sont synchronisés avec votre compte. Les autres restent sur cet appareil jusqu'à l'achat d'un pack ou le passage à Pro.",
+ "plan_pack": "Pack de tampons",
+ "plan_pack_period": "HT · paiement unique",
+ "plan_pack_f1": "100 tampons, sans expiration",
+ "plan_pack_f2": "Utilisés après vos 5 tampons gratuits du mois",
+ "plan_pack_f3": "Sans abonnement",
+ "plan_pack_f4": "Tout ce qui est inclus dans l'offre gratuite",
+ "plan_pack_cta": "Acheter 100 tampons",
+ "pay_pending_pack": "Paiement reçu. Ajout des tampons à votre compte…",
+ "pay_success_pack": "✓ Paiement reçu. Vous avez {n} tampons de pack.",
+ "modal_terms_pack": "Pack de tampons : 8 € HT, paiement unique pour 100 tampons. Les tampons du pack n'expirent pas et ne sont utilisés qu'après les 5 tampons gratuits du mois."
 }

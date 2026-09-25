@@ -86,7 +86,7 @@
  "demo_result_pubkey": "公钥 (JWK)：",
  "demo_result_status": "✓ 已用本设备的密钥签名，并保存在本设备上。",
  "demo_alert_fill": "请添加文件或文本，并填写意义和意图。",
- "demo_limit_reached": "免费版：本设备每月可盖5个印章。升级到Pro可获得更多。",
+ "demo_limit_reached": "免费版：每月 5 个印章。购买印章包或升级到 Pro 以获得更多。",
  "pricing_title": "价格",
  "pricing_sub": "免费开始。只在需要区块链锚定或更大用量时付费。",
  "plan_free": "免费版",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "管理订阅",
  "pay_success": "✓ 已收到付款。Pro 已激活：无限次盖章。",
  "pay_pending": "已收到付款。正在为您的账户激活 Pro…",
- "sync_quota": "免费版：每月 5 个印章同步到您的账户。其余印章保留在此设备上，直到您升级到 Pro。"
+ "sync_quota": "免费版：每月 5 个印章同步到您的账户。其余印章保留在此设备上，直到您购买印章包或升级到 Pro。",
+ "plan_pack": "印章包",
+ "plan_pack_period": "不含增值税 · 一次性付款",
+ "plan_pack_f1": "100 个印章，永不过期",
+ "plan_pack_f2": "在每月 5 个免费印章用完后使用",
+ "plan_pack_f3": "无需订阅",
+ "plan_pack_f4": "包含免费版全部功能",
+ "plan_pack_cta": "购买 100 个印章",
+ "pay_pending_pack": "已收到付款。正在将印章添加到您的账户…",
+ "pay_success_pack": "✓ 已收到付款。您有 {n} 个印章包印章。",
+ "modal_terms_pack": "印章包：8 欧元（不含增值税），一次性购买 100 个印章。印章包中的印章永不过期，仅在每月 5 个免费印章用完后使用。"
 }

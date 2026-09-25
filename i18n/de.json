@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Öffentlicher Schlüssel (JWK):",
  "demo_result_status": "✓ Mit dem Schlüssel Ihres Geräts signiert. Auf diesem Gerät gespeichert.",
  "demo_alert_fill": "Fügen Sie ein Dokument oder einen Text sowie Bedeutung und Absicht hinzu.",
- "demo_limit_reached": "Kostenloser Plan: 5 Stempel pro Monat auf diesem Gerät. Für mehr auf Pro upgraden.",
+ "demo_limit_reached": "Gratis-Plan: 5 Stempel pro Monat. Kaufe ein Stempelpaket oder wechsle zu Pro für mehr.",
  "pricing_title": "Preise",
  "pricing_sub": "Kostenlos starten. Zahlen Sie nur, wenn Sie Blockchain-Verankerung oder Volumen brauchen.",
  "plan_free": "Kostenlos",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Abo verwalten",
  "pay_success": "✓ Zahlung erhalten. Pro ist aktiv: unbegrenzte Stempel.",
  "pay_pending": "Zahlung erhalten. Pro wird für dein Konto aktiviert…",
- "sync_quota": "Gratis-Plan: 5 Stempel pro Monat werden mit deinem Konto synchronisiert. Die übrigen bleiben auf diesem Gerät, bis du auf Pro wechselst."
+ "sync_quota": "Gratis-Plan: 5 Stempel pro Monat werden mit deinem Konto synchronisiert. Die übrigen bleiben auf diesem Gerät, bis du ein Stempelpaket kaufst oder auf Pro wechselst.",
+ "plan_pack": "Stempelpaket",
+ "plan_pack_period": "+ MwSt. · Einmalzahlung",
+ "plan_pack_f1": "100 Stempel, ohne Ablaufdatum",
+ "plan_pack_f2": "Werden nach deinen 5 Gratis-Stempeln des Monats genutzt",
+ "plan_pack_f3": "Kein Abo",
+ "plan_pack_f4": "Alles aus dem Gratis-Plan",
+ "plan_pack_cta": "100 Stempel kaufen",
+ "pay_pending_pack": "Zahlung erhalten. Die Stempel werden deinem Konto gutgeschrieben…",
+ "pay_success_pack": "✓ Zahlung erhalten. Du hast {n} Paket-Stempel.",
+ "modal_terms_pack": "Stempelpaket: 8 € zzgl. MwSt., Einmalzahlung für 100 Stempel. Paket-Stempel verfallen nicht und werden erst nach den 5 Gratis-Stempeln des Monats genutzt."
 }

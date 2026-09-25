@@ -86,7 +86,7 @@
  "demo_result_pubkey": "Açık anahtar (JWK):",
  "demo_result_status": "✓ Cihazınızın anahtarıyla imzalandı. Bu cihaza kaydedildi.",
  "demo_alert_fill": "Bir belge veya metin ile anlam ve niyet ekleyin.",
- "demo_limit_reached": "Ücretsiz plan: bu cihazda ayda 5 mühür. Daha fazlası için Pro’ya geçin.",
+ "demo_limit_reached": "Ücretsiz plan: ayda 5 damga. Daha fazlası için paket alın veya Pro’ya geçin.",
  "pricing_title": "Fiyatlar",
  "pricing_sub": "Ücretsiz başlayın. Yalnızca blokzincir sabitlemesine veya hacme ihtiyaç duyduğunuzda ödeyin.",
  "plan_free": "Ücretsiz",
@@ -291,5 +291,15 @@
  "nav_manage_sub": "Aboneliği yönet",
  "pay_success": "✓ Ödeme alındı. Pro aktif: sınırsız damga.",
  "pay_pending": "Ödeme alındı. Hesabınızda Pro etkinleştiriliyor…",
- "sync_quota": "Ücretsiz plan: ayda 5 damga hesabınızla eşitlenir. Geri kalanlar Pro’ya geçene kadar bu cihazda kalır."
+ "sync_quota": "Ücretsiz plan: ayda 5 damga hesabınızla eşitlenir. Geri kalanlar paket alana veya Pro’ya geçene kadar bu cihazda kalır.",
+ "plan_pack": "Damga paketi",
+ "plan_pack_period": "+ KDV · tek seferlik ödeme",
+ "plan_pack_f1": "100 damga, süresiz",
+ "plan_pack_f2": "Ayın 5 ücretsiz damgasından sonra kullanılır",
+ "plan_pack_f3": "Abonelik yok",
+ "plan_pack_f4": "Ücretsiz plandaki her şey",
+ "plan_pack_cta": "100 damga satın al",
+ "pay_pending_pack": "Ödeme alındı. Damgalar hesabınıza ekleniyor…",
+ "pay_success_pack": "✓ Ödeme alındı. {n} paket damganız var.",
+ "modal_terms_pack": "Damga paketi: 8 € + KDV, 100 damga için tek seferlik ödeme. Paket damgalarının süresi dolmaz ve yalnızca ayın 5 ücretsiz damgasından sonra kullanılır."
 }
