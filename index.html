@@ -1708,9 +1708,9 @@ async function startCheckout(lookupKey, mode) {
     if (res.status === 401) { openModal('auth'); return; }
     var data = await res.json();
     if (data.url) window.location.href = data.url;
-    else alert(data.error || 'Checkout error');
+    else alert((I18N[currentLang] || I18N.en).plan_pro_alert || I18N.en.plan_pro_alert);
   } catch(e) {
-    alert(I18N[currentLang].plan_pro_alert);
+    alert((I18N[currentLang] || I18N.en).plan_pro_alert || I18N.en.plan_pro_alert);
   }
 }
 
