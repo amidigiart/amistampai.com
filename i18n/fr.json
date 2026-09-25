@@ -154,7 +154,7 @@
  "modal_terms_p4": "Offre gratuite : 5 tampons/mois. Pro : 9,99 € HT/mois illimité (tarif early adopter). Enterprise : tarif sur mesure. Les prix peuvent changer avec un préavis de 30 jours.",
  "modal_aiact_title": "Avis de transparence AI Act",
  "modal_aiact_h1": "Classification",
- "modal_aiact_p1": "AmiStampAI est un outil cryptographique. Il ne prend pas de décisions, ne génère pas de contenu et ne classe pas de données à l’aide de l’IA. Il utilise des algorithmes cryptographiques standard (ECDSA, SHA-256) et la technologie blockchain.",
+ "modal_aiact_p1": "AmiStampAI est un outil cryptographique. Le tampon lui-même est réalisé avec une cryptographie standard (ECDSA, SHA-256) et la blockchain, pas avec l'IA. La seule fonction IA est facultative : sur demande, Mistral Small (Mistral AI, UE) suggère un sens et une intention pour un texte que vous avez saisi ; vous pouvez modifier ou ignorer la suggestion.",
  "modal_aiact_h2": "Utilisation avec du contenu IA",
  "modal_aiact_p2": "Lorsqu’AmiStampAI sert à tamponner du contenu généré par l’IA, il assure la traçabilité : qui a demandé le contenu, quelle était l’intention déclarée et quand il a été créé. Cela soutient les exigences de transparence de l’AI Act de l’UE.",
  "modal_aiact_h3": "Supervision humaine",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Connexion à AmiStampAI. Cela ne coûte rien et ne donne aucun accès à vos fonds.",
  "auth_web3_failed": "La connexion par portefeuille n'a pas fonctionné.",
  "passkey_added": "Clé d'accès ajoutée. La prochaine fois, vous pourrez vous connecter avec, sans e-mail.",
- "passkey_add_failed": "La clé d'accès n'a pas pu être ajoutée."
+ "passkey_add_failed": "La clé d'accès n'a pas pu être ajoutée.",
+ "ai_suggest_btn": "✨ Suggérer le sens et l'intention",
+ "ai_suggest_note": "Facultatif. Seul le texte ci-dessus est envoyé à Mistral AI (UE) pour une suggestion ; nous ne le conservons pas. Les fichiers ne quittent jamais votre appareil.",
+ "ai_suggest_working": "Interrogation de Mistral AI…",
+ "ai_suggest_done": "✓ Suggestion ajoutée. Relisez-la et modifiez ce qui ne convient pas avant de tamponner.",
+ "ai_suggest_failed": "Pas de suggestion pour le moment. Écrivez vous-même le sens et l'intention, ou réessayez plus tard.",
+ "ai_suggest_limit": "Vous avez utilisé les suggestions IA du jour. Revenez demain.",
+ "ai_suggest_need_text": "Saisissez ou collez d'abord un texte ci-dessus.",
+ "ai_suggest_file_only": "Les suggestions ne fonctionnent que pour du texte saisi : les fichiers ne quittent jamais votre appareil.",
+ "ai_suggest_overwrite": "Remplacer ce que vous avez déjà écrit dans le sens et l'intention par la suggestion IA ?",
+ "modal_privacy_ai": "Suggestions IA : uniquement si vous appuyez sur le bouton de suggestion, le texte que vous avez saisi (jamais les fichiers) est envoyé à Mistral AI, dans l'UE, pour proposer un sens et une intention. Nous ne le conservons pas ; Mistral AI le traite selon ses conditions d'API."
 }

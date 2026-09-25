@@ -154,7 +154,7 @@
  "modal_terms_p4": "Gratis: 5 stempels/maand. Pro: € 9,99/maand excl. btw onbeperkt (early-adopterprijs). Enterprise: prijs op maat. Prijzen kunnen met 30 dagen opzegtermijn wijzigen.",
  "modal_aiact_title": "Transparantieverklaring AI Act",
  "modal_aiact_h1": "Classificatie",
- "modal_aiact_p1": "AmiStampAI is een cryptografisch hulpmiddel. Het neemt geen beslissingen, genereert geen inhoud en classificeert geen gegevens met AI. Het gebruikt standaard cryptografische algoritmen (ECDSA, SHA-256) en blockchaintechnologie.",
+ "modal_aiact_p1": "AmiStampAI is een cryptografisch hulpmiddel. De stempel zelf wordt gemaakt met standaardcryptografie (ECDSA, SHA-256) en blockchain, niet met AI. De enige AI-functie is optioneel: op verzoek stelt Mistral Small (Mistral AI, EU) een betekenis en een bedoeling voor bij een tekst die je typte; je kunt het voorstel aanpassen of negeren.",
  "modal_aiact_h2": "Gebruik met AI-inhoud",
  "modal_aiact_p2": "Wanneer AmiStampAI wordt gebruikt om door AI gemaakte inhoud te stempelen, zorgt het voor traceerbaarheid: wie de inhoud heeft aangevraagd, wat de verklaarde intentie was en wanneer het is gemaakt. Dit ondersteunt de transparantie-eisen van de EU AI Act.",
  "modal_aiact_h3": "Menselijk toezicht",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Inloggen bij AmiStampAI. Het kost niets en geeft geen toegang tot je tegoed.",
  "auth_web3_failed": "Inloggen met wallet is niet gelukt.",
  "passkey_added": "Passkey toegevoegd. De volgende keer kun je ermee inloggen, zonder e-mail.",
- "passkey_add_failed": "De passkey kon niet worden toegevoegd."
+ "passkey_add_failed": "De passkey kon niet worden toegevoegd.",
+ "ai_suggest_btn": "✨ Betekenis en bedoeling voorstellen",
+ "ai_suggest_note": "Optioneel. Alleen de tekst hierboven wordt voor een voorstel naar Mistral AI (EU) gestuurd; wij bewaren hem niet. Bestanden verlaten je apparaat nooit.",
+ "ai_suggest_working": "Mistral AI wordt gevraagd…",
+ "ai_suggest_done": "✓ Voorstel ingevuld. Lees het en pas aan wat niet klopt voordat je stempelt.",
+ "ai_suggest_failed": "Nu geen voorstel. Schrijf de betekenis en bedoeling zelf of probeer het later opnieuw.",
+ "ai_suggest_limit": "Je hebt de AI-voorstellen van vandaag gebruikt. Kom morgen terug.",
+ "ai_suggest_need_text": "Typ of plak eerst hierboven een tekst.",
+ "ai_suggest_file_only": "Voorstellen werken alleen voor getypte tekst: bestanden verlaten je apparaat nooit.",
+ "ai_suggest_overwrite": "Wat je al bij betekenis en bedoeling schreef vervangen door het AI-voorstel?",
+ "modal_privacy_ai": "AI-voorstellen: alleen als je op de voorstelknop drukt, wordt de tekst die je typte (nooit bestanden) naar Mistral AI in de EU gestuurd om een betekenis en een bedoeling voor te stellen. Wij bewaren hem niet; Mistral AI verwerkt hem volgens zijn API-voorwaarden."
 }

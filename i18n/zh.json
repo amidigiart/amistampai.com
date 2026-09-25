@@ -154,7 +154,7 @@
  "modal_terms_p4": "免费版：每月5个印章。Pro：每月9.99欧元（不含增值税）无限使用（早期用户价格）。Enterprise：定制价格。价格可能在提前30天通知后调整。",
  "modal_aiact_title": "《人工智能法》透明度声明",
  "modal_aiact_h1": "分类",
- "modal_aiact_p1": "AmiStampAI是一个密码学工具。它不使用AI做决策、生成内容或对数据分类。它使用标准密码学算法（ECDSA、SHA-256）和区块链技术。",
+ "modal_aiact_p1": "AmiStampAI 是一个密码学工具。印章本身由标准密码学（ECDSA、SHA-256）和区块链生成，而非 AI。唯一的 AI 功能是可选的：应您的请求，Mistral Small（Mistral AI，欧盟）会为您输入的文本建议含义和意图；您可以修改或忽略该建议。",
  "modal_aiact_h2": "用于AI内容时",
  "modal_aiact_p2": "当AmiStampAI用于为AI生成内容盖章时，它提供可追溯性：谁请求了该内容、声明的意图是什么、何时创建。这支持欧盟《人工智能法》的透明度要求。",
  "modal_aiact_h3": "人类监督",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "登录 AmiStampAI。不收取任何费用，也不会授予对您资金的访问权限。",
  "auth_web3_failed": "钱包登录未成功。",
  "passkey_added": "已添加通行密钥。下次您可以用它登录，无需电子邮件。",
- "passkey_add_failed": "无法添加通行密钥。"
+ "passkey_add_failed": "无法添加通行密钥。",
+ "ai_suggest_btn": "✨ 建议含义和意图",
+ "ai_suggest_note": "可选。只有上面的文本会发送给 Mistral AI（欧盟）以获取建议；我们不会存储。文件永远不会离开您的设备。",
+ "ai_suggest_working": "正在询问 Mistral AI…",
+ "ai_suggest_done": "✓ 已填入建议。盖章前请阅读并修改不合适的内容。",
+ "ai_suggest_failed": "暂时没有建议。请自行填写含义和意图，或稍后再试。",
+ "ai_suggest_limit": "您今天的 AI 建议次数已用完。请明天再来。",
+ "ai_suggest_need_text": "请先在上方输入或粘贴文本。",
+ "ai_suggest_file_only": "建议仅适用于输入的文本：文件永远不会离开您的设备。",
+ "ai_suggest_overwrite": "用 AI 建议替换您已填写的含义和意图吗？",
+ "modal_privacy_ai": "AI 建议：只有在您按下建议按钮时，您输入的文本（绝不包括文件）才会发送给欧盟的 Mistral AI，以提出含义和意图。我们不会存储；Mistral AI 按其 API 条款处理。"
 }

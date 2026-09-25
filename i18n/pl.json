@@ -154,7 +154,7 @@
  "modal_terms_p4": "Darmowy: 5 pieczęci/miesiąc. Pro: 9,99 €/miesiąc + VAT bez limitu (cena dla pierwszych użytkowników). Enterprise: wycena indywidualna. Ceny mogą się zmienić z 30-dniowym wyprzedzeniem.",
  "modal_aiact_title": "Informacja o przejrzystości zgodnie z AI Act",
  "modal_aiact_h1": "Klasyfikacja",
- "modal_aiact_p1": "AmiStampAI to narzędzie kryptograficzne. Nie podejmuje decyzji, nie generuje treści i nie klasyfikuje danych za pomocą AI. Korzysta ze standardowych algorytmów kryptograficznych (ECDSA, SHA-256) i technologii blockchain.",
+ "modal_aiact_p1": "AmiStampAI to narzędzie kryptograficzne. Sama pieczęć powstaje dzięki standardowej kryptografii (ECDSA, SHA-256) i blockchainowi, nie dzięki AI. Jedyna funkcja AI jest opcjonalna: na prośbę Mistral Small (Mistral AI, UE) proponuje sens i intencję dla wpisanego przez Ciebie tekstu; możesz sugestię zmienić lub zignorować.",
  "modal_aiact_h2": "Użycie z treściami AI",
  "modal_aiact_p2": "Gdy AmiStampAI służy do pieczętowania treści generowanych przez AI, zapewnia identyfikowalność: kto zlecił treść, jaka była zadeklarowana intencja i kiedy powstała. Wspiera to wymogi przejrzystości AI Act UE.",
  "modal_aiact_h3": "Nadzór człowieka",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Logowanie do AmiStampAI. Nic nie kosztuje i nie daje dostępu do Twoich środków.",
  "auth_web3_failed": "Logowanie portfelem nie powiodło się.",
  "passkey_added": "Klucz dostępu dodany. Następnym razem zalogujesz się nim bez e-maila.",
- "passkey_add_failed": "Nie udało się dodać klucza dostępu."
+ "passkey_add_failed": "Nie udało się dodać klucza dostępu.",
+ "ai_suggest_btn": "✨ Zaproponuj sens i intencję",
+ "ai_suggest_note": "Opcjonalnie. Tylko powyższy tekst jest wysyłany do Mistral AI (UE) po sugestię; nie przechowujemy go. Pliki nigdy nie opuszczają Twojego urządzenia.",
+ "ai_suggest_working": "Pytam Mistral AI…",
+ "ai_suggest_done": "✓ Sugestia wpisana. Przeczytaj ją i zmień to, co nie pasuje, zanim przybijesz pieczęć.",
+ "ai_suggest_failed": "Teraz brak sugestii. Wpisz sens i intencję samodzielnie lub spróbuj później.",
+ "ai_suggest_limit": "Wykorzystałeś dzisiejsze sugestie AI. Wróć jutro.",
+ "ai_suggest_need_text": "Najpierw wpisz lub wklej tekst powyżej.",
+ "ai_suggest_file_only": "Sugestie działają tylko dla wpisanego tekstu: pliki nigdy nie opuszczają Twojego urządzenia.",
+ "ai_suggest_overwrite": "Zastąpić to, co już wpisałeś w sensie i intencji, sugestią AI?",
+ "modal_privacy_ai": "Sugestie AI: tylko jeśli naciśniesz przycisk sugestii, wpisany przez Ciebie tekst (nigdy pliki) jest wysyłany do Mistral AI w UE, aby zaproponować sens i intencję. Nie przechowujemy go; Mistral AI przetwarza go zgodnie ze swoimi warunkami API."
 }

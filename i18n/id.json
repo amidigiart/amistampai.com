@@ -154,7 +154,7 @@
  "modal_terms_p4": "Gratis: 5 stempel/bulan. Pro: €9,99/bulan + PPN tanpa batas (harga pengguna awal). Enterprise: harga khusus. Harga dapat berubah dengan pemberitahuan 30 hari sebelumnya.",
  "modal_aiact_title": "Pemberitahuan transparansi AI Act",
  "modal_aiact_h1": "Klasifikasi",
- "modal_aiact_p1": "AmiStampAI adalah alat kriptografis. Alat ini tidak membuat keputusan, tidak menghasilkan konten, dan tidak mengklasifikasikan data menggunakan AI. Alat ini memakai algoritma kriptografis standar (ECDSA, SHA-256) dan teknologi blockchain.",
+ "modal_aiact_p1": "AmiStampAI adalah alat kriptografi. Stempel itu sendiri dibuat dengan kriptografi standar (ECDSA, SHA-256) dan blockchain, bukan dengan AI. Satu-satunya fitur AI bersifat opsional: atas permintaan, Mistral Small (Mistral AI, UE) menyarankan makna dan niat untuk teks yang Anda ketik; Anda dapat mengubah atau mengabaikan saran tersebut.",
  "modal_aiact_h2": "Penggunaan dengan konten AI",
  "modal_aiact_p2": "Saat AmiStampAI digunakan untuk menstempel konten buatan AI, alat ini memberikan ketertelusuran: siapa yang meminta konten, apa niat yang dinyatakan, dan kapan konten dibuat. Ini mendukung persyaratan transparansi EU AI Act.",
  "modal_aiact_h3": "Pengawasan manusia",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Masuk ke AmiStampAI. Gratis dan tidak memberi akses ke dana Anda.",
  "auth_web3_failed": "Masuk dengan dompet gagal.",
  "passkey_added": "Passkey ditambahkan. Lain kali Anda bisa masuk dengannya tanpa email.",
- "passkey_add_failed": "Passkey tidak dapat ditambahkan."
+ "passkey_add_failed": "Passkey tidak dapat ditambahkan.",
+ "ai_suggest_btn": "✨ Sarankan makna dan niat",
+ "ai_suggest_note": "Opsional. Hanya teks di atas yang dikirim ke Mistral AI (UE) untuk saran; kami tidak menyimpannya. File tidak pernah meninggalkan perangkat Anda.",
+ "ai_suggest_working": "Menanyakan Mistral AI…",
+ "ai_suggest_done": "✓ Saran sudah diisi. Baca dan ubah yang tidak sesuai sebelum menstempel.",
+ "ai_suggest_failed": "Belum ada saran. Tulis sendiri makna dan niat, atau coba lagi nanti.",
+ "ai_suggest_limit": "Anda sudah memakai saran AI hari ini. Kembali besok.",
+ "ai_suggest_need_text": "Ketik atau tempel teks di atas terlebih dahulu.",
+ "ai_suggest_file_only": "Saran hanya berfungsi untuk teks yang diketik: file tidak pernah meninggalkan perangkat Anda.",
+ "ai_suggest_overwrite": "Ganti yang sudah Anda tulis di makna dan niat dengan saran AI?",
+ "modal_privacy_ai": "Saran AI: hanya jika Anda menekan tombol saran, teks yang Anda ketik (bukan file) dikirim ke Mistral AI di UE untuk mengusulkan makna dan niat. Kami tidak menyimpannya; Mistral AI memprosesnya sesuai ketentuan API-nya."
 }

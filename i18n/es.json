@@ -154,7 +154,7 @@
  "modal_terms_p4": "Gratis: 5 sellos/mes. Pro: 9,99 €/mes + IVA ilimitado (precio de lanzamiento). Enterprise: precio a medida. Los precios pueden cambiar con 30 días de preaviso.",
  "modal_aiact_title": "Aviso de transparencia de la Ley de IA",
  "modal_aiact_h1": "Clasificación",
- "modal_aiact_p1": "AmiStampAI es una herramienta criptográfica. No toma decisiones, no genera contenido ni clasifica datos mediante IA. Utiliza algoritmos criptográficos estándar (ECDSA, SHA-256) y tecnología blockchain.",
+ "modal_aiact_p1": "AmiStampAI es una herramienta criptográfica. El sello en sí se hace con criptografía estándar (ECDSA, SHA-256) y blockchain, no con IA. La única función de IA es opcional: a petición, Mistral Small (Mistral AI, UE) sugiere un sentido y una intención para un texto que escribiste; puedes modificar o ignorar la sugerencia.",
  "modal_aiact_h2": "Uso con contenido de IA",
  "modal_aiact_p2": "Cuando AmiStampAI se usa para sellar contenido generado por IA, aporta trazabilidad: quién solicitó el contenido, cuál fue la intención declarada y cuándo se creó. Esto respalda los requisitos de transparencia de la Ley de IA de la UE.",
  "modal_aiact_h3": "Supervisión humana",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Inicio de sesión en AmiStampAI. No cuesta nada y no da acceso a tus fondos.",
  "auth_web3_failed": "El inicio de sesión con cartera no funcionó.",
  "passkey_added": "Llave de acceso añadida. La próxima vez podrás entrar con ella, sin correo.",
- "passkey_add_failed": "No se pudo añadir la llave de acceso."
+ "passkey_add_failed": "No se pudo añadir la llave de acceso.",
+ "ai_suggest_btn": "✨ Sugerir sentido e intención",
+ "ai_suggest_note": "Opcional. Solo el texto de arriba se envía a Mistral AI (UE) para una sugerencia; no lo guardamos. Los archivos nunca salen de tu dispositivo.",
+ "ai_suggest_working": "Consultando a Mistral AI…",
+ "ai_suggest_done": "✓ Sugerencia añadida. Léela y cambia lo que no encaje antes de sellar.",
+ "ai_suggest_failed": "Ahora no hay sugerencia. Escribe tú el sentido y la intención, o inténtalo más tarde.",
+ "ai_suggest_limit": "Has usado las sugerencias de IA de hoy. Vuelve mañana.",
+ "ai_suggest_need_text": "Escribe o pega primero un texto arriba.",
+ "ai_suggest_file_only": "Las sugerencias solo funcionan con texto escrito: los archivos nunca salen de tu dispositivo.",
+ "ai_suggest_overwrite": "¿Reemplazar lo que ya escribiste en sentido e intención con la sugerencia de IA?",
+ "modal_privacy_ai": "Sugerencias de IA: solo si pulsas el botón de sugerencia, el texto que escribiste (nunca archivos) se envía a Mistral AI, en la UE, para proponer un sentido y una intención. No lo guardamos; Mistral AI lo procesa según sus condiciones de API."
 }
