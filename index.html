@@ -2522,7 +2522,10 @@ $('ai-suggest-btn').addEventListener('click', async function () {
 
 // ============ coherence certificate (opt-in; signed by AntetAI, holds only hashes) ============
 // Public keys AntetAI signs certificates with, pinned here: a certificate signed with any other key is not trusted.
-var ATTESTATION_KEYS = {};
+var ATTESTATION_KEYS = {
+  // 2026-09-25, monetizare/attestation_public_key.json. Keep old keys here when rotating.
+  '3ce1ece803b63f0aeafe1cfff9e6bad08856d8886eb184cde7746a15435b3851': {"crv": "P-256", "kty": "EC", "x": "kjC84yEOxcZSfUbeO8jB81PfYJv7MAm23KRMlxPWXwM", "y": "odQEMelbjYLk9QkNZ9_vpFL8frOMuXR1hjv0mQ3rzXw"}
+};
 async function requestCoherence(text, sens, intentie) {
   try {
     var res = await fetch(AI_API + '/amistamp/coherence', {
