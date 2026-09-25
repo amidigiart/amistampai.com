@@ -731,6 +731,11 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <label for="demo-intentie" data-i18n="demo_label_intentie">Intention (intentie)</label>
         <input type="text" id="demo-intentie" data-i18n-placeholder="demo_ph_intentie" placeholder="Why are you creating this?">
 
+        <div class="coherence-opt">
+          <label><input type="checkbox" id="coherence-check"> <span data-i18n="coh_check">Coherence certificate (AI): check that the meaning and intention fit the text</span></label>
+          <span class="ai-suggest-note" data-i18n="coh_note">Optional, typed text only. The text and your two declarations are checked by AntetAI (with Mistral AI, EU) in memory and not stored. The certificate holds only their hashes and is signed by AntetAI.</span>
+        </div>
+
         <button type="button" class="btn btn-primary" id="demo-stamp" style="margin-top:8px" data-i18n="demo_btn_stamp">Stamp it</button>
         <p class="key-note"><span data-i18n="demo_key_label">Your signing key on this device:</span> <code id="demo-key-fp">…</code></p>
       </div>
@@ -748,6 +753,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
         <div class="result-label" data-i18n="demo_result_pubkey">Public key (JWK):</div>
         <div class="hash" id="result-pubkey"></div>
         <div class="stamp-status" id="result-status"></div>
+        <div class="coherence-result" id="result-coherence"></div>
 
         <div class="proof-row">
           <button type="button" class="btn btn-primary" id="btn-download-proof" data-i18n="proof_download">Download proof (.json)</button>
@@ -1070,6 +1076,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <p data-i18n="modal_privacy_p1">AmiStampAI performs all cryptographic operations (key generation, signing, hashing) locally in your browser using the Web Crypto API. Your private keys never leave your device.</p>
     <h3 data-i18n="modal_privacy_h2">What We Store</h3>
     <p data-i18n="modal_privacy_ai">AI suggestions: only if you press the suggestion button, the text you typed (never files) is sent to Mistral AI in the EU to propose a meaning and an intention. We do not store it; Mistral AI processes it under its API terms.</p>
+    <p data-i18n="modal_privacy_coh">Coherence certificate: only if you tick it, the text you typed (never files) and your meaning and intention are sent to AntetAI, which checks them with Mistral AI in the EU. Nothing is stored; the certificate contains only hashes.</p>
     <p data-i18n="modal_privacy_p2">If you choose to persist a stamped document, we store: the document hash, the meaning declaration, the intention declaration, the signature, and the timestamp. We do not store the original content unless you explicitly include it.</p>
     <h3 data-i18n="modal_privacy_h3">Cookies</h3>
     <p data-i18n="modal_privacy_p3">We use only essential cookies for session persistence and cookie consent state. No tracking, no analytics, no third-party cookies.</p>
@@ -1959,6 +1966,16 @@ function toggleAuthMenu() {
 .ai-suggest-row .btn{align-self:flex-start;padding:8px 14px;font-size:.82rem}
 .ai-suggest-note{font-size:.72rem;color:var(--muted);line-height:1.45}
 .ai-suggest-status{font-size:.78rem;min-height:1em}
+.coherence-opt{display:flex;flex-direction:column;gap:4px;margin:2px 0 10px}
+.coherence-opt label{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0}
+.coherence-opt input{margin-top:3px;accent-color:var(--teal)}
+.coherence-result{font-size:.8rem;line-height:1.5;margin-top:8px}
+.coherence-result:empty{display:none}
+.coherence-result .coh-level{font-weight:700}
+.coherence-result .coh-level.coerent{color:var(--teal)}
+.coherence-result .coh-level.partial,.coherence-result .coh-level.neverificat{color:var(--gold)}
+.coherence-result .coh-level.necoerent{color:var(--accent)}
+.coherence-result .coh-detail{color:var(--muted)}
 .key-note code{color:var(--gold)}
 .result-label{font-size:.8rem;color:var(--text);font-weight:700;margin-top:10px}
 .proof-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
@@ -2065,7 +2082,26 @@ Object.assign(I18N.en, {
   ai_suggest_need_text: 'Type or paste a text above first.',
   ai_suggest_file_only: 'Suggestions work only for typed text: files never leave your device.',
   ai_suggest_overwrite: 'Replace what you already wrote in meaning and intention with the AI suggestion?',
-  modal_privacy_ai: 'AI suggestions: only if you press the suggestion button, the text you typed (never files) is sent to Mistral AI in the EU to propose a meaning and an intention. We do not store it; Mistral AI processes it under its API terms.'
+  modal_privacy_ai: 'AI suggestions: only if you press the suggestion button, the text you typed (never files) is sent to Mistral AI in the EU to propose a meaning and an intention. We do not store it; Mistral AI processes it under its API terms.',
+  coh_check: 'Coherence certificate (AI): check that the meaning and intention fit the text',
+  coh_note: 'Optional, typed text only. The text and your two declarations are checked by AntetAI (with Mistral AI, EU) in memory and not stored. The certificate holds only their hashes and is signed by AntetAI.',
+  coh_working: 'Checking coherence…',
+  coh_failed: 'The coherence check is not available right now.',
+  coh_limit: 'You have used today\'s coherence checks.',
+  coh_confirm_without: 'Stamp without the coherence certificate?',
+  coh_file_only: 'The coherence certificate works only for typed text: files never leave your device. Uncheck it to stamp a file.',
+  coh_confirm_mismatch: 'AntetAI thinks the meaning you declared does not fit the text: {reason}\n\nStamp anyway? The certificate will record this.',
+  coh_level_coerent: '✓ Coherent: the meaning and intention fit the text',
+  coh_level_partial: 'Partly coherent: check the meaning and intention',
+  coh_level_necoerent: '✗ Not coherent: the declared meaning does not fit the text',
+  coh_level_neverificat: 'Checked for manipulation only (the AI check was unavailable)',
+  coh_match: 'meaning fits {pct}%',
+  coh_manip_clean: 'no manipulation found',
+  coh_manip_found: 'manipulation signals in the text',
+  check_coherence: 'Coherence certificate (AntetAI): {level}',
+  check_coherence_bad: 'The coherence certificate does not belong to this stamp or its signature is invalid',
+  check_coherence_unknown_key: 'Coherence certificate signed with a key this page does not know',
+  modal_privacy_coh: 'Coherence certificate: only if you tick it, the text you typed (never files) and your meaning and intention are sent to AntetAI, which checks them with Mistral AI in the EU. Nothing is stored; the certificate contains only hashes.'
 });
 Object.assign(I18N.ro, {
   demo_label_file: 'Document',
@@ -2155,7 +2191,26 @@ Object.assign(I18N.ro, {
   ai_suggest_need_text: 'Scrie sau lipește întâi un text mai sus.',
   ai_suggest_file_only: 'Sugestiile funcționează doar pentru text scris: fișierele nu părăsesc dispozitivul.',
   ai_suggest_overwrite: 'Înlocuiești ce ai scris deja la sens și intenție cu sugestia AI?',
-  modal_privacy_ai: 'Sugestii AI: doar dacă apeși butonul de sugestie, textul scris de tine (niciodată fișierele) e trimis la Mistral AI, în UE, pentru a propune un sens și o intenție. Nu îl stocăm; Mistral AI îl procesează conform condițiilor API-ului său.'
+  modal_privacy_ai: 'Sugestii AI: doar dacă apeși butonul de sugestie, textul scris de tine (niciodată fișierele) e trimis la Mistral AI, în UE, pentru a propune un sens și o intenție. Nu îl stocăm; Mistral AI îl procesează conform condițiilor API-ului său.',
+  coh_check: 'Atestat de coerență (AI): verifică dacă sensul și intenția se potrivesc cu textul',
+  coh_note: 'Opțional, doar pentru text scris. Textul și cele două declarații sunt verificate de AntetAI (cu Mistral AI, UE) în memorie și nu sunt stocate. Atestatul conține doar hash-urile lor și e semnat de AntetAI.',
+  coh_working: 'Verific coerența…',
+  coh_failed: 'Verificarea coerenței nu e disponibilă acum.',
+  coh_limit: 'Ai folosit verificările de coerență de azi.',
+  coh_confirm_without: 'Ștampilezi fără atestatul de coerență?',
+  coh_file_only: 'Atestatul de coerență funcționează doar pentru text scris: fișierele nu părăsesc dispozitivul. Debifează-l ca să ștampilezi un fișier.',
+  coh_confirm_mismatch: 'AntetAI consideră că sensul declarat nu se potrivește cu textul: {reason}\n\nȘtampilezi totuși? Atestatul va consemna asta.',
+  coh_level_coerent: '✓ Coerent: sensul și intenția se potrivesc cu textul',
+  coh_level_partial: 'Parțial coerent: verifică sensul și intenția',
+  coh_level_necoerent: '✗ Necoerent: sensul declarat nu se potrivește cu textul',
+  coh_level_neverificat: 'Verificat doar pentru manipulare (verificarea AI nu a fost disponibilă)',
+  coh_match: 'sensul se potrivește {pct}%',
+  coh_manip_clean: 'fără manipulare',
+  coh_manip_found: 'semnale de manipulare în text',
+  check_coherence: 'Atestat de coerență (AntetAI): {level}',
+  check_coherence_bad: 'Atestatul de coerență nu aparține acestei ștampile sau semnătura lui nu e validă',
+  check_coherence_unknown_key: 'Atestat de coerență semnat cu o cheie pe care pagina nu o cunoaște',
+  modal_privacy_coh: 'Atestat de coerență: doar dacă îl bifezi, textul scris de tine (niciodată fișierele) împreună cu sensul și intenția sunt trimise la AntetAI, care le verifică cu Mistral AI în UE. Nu se stochează nimic; atestatul conține doar hash-uri.'
 });
 applyLang(currentLang);
 function t(k, vars) {
@@ -2281,6 +2336,7 @@ function proofOf(s) {
     signature: { alg: 'ECDSA-P256-SHA256', encoding: 'base64-ieee-p1363', value: s.signature },
     public_key: s.public_key,
     anchors: s.anchors || [],
+    coherence: s.coherence || undefined,
     verify_url: 'https://amistampai.com/?verify=' + encodeURIComponent(s.id),
     how_to_verify: 'Open amistampai.com, section Verify, choose this file (and optionally the original document). ' +
       'Manually: stamp_hash = SHA-256 of JSON(stamp) with keys sorted and no spaces; the signature is ECDSA P-256/SHA-256 over the same bytes; ' +
@@ -2292,7 +2348,8 @@ function stampFromProof(p) {
   var st = p.stamp;
   return { id: p.id, v: st.v, doc_hash: st.doc_hash, doc_kind: st.doc_kind, sens: st.sens, intentie: st.intentie,
     created_at: st.created_at, key_fp: st.key_fp, stamp_hash: p.stamp_hash, signature: p.signature.value,
-    public_key: p.public_key, anchors: Array.isArray(p.anchors) ? p.anchors : [] };
+    public_key: p.public_key, anchors: Array.isArray(p.anchors) ? p.anchors : [],
+    coherence: p.coherence && p.coherence.signed ? p.coherence : null };
 }
 function stampFromRow(r) {
   var m = r.context_graph || {};
@@ -2300,7 +2357,8 @@ function stampFromRow(r) {
   if (!anchors.length && r.blockchain_tx) anchors = [{ network: r.blockchain_network, tx: r.blockchain_tx }];
   return { id: r.id, v: m.v, doc_hash: r.content_hash, doc_kind: m.doc_kind, sens: r.sens, intentie: r.intentie,
     created_at: new Date(r.created_at).toISOString(), key_fp: m.key_fp, stamp_hash: m.stamp_hash,
-    signature: r.signature, public_key: r.public_key, anchors: anchors };
+    signature: r.signature, public_key: r.public_key, anchors: anchors,
+    coherence: m.coherence && m.coherence.signed ? m.coherence : null };
 }
 
 // ============ create stamp ============
@@ -2365,6 +2423,22 @@ $('demo-stamp').addEventListener('click', async function () {
   var used = (await allStamps()).filter(function (s) { return s.created_at >= monthStart; }).length;
   if (!plan.pro && used >= FREE_LIMIT && !(plan.packLeft > 0)) { alert(t('demo_limit_reached')); return; }
 
+  var coherence = null;
+  if ($('coherence-check').checked) {
+    if (pendingFile || !text) { alert(t('coh_file_only')); return; }
+    btn.disabled = true; btn.textContent = t('coh_working');
+    var c = await requestCoherence(text, sens, intentie);
+    btn.disabled = false; btn.textContent = t('demo_btn_stamp');
+    if (c.error) {
+      if (!confirm(t(c.error === 'limit' ? 'coh_limit' : 'coh_failed') + '\n\n' + t('coh_confirm_without'))) return;
+    } else {
+      var body = JSON.parse(c.signed);
+      if (body.level === 'necoerent' &&
+          !confirm(t('coh_confirm_mismatch', { reason: cohReason(body) }))) return;
+      coherence = c;
+    }
+  }
+
   btn.disabled = true; btn.textContent = t('demo_btn_stamping');
   try {
     var key = await deviceKey();
@@ -2381,6 +2455,7 @@ $('demo-stamp').addEventListener('click', async function () {
     s.stamp_hash = await sha256Hex(bytes);
     s.public_key = key.publicJwk;
     s.anchors = [];
+    s.coherence = coherence;
     s.synced = 0;
     await putStamp(s);
     currentStamp = s;
@@ -2400,6 +2475,7 @@ function showResult(s) {
   setText('result-sig', s.signature);
   setText('result-pubkey', JSON.stringify(s.public_key));
   setText('result-status', t('demo_result_status'));
+  renderCoherence($('result-coherence'), s.coherence);
   $('anchor-status').textContent = '';
   $('commit-output').style.display = 'none';
   $('commit-status').textContent = '';
@@ -2444,6 +2520,69 @@ $('ai-suggest-btn').addEventListener('click', async function () {
   btn.disabled = false;
 });
 
+// ============ coherence certificate (opt-in; signed by AntetAI, holds only hashes) ============
+// Public keys AntetAI signs certificates with, pinned here: a certificate signed with any other key is not trusted.
+var ATTESTATION_KEYS = {
+  // 2026-09-25, monetizare/attestation_public_key.json. Keep old keys here when rotating.
+  '3ce1ece803b63f0aeafe1cfff9e6bad08856d8886eb184cde7746a15435b3851': {"crv": "P-256", "kty": "EC", "x": "kjC84yEOxcZSfUbeO8jB81PfYJv7MAm23KRMlxPWXwM", "y": "odQEMelbjYLk9QkNZ9_vpFL8frOMuXR1hjv0mQ3rzXw"}
+};
+async function requestCoherence(text, sens, intentie) {
+  try {
+    var res = await fetch(AI_API + '/amistamp/coherence', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, sens: sens, intentie: intentie })
+    });
+    var d = await res.json().catch(function () { return {}; });
+    if (res.status === 429) return { error: 'limit' };
+    if (!res.ok || !d.signed || !d.signature) return { error: 'failed' };
+    return { signed: d.signed, signature: d.signature, key_id: d.key_id, alg: d.alg };
+  } catch (e) { return { error: 'failed' }; }
+}
+function cohReason(body) {
+  var m = body.meaning;
+  return m ? (currentLang === 'ro' ? m.reason_ro : m.reason_en) || '' : '';
+}
+function renderCoherence(target, c) {
+  target.textContent = '';
+  if (!c || !c.signed) return;
+  var body; try { body = JSON.parse(c.signed); } catch (e) { return; }
+  var lvl = document.createElement('div');
+  lvl.className = 'coh-level ' + body.level;
+  lvl.textContent = t('coh_level_' + body.level);
+  target.appendChild(lvl);
+  var parts = [];
+  if (body.meaning) parts.push(t('coh_match', { pct: Math.round(body.meaning.match * 100) }));
+  var mv = body.manipulation && body.manipulation.verdict;
+  parts.push(t(mv === 'CURAT' || mv === 'ATENTIE_MINORA' ? 'coh_manip_clean' : 'coh_manip_found'));
+  var reason = cohReason(body);
+  var det = document.createElement('div');
+  det.className = 'coh-detail';
+  det.textContent = parts.join(' · ') + (reason ? ' — ' + reason : '');
+  target.appendChild(det);
+}
+// null = no certificate; otherwise { state: 'ok' | 'na' | 'fail', text, detail }
+async function verifyCoherence(s) {
+  var c = s.coherence;
+  if (!c || !c.signed) return null;
+  var body;
+  try { body = JSON.parse(c.signed); } catch (e) { return { state: 'fail', text: t('check_coherence_bad') }; }
+  var jwk = ATTESTATION_KEYS[body.key_id];
+  if (!jwk) return { state: 'na', text: t('check_coherence_unknown_key') };
+  var ok = false;
+  try {
+    var pub = await crypto.subtle.importKey('jwk', { kty: jwk.kty, crv: jwk.crv, x: jwk.x, y: jwk.y },
+      { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
+    ok = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, pub, unb64(c.signature), enc.encode(c.signed));
+  } catch (e) { ok = false; }
+  ok = ok && body.format === 'amistamp-coherence-1' && body.doc_hash === s.doc_hash &&
+       body.sens_hash === await sha256Hex(s.sens) && body.intentie_hash === await sha256Hex(s.intentie);
+  if (!ok) return { state: 'fail', text: t('check_coherence_bad') };
+  var reason = cohReason(body);
+  return { state: body.level === 'coerent' ? 'ok' : 'na',
+           text: t('check_coherence', { level: t('coh_level_' + body.level) }),
+           detail: (body.issued_at || '') + (reason ? ' — ' + reason : '') };
+}
+
 // ============ proof file + link ============
 $('btn-download-proof').addEventListener('click', function () {
   if (!currentStamp) return;
@@ -2472,7 +2611,7 @@ async function syncStamps() {
       id: s.id, user_id: session.user.id, content_hash: s.doc_hash, sens: s.sens, intentie: s.intentie,
       signature: s.signature, public_key: s.public_key, created_at: s.created_at,
       blockchain_tx: last ? last.tx : null, blockchain_network: last ? last.network : null,
-      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors }
+      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors, coherence: s.coherence || null }
     });
     // 23505: already in the cloud; 42501: row-level security refused it, i.e. monthly quota used up
     if (!res.error || res.error.code === '23505') { s.synced = 1; await putStamp(s); }
@@ -2487,7 +2626,7 @@ async function pushAnchorToCloud(s) {
   try {
     await sb.from('stamps').update({
       blockchain_tx: last.tx, blockchain_network: last.network,
-      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors }
+      context_graph: { v: s.v, doc_kind: s.doc_kind, key_fp: s.key_fp, stamp_hash: s.stamp_hash, anchors: s.anchors, coherence: s.coherence || null }
     }).eq('id', s.id);
   } catch (e) {}
 }
@@ -2753,6 +2892,8 @@ async function verifyStamp(s, providedDocHash) {
   checks.push({ state: !s.stamp_hash || sh === s.stamp_hash ? 'ok' : 'fail', text: t('check_hash'), detail: short(sh, 16, 8) });
   if (providedDocHash) checks.push({ state: providedDocHash === s.doc_hash ? 'ok' : 'fail', text: t('check_doc') });
   else checks.push({ state: 'na', text: t('check_doc_na') });
+  var coh = await verifyCoherence(s);
+  if (coh) checks.push(coh);
   var anchors = (s.anchors || []).filter(function (a) { return a && typeof a.tx === 'string'; });
   if (!anchors.length) checks.push({ state: 'na', text: t('check_anchor_na') });
   for (var i = 0; i < anchors.length; i++) {
