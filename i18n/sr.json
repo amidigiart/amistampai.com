@@ -154,7 +154,7 @@
  "modal_terms_p4": "Besplatno: 5 pečata/mesec. Pro: 9,99 €/mesec + PDV neograničeno (cena za prve korisnike). Enterprise: cena po dogovoru. Cene se mogu promeniti uz obaveštenje 30 dana unapred.",
  "modal_aiact_title": "Obaveštenje o transparentnosti po AI Act-u",
  "modal_aiact_h1": "Klasifikacija",
- "modal_aiact_p1": "AmiStampAI je kriptografski alat. Ne donosi odluke, ne stvara sadržaj i ne klasifikuje podatke pomoću VI. Koristi standardne kriptografske algoritme (ECDSA, SHA-256) i blokčejn tehnologiju.",
+ "modal_aiact_p1": "AmiStampAI je kriptografski alat. Sam pečat se pravi standardnom kriptografijom (ECDSA, SHA-256) i blokčejnom, ne veštačkom inteligencijom. Jedina AI funkcija je opciona: na zahtev, Mistral Small (Mistral AI, EU) predlaže smisao i nameru za tekst koji si napisao; predlog možeš da izmeniš ili zanemariš.",
  "modal_aiact_h2": "Upotreba sa VI sadržajem",
  "modal_aiact_p2": "Kada se AmiStampAI koristi za pečatiranje sadržaja koji je stvorila VI, obezbeđuje sledljivost: ko je zatražio sadržaj, koja je izjavljena namera i kada je nastao. To podržava zahteve transparentnosti EU AI Act-a.",
  "modal_aiact_h3": "Ljudski nadzor",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Prijava na AmiStampAI. Ništa ne košta i ne daje pristup tvojim sredstvima.",
  "auth_web3_failed": "Prijava pomoću novčanika nije uspela.",
  "passkey_added": "Passkey je dodat. Sledeći put možeš da se prijaviš njime, bez e-pošte.",
- "passkey_add_failed": "Passkey nije mogao da se doda."
+ "passkey_add_failed": "Passkey nije mogao da se doda.",
+ "ai_suggest_btn": "✨ Predloži smisao i nameru",
+ "ai_suggest_note": "Opciono. Samo gornji tekst se šalje Mistral AI (EU) radi predloga; ne čuvamo ga. Fajlovi nikad ne napuštaju tvoj uređaj.",
+ "ai_suggest_working": "Pitam Mistral AI…",
+ "ai_suggest_done": "✓ Predlog je upisan. Pročitaj ga i promeni ono što ne odgovara pre pečatiranja.",
+ "ai_suggest_failed": "Trenutno nema predloga. Napiši sam smisao i nameru ili pokušaj kasnije.",
+ "ai_suggest_limit": "Iskoristio si današnje AI predloge. Vrati se sutra.",
+ "ai_suggest_need_text": "Prvo upiši ili nalepi tekst iznad.",
+ "ai_suggest_file_only": "Predlozi rade samo za upisan tekst: fajlovi nikad ne napuštaju tvoj uređaj.",
+ "ai_suggest_overwrite": "Zameniti ono što si već upisao u smisao i nameru AI predlogom?",
+ "modal_privacy_ai": "AI predlozi: samo ako pritisneš dugme za predlog, tekst koji si upisao (nikad fajlovi) šalje se Mistral AI u EU da predloži smisao i nameru. Ne čuvamo ga; Mistral AI ga obrađuje prema svojim API uslovima."
 }

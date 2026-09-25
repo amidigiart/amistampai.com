@@ -154,7 +154,7 @@
  "modal_terms_p4": "Ücretsiz: ayda 5 mühür. Pro: ayda 9,99 € + KDV sınırsız (erken kullanıcı fiyatı). Enterprise: özel fiyat. Fiyatlar 30 gün önceden bildirilerek değişebilir.",
  "modal_aiact_title": "Yapay Zekâ Yasası şeffaflık bildirimi",
  "modal_aiact_h1": "Sınıflandırma",
- "modal_aiact_p1": "AmiStampAI kriptografik bir araçtır. Yapay zekâ ile karar vermez, içerik üretmez veya veri sınıflandırmaz. Standart kriptografik algoritmalar (ECDSA, SHA-256) ve blokzincir teknolojisi kullanır.",
+ "modal_aiact_p1": "AmiStampAI kriptografik bir araçtır. Damganın kendisi yapay zekâ ile değil, standart kriptografi (ECDSA, SHA-256) ve blok zinciriyle oluşturulur. Tek AI özelliği isteğe bağlıdır: istek üzerine Mistral Small (Mistral AI, AB), yazdığınız bir metin için anlam ve niyet önerir; öneriyi değiştirebilir veya yok sayabilirsiniz.",
  "modal_aiact_h2": "Yapay zekâ içeriğiyle kullanım",
  "modal_aiact_p2": "AmiStampAI yapay zekâ üretimi içeriği mühürlemek için kullanıldığında izlenebilirlik sağlar: içeriği kimin istediği, beyan edilen niyetin ne olduğu ve ne zaman oluşturulduğu. Bu, AB Yapay Zekâ Yasası’nın şeffaflık gerekliliklerini destekler.",
  "modal_aiact_h3": "İnsan gözetimi",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "AmiStampAI girişi. Hiçbir ücreti yoktur ve fonlarınıza erişim vermez.",
  "auth_web3_failed": "Cüzdanla giriş başarısız oldu.",
  "passkey_added": "Geçiş anahtarı eklendi. Bir dahaki sefere e-posta olmadan onunla giriş yapabilirsiniz.",
- "passkey_add_failed": "Geçiş anahtarı eklenemedi."
+ "passkey_add_failed": "Geçiş anahtarı eklenemedi.",
+ "ai_suggest_btn": "✨ Anlam ve niyet öner",
+ "ai_suggest_note": "İsteğe bağlı. Yalnızca yukarıdaki metin öneri için Mistral AI’ye (AB) gönderilir; saklamayız. Dosyalar cihazınızdan asla çıkmaz.",
+ "ai_suggest_working": "Mistral AI’ye soruluyor…",
+ "ai_suggest_done": "✓ Öneri dolduruldu. Damgalamadan önce okuyun ve uymayanı değiştirin.",
+ "ai_suggest_failed": "Şu anda öneri yok. Anlamı ve niyeti kendiniz yazın veya daha sonra deneyin.",
+ "ai_suggest_limit": "Bugünkü AI önerilerini kullandınız. Yarın tekrar gelin.",
+ "ai_suggest_need_text": "Önce yukarıya bir metin yazın veya yapıştırın.",
+ "ai_suggest_file_only": "Öneriler yalnızca yazılmış metin için çalışır: dosyalar cihazınızdan asla çıkmaz.",
+ "ai_suggest_overwrite": "Anlam ve niyete zaten yazdıklarınız AI önerisiyle değiştirilsin mi?",
+ "modal_privacy_ai": "AI önerileri: yalnızca öneri düğmesine basarsanız, yazdığınız metin (asla dosyalar) anlam ve niyet önermesi için AB’deki Mistral AI’ye gönderilir. Saklamayız; Mistral AI bunu API koşullarına göre işler."
 }

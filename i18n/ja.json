@@ -154,7 +154,7 @@
  "modal_terms_p4": "無料: 月5件。Pro: 月額9.99ユーロ（税別）で無制限（早期利用者価格）。Enterprise: 個別見積もり。料金は30日前の通知により変更されることがあります。",
  "modal_aiact_title": "AI Act 透明性に関する通知",
  "modal_aiact_h1": "分類",
- "modal_aiact_p1": "AmiStampAIは暗号ツールです。AIを使って意思決定、コンテンツ生成、データ分類を行うことはありません。標準的な暗号アルゴリズム（ECDSA、SHA-256）とブロックチェーン技術を使用しています。",
+ "modal_aiact_p1": "AmiStampAI は暗号ツールです。スタンプ自体は AI ではなく、標準的な暗号技術（ECDSA、SHA-256）とブロックチェーンで作成されます。唯一の AI 機能は任意です：ご希望に応じて Mistral Small（Mistral AI、EU）が入力したテキストの意味と意図を提案します。提案は修正も無視もできます。",
  "modal_aiact_h2": "AIコンテンツでの利用",
  "modal_aiact_p2": "AmiStampAIでAI生成コンテンツをスタンプすると、誰がコンテンツを依頼したか、宣言された意図は何か、いつ作成されたかを追跡できます。これはEU AI Actの透明性要件を支えます。",
  "modal_aiact_h3": "人による監督",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "AmiStampAI へのログインです。費用はかからず、資金へのアクセス権も与えません。",
  "auth_web3_failed": "ウォレットでのログインに失敗しました。",
  "passkey_added": "パスキーを追加しました。次回からメールなしでログインできます。",
- "passkey_add_failed": "パスキーを追加できませんでした。"
+ "passkey_add_failed": "パスキーを追加できませんでした。",
+ "ai_suggest_btn": "✨ 意味と意図を提案",
+ "ai_suggest_note": "任意。上のテキストだけが提案のために Mistral AI（EU）へ送信されます。保存はしません。ファイルが端末から出ることはありません。",
+ "ai_suggest_working": "Mistral AI に問い合わせています…",
+ "ai_suggest_done": "✓ 提案を入力しました。スタンプする前に読んで、合わない部分を修正してください。",
+ "ai_suggest_failed": "現在提案できません。意味と意図をご自分で入力するか、後でもう一度お試しください。",
+ "ai_suggest_limit": "本日の AI 提案を使い切りました。明日またお越しください。",
+ "ai_suggest_need_text": "まず上にテキストを入力または貼り付けてください。",
+ "ai_suggest_file_only": "提案は入力したテキストにのみ使えます。ファイルが端末から出ることはありません。",
+ "ai_suggest_overwrite": "意味と意図にすでに書いた内容を AI の提案で置き換えますか？",
+ "modal_privacy_ai": "AI 提案：提案ボタンを押した場合のみ、入力したテキスト（ファイルは対象外）が意味と意図を提案するため EU の Mistral AI に送信されます。当方では保存せず、Mistral AI が API 規約に従って処理します。"
 }

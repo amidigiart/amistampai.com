@@ -719,6 +719,11 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
 
         <label for="demo-content" data-i18n="demo_label_content">Content to stamp</label>
         <textarea id="demo-content" data-i18n-placeholder="demo_ph_content" placeholder="Your document, text, or declaration..."></textarea>
+        <div class="ai-suggest-row">
+          <button type="button" class="btn btn-outline" id="ai-suggest-btn" data-i18n="ai_suggest_btn">✨ Suggest meaning and intention</button>
+          <span class="ai-suggest-note" data-i18n="ai_suggest_note">Optional. Only the text above is sent to Mistral AI (EU) for a suggestion; we do not store it. Files never leave your device.</span>
+          <span class="ai-suggest-status" id="ai-suggest-status" role="status"></span>
+        </div>
 
         <label for="demo-sens" data-i18n="demo_label_sens">Meaning (sens)</label>
         <input type="text" id="demo-sens" data-i18n-placeholder="demo_ph_sens" placeholder="What does this document mean?">
@@ -1064,6 +1069,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <h3 data-i18n="modal_privacy_h1">Data Processing</h3>
     <p data-i18n="modal_privacy_p1">AmiStampAI performs all cryptographic operations (key generation, signing, hashing) locally in your browser using the Web Crypto API. Your private keys never leave your device.</p>
     <h3 data-i18n="modal_privacy_h2">What We Store</h3>
+    <p data-i18n="modal_privacy_ai">AI suggestions: only if you press the suggestion button, the text you typed (never files) is sent to Mistral AI in the EU to propose a meaning and an intention. We do not store it; Mistral AI processes it under its API terms.</p>
     <p data-i18n="modal_privacy_p2">If you choose to persist a stamped document, we store: the document hash, the meaning declaration, the intention declaration, the signature, and the timestamp. We do not store the original content unless you explicitly include it.</p>
     <h3 data-i18n="modal_privacy_h3">Cookies</h3>
     <p data-i18n="modal_privacy_p3">We use only essential cookies for session persistence and cookie consent state. No tracking, no analytics, no third-party cookies.</p>
@@ -1095,7 +1101,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
     <button class="modal-close" onclick="closeModal('aiact')">&times;</button>
     <h2 data-i18n="modal_aiact_title">AI Act Transparency Notice</h2>
     <h3 data-i18n="modal_aiact_h1">Classification</h3>
-    <p data-i18n="modal_aiact_p1">AmiStampAI is a cryptographic tool. It does not make decisions, generate content, or classify data using AI. It uses standard cryptographic algorithms (ECDSA, SHA-256) and blockchain technology.</p>
+    <p data-i18n="modal_aiact_p1">AmiStampAI is a cryptographic tool. The stamp itself is made with standard cryptography (ECDSA, SHA-256) and blockchain, not with AI. The only AI feature is optional: on request, Mistral Small (Mistral AI, EU) suggests a meaning and an intention for a text you typed; you can edit or ignore the suggestion.</p>
     <h3 data-i18n="modal_aiact_h2">When Used with AI Content</h3>
     <p data-i18n="modal_aiact_p2">When AmiStampAI is used to stamp AI-generated content, it provides traceability: who requested the content, what was the declared intention, and when was it created. This supports EU AI Act transparency requirements.</p>
     <h3 data-i18n="modal_aiact_h3">Human Oversight</h3>
@@ -1308,7 +1314,7 @@ var I18N = {
     modal_terms_p4: "Free tier: 5 stamps/month. Pro: €9.99/month + VAT, unlimited (early adopter pricing). Enterprise: custom pricing. Prices may change with 30 days notice.",
     modal_aiact_title: "AI Act Transparency Notice",
     modal_aiact_h1: "Classification",
-    modal_aiact_p1: "AmiStampAI is a cryptographic tool. It does not make decisions, generate content, or classify data using AI. It uses standard cryptographic algorithms (ECDSA, SHA-256) and blockchain technology.",
+    modal_aiact_p1: "AmiStampAI is a cryptographic tool. The stamp itself is made with standard cryptography (ECDSA, SHA-256) and blockchain, not with AI. The only AI feature is optional: on request, Mistral Small (Mistral AI, EU) suggests a meaning and an intention for a text you typed; you can edit or ignore the suggestion.",
     modal_aiact_h2: "When Used with AI Content",
     modal_aiact_p2: "When AmiStampAI is used to stamp AI-generated content, it provides traceability: who requested the content, what was the declared intention, and when was it created. This supports EU AI Act transparency requirements.",
     modal_aiact_h3: "Human Oversight",
@@ -1558,7 +1564,7 @@ var I18N = {
     modal_terms_p4: "Planul gratuit: 5 ștampile/lună. Pro: €9,99/lună + TVA, nelimitat (preț early adopter). Enterprise: prețuri personalizate. Prețurile se pot modifica cu 30 de zile preaviz.",
     modal_aiact_title: "Notificare Transparență AI Act",
     modal_aiact_h1: "Clasificare",
-    modal_aiact_p1: "AmiStampAI este un instrument criptografic. Nu ia decizii, nu generează conținut și nu clasifică date folosind AI. Folosește algoritmi criptografici standard (ECDSA, SHA-256) și tehnologie blockchain.",
+    modal_aiact_p1: "AmiStampAI este un instrument criptografic. Ștampila în sine se face cu criptografie standard (ECDSA, SHA-256) și blockchain, nu cu AI. Singura funcție AI este opțională: la cerere, Mistral Small (Mistral AI, UE) sugerează un sens și o intenție pentru un text scris de tine; poți modifica sau ignora sugestia.",
     modal_aiact_h2: "Când Este Folosit cu Conținut AI",
     modal_aiact_p2: "Când AmiStampAI este folosit pentru ștampilarea conținutului generat de AI, oferă trasabilitate: cine a solicitat conținutul, care a fost intenția declarată și când a fost creat. Aceasta susține cerințele de transparență ale EU AI Act.",
     modal_aiact_h3: "Supraveghere Umană",
@@ -1949,6 +1955,10 @@ function toggleAuthMenu() {
 .drop-zone.small{min-height:44px;padding:10px}
 .drop-zone:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .key-note{font-size:.75rem;color:var(--muted);margin-top:10px;overflow-wrap:anywhere}
+.ai-suggest-row{display:flex;flex-direction:column;gap:6px;margin:-4px 0 14px}
+.ai-suggest-row .btn{align-self:flex-start;padding:8px 14px;font-size:.82rem}
+.ai-suggest-note{font-size:.72rem;color:var(--muted);line-height:1.45}
+.ai-suggest-status{font-size:.78rem;min-height:1em}
 .key-note code{color:var(--gold)}
 .result-label{font-size:.8rem;color:var(--text);font-weight:700;margin-top:10px}
 .proof-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
@@ -2045,7 +2055,17 @@ Object.assign(I18N.en, {
   auth_web3_statement: 'Sign in to AmiStampAI. This costs nothing and gives no access to your funds.',
   auth_web3_failed: 'Wallet sign-in did not work.',
   passkey_added: 'Passkey added. Next time you can sign in with it, without email.',
-  passkey_add_failed: 'The passkey could not be added.'
+  passkey_add_failed: 'The passkey could not be added.',
+  ai_suggest_btn: '✨ Suggest meaning and intention',
+  ai_suggest_note: 'Optional. Only the text above is sent to Mistral AI (EU) for a suggestion; we do not store it. Files never leave your device.',
+  ai_suggest_working: 'Asking Mistral AI…',
+  ai_suggest_done: '✓ Suggestion filled in. Read it and change what does not fit before stamping.',
+  ai_suggest_failed: 'No suggestion right now. Write the meaning and intention yourself, or try again later.',
+  ai_suggest_limit: 'You have used today\'s AI suggestions. Come back tomorrow.',
+  ai_suggest_need_text: 'Type or paste a text above first.',
+  ai_suggest_file_only: 'Suggestions work only for typed text: files never leave your device.',
+  ai_suggest_overwrite: 'Replace what you already wrote in meaning and intention with the AI suggestion?',
+  modal_privacy_ai: 'AI suggestions: only if you press the suggestion button, the text you typed (never files) is sent to Mistral AI in the EU to propose a meaning and an intention. We do not store it; Mistral AI processes it under its API terms.'
 });
 Object.assign(I18N.ro, {
   demo_label_file: 'Document',
@@ -2125,7 +2145,17 @@ Object.assign(I18N.ro, {
   auth_web3_statement: 'Intru în AmiStampAI. Nu costă nimic și nu dă acces la fondurile mele.',
   auth_web3_failed: 'Login-ul cu wallet nu a mers.',
   passkey_added: 'Passkey adăugat. Data viitoare poți intra cu el, fără email.',
-  passkey_add_failed: 'Passkey-ul nu a putut fi adăugat.'
+  passkey_add_failed: 'Passkey-ul nu a putut fi adăugat.',
+  ai_suggest_btn: '✨ Sugerează sensul și intenția',
+  ai_suggest_note: 'Opțional. Doar textul de mai sus e trimis la Mistral AI (UE) pentru o sugestie; nu îl stocăm. Fișierele nu părăsesc dispozitivul.',
+  ai_suggest_working: 'Întreb Mistral AI…',
+  ai_suggest_done: '✓ Sugestie completată. Citește-o și schimbă ce nu se potrivește înainte de ștampilare.',
+  ai_suggest_failed: 'Nicio sugestie acum. Scrie tu sensul și intenția sau încearcă mai târziu.',
+  ai_suggest_limit: 'Ai folosit sugestiile AI de azi. Revino mâine.',
+  ai_suggest_need_text: 'Scrie sau lipește întâi un text mai sus.',
+  ai_suggest_file_only: 'Sugestiile funcționează doar pentru text scris: fișierele nu părăsesc dispozitivul.',
+  ai_suggest_overwrite: 'Înlocuiești ce ai scris deja la sens și intenție cu sugestia AI?',
+  modal_privacy_ai: 'Sugestii AI: doar dacă apeși butonul de sugestie, textul scris de tine (niciodată fișierele) e trimis la Mistral AI, în UE, pentru a propune un sens și o intenție. Nu îl stocăm; Mistral AI îl procesează conform condițiilor API-ului său.'
 });
 applyLang(currentLang);
 function t(k, vars) {
@@ -2381,6 +2411,38 @@ function showResult(s) {
 }
 
 deviceKey().then(function (k) { $('demo-key-fp').textContent = k.fp.slice(0, 16); }).catch(function () {});
+
+// ============ AI suggestion for meaning + intention (opt-in; only the typed text is sent) ============
+var AI_API = 'https://antetai-api-production.up.railway.app';
+$('ai-suggest-btn').addEventListener('click', async function () {
+  var btn = this, status = $('ai-suggest-status');
+  var text = normText($('demo-content').value);
+  if (!text) {
+    statusLine(status, 'warn', t(pendingFile ? 'ai_suggest_file_only' : 'ai_suggest_need_text'));
+    return;
+  }
+  if (($('demo-sens').value.trim() || $('demo-intentie').value.trim()) && !confirm(t('ai_suggest_overwrite'))) return;
+  btn.disabled = true;
+  statusLine(status, 'warn', t('ai_suggest_working'));
+  try {
+    var res = await fetch(AI_API + '/amistamp/suggest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, locale: currentLang })
+    });
+    var d = await res.json().catch(function () { return {}; });
+    if (res.status === 429) statusLine(status, 'err', t('ai_suggest_limit'));
+    else if (!res.ok || !d.sens || !d.intentie) statusLine(status, 'err', t('ai_suggest_failed'));
+    else {
+      $('demo-sens').value = d.sens;
+      $('demo-intentie').value = d.intentie;
+      statusLine(status, 'ok', t('ai_suggest_done'));
+    }
+  } catch (e) {
+    statusLine(status, 'err', t('ai_suggest_failed'));
+  }
+  btn.disabled = false;
+});
 
 // ============ proof file + link ============
 $('btn-download-proof').addEventListener('click', function () {

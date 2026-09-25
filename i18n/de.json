@@ -154,7 +154,7 @@
  "modal_terms_p4": "Kostenlos: 5 Stempel/Monat. Pro: 9,99 €/Monat zzgl. MwSt. unbegrenzt (Early-Adopter-Preis). Enterprise: individueller Preis. Preise können sich mit 30 Tagen Vorankündigung ändern.",
  "modal_aiact_title": "Transparenzhinweis nach AI Act",
  "modal_aiact_h1": "Einstufung",
- "modal_aiact_p1": "AmiStampAI ist ein kryptografisches Werkzeug. Es trifft keine Entscheidungen, erzeugt keine Inhalte und klassifiziert keine Daten mittels KI. Es nutzt kryptografische Standardalgorithmen (ECDSA, SHA-256) und Blockchain-Technologie.",
+ "modal_aiact_p1": "AmiStampAI ist ein kryptografisches Werkzeug. Der Stempel selbst entsteht mit Standard-Kryptografie (ECDSA, SHA-256) und Blockchain, nicht mit KI. Die einzige KI-Funktion ist optional: Auf Wunsch schlägt Mistral Small (Mistral AI, EU) eine Bedeutung und eine Absicht für einen von dir geschriebenen Text vor; du kannst den Vorschlag ändern oder ignorieren.",
  "modal_aiact_h2": "Einsatz mit KI-Inhalten",
  "modal_aiact_p2": "Wird AmiStampAI zum Stempeln KI-generierter Inhalte verwendet, sorgt es für Rückverfolgbarkeit: wer den Inhalt angefordert hat, welche Absicht erklärt wurde und wann er erstellt wurde. Das unterstützt die Transparenzpflichten des EU AI Act.",
  "modal_aiact_h3": "Menschliche Aufsicht",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Anmeldung bei AmiStampAI. Kostet nichts und gibt keinen Zugriff auf dein Guthaben.",
  "auth_web3_failed": "Die Anmeldung mit Wallet hat nicht funktioniert.",
  "passkey_added": "Passkey hinzugefügt. Beim nächsten Mal kannst du dich damit ohne E-Mail anmelden.",
- "passkey_add_failed": "Der Passkey konnte nicht hinzugefügt werden."
+ "passkey_add_failed": "Der Passkey konnte nicht hinzugefügt werden.",
+ "ai_suggest_btn": "✨ Bedeutung und Absicht vorschlagen",
+ "ai_suggest_note": "Optional. Nur der obige Text wird für einen Vorschlag an Mistral AI (EU) gesendet; wir speichern ihn nicht. Dateien verlassen dein Gerät nie.",
+ "ai_suggest_working": "Frage Mistral AI…",
+ "ai_suggest_done": "✓ Vorschlag eingetragen. Lies ihn und ändere, was nicht passt, bevor du stempelst.",
+ "ai_suggest_failed": "Gerade kein Vorschlag. Schreibe Bedeutung und Absicht selbst oder versuche es später.",
+ "ai_suggest_limit": "Du hast die KI-Vorschläge für heute aufgebraucht. Komm morgen wieder.",
+ "ai_suggest_need_text": "Gib zuerst oben einen Text ein oder füge ihn ein.",
+ "ai_suggest_file_only": "Vorschläge gibt es nur für eingegebenen Text: Dateien verlassen dein Gerät nie.",
+ "ai_suggest_overwrite": "Was du bei Bedeutung und Absicht geschrieben hast, durch den KI-Vorschlag ersetzen?",
+ "modal_privacy_ai": "KI-Vorschläge: Nur wenn du auf die Vorschlagstaste drückst, wird der von dir eingegebene Text (nie Dateien) an Mistral AI in der EU gesendet, um eine Bedeutung und eine Absicht vorzuschlagen. Wir speichern ihn nicht; Mistral AI verarbeitet ihn gemäß seinen API-Bedingungen."
 }

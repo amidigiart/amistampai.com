@@ -154,7 +154,7 @@
  "modal_terms_p4": "Ingyenes: havi 5 pecsét. Pro: havi 9,99 € + ÁFA korlátlanul (korai felhasználói ár). Enterprise: egyedi ár. Az árak 30 napos előzetes értesítéssel változhatnak.",
  "modal_aiact_title": "AI Act átláthatósági tájékoztató",
  "modal_aiact_h1": "Besorolás",
- "modal_aiact_p1": "Az AmiStampAI kriptográfiai eszköz. Nem hoz döntéseket, nem hoz létre tartalmat, és nem osztályoz adatokat MI-vel. Szabványos kriptográfiai algoritmusokat (ECDSA, SHA-256) és blokklánc-technológiát használ.",
+ "modal_aiact_p1": "Az AmiStampAI kriptográfiai eszköz. Maga a bélyegző szabványos kriptográfiával (ECDSA, SHA-256) és blokklánccal készül, nem AI-val. Az egyetlen AI-funkció opcionális: kérésre a Mistral Small (Mistral AI, EU) jelentést és szándékot javasol az általad írt szöveghez; a javaslatot módosíthatod vagy figyelmen kívül hagyhatod.",
  "modal_aiact_h2": "Használat MI-tartalommal",
  "modal_aiact_p2": "Ha az AmiStampAI-t MI által létrehozott tartalom lepecsételésére használják, nyomon követhetőséget biztosít: ki kérte a tartalmat, mi volt a kijelentett szándék, és mikor jött létre. Ez támogatja az EU AI Act átláthatósági követelményeit.",
  "modal_aiact_h3": "Emberi felügyelet",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "Belépés az AmiStampAI-ba. Semmibe sem kerül, és nem ad hozzáférést a pénzedhez.",
  "auth_web3_failed": "A tárcás belépés nem sikerült.",
  "passkey_added": "Passkey hozzáadva. Legközelebb ezzel, e-mail nélkül léphetsz be.",
- "passkey_add_failed": "A passkey-t nem sikerült hozzáadni."
+ "passkey_add_failed": "A passkey-t nem sikerült hozzáadni.",
+ "ai_suggest_btn": "✨ Jelentés és szándék javaslata",
+ "ai_suggest_note": "Opcionális. Csak a fenti szöveg kerül el a Mistral AI-hoz (EU) javaslatért; nem tároljuk. A fájlok soha nem hagyják el az eszközödet.",
+ "ai_suggest_working": "Kérdezem a Mistral AI-t…",
+ "ai_suggest_done": "✓ Javaslat kitöltve. Olvasd el, és módosítsd, ami nem illik, mielőtt bélyegzel.",
+ "ai_suggest_failed": "Most nincs javaslat. Írd meg magad a jelentést és a szándékot, vagy próbáld később.",
+ "ai_suggest_limit": "Elhasználtad a mai AI-javaslatokat. Gyere vissza holnap.",
+ "ai_suggest_need_text": "Előbb írj vagy illessz be fent egy szöveget.",
+ "ai_suggest_file_only": "A javaslatok csak beírt szövegre működnek: a fájlok soha nem hagyják el az eszközödet.",
+ "ai_suggest_overwrite": "Lecseréled a jelentésnél és szándéknál már beírtakat az AI-javaslatra?",
+ "modal_privacy_ai": "AI-javaslatok: csak ha megnyomod a javaslat gombot, az általad beírt szöveg (fájlok soha) a Mistral AI-hoz kerül az EU-ban, hogy jelentést és szándékot javasoljon. Nem tároljuk; a Mistral AI az API-feltételei szerint dolgozza fel."
 }

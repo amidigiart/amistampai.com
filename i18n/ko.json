@@ -154,7 +154,7 @@
  "modal_terms_p4": "무료: 월 5개 스탬프. Pro: 월 9.99유로(부가세 별도) 무제한(얼리 어답터 가격). Enterprise: 맞춤 요금. 요금은 30일 전 통지 후 변경될 수 있습니다.",
  "modal_aiact_title": "AI Act 투명성 고지",
  "modal_aiact_h1": "분류",
- "modal_aiact_p1": "AmiStampAI는 암호 도구입니다. AI를 사용해 결정을 내리거나 콘텐츠를 생성하거나 데이터를 분류하지 않습니다. 표준 암호 알고리즘(ECDSA, SHA-256)과 블록체인 기술을 사용합니다.",
+ "modal_aiact_p1": "AmiStampAI는 암호화 도구입니다. 스탬프 자체는 AI가 아니라 표준 암호화(ECDSA, SHA-256)와 블록체인으로 만들어집니다. 유일한 AI 기능은 선택 사항입니다. 요청하면 Mistral Small(Mistral AI, EU)이 입력한 텍스트의 의미와 의도를 제안하며, 제안은 수정하거나 무시할 수 있습니다.",
  "modal_aiact_h2": "AI 콘텐츠와 함께 사용할 때",
  "modal_aiact_p2": "AmiStampAI로 AI 생성 콘텐츠를 스탬프하면 누가 콘텐츠를 요청했는지, 선언된 의도가 무엇인지, 언제 만들어졌는지 추적할 수 있습니다. 이는 EU AI Act의 투명성 요건을 뒷받침합니다.",
  "modal_aiact_h3": "인간 감독",
@@ -312,5 +312,15 @@
  "auth_web3_statement": "AmiStampAI 로그인입니다. 비용이 들지 않으며 자금에 대한 접근 권한을 주지 않습니다.",
  "auth_web3_failed": "지갑 로그인에 실패했습니다.",
  "passkey_added": "패스키가 추가되었습니다. 다음부터 이메일 없이 로그인할 수 있습니다.",
- "passkey_add_failed": "패스키를 추가할 수 없습니다."
+ "passkey_add_failed": "패스키를 추가할 수 없습니다.",
+ "ai_suggest_btn": "✨ 의미와 의도 제안",
+ "ai_suggest_note": "선택 사항입니다. 위의 텍스트만 제안을 위해 Mistral AI(EU)로 전송되며 저장하지 않습니다. 파일은 기기를 벗어나지 않습니다.",
+ "ai_suggest_working": "Mistral AI에 묻는 중…",
+ "ai_suggest_done": "✓ 제안이 입력되었습니다. 스탬프 전에 읽어 보고 맞지 않는 부분을 고치세요.",
+ "ai_suggest_failed": "지금은 제안이 없습니다. 의미와 의도를 직접 쓰거나 나중에 다시 시도하세요.",
+ "ai_suggest_limit": "오늘의 AI 제안을 모두 사용했습니다. 내일 다시 오세요.",
+ "ai_suggest_need_text": "먼저 위에 텍스트를 입력하거나 붙여 넣으세요.",
+ "ai_suggest_file_only": "제안은 입력한 텍스트에만 작동합니다. 파일은 기기를 벗어나지 않습니다.",
+ "ai_suggest_overwrite": "의미와 의도에 이미 쓴 내용을 AI 제안으로 바꿀까요?",
+ "modal_privacy_ai": "AI 제안: 제안 버튼을 누를 때만 입력한 텍스트(파일은 제외)가 의미와 의도를 제안하기 위해 EU의 Mistral AI로 전송됩니다. 저장하지 않으며 Mistral AI가 API 약관에 따라 처리합니다."
 }
