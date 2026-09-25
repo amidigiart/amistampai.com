@@ -1,5 +1,8 @@
 var SUPABASE_URL = 'https://aywcfyfqvusawqbfhwhs.supabase.co';
 var SUPABASE_ANON_KEY = 'sb_publishable_1SpMklrPQqZBfKqFpFRwaA_QNxN1RBw';
+// Supabase does not publish whether wallet sign-in is on; keep this in sync with
+// Authentication → Sign In / Providers → Web3 Wallet → Ethereum (enabled 2026-09-25).
+var WEB3_LOGIN_ENABLED = true;
 
 var _supabase = null;
 function getSupabase() {

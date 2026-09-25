@@ -1890,7 +1890,8 @@ function toggleAuthMenu() {
     .then(function (s) {
       var ext = s.external || {};
       loginOptions.passkey = !!s.passkeys_enabled && typeof sb.auth.signInWithPasskey === 'function';
-      loginOptions.web3 = !!(ext.web3_ethereum || ext.web3) && typeof sb.auth.signInWithWeb3 === 'function';
+      loginOptions.web3 = (typeof WEB3_LOGIN_ENABLED !== 'undefined' && WEB3_LOGIN_ENABLED || !!(ext.web3_ethereum || ext.web3))
+                          && typeof sb.auth.signInWithWeb3 === 'function';
       document.getElementById('auth-passkey-btn').style.display = loginOptions.passkey ? '' : 'none';
       document.getElementById('auth-passkey-hint').style.display = loginOptions.passkey ? '' : 'none';
       document.getElementById('auth-web3-btn').style.display = loginOptions.web3 ? '' : 'none';
