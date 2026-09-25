@@ -301,5 +301,16 @@
  "plan_pack_cta": "100 Stempel kaufen",
  "pay_pending_pack": "Zahlung erhalten. Die Stempel werden deinem Konto gutgeschrieben…",
  "pay_success_pack": "✓ Zahlung erhalten. Du hast {n} Paket-Stempel.",
- "modal_terms_pack": "Stempelpaket: 8 € zzgl. MwSt., Einmalzahlung für 100 Stempel. Paket-Stempel verfallen nicht und werden erst nach den 5 Gratis-Stempeln des Monats genutzt."
+ "modal_terms_pack": "Stempelpaket: 8 € zzgl. MwSt., Einmalzahlung für 100 Stempel. Paket-Stempel verfallen nicht und werden erst nach den 5 Gratis-Stempeln des Monats genutzt.",
+ "auth_btn_passkey": "Mit Passkey anmelden",
+ "auth_btn_web3": "Mit Ethereum-Wallet anmelden",
+ "auth_passkey_hint": "Passkeys funktionieren nach deiner ersten Anmeldung per E-Mail: füge einen im Kontomenü hinzu.",
+ "nav_add_passkey": "Passkey hinzufügen",
+ "auth_wallet_account": "Wallet",
+ "auth_passkey_failed": "Die Anmeldung mit Passkey hat nicht funktioniert. Nutze den E-Mail-Link oder füge nach der Anmeldung einen Passkey hinzu.",
+ "auth_no_wallet": "Keine Ethereum-Wallet in diesem Browser gefunden. Installiere MetaMask oder melde dich per E-Mail an.",
+ "auth_web3_statement": "Anmeldung bei AmiStampAI. Kostet nichts und gibt keinen Zugriff auf dein Guthaben.",
+ "auth_web3_failed": "Die Anmeldung mit Wallet hat nicht funktioniert.",
+ "passkey_added": "Passkey hinzugefügt. Beim nächsten Mal kannst du dich damit ohne E-Mail anmelden.",
+ "passkey_add_failed": "Der Passkey konnte nicht hinzugefügt werden."
 }

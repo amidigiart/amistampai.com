@@ -301,5 +301,16 @@
  "plan_pack_cta": "Comprar 100 carimbos",
  "pay_pending_pack": "Pagamento recebido. A adicionar os carimbos à sua conta…",
  "pay_success_pack": "✓ Pagamento recebido. Tem {n} carimbos de pacote.",
- "modal_terms_pack": "Pacote de carimbos: 8 € + IVA, pagamento único por 100 carimbos. Os carimbos do pacote não expiram e só são usados depois dos 5 carimbos gratuitos do mês."
+ "modal_terms_pack": "Pacote de carimbos: 8 € + IVA, pagamento único por 100 carimbos. Os carimbos do pacote não expiram e só são usados depois dos 5 carimbos gratuitos do mês.",
+ "auth_btn_passkey": "Entrar com chave de acesso",
+ "auth_btn_web3": "Entrar com uma carteira Ethereum",
+ "auth_passkey_hint": "As chaves de acesso funcionam após o primeiro início de sessão por e-mail: adicione uma no menu da conta.",
+ "nav_add_passkey": "Adicionar chave de acesso",
+ "auth_wallet_account": "Carteira",
+ "auth_passkey_failed": "O início de sessão com chave de acesso não funcionou. Use a ligação por e-mail ou adicione uma chave depois de entrar.",
+ "auth_no_wallet": "Não foi encontrada nenhuma carteira Ethereum neste navegador. Instale o MetaMask ou entre com e-mail.",
+ "auth_web3_statement": "Início de sessão no AmiStampAI. Não custa nada e não dá acesso aos seus fundos.",
+ "auth_web3_failed": "O início de sessão com carteira não funcionou.",
+ "passkey_added": "Chave de acesso adicionada. Da próxima vez pode entrar com ela, sem e-mail.",
+ "passkey_add_failed": "Não foi possível adicionar a chave de acesso."
 }

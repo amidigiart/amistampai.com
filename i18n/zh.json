@@ -301,5 +301,16 @@
  "plan_pack_cta": "购买 100 个印章",
  "pay_pending_pack": "已收到付款。正在将印章添加到您的账户…",
  "pay_success_pack": "✓ 已收到付款。您有 {n} 个印章包印章。",
- "modal_terms_pack": "印章包：8 欧元（不含增值税），一次性购买 100 个印章。印章包中的印章永不过期，仅在每月 5 个免费印章用完后使用。"
+ "modal_terms_pack": "印章包：8 欧元（不含增值税），一次性购买 100 个印章。印章包中的印章永不过期，仅在每月 5 个免费印章用完后使用。",
+ "auth_btn_passkey": "使用通行密钥登录",
+ "auth_btn_web3": "使用以太坊钱包登录",
+ "auth_passkey_hint": "通行密钥需在首次通过电子邮件登录后使用：请在账户菜单中添加。",
+ "nav_add_passkey": "添加通行密钥",
+ "auth_wallet_account": "钱包",
+ "auth_passkey_failed": "通行密钥登录未成功。请使用电子邮件链接，或登录后添加通行密钥。",
+ "auth_no_wallet": "此浏览器中未找到以太坊钱包。请安装 MetaMask 或使用电子邮件登录。",
+ "auth_web3_statement": "登录 AmiStampAI。不收取任何费用，也不会授予对您资金的访问权限。",
+ "auth_web3_failed": "钱包登录未成功。",
+ "passkey_added": "已添加通行密钥。下次您可以用它登录，无需电子邮件。",
+ "passkey_add_failed": "无法添加通行密钥。"
 }

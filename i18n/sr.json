@@ -301,5 +301,16 @@
  "plan_pack_cta": "Kupi 100 pečata",
  "pay_pending_pack": "Uplata primljena. Dodajemo pečate na tvoj nalog…",
  "pay_success_pack": "✓ Uplata primljena. Imaš {n} pečata iz paketa.",
- "modal_terms_pack": "Paket pečata: 8 € + PDV, jednokratno plaćanje za 100 pečata. Pečati iz paketa ne ističu i koriste se tek posle 5 besplatnih pečata u mesecu."
+ "modal_terms_pack": "Paket pečata: 8 € + PDV, jednokratno plaćanje za 100 pečata. Pečati iz paketa ne ističu i koriste se tek posle 5 besplatnih pečata u mesecu.",
+ "auth_btn_passkey": "Prijava pomoću passkey-ja",
+ "auth_btn_web3": "Prijava pomoću Ethereum novčanika",
+ "auth_passkey_hint": "Passkey radi posle prve prijave e-poštom: dodaj ga iz menija naloga.",
+ "nav_add_passkey": "Dodaj passkey",
+ "auth_wallet_account": "Novčanik",
+ "auth_passkey_failed": "Prijava pomoću passkey-ja nije uspela. Koristi link iz e-pošte ili dodaj passkey posle prijave.",
+ "auth_no_wallet": "U ovom pregledaču nije pronađen Ethereum novčanik. Instaliraj MetaMask ili se prijavi e-poštom.",
+ "auth_web3_statement": "Prijava na AmiStampAI. Ništa ne košta i ne daje pristup tvojim sredstvima.",
+ "auth_web3_failed": "Prijava pomoću novčanika nije uspela.",
+ "passkey_added": "Passkey je dodat. Sledeći put možeš da se prijaviš njime, bez e-pošte.",
+ "passkey_add_failed": "Passkey nije mogao da se doda."
 }

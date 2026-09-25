@@ -478,6 +478,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <div class="auth-menu" id="auth-menu">
         <a href="#" onclick="showMyStamps();return false" data-i18n="nav_my_stamps">My Stamps</a>
         <a href="#" id="auth-manage-sub" style="display:none" onclick="openBillingPortal();return false" data-i18n="nav_manage_sub">Manage subscription</a>
+        <a href="#" id="auth-add-passkey" style="display:none" onclick="addPasskey();return false" data-i18n="nav_add_passkey">Add a passkey</a>
         <button onclick="handleSignOut()" data-i18n="nav_signout">Sign out</button>
       </div>
     </div>
@@ -1126,8 +1127,14 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
       <button class="btn btn-primary" id="auth-send-magic" data-i18n="auth_btn_magic">Send magic link</button>
     </div>
     <div class="auth-msg" id="auth-msg"></div>
-    <div class="auth-divider" data-i18n="auth_or">or</div>
-    <button class="btn btn-outline" id="auth-wallet-btn" style="width:100%;justify-content:center" data-i18n="auth_btn_wallet">&#128274; Connect Wallet</button>
+    <div id="auth-no-email" style="display:none">
+      <div class="auth-divider" data-i18n="auth_or">or</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-outline" id="auth-passkey-btn" style="width:100%;justify-content:center;display:none" data-i18n="auth_btn_passkey">Sign in with a passkey</button>
+        <button class="btn btn-outline" id="auth-web3-btn" style="width:100%;justify-content:center;display:none" data-i18n="auth_btn_web3">Sign in with an Ethereum wallet</button>
+      </div>
+      <p class="auth-subtitle" id="auth-passkey-hint" style="display:none;margin-top:10px;font-size:.78rem" data-i18n="auth_passkey_hint">Passkeys work after your first sign-in by email: add one from your account menu.</p>
+    </div>
   </div>
 </div>
 
@@ -1809,7 +1816,8 @@ function toggleAuthMenu() {
     var emailDisplay = document.getElementById('auth-email-display');
 
     if (session && session.user) {
-      var email = session.user.email || '';
+      // wallet accounts have no email: show the short wallet address instead
+      var email = session.user.email || walletLabel(session.user);
       loginBtn.style.display = 'none';
       userInfo.style.display = 'inline-flex';
       avatar.textContent = email.charAt(0).toUpperCase();
@@ -1863,6 +1871,72 @@ function toggleAuthMenu() {
   window.handleSignOut = async function() {
     document.getElementById('auth-menu').classList.remove('show');
     await sb.auth.signOut();
+  };
+
+  // ── sign-in without email: passkey (Supabase beta) and Ethereum wallet (SIWE / EIP-4361) ──
+  function tr(k) { var c = I18N[currentLang] || I18N.en; return c[k] || I18N.en[k] || k; }
+  function authMsg(cls, text) { var m = document.getElementById('auth-msg'); m.className = 'auth-msg ' + cls; m.textContent = text; }
+  function walletLabel(user) {
+    var found = '';
+    JSON.stringify([user.user_metadata || {}, (user.identities || []).map(function (i) { return i.identity_data || {}; })])
+      .replace(/0x[0-9a-fA-F]{40}/, function (a) { found = a; });
+    return found ? found.slice(0, 6) + '…' + found.slice(-4) : tr('auth_wallet_account');
+  }
+  var loginOptions = { passkey: false, web3: false };
+
+  // show a button only when the project has that sign-in method switched on
+  fetch(SUPABASE_URL + '/auth/v1/settings', { headers: { apikey: SUPABASE_ANON_KEY } })
+    .then(function (r) { return r.json(); })
+    .then(function (s) {
+      var ext = s.external || {};
+      loginOptions.passkey = !!s.passkeys_enabled && typeof sb.auth.signInWithPasskey === 'function';
+      loginOptions.web3 = !!(ext.web3_ethereum || ext.web3) && typeof sb.auth.signInWithWeb3 === 'function';
+      document.getElementById('auth-passkey-btn').style.display = loginOptions.passkey ? '' : 'none';
+      document.getElementById('auth-passkey-hint').style.display = loginOptions.passkey ? '' : 'none';
+      document.getElementById('auth-web3-btn').style.display = loginOptions.web3 ? '' : 'none';
+      document.getElementById('auth-no-email').style.display = (loginOptions.passkey || loginOptions.web3) ? '' : 'none';
+      sb.auth.getSession().then(function (r) { showAddPasskey(r.data.session); });
+    })
+    .catch(function () {});
+
+  function showAddPasskey(session) {
+    var a = document.getElementById('auth-add-passkey');
+    if (a) a.style.display = (loginOptions.passkey && session && session.user && session.user.email) ? '' : 'none';
+  }
+  sb.auth.onAuthStateChange(function (event, session) { showAddPasskey(session); });
+
+  document.getElementById('auth-passkey-btn').addEventListener('click', async function () {
+    this.disabled = true;
+    try {
+      var r = await sb.auth.signInWithPasskey();
+      if (r && r.error) throw r.error;
+    } catch (e) {
+      authMsg('error', tr('auth_passkey_failed') + (e && e.message ? ' (' + e.message + ')' : ''));
+    }
+    this.disabled = false;
+  });
+
+  document.getElementById('auth-web3-btn').addEventListener('click', async function () {
+    if (!window.ethereum) { authMsg('error', tr('auth_no_wallet')); return; }
+    this.disabled = true;
+    try {
+      var r = await sb.auth.signInWithWeb3({ chain: 'ethereum', statement: tr('auth_web3_statement') });
+      if (r && r.error) throw r.error;
+    } catch (e) {
+      authMsg('error', tr('auth_web3_failed') + (e && e.message ? ' (' + e.message + ')' : ''));
+    }
+    this.disabled = false;
+  });
+
+  window.addPasskey = async function () {
+    document.getElementById('auth-menu').classList.remove('show');
+    try {
+      var r = await sb.auth.registerPasskey();
+      if (r && r.error) throw r.error;
+      alert(tr('passkey_added'));
+    } catch (e) {
+      alert(tr('passkey_add_failed') + (e && e.message ? ' (' + e.message + ')' : ''));
+    }
   };
 
 })();
@@ -1959,7 +2033,18 @@ Object.assign(I18N.en, {
   plan_pack_cta: 'Buy 100 stamps',
   pay_pending_pack: 'Payment received. Adding the stamps to your account…',
   pay_success_pack: '✓ Payment received. You have {n} pack stamps.',
-  modal_terms_pack: 'Stamp Pack: €8 + VAT, one-time payment for 100 stamps. Pack stamps do not expire and are used only after the 5 free stamps of the month.'
+  modal_terms_pack: 'Stamp Pack: €8 + VAT, one-time payment for 100 stamps. Pack stamps do not expire and are used only after the 5 free stamps of the month.',
+  auth_btn_passkey: 'Sign in with a passkey',
+  auth_btn_web3: 'Sign in with an Ethereum wallet',
+  auth_passkey_hint: 'Passkeys work after your first sign-in by email: add one from your account menu.',
+  nav_add_passkey: 'Add a passkey',
+  auth_wallet_account: 'Wallet',
+  auth_passkey_failed: 'Passkey sign-in did not work. Use the email link, or add a passkey after signing in.',
+  auth_no_wallet: 'No Ethereum wallet found in this browser. Install MetaMask or sign in with email.',
+  auth_web3_statement: 'Sign in to AmiStampAI. This costs nothing and gives no access to your funds.',
+  auth_web3_failed: 'Wallet sign-in did not work.',
+  passkey_added: 'Passkey added. Next time you can sign in with it, without email.',
+  passkey_add_failed: 'The passkey could not be added.'
 });
 Object.assign(I18N.ro, {
   demo_label_file: 'Document',
@@ -2028,7 +2113,18 @@ Object.assign(I18N.ro, {
   plan_pack_cta: 'Cumpără 100 de ștampile',
   pay_pending_pack: 'Plată primită. Adăugăm ștampilele în contul tău…',
   pay_success_pack: '✓ Plată primită. Ai {n} ștampile din pachete.',
-  modal_terms_pack: 'Pachet de ștampile: 8 € + TVA, plată unică pentru 100 de ștampile. Ștampilele din pachet nu expiră și se folosesc doar după cele 5 ștampile gratuite ale lunii.'
+  modal_terms_pack: 'Pachet de ștampile: 8 € + TVA, plată unică pentru 100 de ștampile. Ștampilele din pachet nu expiră și se folosesc doar după cele 5 ștampile gratuite ale lunii.',
+  auth_btn_passkey: 'Intră cu passkey',
+  auth_btn_web3: 'Intră cu un wallet Ethereum',
+  auth_passkey_hint: 'Passkey-ul funcționează după primul login cu email: îl adaugi din meniul contului.',
+  nav_add_passkey: 'Adaugă un passkey',
+  auth_wallet_account: 'Wallet',
+  auth_passkey_failed: 'Login-ul cu passkey nu a mers. Folosește linkul pe email sau adaugă un passkey după ce intri în cont.',
+  auth_no_wallet: 'Nu am găsit un wallet Ethereum în acest browser. Instalează MetaMask sau intră cu email.',
+  auth_web3_statement: 'Intru în AmiStampAI. Nu costă nimic și nu dă acces la fondurile mele.',
+  auth_web3_failed: 'Login-ul cu wallet nu a mers.',
+  passkey_added: 'Passkey adăugat. Data viitoare poți intra cu el, fără email.',
+  passkey_add_failed: 'Passkey-ul nu a putut fi adăugat.'
 });
 applyLang(currentLang);
 function t(k, vars) {
@@ -2516,12 +2612,6 @@ $('btn-anchor-quick').addEventListener('click', async function () {
   btn.disabled = false; btn.textContent = t('chain_anchor_quick');
 });
 
-if (typeof beacon !== 'undefined' && typeof taquito !== 'undefined') {
-  $('auth-wallet-btn').onclick = async function () {
-    try { await connectTezos(isTezos(getNetwork()) ? getNetwork() : 'mainnet'); closeModal('auth'); }
-    catch (e) { var m = $('auth-msg'); m.className = 'auth-msg error'; m.textContent = e.message; }
-  };
-}
 
 // ============ private commitment (salted, VCI §6.3) ============
 async function commitmentOf(salt, docHash) { return sha256Hex('amistamp-commit-v1|' + salt + '|' + docHash); }

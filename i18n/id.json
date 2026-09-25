@@ -301,5 +301,16 @@
  "plan_pack_cta": "Beli 100 stempel",
  "pay_pending_pack": "Pembayaran diterima. Menambahkan stempel ke akun Anda…",
  "pay_success_pack": "✓ Pembayaran diterima. Anda punya {n} stempel paket.",
- "modal_terms_pack": "Paket stempel: €8 + PPN, pembayaran sekali untuk 100 stempel. Stempel paket tidak kedaluwarsa dan hanya dipakai setelah 5 stempel gratis bulan ini."
+ "modal_terms_pack": "Paket stempel: €8 + PPN, pembayaran sekali untuk 100 stempel. Stempel paket tidak kedaluwarsa dan hanya dipakai setelah 5 stempel gratis bulan ini.",
+ "auth_btn_passkey": "Masuk dengan passkey",
+ "auth_btn_web3": "Masuk dengan dompet Ethereum",
+ "auth_passkey_hint": "Passkey berfungsi setelah masuk pertama kali lewat email: tambahkan dari menu akun.",
+ "nav_add_passkey": "Tambah passkey",
+ "auth_wallet_account": "Dompet",
+ "auth_passkey_failed": "Masuk dengan passkey gagal. Gunakan tautan email atau tambahkan passkey setelah masuk.",
+ "auth_no_wallet": "Tidak ada dompet Ethereum di browser ini. Pasang MetaMask atau masuk dengan email.",
+ "auth_web3_statement": "Masuk ke AmiStampAI. Gratis dan tidak memberi akses ke dana Anda.",
+ "auth_web3_failed": "Masuk dengan dompet gagal.",
+ "passkey_added": "Passkey ditambahkan. Lain kali Anda bisa masuk dengannya tanpa email.",
+ "passkey_add_failed": "Passkey tidak dapat ditambahkan."
 }

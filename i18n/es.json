@@ -301,5 +301,16 @@
  "plan_pack_cta": "Comprar 100 sellos",
  "pay_pending_pack": "Pago recibido. Añadiendo los sellos a tu cuenta…",
  "pay_success_pack": "✓ Pago recibido. Tienes {n} sellos de paquete.",
- "modal_terms_pack": "Paquete de sellos: 8 € + IVA, pago único por 100 sellos. Los sellos del paquete no caducan y solo se usan después de los 5 sellos gratuitos del mes."
+ "modal_terms_pack": "Paquete de sellos: 8 € + IVA, pago único por 100 sellos. Los sellos del paquete no caducan y solo se usan después de los 5 sellos gratuitos del mes.",
+ "auth_btn_passkey": "Entrar con llave de acceso",
+ "auth_btn_web3": "Entrar con una cartera Ethereum",
+ "auth_passkey_hint": "Las llaves de acceso funcionan tras tu primer inicio de sesión por correo: añade una desde el menú de la cuenta.",
+ "nav_add_passkey": "Añadir llave de acceso",
+ "auth_wallet_account": "Cartera",
+ "auth_passkey_failed": "El inicio de sesión con llave de acceso no funcionó. Usa el enlace por correo o añade una llave tras iniciar sesión.",
+ "auth_no_wallet": "No se encontró ninguna cartera Ethereum en este navegador. Instala MetaMask o entra con correo.",
+ "auth_web3_statement": "Inicio de sesión en AmiStampAI. No cuesta nada y no da acceso a tus fondos.",
+ "auth_web3_failed": "El inicio de sesión con cartera no funcionó.",
+ "passkey_added": "Llave de acceso añadida. La próxima vez podrás entrar con ella, sin correo.",
+ "passkey_add_failed": "No se pudo añadir la llave de acceso."
 }

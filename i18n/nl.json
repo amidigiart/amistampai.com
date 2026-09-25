@@ -301,5 +301,16 @@
  "plan_pack_cta": "100 stempels kopen",
  "pay_pending_pack": "Betaling ontvangen. De stempels worden aan je account toegevoegd…",
  "pay_success_pack": "✓ Betaling ontvangen. Je hebt {n} pakketstempels.",
- "modal_terms_pack": "Stempelpakket: € 8 excl. btw, eenmalige betaling voor 100 stempels. Pakketstempels verlopen niet en worden pas gebruikt na de 5 gratis stempels van de maand."
+ "modal_terms_pack": "Stempelpakket: € 8 excl. btw, eenmalige betaling voor 100 stempels. Pakketstempels verlopen niet en worden pas gebruikt na de 5 gratis stempels van de maand.",
+ "auth_btn_passkey": "Inloggen met passkey",
+ "auth_btn_web3": "Inloggen met een Ethereum-wallet",
+ "auth_passkey_hint": "Passkeys werken na je eerste login per e-mail: voeg er een toe via het accountmenu.",
+ "nav_add_passkey": "Passkey toevoegen",
+ "auth_wallet_account": "Wallet",
+ "auth_passkey_failed": "Inloggen met passkey is niet gelukt. Gebruik de e-maillink of voeg na het inloggen een passkey toe.",
+ "auth_no_wallet": "Geen Ethereum-wallet gevonden in deze browser. Installeer MetaMask of log in met e-mail.",
+ "auth_web3_statement": "Inloggen bij AmiStampAI. Het kost niets en geeft geen toegang tot je tegoed.",
+ "auth_web3_failed": "Inloggen met wallet is niet gelukt.",
+ "passkey_added": "Passkey toegevoegd. De volgende keer kun je ermee inloggen, zonder e-mail.",
+ "passkey_add_failed": "De passkey kon niet worden toegevoegd."
 }

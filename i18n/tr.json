@@ -301,5 +301,16 @@
  "plan_pack_cta": "100 damga satın al",
  "pay_pending_pack": "Ödeme alındı. Damgalar hesabınıza ekleniyor…",
  "pay_success_pack": "✓ Ödeme alındı. {n} paket damganız var.",
- "modal_terms_pack": "Damga paketi: 8 € + KDV, 100 damga için tek seferlik ödeme. Paket damgalarının süresi dolmaz ve yalnızca ayın 5 ücretsiz damgasından sonra kullanılır."
+ "modal_terms_pack": "Damga paketi: 8 € + KDV, 100 damga için tek seferlik ödeme. Paket damgalarının süresi dolmaz ve yalnızca ayın 5 ücretsiz damgasından sonra kullanılır.",
+ "auth_btn_passkey": "Geçiş anahtarıyla giriş yap",
+ "auth_btn_web3": "Ethereum cüzdanıyla giriş yap",
+ "auth_passkey_hint": "Geçiş anahtarları ilk e-posta girişinizden sonra çalışır: hesap menüsünden bir tane ekleyin.",
+ "nav_add_passkey": "Geçiş anahtarı ekle",
+ "auth_wallet_account": "Cüzdan",
+ "auth_passkey_failed": "Geçiş anahtarıyla giriş başarısız oldu. E-posta bağlantısını kullanın veya giriş yaptıktan sonra bir anahtar ekleyin.",
+ "auth_no_wallet": "Bu tarayıcıda Ethereum cüzdanı bulunamadı. MetaMask kurun veya e-postayla giriş yapın.",
+ "auth_web3_statement": "AmiStampAI girişi. Hiçbir ücreti yoktur ve fonlarınıza erişim vermez.",
+ "auth_web3_failed": "Cüzdanla giriş başarısız oldu.",
+ "passkey_added": "Geçiş anahtarı eklendi. Bir dahaki sefere e-posta olmadan onunla giriş yapabilirsiniz.",
+ "passkey_add_failed": "Geçiş anahtarı eklenemedi."
 }

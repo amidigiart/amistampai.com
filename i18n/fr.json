@@ -301,5 +301,16 @@
  "plan_pack_cta": "Acheter 100 tampons",
  "pay_pending_pack": "Paiement reçu. Ajout des tampons à votre compte…",
  "pay_success_pack": "✓ Paiement reçu. Vous avez {n} tampons de pack.",
- "modal_terms_pack": "Pack de tampons : 8 € HT, paiement unique pour 100 tampons. Les tampons du pack n'expirent pas et ne sont utilisés qu'après les 5 tampons gratuits du mois."
+ "modal_terms_pack": "Pack de tampons : 8 € HT, paiement unique pour 100 tampons. Les tampons du pack n'expirent pas et ne sont utilisés qu'après les 5 tampons gratuits du mois.",
+ "auth_btn_passkey": "Se connecter avec une clé d'accès",
+ "auth_btn_web3": "Se connecter avec un portefeuille Ethereum",
+ "auth_passkey_hint": "Les clés d'accès fonctionnent après votre première connexion par e-mail : ajoutez-en une depuis le menu du compte.",
+ "nav_add_passkey": "Ajouter une clé d'accès",
+ "auth_wallet_account": "Portefeuille",
+ "auth_passkey_failed": "La connexion par clé d'accès n'a pas fonctionné. Utilisez le lien par e-mail ou ajoutez une clé après la connexion.",
+ "auth_no_wallet": "Aucun portefeuille Ethereum trouvé dans ce navigateur. Installez MetaMask ou connectez-vous par e-mail.",
+ "auth_web3_statement": "Connexion à AmiStampAI. Cela ne coûte rien et ne donne aucun accès à vos fonds.",
+ "auth_web3_failed": "La connexion par portefeuille n'a pas fonctionné.",
+ "passkey_added": "Clé d'accès ajoutée. La prochaine fois, vous pourrez vous connecter avec, sans e-mail.",
+ "passkey_add_failed": "La clé d'accès n'a pas pu être ajoutée."
 }

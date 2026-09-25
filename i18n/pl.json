@@ -301,5 +301,16 @@
  "plan_pack_cta": "Kup 100 pieczęci",
  "pay_pending_pack": "Płatność otrzymana. Dodajemy pieczęcie do Twojego konta…",
  "pay_success_pack": "✓ Płatność otrzymana. Masz {n} pieczęci z pakietu.",
- "modal_terms_pack": "Pakiet pieczęci: 8 € + VAT, płatność jednorazowa za 100 pieczęci. Pieczęcie z pakietu nie wygasają i są używane dopiero po 5 darmowych pieczęciach w miesiącu."
+ "modal_terms_pack": "Pakiet pieczęci: 8 € + VAT, płatność jednorazowa za 100 pieczęci. Pieczęcie z pakietu nie wygasają i są używane dopiero po 5 darmowych pieczęciach w miesiącu.",
+ "auth_btn_passkey": "Zaloguj się kluczem dostępu",
+ "auth_btn_web3": "Zaloguj się portfelem Ethereum",
+ "auth_passkey_hint": "Klucze dostępu działają po pierwszym logowaniu e-mailem: dodaj klucz w menu konta.",
+ "nav_add_passkey": "Dodaj klucz dostępu",
+ "auth_wallet_account": "Portfel",
+ "auth_passkey_failed": "Logowanie kluczem dostępu nie powiodło się. Użyj linku e-mail lub dodaj klucz po zalogowaniu.",
+ "auth_no_wallet": "Nie znaleziono portfela Ethereum w tej przeglądarce. Zainstaluj MetaMask lub zaloguj się e-mailem.",
+ "auth_web3_statement": "Logowanie do AmiStampAI. Nic nie kosztuje i nie daje dostępu do Twoich środków.",
+ "auth_web3_failed": "Logowanie portfelem nie powiodło się.",
+ "passkey_added": "Klucz dostępu dodany. Następnym razem zalogujesz się nim bez e-maila.",
+ "passkey_add_failed": "Nie udało się dodać klucza dostępu."
 }
