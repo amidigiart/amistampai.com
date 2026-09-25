@@ -301,5 +301,16 @@
  "plan_pack_cta": "Acquista 100 timbri",
  "pay_pending_pack": "Pagamento ricevuto. Stiamo aggiungendo i timbri al tuo account…",
  "pay_success_pack": "✓ Pagamento ricevuto. Hai {n} timbri del pacchetto.",
- "modal_terms_pack": "Pacchetto timbri: 8 € + IVA, pagamento unico per 100 timbri. I timbri del pacchetto non scadono e si usano solo dopo i 5 timbri gratuiti del mese."
+ "modal_terms_pack": "Pacchetto timbri: 8 € + IVA, pagamento unico per 100 timbri. I timbri del pacchetto non scadono e si usano solo dopo i 5 timbri gratuiti del mese.",
+ "auth_btn_passkey": "Accedi con passkey",
+ "auth_btn_web3": "Accedi con un wallet Ethereum",
+ "auth_passkey_hint": "Le passkey funzionano dopo il primo accesso via email: aggiungine una dal menu dell'account.",
+ "nav_add_passkey": "Aggiungi una passkey",
+ "auth_wallet_account": "Wallet",
+ "auth_passkey_failed": "L'accesso con passkey non ha funzionato. Usa il link via email o aggiungi una passkey dopo l'accesso.",
+ "auth_no_wallet": "Nessun wallet Ethereum trovato in questo browser. Installa MetaMask o accedi con l'email.",
+ "auth_web3_statement": "Accesso ad AmiStampAI. Non costa nulla e non dà accesso ai tuoi fondi.",
+ "auth_web3_failed": "L'accesso con wallet non ha funzionato.",
+ "passkey_added": "Passkey aggiunta. La prossima volta potrai accedere con essa, senza email.",
+ "passkey_add_failed": "Impossibile aggiungere la passkey."
 }

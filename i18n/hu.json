@@ -301,5 +301,16 @@
  "plan_pack_cta": "100 bélyegző vásárlása",
  "pay_pending_pack": "Fizetés megérkezett. A bélyegzőket hozzáadjuk a fiókodhoz…",
  "pay_success_pack": "✓ Fizetés megérkezett. {n} csomagbélyegződ van.",
- "modal_terms_pack": "Bélyegzőcsomag: 8 € + ÁFA, egyszeri fizetés 100 bélyegzőért. A csomagbélyegzők nem járnak le, és csak a hónap 5 ingyenes bélyegzője után használódnak."
+ "modal_terms_pack": "Bélyegzőcsomag: 8 € + ÁFA, egyszeri fizetés 100 bélyegzőért. A csomagbélyegzők nem járnak le, és csak a hónap 5 ingyenes bélyegzője után használódnak.",
+ "auth_btn_passkey": "Belépés passkey-jel",
+ "auth_btn_web3": "Belépés Ethereum-tárcával",
+ "auth_passkey_hint": "A passkey az első e-mailes belépés után működik: add hozzá a fiókmenüben.",
+ "nav_add_passkey": "Passkey hozzáadása",
+ "auth_wallet_account": "Tárca",
+ "auth_passkey_failed": "A passkey-es belépés nem sikerült. Használd az e-mailes linket, vagy belépés után adj hozzá passkey-t.",
+ "auth_no_wallet": "Nem található Ethereum-tárca ebben a böngészőben. Telepítsd a MetaMaskot, vagy lépj be e-maillel.",
+ "auth_web3_statement": "Belépés az AmiStampAI-ba. Semmibe sem kerül, és nem ad hozzáférést a pénzedhez.",
+ "auth_web3_failed": "A tárcás belépés nem sikerült.",
+ "passkey_added": "Passkey hozzáadva. Legközelebb ezzel, e-mail nélkül léphetsz be.",
+ "passkey_add_failed": "A passkey-t nem sikerült hozzáadni."
 }

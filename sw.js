@@ -1,4 +1,4 @@
-var CACHE_NAME = 'amistampai-v7';
+var CACHE_NAME = 'amistampai-v8';
 var ASSETS = [
   '/',
   '/index.html',
