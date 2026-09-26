@@ -256,7 +256,7 @@
  "proof_download": "Pobierz dowód (.json)",
  "proof_copy_link": "Kopiuj link weryfikacyjny",
  "proof_copied": "Link skopiowany. Otworzy tę pieczęć na dowolnym urządzeniu po synchronizacji (logowanie) albo już teraz na tym urządzeniu.",
- "proof_note": "Przechowuj plik dowodu razem z dokumentem. Każdy może go zweryfikować na tej stronie, bez konta.",
+ "proof_note": "Zapisz dowód obok dokumentu: nosi nazwę dokumentu i link do weryfikacji. Przechowuj je razem: dowód oddzielony od dokumentu traci wartość. Każdy może go sprawdzić na tej stronie, bez konta.",
  "chain_tezos_soon": "W tej sieci nie ma jeszcze publicznego rejestru AmiStamp. Wybierz Tezos Mainnet, sieć EVM lub własny kontrakt w ustawieniach zaawansowanych.",
  "chain_no_stamp": "Najpierw utwórz pieczęć.",
  "commit_generate": "Utwórz prywatne zobowiązanie",

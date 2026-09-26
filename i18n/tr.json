@@ -256,7 +256,7 @@
  "proof_download": "Kanıtı indir (.json)",
  "proof_copy_link": "Doğrulama bağlantısını kopyala",
  "proof_copied": "Bağlantı kopyalandı. Eşitlendikten sonra (oturum açarak) bu mührü her cihazda, bu cihazda ise hemen açar.",
- "proof_note": "Kanıt dosyasını belgenizle birlikte saklayın. Herkes bu sayfada hesap olmadan doğrulayabilir.",
+ "proof_note": "Kanıtı belgenizin yanına kaydedin: belgenin adını ve doğrulama bağlantısını taşır. İkisini birlikte saklayın: belgesinden ayrılan bir kanıt değerini yitirir. Herkes bu sayfada hesap olmadan doğrulayabilir.",
  "chain_tezos_soon": "Bu ağda henüz herkese açık bir AmiStamp kaydı yok. Gelişmiş ayarlardan Tezos Mainnet’i, bir EVM ağını veya kendi sözleşmenizi seçin.",
  "chain_no_stamp": "Önce bir mühür oluşturun.",
  "commit_generate": "Gizli taahhüt oluştur",

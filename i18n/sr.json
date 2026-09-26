@@ -256,7 +256,7 @@
  "proof_download": "Preuzmi dokaz (.json)",
  "proof_copy_link": "Kopiraj link za proveru",
  "proof_copied": "Link je kopiran. Otvara ovaj pečat na bilo kom uređaju nakon sinhronizacije (prijava), ili odmah na ovom uređaju.",
- "proof_note": "Čuvajte datoteku dokaza uz dokument. Svako može da je proveri na ovoj stranici, bez naloga.",
+ "proof_note": "Sačuvajte dokaz pored dokumenta: nosi ime dokumenta i link za proveru. Čuvajte ih zajedno: dokaz odvojen od dokumenta gubi vrednost. Svako ga može proveriti na ovoj stranici, bez naloga.",
  "chain_tezos_soon": "Na ovoj mreži još ne postoji javni AmiStamp registar. Izaberite Tezos Mainnet, EVM mrežu ili sopstveni ugovor u naprednim podešavanjima.",
  "chain_no_stamp": "Prvo napravite pečat.",
  "commit_generate": "Napravi privatnu obavezu",

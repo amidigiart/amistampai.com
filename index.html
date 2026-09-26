@@ -759,7 +759,7 @@ footer{padding:48px 0 32px;border-top:1px solid var(--border);margin-top:80px}
           <button type="button" class="btn btn-primary" id="btn-download-proof" data-i18n="proof_download">Download proof (.json)</button>
           <button type="button" class="btn btn-outline" id="btn-copy-link" data-i18n="proof_copy_link">Copy verification link</button>
         </div>
-        <p class="proof-note" data-i18n="proof_note">Keep the proof file with your document. Anyone can verify it on this page, without an account.</p>
+        <p class="proof-note" data-i18n="proof_note">Save the proof next to your document: it carries the document&#39;s name and the verification link. Keep them together: a proof separated from its document loses its value. Anyone can verify it on this page, without an account.</p>
 
         <div class="anchor-section" id="anchor-section">
           <div class="anchor-default">
@@ -2009,7 +2009,7 @@ Object.assign(I18N.en, {
   proof_download: 'Download proof (.json)',
   proof_copy_link: 'Copy verification link',
   proof_copied: 'Link copied. It opens this stamp on any device once it is synced (sign in), or on this device now.',
-  proof_note: 'Keep the proof file with your document. Anyone can verify it on this page, without an account.',
+  proof_note: "Save the proof next to your document: it carries the document's name and the verification link. Keep them together: a proof separated from its document loses its value. Anyone can verify it on this page, without an account.",
   chain_anchor_quick: '⚓ Anchor on blockchain',
   chain_anchoring: 'Anchoring…',
   chain_success: '✓ Anchored. Transaction: ',
@@ -2118,7 +2118,7 @@ Object.assign(I18N.ro, {
   proof_download: 'Descarcă dovada (.json)',
   proof_copy_link: 'Copiază linkul de verificare',
   proof_copied: 'Link copiat. Deschide ștampila pe orice dispozitiv după sincronizare (autentificare) sau pe acest dispozitiv acum.',
-  proof_note: 'Păstrează fișierul de dovadă lângă document. Oricine îl poate verifica pe această pagină, fără cont.',
+  proof_note: 'Salvează dovada lângă document: poartă numele lui și linkul de verificare. Păstrează-le împreună: o dovadă despărțită de document își pierde valoarea. Oricine o poate verifica pe această pagină, fără cont.',
   chain_anchor_quick: '⚓ Ancorează pe blockchain',
   chain_anchoring: 'Se ancorează…',
   chain_success: '✓ Ancorat. Tranzacție: ',
@@ -2456,6 +2456,9 @@ $('demo-stamp').addEventListener('click', async function () {
     s.public_key = key.publicJwk;
     s.anchors = [];
     s.coherence = coherence;
+    // numai pe acest dispozitiv (nu intra in dovada, nu se sincronizeaza): ca dovada sa se descarce
+    // cu numele documentului si sa stea langa el
+    s.doc_name = pendingFile ? pendingFile.name : '';
     s.synced = 0;
     await putStamp(s);
     currentStamp = s;
@@ -2589,7 +2592,9 @@ $('btn-download-proof').addEventListener('click', function () {
   var blob = new Blob([JSON.stringify(proofOf(currentStamp), null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'amistamp-proof-' + currentStamp.id.slice(0, 8) + '.json';
+  // numele documentului + .amistamp.json: dovada se salveaza langa documentul ei si ramane legata de el
+  var base = (currentStamp.doc_name || '').replace(/[\\/:*?"<>|]+/g, '_').trim();
+  a.download = (base ? base : 'text-' + currentStamp.id.slice(0, 8)) + '.amistamp.json';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
 });

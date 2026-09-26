@@ -256,7 +256,7 @@
  "proof_download": "Télécharger la preuve (.json)",
  "proof_copy_link": "Copier le lien de vérification",
  "proof_copied": "Lien copié. Il ouvre ce tampon sur n’importe quel appareil une fois synchronisé (connexion), ou sur cet appareil dès maintenant.",
- "proof_note": "Conservez le fichier de preuve avec votre document. N’importe qui peut le vérifier sur cette page, sans compte.",
+ "proof_note": "Enregistrez la preuve à côté de votre document : elle porte le nom du document et le lien de vérification. Gardez-les ensemble : une preuve séparée de son document perd sa valeur. Tout le monde peut la vérifier sur cette page, sans compte.",
  "chain_tezos_soon": "Pas encore de registre public AmiStamp sur ce réseau. Choisissez Tezos Mainnet, un réseau EVM ou votre propre contrat dans les paramètres avancés.",
  "chain_no_stamp": "Créez d’abord un tampon.",
  "commit_generate": "Créer un engagement privé",

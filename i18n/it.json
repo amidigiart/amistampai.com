@@ -256,7 +256,7 @@
  "proof_download": "Scarica la prova (.json)",
  "proof_copy_link": "Copia il link di verifica",
  "proof_copied": "Link copiato. Apre questo timbro su qualsiasi dispositivo una volta sincronizzato (accesso), o già ora su questo dispositivo.",
- "proof_note": "Conserva il file di prova insieme al documento. Chiunque può verificarlo su questa pagina, senza account.",
+ "proof_note": "Salva la prova accanto al tuo documento: porta il nome del documento e il link di verifica. Tienili insieme: una prova separata dal suo documento perde valore. Chiunque può verificarla su questa pagina, senza account.",
  "chain_tezos_soon": "Su questa rete non esiste ancora un registro pubblico AmiStamp. Scegli Tezos Mainnet, una rete EVM o il tuo contratto nelle impostazioni avanzate.",
  "chain_no_stamp": "Crea prima un timbro.",
  "commit_generate": "Crea un impegno privato",

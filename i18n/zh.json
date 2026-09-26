@@ -256,7 +256,7 @@
  "proof_download": "下载证明 (.json)",
  "proof_copy_link": "复制验证链接",
  "proof_copied": "链接已复制。同步（登录）后可在任何设备上打开此印章，在本设备上现在即可打开。",
- "proof_note": "请将证明文件与文件一起保存。任何人都能在此页面验证，无需账户。",
+ "proof_note": "请将证明保存在文档旁边：它带有文档名称和验证链接。请把两者放在一起：与文档分开的证明会失去价值。任何人都可以在此页面免登录验证。",
  "chain_tezos_soon": "该网络上还没有公开的AmiStamp登记合约。请在高级设置中选择Tezos Mainnet、EVM网络或你自己的合约。",
  "chain_no_stamp": "请先创建印章。",
  "commit_generate": "创建私密承诺",

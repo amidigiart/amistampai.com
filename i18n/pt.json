@@ -256,7 +256,7 @@
  "proof_download": "Descarregar prova (.json)",
  "proof_copy_link": "Copiar link de verificação",
  "proof_copied": "Link copiado. Abre este carimbo em qualquer dispositivo depois de sincronizado (início de sessão), ou já neste dispositivo.",
- "proof_note": "Guarde o ficheiro de prova junto com o documento. Qualquer pessoa o pode verificar nesta página, sem conta.",
+ "proof_note": "Guarda a prova junto ao teu documento: tem o nome do documento e o link de verificação. Mantém-nos juntos: uma prova separada do seu documento perde o valor. Qualquer pessoa a pode verificar nesta página, sem conta.",
  "chain_tezos_soon": "Ainda não há um registo público AmiStamp nesta rede. Escolha Tezos Mainnet, uma rede EVM ou o seu próprio contrato nas definições avançadas.",
  "chain_no_stamp": "Crie primeiro um carimbo.",
  "commit_generate": "Criar compromisso privado",
