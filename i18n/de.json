@@ -256,7 +256,7 @@
  "proof_download": "Nachweis herunterladen (.json)",
  "proof_copy_link": "Prüflink kopieren",
  "proof_copied": "Link kopiert. Er öffnet diesen Stempel auf jedem Gerät, sobald er synchronisiert ist (Anmeldung), oder jetzt schon auf diesem Gerät.",
- "proof_note": "Bewahren Sie die Nachweisdatei zusammen mit Ihrem Dokument auf. Jeder kann sie auf dieser Seite ohne Konto prüfen.",
+ "proof_note": "Speichere den Nachweis neben deinem Dokument: Er trägt den Namen des Dokuments und den Prüflink. Bewahre beide zusammen auf: Ein Nachweis ohne sein Dokument verliert seinen Wert. Jeder kann ihn auf dieser Seite prüfen, ohne Konto.",
  "chain_tezos_soon": "In diesem Netzwerk gibt es noch kein öffentliches AmiStamp-Register. Wählen Sie Tezos Mainnet, ein EVM-Netzwerk oder Ihren eigenen Vertrag in den erweiterten Einstellungen.",
  "chain_no_stamp": "Erstellen Sie zuerst einen Stempel.",
  "commit_generate": "Privates Commitment erstellen",

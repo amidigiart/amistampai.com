@@ -256,7 +256,7 @@
  "proof_download": "Unduh bukti (.json)",
  "proof_copy_link": "Salin tautan verifikasi",
  "proof_copied": "Tautan disalin. Tautan ini membuka stempel di perangkat mana pun setelah disinkronkan (masuk), atau langsung di perangkat ini.",
- "proof_note": "Simpan berkas bukti bersama dokumen Anda. Siapa pun dapat memverifikasinya di halaman ini, tanpa akun.",
+ "proof_note": "Simpan bukti di samping dokumen Anda: bukti membawa nama dokumen dan tautan verifikasi. Simpan keduanya bersama: bukti yang terpisah dari dokumennya kehilangan nilainya. Siapa pun dapat memverifikasinya di halaman ini, tanpa akun.",
  "chain_tezos_soon": "Belum ada registri publik AmiStamp di jaringan ini. Pilih Tezos Mainnet, jaringan EVM, atau kontrak Anda sendiri di pengaturan lanjutan.",
  "chain_no_stamp": "Buat stempel terlebih dahulu.",
  "commit_generate": "Buat komitmen privat",

@@ -256,7 +256,7 @@
  "proof_download": "Bewijs downloaden (.json)",
  "proof_copy_link": "Verificatielink kopiëren",
  "proof_copied": "Link gekopieerd. Hij opent deze stempel op elk apparaat zodra hij is gesynchroniseerd (inloggen), of nu al op dit apparaat.",
- "proof_note": "Bewaar het bewijsbestand bij je document. Iedereen kan het op deze pagina verifiëren, zonder account.",
+ "proof_note": "Sla het bewijs op naast je document: het draagt de naam van het document en de verificatielink. Bewaar ze samen: een bewijs zonder zijn document verliest zijn waarde. Iedereen kan het op deze pagina controleren, zonder account.",
  "chain_tezos_soon": "Op dit netwerk is nog geen openbaar AmiStamp-register. Kies Tezos Mainnet, een EVM-netwerk of je eigen contract in de geavanceerde instellingen.",
  "chain_no_stamp": "Maak eerst een stempel.",
  "commit_generate": "Privécommitment maken",

@@ -256,7 +256,7 @@
  "proof_download": "Bizonyíték letöltése (.json)",
  "proof_copy_link": "Ellenőrző link másolása",
  "proof_copied": "Link másolva. Szinkronizálás (bejelentkezés) után bármely eszközön megnyitja ezt a pecsétet, ezen az eszközön pedig már most.",
- "proof_note": "Tartsd a bizonyítékfájlt a dokumentumod mellett. Bárki ellenőrizheti ezen az oldalon, fiók nélkül.",
+ "proof_note": "Mentsd a bizonyítékot a dokumentum mellé: a dokumentum nevét és az ellenőrző linket viseli. Tartsd őket együtt: a dokumentumától elválasztott bizonyíték elveszíti az értékét. Bárki ellenőrizheti ezen az oldalon, fiók nélkül.",
  "chain_tezos_soon": "Ezen a hálózaton még nincs nyilvános AmiStamp-nyilvántartás. Válaszd a Tezos Mainnetet, egy EVM-hálózatot vagy a saját szerződésedet a speciális beállításokban.",
  "chain_no_stamp": "Előbb hozz létre egy pecsétet.",
  "commit_generate": "Privát kötelezettség létrehozása",

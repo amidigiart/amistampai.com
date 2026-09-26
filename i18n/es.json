@@ -256,7 +256,7 @@
  "proof_download": "Descargar prueba (.json)",
  "proof_copy_link": "Copiar enlace de verificación",
  "proof_copied": "Enlace copiado. Abre este sello en cualquier dispositivo cuando esté sincronizado (iniciando sesión), o en este dispositivo ahora mismo.",
- "proof_note": "Guarda el archivo de prueba junto con tu documento. Cualquiera puede verificarlo en esta página, sin cuenta.",
+ "proof_note": "Guarda la prueba junto a tu documento: lleva el nombre del documento y el enlace de verificación. Mantenlos juntos: una prueba separada de su documento pierde su valor. Cualquiera puede verificarla en esta página, sin cuenta.",
  "chain_tezos_soon": "Todavía no hay un registro público de AmiStamp en esta red. Elige Tezos Mainnet, una red EVM o tu propio contrato en los ajustes avanzados.",
  "chain_no_stamp": "Crea primero un sello.",
  "commit_generate": "Crear compromiso privado",
