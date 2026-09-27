@@ -341,5 +341,18 @@
  "check_coherence": "Certificado de coerência (AntetAI): {level}",
  "check_coherence_bad": "O certificado de coerência não pertence a este carimbo ou a sua assinatura é inválida",
  "check_coherence_unknown_key": "Certificado de coerência assinado com uma chave que esta página não conhece",
- "modal_privacy_coh": "Certificado de coerência: só se o marcares, o texto escrito (nunca ficheiros) com o sentido e a intenção é enviado à AntetAI, que o verifica com a Mistral AI na UE. Nada é guardado; o certificado contém apenas hashes."
+ "modal_privacy_coh": "Certificado de coerência: só se o marcares, o texto escrito (nunca ficheiros) com o sentido e a intenção é enviado à AntetAI, que o verifica com a Mistral AI na UE. Nada é guardado; o certificado contém apenas hashes.",
+ "tl_title": "Nível de confiança",
+ "tl_certified": "CERTIFICADO",
+ "tl_conditional": "CONDICIONAL",
+ "tl_indeterminate": "INDETERMINADO",
+ "tl_rejected": "REJEITADO",
+ "tl_desc_certified": "Assinatura, documento, sentido e âncora em blockchain estão todos confirmados.",
+ "tl_desc_indeterminate": "O selo está intacto, mas o sentido declarado não corresponde ao texto. Não o certificamos.",
+ "tl_desc_rejected": "Pelo menos uma verificação falhou. Não confie nesta prova.",
+ "tl_missing": "Ainda não confirmado:",
+ "tl_why_doc": "o próprio documento (adicione-o acima)",
+ "tl_why_coherence": "sem certificado de coerência",
+ "tl_why_coherence_partial": "o certificado de coerência não indica «coerente»",
+ "tl_why_anchor": "nenhuma âncora em blockchain confirmada"
 }

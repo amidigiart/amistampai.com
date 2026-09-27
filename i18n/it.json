@@ -341,5 +341,18 @@
  "check_coherence": "Certificato di coerenza (AntetAI): {level}",
  "check_coherence_bad": "Il certificato di coerenza non appartiene a questo timbro o la sua firma non è valida",
  "check_coherence_unknown_key": "Certificato di coerenza firmato con una chiave che questa pagina non conosce",
- "modal_privacy_coh": "Certificato di coerenza: solo se lo selezioni, il testo digitato (mai i file) con significato e intenzione viene inviato ad AntetAI, che lo verifica con Mistral AI nell'UE. Non si salva nulla; il certificato contiene solo hash."
+ "modal_privacy_coh": "Certificato di coerenza: solo se lo selezioni, il testo digitato (mai i file) con significato e intenzione viene inviato ad AntetAI, che lo verifica con Mistral AI nell'UE. Non si salva nulla; il certificato contiene solo hash.",
+ "tl_title": "Livello di fiducia",
+ "tl_certified": "CERTIFICATO",
+ "tl_conditional": "CONDIZIONATO",
+ "tl_indeterminate": "INDETERMINATO",
+ "tl_rejected": "RESPINTO",
+ "tl_desc_certified": "Firma, documento, significato e ancoraggio blockchain sono tutti confermati.",
+ "tl_desc_indeterminate": "Il sigillo è integro, ma il significato dichiarato non corrisponde al testo. Non lo certifichiamo.",
+ "tl_desc_rejected": "Almeno una verifica è fallita. Non fare affidamento su questa prova.",
+ "tl_missing": "Non ancora confermato:",
+ "tl_why_doc": "il documento stesso (aggiungilo sopra)",
+ "tl_why_coherence": "nessun certificato di coerenza",
+ "tl_why_coherence_partial": "il certificato di coerenza non indica «coerente»",
+ "tl_why_anchor": "nessun ancoraggio blockchain confermato"
 }

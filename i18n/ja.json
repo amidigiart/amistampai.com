@@ -341,5 +341,18 @@
  "check_coherence": "整合性証明書（AntetAI）：{level}",
  "check_coherence_bad": "整合性証明書がこのスタンプのものではないか、署名が無効です",
  "check_coherence_unknown_key": "このページが知らない鍵で署名された整合性証明書",
- "modal_privacy_coh": "整合性証明書：チェックした場合のみ、入力したテキスト（ファイルは対象外）と意味・意図がAntetAIに送られ、EUのMistral AIで確認されます。何も保存されません。証明書にはハッシュだけが含まれます。"
+ "modal_privacy_coh": "整合性証明書：チェックした場合のみ、入力したテキスト（ファイルは対象外）と意味・意図がAntetAIに送られ、EUのMistral AIで確認されます。何も保存されません。証明書にはハッシュだけが含まれます。",
+ "tl_title": "信頼レベル",
+ "tl_certified": "認証済み",
+ "tl_conditional": "条件付き",
+ "tl_indeterminate": "判定不能",
+ "tl_rejected": "却下",
+ "tl_desc_certified": "署名、文書、意味、ブロックチェーンのアンカーがすべて確認されました。",
+ "tl_desc_indeterminate": "印章は無傷ですが、宣言された意味が本文と一致しません。認証しません。",
+ "tl_desc_rejected": "少なくとも1つの検証に失敗しました。この証明を信頼しないでください。",
+ "tl_missing": "未確認：",
+ "tl_why_doc": "文書そのもの（上で追加してください）",
+ "tl_why_coherence": "整合性証明書がありません",
+ "tl_why_coherence_partial": "整合性証明書が「整合」ではありません",
+ "tl_why_anchor": "確認済みのブロックチェーンアンカーがありません"
 }

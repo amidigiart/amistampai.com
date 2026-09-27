@@ -341,5 +341,18 @@
  "check_coherence": "Koherenciatanúsítvány (AntetAI): {level}",
  "check_coherence_bad": "A koherenciatanúsítvány nem ehhez a bélyegzőhöz tartozik, vagy az aláírása érvénytelen",
  "check_coherence_unknown_key": "A koherenciatanúsítványt olyan kulcs írta alá, amelyet ez az oldal nem ismer",
- "modal_privacy_coh": "Koherenciatanúsítvány: csak ha bejelölöd, a begépelt szöveg (soha nem fájlok) a jelentéssel és a szándékkal együtt az AntetAI-hoz kerül, amely a Mistral AI-jal ellenőrzi az EU-ban. Semmit nem tárolunk; a tanúsítvány csak hash-eket tartalmaz."
+ "modal_privacy_coh": "Koherenciatanúsítvány: csak ha bejelölöd, a begépelt szöveg (soha nem fájlok) a jelentéssel és a szándékkal együtt az AntetAI-hoz kerül, amely a Mistral AI-jal ellenőrzi az EU-ban. Semmit nem tárolunk; a tanúsítvány csak hash-eket tartalmaz.",
+ "tl_title": "Megbízhatósági szint",
+ "tl_certified": "TANÚSÍTOTT",
+ "tl_conditional": "FELTÉTELES",
+ "tl_indeterminate": "MEGHATÁROZATLAN",
+ "tl_rejected": "ELUTASÍTVA",
+ "tl_desc_certified": "Az aláírás, a dokumentum, a jelentés és a blokklánc-horgony mind megerősítve.",
+ "tl_desc_indeterminate": "A pecsét sértetlen, de a megadott jelentés nem illik a szöveghez. Nem tanúsítjuk.",
+ "tl_desc_rejected": "Legalább egy ellenőrzés sikertelen. Ebben a bizonyítékban nem szabad megbízni.",
+ "tl_missing": "Még nincs megerősítve:",
+ "tl_why_doc": "maga a dokumentum (add hozzá fent)",
+ "tl_why_coherence": "nincs koherencia-tanúsítvány",
+ "tl_why_coherence_partial": "a koherencia-tanúsítvány nem „koherens”",
+ "tl_why_anchor": "nincs megerősített blokklánc-horgony"
 }

@@ -341,5 +341,18 @@
  "check_coherence": "Sertifikat koherentnosti (AntetAI): {level}",
  "check_coherence_bad": "Sertifikat koherentnosti ne pripada ovom pečatu ili mu potpis nije važeći",
  "check_coherence_unknown_key": "Sertifikat koherentnosti potpisan ključem koji ova stranica ne poznaje",
- "modal_privacy_coh": "Sertifikat koherentnosti: samo ako ga označite, uneti tekst (nikada fajlovi) sa smislom i namerom šalje se AntetAI-ju, koji ga proverava sa Mistral AI u EU. Ništa se ne čuva; sertifikat sadrži samo heševe."
+ "modal_privacy_coh": "Sertifikat koherentnosti: samo ako ga označite, uneti tekst (nikada fajlovi) sa smislom i namerom šalje se AntetAI-ju, koji ga proverava sa Mistral AI u EU. Ništa se ne čuva; sertifikat sadrži samo heševe.",
+ "tl_title": "Nivo poverenja",
+ "tl_certified": "SERTIFIKOVANO",
+ "tl_conditional": "USLOVNO",
+ "tl_indeterminate": "NEODREĐENO",
+ "tl_rejected": "ODBIJENO",
+ "tl_desc_certified": "Potpis, dokument, smisao i sidro na blokčejnu su potvrđeni.",
+ "tl_desc_indeterminate": "Pečat je netaknut, ali deklarisani smisao ne odgovara tekstu. Ne sertifikujemo ga.",
+ "tl_desc_rejected": "Najmanje jedna provera nije uspela. Ne oslanjajte se na ovaj dokaz.",
+ "tl_missing": "Još nije potvrđeno:",
+ "tl_why_doc": "sam dokument (dodajte ga iznad)",
+ "tl_why_coherence": "nema sertifikata koherentnosti",
+ "tl_why_coherence_partial": "sertifikat koherentnosti ne glasi „koherentno“",
+ "tl_why_anchor": "nema potvrđenog sidra na blokčejnu"
 }

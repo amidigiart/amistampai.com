@@ -341,5 +341,18 @@
  "check_coherence": "Sertifikat koherensi (AntetAI): {level}",
  "check_coherence_bad": "Sertifikat koherensi bukan milik stempel ini atau tanda tangannya tidak sah",
  "check_coherence_unknown_key": "Sertifikat koherensi ditandatangani dengan kunci yang tidak dikenal halaman ini",
- "modal_privacy_coh": "Sertifikat koherensi: hanya jika Anda mencentangnya, teks yang Anda ketik (tidak pernah file) beserta makna dan niat dikirim ke AntetAI, yang memeriksanya dengan Mistral AI di UE. Tidak ada yang disimpan; sertifikat hanya berisi hash."
+ "modal_privacy_coh": "Sertifikat koherensi: hanya jika Anda mencentangnya, teks yang Anda ketik (tidak pernah file) beserta makna dan niat dikirim ke AntetAI, yang memeriksanya dengan Mistral AI di UE. Tidak ada yang disimpan; sertifikat hanya berisi hash.",
+ "tl_title": "Tingkat kepercayaan",
+ "tl_certified": "TERSERTIFIKASI",
+ "tl_conditional": "BERSYARAT",
+ "tl_indeterminate": "TIDAK DAPAT DITENTUKAN",
+ "tl_rejected": "DITOLAK",
+ "tl_desc_certified": "Tanda tangan, dokumen, makna, dan jangkar blockchain semuanya terkonfirmasi.",
+ "tl_desc_indeterminate": "Segel utuh, tetapi makna yang dinyatakan tidak sesuai dengan teks. Kami tidak mensertifikasinya.",
+ "tl_desc_rejected": "Setidaknya satu pemeriksaan gagal. Jangan percayai bukti ini.",
+ "tl_missing": "Belum terkonfirmasi:",
+ "tl_why_doc": "dokumennya sendiri (tambahkan di atas)",
+ "tl_why_coherence": "tidak ada sertifikat koherensi",
+ "tl_why_coherence_partial": "sertifikat koherensi tidak menyatakan \"koheren\"",
+ "tl_why_anchor": "tidak ada jangkar blockchain yang terkonfirmasi"
 }

@@ -341,5 +341,18 @@
  "check_coherence": "Coherentiecertificaat (AntetAI): {level}",
  "check_coherence_bad": "Het coherentiecertificaat hoort niet bij deze stempel of de handtekening is ongeldig",
  "check_coherence_unknown_key": "Coherentiecertificaat ondertekend met een sleutel die deze pagina niet kent",
- "modal_privacy_coh": "Coherentiecertificaat: alleen als je het aanvinkt, worden de getypte tekst (nooit bestanden) en je betekenis en intentie naar AntetAI gestuurd, dat ze met Mistral AI in de EU controleert. Er wordt niets opgeslagen; het certificaat bevat alleen hashes."
+ "modal_privacy_coh": "Coherentiecertificaat: alleen als je het aanvinkt, worden de getypte tekst (nooit bestanden) en je betekenis en intentie naar AntetAI gestuurd, dat ze met Mistral AI in de EU controleert. Er wordt niets opgeslagen; het certificaat bevat alleen hashes.",
+ "tl_title": "Betrouwbaarheidsniveau",
+ "tl_certified": "GECERTIFICEERD",
+ "tl_conditional": "VOORWAARDELIJK",
+ "tl_indeterminate": "ONBEPAALD",
+ "tl_rejected": "AFGEWEZEN",
+ "tl_desc_certified": "Handtekening, document, betekenis en blockchain-anker zijn allemaal bevestigd.",
+ "tl_desc_indeterminate": "Het zegel is intact, maar de opgegeven betekenis past niet bij de tekst. Wij certificeren het niet.",
+ "tl_desc_rejected": "Minstens één controle is mislukt. Vertrouw dit bewijs niet.",
+ "tl_missing": "Nog niet bevestigd:",
+ "tl_why_doc": "het document zelf (voeg het hierboven toe)",
+ "tl_why_coherence": "geen coherentiecertificaat",
+ "tl_why_coherence_partial": "het coherentiecertificaat zegt niet „coherent”",
+ "tl_why_anchor": "geen bevestigd blockchain-anker"
 }

@@ -341,5 +341,18 @@
  "check_coherence": "Tutarlılık sertifikası (AntetAI): {level}",
  "check_coherence_bad": "Tutarlılık sertifikası bu damgaya ait değil veya imzası geçersiz",
  "check_coherence_unknown_key": "Tutarlılık sertifikası bu sayfanın tanımadığı bir anahtarla imzalanmış",
- "modal_privacy_coh": "Tutarlılık sertifikası: yalnızca işaretlerseniz, yazdığınız metin (asla dosyalar) anlam ve niyetinizle birlikte AntetAI'ye gönderilir; AntetAI bunları AB'deki Mistral AI ile kontrol eder. Hiçbir şey saklanmaz; sertifika yalnızca hash değerleri içerir."
+ "modal_privacy_coh": "Tutarlılık sertifikası: yalnızca işaretlerseniz, yazdığınız metin (asla dosyalar) anlam ve niyetinizle birlikte AntetAI'ye gönderilir; AntetAI bunları AB'deki Mistral AI ile kontrol eder. Hiçbir şey saklanmaz; sertifika yalnızca hash değerleri içerir.",
+ "tl_title": "Güven düzeyi",
+ "tl_certified": "SERTİFİKALI",
+ "tl_conditional": "KOŞULLU",
+ "tl_indeterminate": "BELİRSİZ",
+ "tl_rejected": "REDDEDİLDİ",
+ "tl_desc_certified": "İmza, belge, anlam ve blokzincir çapası doğrulandı.",
+ "tl_desc_indeterminate": "Mühür sağlam, ancak beyan edilen anlam metinle uyuşmuyor. Onu sertifikalandırmıyoruz.",
+ "tl_desc_rejected": "En az bir kontrol başarısız oldu. Bu kanıta güvenmeyin.",
+ "tl_missing": "Henüz doğrulanmadı:",
+ "tl_why_doc": "belgenin kendisi (yukarıya ekleyin)",
+ "tl_why_coherence": "tutarlılık sertifikası yok",
+ "tl_why_coherence_partial": "tutarlılık sertifikası «tutarlı» değil",
+ "tl_why_anchor": "doğrulanmış blokzincir çapası yok"
 }

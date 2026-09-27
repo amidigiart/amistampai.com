@@ -1,8 +1,9 @@
-var CACHE_NAME = 'amistampai-v14';
+var CACHE_NAME = 'amistampai-v15';
 var ASSETS = [
   '/',
   '/index.html',
   '/supabase-config.js',
+  '/trust.js',
   '/manifest.json'
 ];
 
