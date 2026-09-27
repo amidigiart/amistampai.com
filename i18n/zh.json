@@ -341,5 +341,18 @@
  "check_coherence": "一致性证书（AntetAI）：{level}",
  "check_coherence_bad": "一致性证书不属于此印章，或其签名无效",
  "check_coherence_unknown_key": "一致性证书使用了本页面不认识的密钥签名",
- "modal_privacy_coh": "一致性证书：仅当你勾选时，你输入的文本（绝不包括文件）以及含义和意图才会发送给 AntetAI，由其在欧盟使用 Mistral AI 检查。不会保存任何内容；证书只包含哈希值。"
+ "modal_privacy_coh": "一致性证书：仅当你勾选时，你输入的文本（绝不包括文件）以及含义和意图才会发送给 AntetAI，由其在欧盟使用 Mistral AI 检查。不会保存任何内容；证书只包含哈希值。",
+ "tl_title": "信任等级",
+ "tl_certified": "已认证",
+ "tl_conditional": "有条件",
+ "tl_indeterminate": "无法确定",
+ "tl_rejected": "已拒绝",
+ "tl_desc_certified": "签名、文档、含义和区块链锚定均已确认。",
+ "tl_desc_indeterminate": "印章完好，但声明的含义与文本不符。我们不予认证。",
+ "tl_desc_rejected": "至少有一项验证失败。请勿信任此证明。",
+ "tl_missing": "尚未确认：",
+ "tl_why_doc": "文档本身（请在上方添加）",
+ "tl_why_coherence": "没有一致性证书",
+ "tl_why_coherence_partial": "一致性证书不是\"一致\"",
+ "tl_why_anchor": "没有已确认的区块链锚定"
 }

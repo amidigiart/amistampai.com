@@ -1810,6 +1810,7 @@ function toggleAuthMenu() {
 <script src="https://cdn.jsdelivr.net/npm/@airgap/beacon-dapp@4.2.2/dist/walletbeacon.dapp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
 <script src="supabase-config.js"></script>
+<script src="trust.js"></script>
 <script>
 (function() {
   if (typeof getSupabase === 'undefined') return;
@@ -1965,6 +1966,12 @@ function toggleAuthMenu() {
 .coherence-opt input{margin-top:3px;accent-color:var(--teal)}
 .coherence-result{font-size:.8rem;line-height:1.5;margin-top:8px}
 .coherence-result:empty{display:none}
+.trust-level{margin-top:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);font-size:.85rem;line-height:1.45}
+.trust-level strong{display:block;letter-spacing:.02em}
+.trust-level .trust-why{color:var(--muted);margin-top:4px}
+.trust-level.certified strong{color:var(--teal)}
+.trust-level.conditional strong,.trust-level.indeterminate strong{color:var(--gold)}
+.trust-level.rejected strong{color:var(--accent)}
 .coherence-result .coh-level{font-weight:700}
 .coherence-result .coh-level.coerent{color:var(--teal)}
 .coherence-result .coh-level.partial,.coherence-result .coh-level.neverificat{color:var(--gold)}
@@ -2095,6 +2102,19 @@ Object.assign(I18N.en, {
   check_coherence: 'Coherence certificate (AntetAI): {level}',
   check_coherence_bad: 'The coherence certificate does not belong to this stamp or its signature is invalid',
   check_coherence_unknown_key: 'Coherence certificate signed with a key this page does not know',
+  tl_title: 'Trust level',
+  tl_certified: 'CERTIFIED',
+  tl_conditional: 'CONDITIONAL',
+  tl_indeterminate: 'INDETERMINATE',
+  tl_rejected: 'REJECTED',
+  tl_desc_certified: 'Signature, document, meaning and blockchain anchor are all confirmed.',
+  tl_desc_indeterminate: 'The seal is intact, but the declared meaning does not fit the text. We do not certify it.',
+  tl_desc_rejected: 'At least one check failed. This proof must not be trusted.',
+  tl_missing: 'Not yet confirmed:',
+  tl_why_doc: 'the document itself (add it above)',
+  tl_why_coherence: 'no coherence certificate',
+  tl_why_coherence_partial: 'the coherence certificate is not "coherent"',
+  tl_why_anchor: 'no confirmed blockchain anchor',
   modal_privacy_coh: 'Coherence certificate: only if you tick it, the text you typed (never files) and your meaning and intention are sent to AntetAI, which checks them with Mistral AI in the EU. Nothing is stored; the certificate contains only hashes.'
 });
 Object.assign(I18N.ro, {
@@ -2204,6 +2224,19 @@ Object.assign(I18N.ro, {
   check_coherence: 'Atestat de coerență (AntetAI): {level}',
   check_coherence_bad: 'Atestatul de coerență nu aparține acestei ștampile sau semnătura lui nu e validă',
   check_coherence_unknown_key: 'Atestat de coerență semnat cu o cheie pe care pagina nu o cunoaște',
+  tl_title: 'Nivel de încredere',
+  tl_certified: 'CERTIFICAT',
+  tl_conditional: 'CONDIȚIONAT',
+  tl_indeterminate: 'NEDETERMINAT',
+  tl_rejected: 'RESPINS',
+  tl_desc_certified: 'Semnătura, documentul, sensul și ancora pe blockchain sunt toate confirmate.',
+  tl_desc_indeterminate: 'Sigiliul e intact, dar sensul declarat nu se potrivește cu textul. Nu îl certificăm.',
+  tl_desc_rejected: 'Cel puțin o verificare a eșuat. Nu te baza pe această dovadă.',
+  tl_missing: 'Neconfirmat încă:',
+  tl_why_doc: 'documentul însuși (adaugă-l mai sus)',
+  tl_why_coherence: 'lipsește atestatul de coerență',
+  tl_why_coherence_partial: 'atestatul de coerență nu e „coerent”',
+  tl_why_anchor: 'nicio ancoră confirmată pe blockchain',
   modal_privacy_coh: 'Atestat de coerență: doar dacă îl bifezi, textul scris de tine (niciodată fișierele) împreună cu sensul și intenția sunt trimise la AntetAI, care le verifică cu Mistral AI în UE. Nu se stochează nimic; atestatul conține doar hash-uri.'
 });
 applyLang(currentLang);
@@ -2562,9 +2595,9 @@ async function verifyCoherence(s) {
   var c = s.coherence;
   if (!c || !c.signed) return null;
   var body;
-  try { body = JSON.parse(c.signed); } catch (e) { return { state: 'fail', text: t('check_coherence_bad') }; }
+  try { body = JSON.parse(c.signed); } catch (e) { return { kind: 'coherence', state: 'fail', text: t('check_coherence_bad') }; }
   var jwk = ATTESTATION_KEYS[body.key_id];
-  if (!jwk) return { state: 'na', text: t('check_coherence_unknown_key') };
+  if (!jwk) return { kind: 'coherence', state: 'na', text: t('check_coherence_unknown_key') };
   var ok = false;
   try {
     var pub = await crypto.subtle.importKey('jwk', { kty: jwk.kty, crv: jwk.crv, x: jwk.x, y: jwk.y },
@@ -2573,9 +2606,9 @@ async function verifyCoherence(s) {
   } catch (e) { ok = false; }
   ok = ok && body.format === 'amistamp-coherence-1' && body.doc_hash === s.doc_hash &&
        body.sens_hash === await sha256Hex(s.sens) && body.intentie_hash === await sha256Hex(s.intentie);
-  if (!ok) return { state: 'fail', text: t('check_coherence_bad') };
+  if (!ok) return { kind: 'coherence', state: 'fail', text: t('check_coherence_bad') };
   var reason = cohReason(body);
-  return { state: body.level === 'coerent' ? 'ok' : 'na',
+  return { kind: 'coherence', cohLevel: body.level, state: body.level === 'coerent' ? 'ok' : 'na',
            text: t('check_coherence', { level: t('coh_level_' + body.level) }),
            detail: (body.issued_at || '') + (reason ? ' — ' + reason : '') };
 }
@@ -2878,7 +2911,7 @@ async function verifyStamp(s, providedDocHash) {
     return { checks: checks, verdict: 'partial' };
   }
   var fp = await keyFingerprint(s.public_key);
-  checks.push({ state: fp === s.key_fp ? 'ok' : 'fail', text: t('check_key'), detail: fp.slice(0, 16) });
+  checks.push({ kind: 'key', state: fp === s.key_fp ? 'ok' : 'fail', text: t('check_key'), detail: fp.slice(0, 16) });
   var bytes = enc.encode(canonical(payloadOf(s)));
   var sigOk = false;
   try {
@@ -2886,18 +2919,19 @@ async function verifyStamp(s, providedDocHash) {
       { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
     sigOk = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, pub, unb64(s.signature), bytes);
   } catch (e) { sigOk = false; }
-  checks.push({ state: sigOk ? 'ok' : 'fail', text: t('check_sig') });
+  checks.push({ kind: 'sig', state: sigOk ? 'ok' : 'fail', text: t('check_sig') });
   var sh = await sha256Hex(bytes);
-  checks.push({ state: !s.stamp_hash || sh === s.stamp_hash ? 'ok' : 'fail', text: t('check_hash'), detail: short(sh, 16, 8) });
-  if (providedDocHash) checks.push({ state: providedDocHash === s.doc_hash ? 'ok' : 'fail', text: t('check_doc') });
-  else checks.push({ state: 'na', text: t('check_doc_na') });
+  checks.push({ kind: 'hash', state: !s.stamp_hash || sh === s.stamp_hash ? 'ok' : 'fail', text: t('check_hash'), detail: short(sh, 16, 8) });
+  if (providedDocHash) checks.push({ kind: 'doc', state: providedDocHash === s.doc_hash ? 'ok' : 'fail', text: t('check_doc') });
+  else checks.push({ kind: 'doc', state: 'na', text: t('check_doc_na') });
   var coh = await verifyCoherence(s);
   if (coh) checks.push(coh);
   var anchors = (s.anchors || []).filter(function (a) { return a && typeof a.tx === 'string'; });
-  if (!anchors.length) checks.push({ state: 'na', text: t('check_anchor_na') });
+  if (!anchors.length) checks.push({ kind: 'anchor', state: 'na', text: t('check_anchor_na') });
   for (var i = 0; i < anchors.length; i++) {
     var a = anchors[i], res = await checkAnchor(a, sh), label = networkLabel(a.network);
     checks.push({
+      kind: 'anchor',
       state: res === null ? 'na' : res ? 'ok' : 'fail',
       text: res === null ? t('check_anchor_unverifiable', { network: label }) : t('check_anchor', { network: label }),
       link: explorerUrl(a.network, a.tx) ? { href: explorerUrl(a.network, a.tx), text: short(a.tx, 12, 4) } : null
@@ -2905,7 +2939,7 @@ async function verifyStamp(s, providedDocHash) {
   }
   var core = checks.slice(0, 3).every(function (c) { return c.state === 'ok'; });
   var anyFail = checks.some(function (c) { return c.state === 'fail'; });
-  return { checks: checks, verdict: !core || anyFail ? 'failed' : 'verified' };
+  return { checks: checks, verdict: !core || anyFail ? 'failed' : 'verified', trust: AmiTrust.trustLevel(checks) };
 }
 function renderVerification(s, result) {
   var card = $('verify-result-card'), badge = $('verify-badge-area'), list = $('verify-checks');
@@ -2933,6 +2967,17 @@ function renderVerification(s, result) {
     });
   }
   badge.appendChild(b);
+  var tr = s && result && result.trust;
+  if (tr) {
+    var tl = document.createElement('div'); tl.className = 'trust-level ' + tr.level;
+    var tn = document.createElement('strong'); tn.textContent = t('tl_title') + ': ' + t('tl_' + tr.level);
+    tl.appendChild(tn);
+    var why = document.createElement('div'); why.className = 'trust-why';
+    why.textContent = tr.missing.length ? t('tl_missing') + ' ' + tr.missing.map(function (m) { return t('tl_why_' + m); }).join('; ')
+                                        : t('tl_desc_' + tr.level);
+    tl.appendChild(why);
+    badge.appendChild(tl);
+  }
   card.classList.add('show');
 }
 var verifyDocHash = null;

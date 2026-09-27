@@ -341,5 +341,18 @@
  "check_coherence": "Certyfikat spójności (AntetAI): {level}",
  "check_coherence_bad": "Certyfikat spójności nie należy do tej pieczęci lub jego podpis jest nieprawidłowy",
  "check_coherence_unknown_key": "Certyfikat spójności podpisany kluczem, którego ta strona nie zna",
- "modal_privacy_coh": "Certyfikat spójności: tylko jeśli go zaznaczysz, wpisany tekst (nigdy pliki) oraz znaczenie i intencja są wysyłane do AntetAI, które sprawdza je z Mistral AI w UE. Nic nie jest zapisywane; certyfikat zawiera tylko skróty."
+ "modal_privacy_coh": "Certyfikat spójności: tylko jeśli go zaznaczysz, wpisany tekst (nigdy pliki) oraz znaczenie i intencja są wysyłane do AntetAI, które sprawdza je z Mistral AI w UE. Nic nie jest zapisywane; certyfikat zawiera tylko skróty.",
+ "tl_title": "Poziom zaufania",
+ "tl_certified": "CERTYFIKOWANY",
+ "tl_conditional": "WARUNKOWY",
+ "tl_indeterminate": "NIEOKREŚLONY",
+ "tl_rejected": "ODRZUCONY",
+ "tl_desc_certified": "Podpis, dokument, znaczenie i kotwica w blockchainie są potwierdzone.",
+ "tl_desc_indeterminate": "Pieczęć jest nienaruszona, ale deklarowane znaczenie nie pasuje do tekstu. Nie certyfikujemy go.",
+ "tl_desc_rejected": "Co najmniej jedna weryfikacja się nie powiodła. Nie należy ufać temu dowodowi.",
+ "tl_missing": "Jeszcze niepotwierdzone:",
+ "tl_why_doc": "sam dokument (dodaj go powyżej)",
+ "tl_why_coherence": "brak certyfikatu spójności",
+ "tl_why_coherence_partial": "certyfikat spójności nie brzmi „spójny”",
+ "tl_why_anchor": "brak potwierdzonej kotwicy w blockchainie"
 }

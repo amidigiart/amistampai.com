@@ -341,5 +341,18 @@
  "check_coherence": "일관성 인증서(AntetAI): {level}",
  "check_coherence_bad": "일관성 인증서가 이 도장의 것이 아니거나 서명이 유효하지 않습니다",
  "check_coherence_unknown_key": "이 페이지가 모르는 키로 서명된 일관성 인증서",
- "modal_privacy_coh": "일관성 인증서: 선택한 경우에만 입력한 텍스트(파일은 제외)와 의미·의도가 AntetAI로 전송되며, EU의 Mistral AI로 확인합니다. 아무것도 저장되지 않으며 인증서에는 해시만 담깁니다."
+ "modal_privacy_coh": "일관성 인증서: 선택한 경우에만 입력한 텍스트(파일은 제외)와 의미·의도가 AntetAI로 전송되며, EU의 Mistral AI로 확인합니다. 아무것도 저장되지 않으며 인증서에는 해시만 담깁니다.",
+ "tl_title": "신뢰 수준",
+ "tl_certified": "인증됨",
+ "tl_conditional": "조건부",
+ "tl_indeterminate": "판정 불가",
+ "tl_rejected": "거부됨",
+ "tl_desc_certified": "서명, 문서, 의미, 블록체인 앵커가 모두 확인되었습니다.",
+ "tl_desc_indeterminate": "인장은 온전하지만 선언된 의미가 텍스트와 맞지 않습니다. 인증하지 않습니다.",
+ "tl_desc_rejected": "하나 이상의 검증이 실패했습니다. 이 증명을 신뢰하지 마세요.",
+ "tl_missing": "아직 확인되지 않음:",
+ "tl_why_doc": "문서 자체 (위에 추가하세요)",
+ "tl_why_coherence": "일관성 인증서 없음",
+ "tl_why_coherence_partial": "일관성 인증서가 \"일관됨\"이 아님",
+ "tl_why_anchor": "확인된 블록체인 앵커 없음"
 }

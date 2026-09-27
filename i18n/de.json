@@ -341,5 +341,18 @@
  "check_coherence": "Kohärenzzertifikat (AntetAI): {level}",
  "check_coherence_bad": "Das Kohärenzzertifikat gehört nicht zu diesem Stempel oder seine Signatur ist ungültig",
  "check_coherence_unknown_key": "Kohärenzzertifikat mit einem Schlüssel signiert, den diese Seite nicht kennt",
- "modal_privacy_coh": "Kohärenzzertifikat: Nur wenn du es ankreuzt, werden der eingegebene Text (nie Dateien) sowie Bedeutung und Absicht an AntetAI gesendet, das sie mit Mistral AI in der EU prüft. Nichts wird gespeichert; das Zertifikat enthält nur Hashes."
+ "modal_privacy_coh": "Kohärenzzertifikat: Nur wenn du es ankreuzt, werden der eingegebene Text (nie Dateien) sowie Bedeutung und Absicht an AntetAI gesendet, das sie mit Mistral AI in der EU prüft. Nichts wird gespeichert; das Zertifikat enthält nur Hashes.",
+ "tl_title": "Vertrauensstufe",
+ "tl_certified": "ZERTIFIZIERT",
+ "tl_conditional": "BEDINGT",
+ "tl_indeterminate": "UNBESTIMMT",
+ "tl_rejected": "ABGELEHNT",
+ "tl_desc_certified": "Signatur, Dokument, Bedeutung und Blockchain-Anker sind alle bestätigt.",
+ "tl_desc_indeterminate": "Das Siegel ist intakt, aber die erklärte Bedeutung passt nicht zum Text. Wir zertifizieren es nicht.",
+ "tl_desc_rejected": "Mindestens eine Prüfung ist fehlgeschlagen. Diesem Nachweis darf nicht vertraut werden.",
+ "tl_missing": "Noch nicht bestätigt:",
+ "tl_why_doc": "das Dokument selbst (oben hinzufügen)",
+ "tl_why_coherence": "kein Kohärenzzertifikat",
+ "tl_why_coherence_partial": "das Kohärenzzertifikat lautet nicht „kohärent“",
+ "tl_why_anchor": "kein bestätigter Blockchain-Anker"
 }
